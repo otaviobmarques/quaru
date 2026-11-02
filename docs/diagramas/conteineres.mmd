@@ -1,0 +1,14 @@
+flowchart LR
+  U([Aluno]) -->|toques| APP
+  subgraph Aparelho
+    APP[App Expo<br/>expo-router + TypeScript] --> EST[(Estado local<br/>AsyncStorage v1)]
+    APP --> FILA[[Fila de sincronização]]
+    APP --> NOT[Notificação local<br/>expo-notifications]
+  end
+  subgraph Futuro["Supabase sa-east-1 (aguarda aprovação)"]
+    API[PostgREST + RPC<br/>openapi.yaml] --> DB[(Postgres + RLS)]
+    AUTH[Auth código por e-mail]
+  end
+  FILA -.->|upsert idempotente por id| API
+  APP -.-> AUTH
+  NUT[["@domma/nutricao<br/>(Nícolas, a extrair)"]] -.-> APP

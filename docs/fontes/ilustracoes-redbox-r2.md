@@ -1,0 +1,12 @@
+# Ilustrações r2 da RedBox (v0.4.3)
+- Autoria: time de design da RedBox, para a Domma (Quaru). Revisão r2 **aprovada pelo Henriquiano**. A r1 não foi usada.
+- Origem: `/home/box/redbox/clientes/domma-tecnologia/app-treinos/imagens-v0.4.3/ilustracoes-r2/` (LEIAME-r2.md e pranchas `prancha-equipamentos-r2.png`, `prancha-tela-sair-r2.png` e `prancha-prova-24-48px-r2.png`).
+- Copiados **sem alteração** para `mobile/assets/ilustracoes-redbox/r2/`:
+  - os 10 ícones `equipamentos/equipamento-<id>.svg`, com os mesmos ids de `src/dominio/equipamentos.ts`;
+  - `ilustracao-sair.svg` ("Pessoa acenando ao lado de uma porta aberta");
+  - `LEIAME-r2.md`.
+- Uso no app: `node scripts/importar-ilustracoes-r2.mjs` gera `src/config/ilustracoes-r2-gerado.ts`. O script troca as variáveis de cor `--q-*` do próprio SVG pelos valores do tema claro e do escuro, porque o `SvgXml` não lê CSS. Desenho e cores não mudam.
+- Onde aparecem:
+  - ícones: na escolha de equipamentos (tour e Perfil › Meus dados) e na linha de equipamento dos cartões de treino sugerido (Início e Treinos);
+  - ilustração: no topo da tela Sair.
+- Não usado (não estava pedido): HTMLs e PNGs das telas, que serviram só de referência, os PNGs de prova de 24/48 px e o gerador.

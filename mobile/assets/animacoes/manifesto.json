@@ -1,0 +1,40 @@
+{
+ "regras": {
+  "reduzir_movimento": "mostrar o quadro final parado (progress=1)",
+  "decorativa": "importantForAccessibility=no-hide-descendants / aria-hidden",
+  "sucesso": "accessible + accessibilityLabel = descricao; anunciar com AccessibilityInfo.announceForAccessibility"
+ },
+ "animacoes": {
+  "tour-progresso": {
+   "tipo": "decorativa",
+   "repetir": false,
+   "descricao": null,
+   "uso": "Pontos de passo do tour; o progresso real é anunciado em texto (\"Pergunta 3 de 11\")."
+  },
+  "carregando": {
+   "tipo": "decorativa",
+   "repetir": true,
+   "repeticoes_max": 10,
+   "descricao": null,
+   "uso": "Até 10 voltas (15 s); depois fica parado no último quadro e o texto \"Carregando…\" continua visível (role=status)."
+  },
+  "meta-de-agua": {
+   "tipo": "sucesso",
+   "repetir": false,
+   "descricao": "Meta de água do dia concluída",
+   "uso": "Toca uma vez ao bater a meta."
+  },
+  "treino-concluido": {
+   "tipo": "sucesso",
+   "repetir": false,
+   "descricao": "Treino concluído. Parabéns!",
+   "uso": "Toca uma vez no resumo do treino."
+  },
+  "login-sucesso": {
+   "tipo": "sucesso",
+   "repetir": false,
+   "descricao": "Login feito com sucesso",
+   "uso": "Toca uma vez antes de ir para o Início."
+  }
+ }
+}

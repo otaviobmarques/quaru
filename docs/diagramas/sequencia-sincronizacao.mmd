@@ -1,0 +1,19 @@
+sequenceDiagram
+  autonumber
+  actor A as Aluno
+  participant T as Tela Treino
+  participant E as Estado local
+  participant F as Fila
+  participant S as Servidor (futuro)
+  A->>T: Toca ✓ (concluir série)
+  T->>E: salvarSerie (id uuid do aparelho)
+  E->>F: enfileirar (substitui versão pendente do mesmo id)
+  T->>T: timer de descanso + notificação local
+  Note over F,S: sem rede: fila para e mantém a ordem
+  F->>S: upsert por id (repetir não duplica)
+  alt aceito
+    S-->>F: registro com atualizado_em do servidor
+  else 422 inválido
+    S-->>F: problem+json → item marcado, demais seguem
+  end
+  S-->>E: mesclar: servidor vence, exclusão não é desfeita

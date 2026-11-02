@@ -1,0 +1,142 @@
+[
+  {
+    "nome": "celular: raiz redireciona para /quaru/entrar",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: onboarding chega ao Início",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: estado gravado no localStorage do navegador",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: descanso iniciou",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: fim do descanso chamou navigator.vibrate",
+    "ok": true,
+    "det": "[0,400,200,400]"
+  },
+  {
+    "nome": "celular: fim do descanso tocou descanso.wav",
+    "ok": true,
+    "det": "/quaru/assets/assets/sons/descanso.1906870d88410e21033f2adc86f04662.wav"
+  },
+  {
+    "nome": "celular: Perfil avisa \"Dados salvos neste navegador, sem criptografia do aparelho\"",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: acesso direto a /quaru/perfil (fallback 404.html) abre o app",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: manifest carregado sem erros",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: service worker ativo no escopo /quaru/",
+    "ok": true,
+    "det": "/quaru/"
+  },
+  {
+    "nome": "celular: abre SEM internet (service worker) e mantém os dados",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: \"Excluir tudo\" explica que apaga só este navegador",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: após Excluir tudo volta para Entrar e o estado salvo está vazio",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "celular: sem erros de JavaScript",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: raiz redireciona para /quaru/entrar",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: onboarding chega ao Início",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: estado gravado no localStorage do navegador",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: descanso iniciou",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: fim do descanso chamou navigator.vibrate",
+    "ok": true,
+    "det": "[0,400,200,400]"
+  },
+  {
+    "nome": "computador: fim do descanso tocou descanso.wav",
+    "ok": true,
+    "det": "/quaru/assets/assets/sons/descanso.1906870d88410e21033f2adc86f04662.wav"
+  },
+  {
+    "nome": "computador: Perfil avisa \"Dados salvos neste navegador, sem criptografia do aparelho\"",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: acesso direto a /quaru/perfil (fallback 404.html) abre o app",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: manifest carregado sem erros",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: service worker ativo no escopo /quaru/",
+    "ok": true,
+    "det": "/quaru/"
+  },
+  {
+    "nome": "computador: abre SEM internet (service worker) e mantém os dados",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: \"Excluir tudo\" explica que apaga só este navegador",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: após Excluir tudo volta para Entrar e o estado salvo está vazio",
+    "ok": true,
+    "det": ""
+  },
+  {
+    "nome": "computador: sem erros de JavaScript",
+    "ok": true,
+    "det": ""
+  }
+]

@@ -1,0 +1,1 @@
+{ "name": "quaru-backup", "version": "0.3.0", "private": true, "main": "src/index.ts", "license": "UNLICENSED", "description": "Exclui arquivos do backup do iCloud/computador (NSURLIsExcludedFromBackupKey). Só iOS." }

@@ -1,0 +1,72 @@
+:root{--cor-fundo:#F7F6F6;--cor-superficie:#FFFFFF;--cor-superficie-2:#EFECED;--cor-borda:#DED8DA;--cor-texto:#14141A;--cor-texto-suave:#5C5257;--cor-primaria:#C81E36;--cor-primaria-texto:#A3172C;--cor-sobre-primaria:#FFFFFF;--cor-primaria-suave:#FDECEE;--cor-secundaria:#285884;--cor-sobre-secundaria:#FFFFFF;--cor-secundaria-suave:#EFF5FA;--cor-sucesso:#15803D;--cor-alerta:#A75A07;--cor-erro:#C62828;--cor-foco:#346EA1;--cor-marca:#E0263F;--cor-marca-escuro:#A3172C;--cor-energia:#FBBF24;--cor-sobre-energia:#14141A;--cor-folha:#2F855A}[data-tema=escuro]{--cor-fundo:#1A0E12;--cor-superficie:#2A1C21;--cor-superficie-2:#3D2C32;--cor-borda:#3D2C32;--cor-texto:#F7F3F4;--cor-texto-suave:#C9BDC1;--cor-primaria:#FF7085;--cor-primaria-texto:#FF8A9B;--cor-sobre-primaria:#1A0E12;--cor-primaria-suave:#3A1620;--cor-secundaria:#84AED3;--cor-sobre-secundaria:#1A1918;--cor-secundaria-suave:#16283A;--cor-sucesso:#4ADE80;--cor-alerta:#FBBF24;--cor-erro:#F87171;--cor-foco:#84AED3}
+/* Quaru v0.4.1 · v2 · cores = app/mobile/src/tema/tokens.ts (paleta v0.3). Fonte Inter (OFL). */
+*{box-sizing:border-box;margin:0}
+html{font-size:16px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--cor-fundo);color:var(--cor-texto);font-size:1rem;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--cor-foco);outline-offset:2px}
+.palco{min-height:100vh;background:radial-gradient(circle at 12% 18%,var(--cor-primaria-suave) 0 180px,transparent 181px),radial-gradient(circle at 88% 78%,var(--cor-secundaria-suave) 0 220px,transparent 221px),var(--cor-fundo)}
+.col{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--cor-fundo);position:relative}
+.topo{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.topo .simb{width:36px;height:36px} .topo .ola{font-weight:800;font-size:1.25rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.selo-sim{font-size:.75rem;font-weight:800;letter-spacing:.06em;background:var(--cor-energia);color:var(--cor-sobre-energia);border:1.5px solid var(--cor-texto);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.icobtn{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--cor-texto)}
+main{flex:1;padding:4px 16px 104px;display:flex;flex-direction:column;gap:16px}
+h1{font-size:1.75rem;line-height:1.2;font-weight:800;letter-spacing:-.01em} h2{font-size:1.25rem;line-height:1.3;font-weight:700} h3{font-size:1.0625rem;font-weight:700}
+.t2{color:var(--cor-texto-suave)} .peq{font-size:.875rem;line-height:1.45}
+.card{background:var(--cor-superficie);border:1px solid var(--cor-borda);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 4px 12px rgba(20,20,26,.08)}
+.hero{border-radius:24px;overflow:hidden;background:var(--cor-superficie);border:1px solid var(--cor-borda);box-shadow:0 12px 32px rgba(200,30,54,.18)}
+.hero .faixa{background:linear-gradient(135deg,var(--cor-marca),var(--cor-marca-escuro));color:#fff;padding:16px 16px 20px;display:flex;flex-direction:column;gap:8px}
+.hero .faixa h1,.hero .faixa h2{color:#fff} .hero .faixa p{color:#fff}
+.hero .cena{background:var(--cor-primaria-suave);padding:8px 16px 0} .hero .cena svg{display:block;width:100%;height:auto;max-height:200px}
+.hero .acao{padding:16px;display:flex;flex-direction:column;gap:8px}
+.selo{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--cor-energia);color:var(--cor-sobre-energia);border:1.5px solid var(--cor-texto);border-radius:999px;padding:4px 10px}
+.hero .selo{border-color:#fff}
+.selo-p{align-self:flex-start;font-size:.8125rem;font-weight:700;background:var(--cor-primaria-suave);color:var(--cor-primaria-texto);border-radius:999px;padding:4px 10px}
+.selo-s{align-self:flex-start;font-size:.8125rem;font-weight:700;background:var(--cor-secundaria-suave);color:var(--cor-texto);border-radius:999px;padding:4px 10px}
+.btn{min-height:52px;border-radius:14px;background:var(--cor-primaria);color:var(--cor-sobre-primaria);font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;width:100%;box-shadow:0 6px 14px rgba(200,30,54,.25);transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.btn-branco{background:#fff;color:#A3172C;box-shadow:none}
+.btn2{min-height:52px;border-radius:14px;border:2px solid var(--cor-primaria);color:var(--cor-primaria-texto);font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;width:100%}
+.btn-sec{min-height:52px;border-radius:14px;background:var(--cor-secundaria);color:var(--cor-sobre-secundaria);font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--cor-texto-suave);color:var(--cor-texto);font-weight:600;background:var(--cor-superficie)}
+.chip[aria-pressed=true]{background:var(--cor-primaria);border-color:var(--cor-primaria);color:var(--cor-sobre-primaria)}
+.linha{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;width:100%;text-align:left}
+.aviso{display:flex;gap:12px;align-items:flex-start;background:var(--cor-superficie);border:1px solid var(--cor-borda);border-left:6px solid var(--cor-secundaria);border-radius:16px;padding:12px 16px;font-size:1rem;line-height:1.5;color:var(--cor-texto)}
+.aviso svg{flex:none;color:var(--cor-secundaria);margin-top:2px} .aviso.erro{border-left-color:var(--cor-erro)} .aviso.erro svg{color:var(--cor-erro)}
+.aviso.fixo{position:sticky;bottom:96px}
+.abas{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;display:flex;background:var(--cor-superficie);border-top:1px solid var(--cor-borda);padding:6px 6px 10px;z-index:5}
+.aba{flex:1;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--cor-texto-suave);font-size:.75rem;font-weight:600;border-radius:14px}
+.aba[aria-current=page]{color:var(--cor-primaria-texto);font-weight:800;background:var(--cor-primaria-suave)}
+.num{font-size:2.5rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.05;letter-spacing:-.02em}
+.grade3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px} .tile{background:var(--cor-superficie-2);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px}
+.tile b{font-size:1.25rem}
+.trilho{height:16px;border-radius:999px;background:var(--cor-superficie-2);border:1.5px solid var(--cor-texto-suave);overflow:hidden} .trilho i{display:block;height:100%;background:var(--cor-secundaria);border-radius:999px}
+.anel{position:relative;width:200px;height:200px;margin:0 auto} .anel .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:2.25rem}
+.esq{background:var(--cor-superficie-2);border-radius:12px;height:16px} .esq.g{height:120px;border-radius:20px}
+.seg{display:flex;background:var(--cor-superficie-2);border-radius:14px;padding:4px;gap:4px} .seg button{flex:1;min-height:44px;border-radius:10px;font-weight:700;color:var(--cor-texto-suave)} .seg button[aria-selected=true]{background:var(--cor-superficie);color:var(--cor-texto);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.rolo{display:flex;gap:12px;overflow:hidden} .rolo>.card{flex:1;min-width:0}
+.ilu svg{display:block;width:100%;height:auto}
+.modal-fundo{position:fixed;inset:0;background:rgba(10,5,7,.62);display:flex;align-items:flex-end;justify-content:center;z-index:9}
+.modal{width:100%;max-width:480px;background:var(--cor-superficie);border-radius:28px 28px 0 0;padding:16px 16px 28px;display:flex;flex-direction:column;gap:12px}
+.domma{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--cor-texto-suave);font-size:.875rem} .domma img{width:136px;height:auto}
+.link{color:var(--cor-primaria-texto);font-weight:700;text-decoration:underline;text-underline-offset:3px;min-height:44px;display:inline-flex;align-items:center}
+.avatar{width:96px;height:96px;border-radius:50%;background:var(--cor-primaria-suave);border:3px solid var(--cor-primaria);overflow:hidden;align-self:center}
+.chave{width:52px;height:32px;border-radius:999px;background:var(--cor-primaria);position:relative;flex:none} .chave:after{content:"";position:absolute;right:4px;top:4px;width:24px;height:24px;border-radius:50%;background:var(--cor-sobre-primaria)}
+.chave.off{background:var(--cor-superficie-2);border:1.5px solid var(--cor-texto-suave)} .chave.off:after{left:4px;right:auto;top:2.5px;background:var(--cor-texto-suave)}
+/* Quaru v0.4.1 · v2.1 · microinterações (web). No app (Expo), reproduzir com react-native-reanimated (já no package.json) nos mesmos tempos.
+   Respeita "reduzir movimento" do sistema. */
+.btn,.btn2,.btn-sec,.chip,.aba{transition:transform .12s cubic-bezier(.2,.8,.2,1),box-shadow .12s}
+.btn:active,.btn2:active,.btn-sec:active{transform:scale(.97)}                 /* toque: afunda 3% em 120 ms */
+.chip[aria-pressed=true]{animation:q-pop .22s cubic-bezier(.2,1.4,.4,1)}       /* ficha selecionada: estala */
+.aba[aria-current=page] svg{animation:q-pulo .32s cubic-bezier(.2,1.4,.4,1)}  /* aba ativa: ícone pula */
+.inp.err{animation:q-tremor .3s}                                               /* erro: campo treme + ícone e texto (nunca só cor) */
+.selo{animation:q-brilho 2.4s ease-in-out 3}                                   /* selo de destaque: respira 3 vezes (7,2 s) e para; .pausado pausa */
+.pausado,.pausado *{animation-play-state:paused!important}
+.trilho i{transition:width .6s cubic-bezier(.2,.8,.2,1)}                       /* água: barra enche suave */
+@keyframes q-pop{0%{transform:scale(.9)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes q-pulo{0%{transform:translateY(0)}40%{transform:translateY(-5px)}100%{transform:translateY(0)}}
+@keyframes q-tremor{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes q-brilho{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

@@ -1,0 +1,6 @@
+# Fontes: treinos sugeridos e objetivo (v0.4.1)
+- **ACSM** – American College of Sports Medicine. *Progression models in resistance training for healthy adults* (Position Stand). Med Sci Sports Exerc. 2009;41(3):687-708. PubMed: https://pubmed.ncbi.nlm.nih.gov/19204579/ (abriu em 01/11/2026). Faixas gerais usadas: iniciante 1–3 séries de 8–12 repetições; força (avançado) ênfase em 1–6 repetições com 2–3 min de descanso; hipertrofia 6–12 repetições com 1–2 min; resistência muscular 10–15 repetições com descanso curto (≤ 1–2 min).
+- **ACSM** – *Guidelines for Exercise Testing and Prescription* (edição vigente): treino de força 2–3 dias por semana para adultos. [a confirmar a edição com o profissional de educação física].
+- Os modelos usam **só** os 22 exercícios do catálogo (`biblioteca.ts`). Os volumes ficam no lado conservador dessas faixas. Tempo estimado: premissa da Domma (3 s por repetição e 1 min de troca por exercício), não é regra do ACSM.
+- Pendência: o catálogo não tem exercício de pernas sem equipamento (ex.: agachamento sem peso); o treino "em casa" fica só com flexão, abdominal e prancha até o catálogo ser revisado.
+- Tudo a revisar por profissional de educação física (CREF) antes de publicar.
