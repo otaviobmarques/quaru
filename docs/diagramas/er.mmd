@@ -1,0 +1,20 @@
+erDiagram
+  USUARIOS ||--o{ CONSENTIMENTOS : concede
+  USUARIOS ||--o{ ROTINAS : cria
+  ROTINAS ||--|{ ROTINA_EXERCICIOS : contem
+  EXERCICIOS ||--o{ ROTINA_EXERCICIOS : usado_em
+  USUARIOS ||--o{ SESSOES_TREINO : faz
+  ROTINAS |o--o{ SESSOES_TREINO : origina
+  SESSOES_TREINO ||--|{ SERIES : registra
+  EXERCICIOS ||--o{ SERIES : de
+  USUARIOS ||--o{ PESOS_CORPORAIS : registra
+  SERIES {
+    uuid id PK
+    uuid sessao_id FK
+    uuid exercicio_id FK
+    text tipo
+    numeric carga_kg
+    int reps
+    timestamptz atualizado_em
+    timestamptz excluido_em
+  }

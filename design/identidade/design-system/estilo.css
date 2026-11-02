@@ -1,0 +1,32 @@
+
+@page { size: 297mm 210mm; margin: 14mm 16mm 14mm 16mm;
+  @bottom-left { content: "Quaru · Design System v1.0 · nome provisório, sujeito à análise jurídica"; font: 8pt Outfit; color: #8A8088 }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 8pt Outfit; color: #8A8088 } }
+@page capa { margin: 0; @bottom-left { content: none } @bottom-right { content: none } }
+* { box-sizing: border-box }
+body { font-family: Outfit, sans-serif; color: #14141A; font-size: 10.5pt; line-height: 1.45; margin: 0 }
+section { page-break-after: always } section:last-child { page-break-after: auto }
+h1 { font-size: 26pt; margin: 0 0 4mm; font-weight: 700 } h2 { font-size: 14pt; margin: 5mm 0 2mm; font-weight: 600 }
+.num { color: #E0263F; font-weight: 600; font-size: 10pt; letter-spacing: .1em }
+.capa { page: capa; height: 210mm; background: #1A0E12; color: #fff; padding: 30mm 24mm; position: relative }
+.capa img { width: 150mm } .capa h1 { font-size: 40pt; margin-top: 18mm } .capa p { color: #BDB2B6; font-size: 13pt }
+.cols { display: flex; gap: 8mm } .cols > div { flex: 1 }
+.ver { display: inline-block; width: 60mm; margin: 0 3mm 4mm 0; vertical-align: top; text-align: center }
+.ver img { height: 26mm; max-width: 58mm; background: #FAF7F5; padding: 3mm; border-radius: 3mm }
+.ver.escuro img { background: #1A0E12 } figcaption { font-size: 8.5pt; color: #5B5560 }
+.proib { display: inline-block; width: 42mm; margin: 0 2mm 2mm 0; text-align: center } .proib img { width: 42mm }
+.sw { display: inline-block; width: 60mm; vertical-align: top; margin-right: 3mm; font-size: 9pt }
+.sw .chip { height: 26mm; border-radius: 3mm; padding: 3mm; font-weight: 600; margin-bottom: 2mm; border: 1px solid #E6E0DE }
+.sw span, .sw small { display: block } .sw small { color: #5B5560 }
+.tom { display: inline-block; width: 25mm; height: 16mm; font-size: 7.5pt; padding: 1.5mm; margin: 0 1mm 1mm 0; border-radius: 2mm }
+table { border-collapse: collapse; width: 100%; font-size: 9pt } td, th { border-bottom: 1px solid #E6E0DE; padding: .9mm 2mm; text-align: left }
+th { color: #5B5560; font-weight: 500 }
+.dot { display: inline-block; width: 4mm; height: 4mm; border-radius: 2mm; vertical-align: middle; margin-right: 2mm }
+.amostra { padding: .5mm 2mm; border-radius: 1mm; font-weight: 600 } .ok { color: #1A7F47; font-weight: 600 } .med { color: #9A5B00; font-weight: 600 } .ruim { color: #A8201A; font-weight: 600 }
+.esp { display: inline-block; text-align: center; margin-right: 5mm; vertical-align: bottom; font-size: 8pt }
+.ic { display: inline-block; width: 24mm; text-align: center; margin: 0 2mm 3mm 0 } .ic img { width: 10mm }
+.btn { display: inline-block; padding: 2.5mm 6mm; border-radius: 20mm; font-weight: 600; margin: 0 2mm 2mm 0; font-size: 10pt }
+.campo { border: 1px solid #C9C0C4; border-radius: 3mm; padding: 2.5mm 3mm; width: 70mm; margin-bottom: 1mm }
+.card { border: 1px solid #E6E0DE; border-radius: 4mm; padding: 4mm; background: #fff; display: inline-block; width: 70mm; vertical-align: top; margin-right: 3mm }
+.ilu { font-size: 8pt; color: #A8201A; font-weight: 600; letter-spacing: .08em }
+.nota { font-size: 8.5pt; color: #5B5560 } .chk li { margin-bottom: 1mm }

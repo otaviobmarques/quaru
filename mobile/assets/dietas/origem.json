@@ -1,0 +1,66 @@
+{
+  "atkins": {
+    "16x9": "redbox",
+    "alt": "Foto de ovos fritos com bacon na frigideira, sem pão",
+    "1x1": "redbox"
+  },
+  "cetogenica": {
+    "16x9": "redbox",
+    "alt": "Foto de salada de salmão, abacate, rúcula e tomate-cereja",
+    "1x1": "redbox"
+  },
+  "jejum-intermitente": {
+    "16x9": "redbox",
+    "alt": "Foto de café preto, despertador antigo e vela, luz quente",
+    "1x1": "redbox"
+  },
+  "low-carb": {
+    "16x9": "redbox",
+    "alt": "Foto de frango grelhado em cubos com brócolis e abobrinha grelhada",
+    "1x1": "redbox"
+  },
+  "mediterranea": {
+    "16x9": "redbox",
+    "alt": "Foto de peixe assado com tomates, azeitonas, limão e manjericão",
+    "1x1": "redbox"
+  },
+  "paleo": {
+    "16x9": "redbox",
+    "alt": "Foto de salada de folhas e tomate com peito de frango grelhado",
+    "1x1": "redbox"
+  },
+  "vegana": {
+    "16x9": "redbox",
+    "alt": "Foto de bowl com tofu, arroz, feijão preto e legumes",
+    "1x1": "redbox"
+  },
+  "vegetariana": {
+    "16x9": "redbox",
+    "alt": "Foto de feijão vermelho, arroz e vinagrete em prato branco",
+    "1x1": "redbox"
+  },
+  "receita:fruta-castanha": {
+    "alt": "Foto de uvas, pistache e amêndoas"
+  },
+  "receita:iogurte-fruta": {
+    "alt": "Foto de iogurte natural com fruta e aveia"
+  },
+  "receita:mingau-aveia": {
+    "alt": "Foto de mingau de aveia com banana"
+  },
+  "receita:ovo-cozido": {
+    "alt": "Foto de ovo cozido com tomate-cereja e folhas"
+  },
+  "receita:ovos-abacate": {
+    "alt": "Foto de ovos mexidos com abacate, folhas e pão"
+  },
+  "receita:pao-pasta-amendoim": {
+    "alt": "Foto de pão com pasta de amendoim e banana"
+  },
+  "receita:sopa-legumes": {
+    "alt": "Foto de sopa de legumes com feijão em tigela rústica"
+  },
+  "receita:tofu-legumes": {
+    "alt": "Foto de tofu grelhado com legumes salteados e brotos"
+  }
+}

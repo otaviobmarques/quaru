@@ -1,0 +1,11 @@
+{
+  "name": "quaru",
+  "private": true,
+  "description": "Quaru: app de treinos (Expo/React Native). O app fica em mobile/.",
+  "scripts": {
+    "postinstall": "npm --prefix mobile ci",
+    "start": "npm --prefix mobile start",
+    "test": "npm --prefix mobile test",
+    "web:export": "npm --prefix mobile run web:export"
+  }
+}

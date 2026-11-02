@@ -1,0 +1,209 @@
+openapi: 3.1.0
+info:
+  title: API do app-academia (provisório)
+  version: 0.1.0
+  description: |
+    Contrato das chamadas do app ao Supabase (PostgREST + funções RPC). **Ainda não ativo**: o projeto Supabase
+    aguarda aprovação de custo (ADR-0004). CRUD simples segue o PostgREST protegido por RLS; regras em
+    backend/supabase/migrations. Exclusão é lógica (excluido_em). Gravação idempotente por id (upsert).
+servers:
+  - url: https://{projeto}.supabase.co/rest/v1
+    variables:
+      projeto: { default: a-definir, description: Projeto em sa-east-1 (a criar com OK do Otávio) }
+security:
+  - bearerAuth: []
+    apiKey: []
+tags:
+  - { name: Treino, description: Sessões e séries }
+  - { name: Peso, description: Peso corporal }
+  - { name: Conta, description: Exclusão de conta (LGPD) }
+paths:
+  /series:
+    get:
+      tags: [Treino]
+      summary: Lista séries do usuário (RLS) alteradas depois de um instante
+      operationId: listarSeries
+      parameters:
+        - { name: atualizado_em, in: query, description: 'Filtro PostgREST, ex.: gt.2026-11-01T00:00:00Z', schema: { type: string } }
+        - $ref: '#/components/parameters/Limite'
+        - $ref: '#/components/parameters/Ordem'
+      responses:
+        '200':
+          description: Séries
+          content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/Serie' } } } }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+    post:
+      tags: [Treino]
+      summary: Grava ou atualiza séries (upsert idempotente por id)
+      operationId: gravarSeries
+      parameters:
+        - { name: Prefer, in: header, required: true, schema: { type: string, const: 'resolution=merge-duplicates,return=representation' } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { type: array, items: { $ref: '#/components/schemas/Serie' } }
+            example: [{ id: 4c1e7f2a-0000-4000-8000-000000000001, sessao_id: 3a9d0c1e-0000-4000-8000-000000000001, usuario_id: 00000000-0000-4000-8000-00000000000a, exercicio_id: 00000000-0000-4000-a000-000000000001, ordem: 1, tipo: normal, carga_kg: 52.5, reps: 8, duracao_s: null, rpe: null, concluida_em: '2026-11-01T10:05:00-03:00', excluido_em: null }]
+      responses:
+        '201':
+          description: Gravadas (atualizado_em é o relógio do servidor)
+          content: { application/json: { schema: { type: array, items: { $ref: '#/components/schemas/Serie' } } } }
+        '400': { $ref: '#/components/responses/Invalido' }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+        '403': { $ref: '#/components/responses/Proibido' }
+  /pesos_corporais:
+    post:
+      tags: [Peso]
+      summary: Registra peso corporal (exige consentimento de saúde)
+      operationId: registrarPeso
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PesoCorporal' }
+            example: { id: 5b2f0000-0000-4000-8000-000000000001, usuario_id: 00000000-0000-4000-8000-00000000000a, peso_kg: 78.4, medido_em: '2026-11-01T08:00:00-03:00' }
+      responses:
+        '201': { description: Registrado }
+        '400': { $ref: '#/components/responses/Invalido' }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+        '403': { $ref: '#/components/responses/Proibido' }
+  /rpc/iniciar_sessao:
+    post:
+      tags: [Treino]
+      summary: Inicia sessão; se já houver outra ativa, devolve conflito (regra L2.5)
+      operationId: iniciarSessao
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [p_id, p_rotina, p_iniciada_em]
+              properties:
+                p_id: { type: string, format: uuid }
+                p_rotina: { type: [string, 'null'], format: uuid }
+                p_iniciada_em: { type: string, format: date-time }
+            example: { p_id: 3a9d0c1e-0000-4000-8000-000000000002, p_rotina: null, p_iniciada_em: '2026-11-01T10:00:00-03:00' }
+      responses:
+        '200':
+          description: Resultado
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [resultado, sessao_ativa]
+                properties:
+                  resultado: { type: string, enum: [iniciada, conflito, id_invalido], description: 'id_invalido = o id já pertence a outra pessoa (BUG-04)' }
+                  sessao_ativa: { type: [string, 'null'], format: uuid }
+              example: { resultado: conflito, sessao_ativa: 3a9d0c1e-0000-4000-8000-000000000001 }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+        '403': { $ref: '#/components/responses/Proibido' }
+  /rpc/conceder_consentimento:
+    post:
+      tags: [Conta]
+      summary: Registra o aceite de uma finalidade na versão do texto informada; idempotente (data/hora do servidor)
+      operationId: concederConsentimento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [p_finalidade, p_versao]
+              properties:
+                p_finalidade: { $ref: '#/components/schemas/Finalidade' }
+                p_versao: { type: string, maxLength: 60 }
+            example: { p_finalidade: dados_saude, p_versao: saude-2026-11-v1-rascunho }
+      responses:
+        '200': { description: Registro ativo, content: { application/json: { schema: { $ref: '#/components/schemas/ConsentimentoRegistro' } } } }
+        '400': { $ref: '#/components/responses/Invalido' }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+  /rpc/revogar_consentimento:
+    post:
+      tags: [Conta]
+      summary: Revoga a finalidade (preenche revogado_em uma única vez; o histórico é imutável)
+      operationId: revogarConsentimento
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [p_finalidade]
+              properties:
+                p_finalidade: { $ref: '#/components/schemas/Finalidade' }
+            example: { p_finalidade: ia_visao_eua }
+      responses:
+        '200': { description: Revogado (ou nada a revogar) }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+  /rpc/excluir_minha_conta:
+    post:
+      tags: [Conta]
+      summary: Exclui a conta e todos os dados do usuário (RF10)
+      operationId: excluirMinhaConta
+      responses:
+        '204': { description: Excluída }
+        '401': { $ref: '#/components/responses/NaoAutenticado' }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer, bearerFormat: JWT }
+    apiKey: { type: apiKey, in: header, name: apikey }
+  parameters:
+    Limite: { name: limit, in: query, schema: { type: integer, minimum: 1, maximum: 1000, default: 500 } }
+    Ordem: { name: order, in: query, description: 'Paginação por chave: order=atualizado_em.asc com filtro gt no último valor', schema: { type: string, default: atualizado_em.asc } }
+  schemas:
+    Finalidade: { type: string, enum: [dados_saude, ia_visao_eua] }
+    ConsentimentoRegistro:
+      type: object
+      required: [id, usuario_id, finalidade, versao, aceito_em]
+      properties:
+        id: { type: string, format: uuid }
+        usuario_id: { type: string, format: uuid }
+        finalidade: { $ref: '#/components/schemas/Finalidade' }
+        versao: { type: string }
+        aceito_em: { type: string, format: date-time }
+        revogado_em: { type: [string, 'null'], format: date-time }
+    Serie:
+      type: object
+      required: [id, sessao_id, usuario_id, exercicio_id, ordem, tipo]
+      properties:
+        id: { type: string, format: uuid }
+        sessao_id: { type: string, format: uuid }
+        usuario_id: { type: string, format: uuid }
+        exercicio_id: { type: string, format: uuid }
+        ordem: { type: integer, minimum: 1 }
+        tipo: { type: string, enum: [aquecimento, normal, falha, drop] }
+        carga_kg: { type: [number, 'null'], minimum: 0, maximum: 1000 }
+        reps: { type: [integer, 'null'], minimum: 0, maximum: 1000 }
+        duracao_s: { type: [integer, 'null'], minimum: 0 }
+        rpe: { type: [number, 'null'], minimum: 1, maximum: 10 }
+        concluida_em: { type: [string, 'null'], format: date-time }
+        atualizado_em: { type: string, format: date-time, readOnly: true }
+        excluido_em: { type: [string, 'null'], format: date-time }
+    PesoCorporal:
+      type: object
+      required: [id, usuario_id, peso_kg, medido_em]
+      properties:
+        id: { type: string, format: uuid }
+        usuario_id: { type: string, format: uuid }
+        peso_kg: { type: number, minimum: 20, maximum: 400 }
+        medido_em: { type: string, format: date-time }
+        excluido_em: { type: [string, 'null'], format: date-time }
+    ErroPostgrest:
+      type: object
+      description: Formato de erro do PostgREST (o app converte para problem+json internamente)
+      properties:
+        code: { type: string, examples: ['42501', '23514'] }
+        message: { type: string }
+        details: { type: [string, 'null'] }
+        hint: { type: [string, 'null'] }
+  responses:
+    NaoAutenticado:
+      description: Sem sessão válida
+      content: { application/json: { schema: { $ref: '#/components/schemas/ErroPostgrest' } } }
+    Proibido:
+      description: Barrado pela RLS (outro usuário ou sem consentimento de saúde)
+      content: { application/json: { schema: { $ref: '#/components/schemas/ErroPostgrest' } } }
+    Invalido:
+      description: Viola restrição (ex. carga negativa)
+      content: { application/json: { schema: { $ref: '#/components/schemas/ErroPostgrest' } } }

@@ -1,0 +1,5 @@
+.btn-destr{min-height:52px;border-radius:14px;background:var(--cor-erro);color:var(--cor-sobre-erro);font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;width:100%}
+.btn-destr:active{transform:scale(.97)}
+button[disabled],button[aria-disabled=true]{opacity:.45;cursor:not-allowed;box-shadow:none}
+.giro{width:20px;height:20px;border-radius:50%;border:3px solid currentColor;border-right-color:transparent}
+.acoes{display:flex;flex-direction:column;gap:12px}

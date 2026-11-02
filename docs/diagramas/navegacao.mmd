@@ -1,0 +1,14 @@
+flowchart LR
+  Entrar --> Consentimentos --> Abas
+  subgraph Abas
+    Inicio; Rotinas; Historico; Alimentacao; Perfil
+  end
+  Inicio -->|Iniciar/Continuar| Treino --> Resumo --> Inicio
+  Inicio --> Peso
+  Rotinas --> EditarRotina --> Biblioteca
+  Historico --> Resumo --> DetalheExercicio
+  Treino --> DetalheExercicio
+  Perfil --> Consentimentos
+  Perfil --> Exportar
+  Perfil --> Sobre
+  Perfil -->|EXCLUIR| Entrar
