@@ -1,6 +1,10 @@
 # Changelog
 Formato Keep a Changelog.
 
+## [0.6.2] – 2026-11-02
+### Corrigido
+- **Pré-visualização do link aparecia só no endereço principal.** Endereços como /quaru/entrar respondiam como "página não encontrada" (o GitHub Pages mostrava o app pela página de erro), e WhatsApp, Instagram e Facebook não montam pré-visualização nesse caso. Agora cada tela tem a sua página.
+
 ## [0.6.1] – 2026-11-02
 ### Adicionado
 - **Painel: criar usuário com senha**, além do convite por e-mail. O painel gera uma senha fácil de ler e mostra os dados de acesso para copiar e enviar.

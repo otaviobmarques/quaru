@@ -12,7 +12,10 @@ createServer(async (req, res) => {
   let rel = normalize(p.slice(BASE.length) || '/').replace(/^(\.\.[/\\])+/, '');
   if (rel.endsWith('/')) rel += 'index.html';
   let arq = join(raiz, rel), status = 200;
-  try { if (!(await stat(arq)).isFile()) throw 0; } catch { arq = join(raiz, '404.html'); status = 404; }
+  // Como o GitHub Pages: /quaru/entrar também é servido a partir de entrar.html.
+  try { if (!(await stat(arq)).isFile()) throw 0; } catch {
+    try { if (!(await stat(arq + '.html')).isFile()) throw 0; arq += '.html'; } catch { arq = join(raiz, '404.html'); status = 404; }
+  }
   res.writeHead(status, { 'Content-Type': tipos[extname(arq)] ?? 'application/octet-stream' });
   res.end(await readFile(arq));
 }).listen(porta, '127.0.0.1', () => console.log(`http://localhost:${porta}${BASE}/`));

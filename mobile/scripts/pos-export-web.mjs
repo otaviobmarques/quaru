@@ -1,8 +1,8 @@
 // Pós-export da versão web (ADR-0013): manifest/ícones no <head>, service worker com a lista de arquivos,
 // 404.html (fallback de SPA no GitHub Pages) e .nojekyll. Uso: node scripts/pos-export-web.mjs dist
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { dirname, join, relative, sep } from 'node:path';
 
 const dist = process.argv[2] ?? 'dist';
 const BASE = '/quaru/'; // igual a experiments.baseUrl do app.json
@@ -34,6 +34,28 @@ if (!html.includes('manifest.webmanifest')) {
   writeFileSync(idx, html);
 }
 writeFileSync(join(dist, '404.html'), html); // GitHub Pages devolve isto para rotas da SPA (ex.: /quaru/perfil)
+
+// v0.6.2: cada tela fixa do app ganha um <rota>.html com o mesmo conteúdo. O GitHub Pages serve /quaru/entrar a partir
+// de entrar.html com status 200; sem isso a resposta era o 404.html com status 404, e WhatsApp, Instagram e
+// Facebook não montam a pré-visualização de páginas 404 (o app abre direto em /quaru/entrar).
+const ROTAS_APP = [];
+const pastaApp = new URL('../src/app/', import.meta.url).pathname;
+const varrer = (d, prefixo) => {
+  for (const n of readdirSync(d)) {
+    const p = join(d, n);
+    if (statSync(p).isDirectory()) { if (!n.startsWith('[')) varrer(p, /^\(.*\)$/.test(n) ? prefixo : prefixo + n + '/'); continue; }
+    const nome = n.replace(/\.tsx$/, '');
+    if (!n.endsWith('.tsx') || nome.startsWith('_') || nome.startsWith('[') || nome === 'index' || nome.includes('+')) continue;
+    ROTAS_APP.push(prefixo + nome);
+  }
+};
+varrer(pastaApp, '');
+for (const r of ROTAS_APP) {
+  const destino = join(dist, r + '.html');
+  if (!existsSync(dirname(destino))) mkdirSync(dirname(destino), { recursive: true });
+  if (!existsSync(destino)) writeFileSync(destino, html);
+}
+console.log(`páginas das telas: ${ROTAS_APP.length} (${ROTAS_APP.slice(0, 6).join(', ')}…)`);
 writeFileSync(join(dist, '.nojekyll'), ''); // pasta _expo/ começa com "_": sem isto o Jekyll a ignora
 
 const arquivos = [];
@@ -41,7 +63,7 @@ const andar = (d) => { for (const n of readdirSync(d)) { const p = join(d, n); i
 andar(dist);
 // v0.4.4 (ADR-0020): as mídias do catálogo (exercicios/*.webp, ~876 animações) NÃO entram no pré-cache;
 // são baixadas quando a pessoa abre o exercício e guardadas no cache de mídia (abaixo).
-const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].includes(f) && !f.endsWith('.map') && !f.startsWith('exercicios/') && !f.startsWith('admin/') && !f.startsWith('loja/') && f !== 'og-quaru.jpg').sort();
+const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].includes(f) && !f.endsWith('.map') && !f.startsWith('exercicios/') && !f.startsWith('admin/') && !f.startsWith('loja/') && f !== 'og-quaru.jpg' && !ROTAS_APP.some((r) => f === r + '.html')).sort();
 const hash = createHash('sha256'); for (const f of lista) hash.update(f).update(readFileSync(join(dist, f)));
 const versao = hash.digest('hex').slice(0, 12);
 const sw = `// Service worker do Quaru web (gerado por scripts/pos-export-web.mjs). Só guarda os arquivos do app para uso offline;
