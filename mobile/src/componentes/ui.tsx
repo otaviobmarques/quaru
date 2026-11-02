@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ActivityIndicator, Image, type ImageSourcePropType, Platform, Pressable, ScrollView, StyleSheet, Switch, Text, TextInput, useWindowDimensions, View, type TextInputProps } from 'react-native';
+import { ActivityIndicator, Image, type ImageSourcePropType, Platform, Pressable, ScrollView, type ScrollViewInstance, StyleSheet, Switch, Text, TextInput, useWindowDimensions, View, type TextInputProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
@@ -184,9 +184,29 @@ export function Ficha({ texto, ativa, onPress }: { texto: string; ativa?: boolea
   );
 }
 
-/** Faixa rolável de fichas: altura natural e a próxima ficha aparece cortada como sinal de rolagem. */
-export function FaixaFichas({ children }: { children: ReactNode }) {
-  return <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flexGrow: 0, marginHorizontal: -espaco[4] }} contentContainerStyle={{ alignItems: 'center', gap: 8, paddingHorizontal: espaco[4], paddingVertical: 4 }}>{children}</ScrollView>;
+/**
+ * Faixa de fichas. Padrão (v3.2): as fichas quebram linha, então todas ficam visíveis em qualquer largura e tamanho de fonte.
+ * `rolar`: faixa horizontal para listas longas (Biblioteca). Na web mostra a barra e aceita a roda do mouse,
+ * porque com mouse não há como arrastar para o lado e as fichas do fim ficavam inacessíveis.
+ */
+export function FaixaFichas({ children, rolar }: { children: ReactNode; rolar?: boolean }) {
+  const ref = useRef<ScrollViewInstance>(null);
+  useEffect(() => {
+    if (!rolar || Platform.OS !== 'web') return;
+    const no = (ref.current as unknown as { getScrollableNode?: () => HTMLElement | null })?.getScrollableNode?.();
+    if (!no) return;
+    const roda = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || no.scrollWidth <= no.clientWidth) return;
+      const fim = no.scrollLeft + no.clientWidth >= no.scrollWidth - 1;
+      if ((e.deltaY > 0 && fim) || (e.deltaY < 0 && no.scrollLeft <= 0)) return; // na ponta, deixa a página rolar
+      e.preventDefault();
+      no.scrollLeft += e.deltaY;
+    };
+    no.addEventListener('wheel', roda, { passive: false });
+    return () => no.removeEventListener('wheel', roda);
+  }, [rolar]);
+  if (!rolar) return <View testID="faixa-fichas" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8, paddingVertical: 4 }}>{children}</View>;
+  return <ScrollView ref={ref} testID="faixa-fichas" horizontal showsHorizontalScrollIndicator={Platform.OS === 'web'} style={{ flexGrow: 0, marginHorizontal: -espaco[4] }} contentContainerStyle={{ alignItems: 'center', gap: 8, paddingHorizontal: espaco[4], paddingVertical: 4, paddingBottom: Platform.OS === 'web' ? 10 : 4 }}>{children}</ScrollView>;
 }
 
 /** Seletor segmentado para trocar de visão (P2-5). */
