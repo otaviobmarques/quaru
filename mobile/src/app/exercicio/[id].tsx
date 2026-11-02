@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { AnimacaoExercicio } from '@/componentes/animacao-exercicio';
-import { Aviso, Cartao, GraficoBarras, ItemLista, Segmentado, Selo, Tela, Texto } from '@/componentes/ui';
+import { GraficoLinha } from '@/componentes/graficos';
+import { MapaMuscular } from '@/componentes/mapa-muscular';
+import { Aviso, Cartao, ItemLista, Segmentado, Selo, Tela, Texto } from '@/componentes/ui';
+import { regioesDoExercicio } from '@/dominio/treinos-sugeridos';
 import { doCatalogo } from '@/dominio/biblioteca';
 import { dataCurta } from '@/dominio/consultas';
 import { formatarKg, recordes, umRmEstimado, volume } from '@/dominio/metricas';
 import { todosExercicios, useEstado } from '@/estado/armazem';
-import { useCores } from '@/tema/tema';
 
 type Metrica = 'carga' | 'volume' | '1rm';
 
@@ -19,7 +21,6 @@ export const AVISO_CREF = 'Nomes e instruções traduzidos pela Domma estão em 
 export default function DetalheExercicio() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { estado } = useEstado();
-  const c = useCores();
   const [m, setM] = useState<Metrica>('carga');
   const ex = todosExercicios(estado).find((e) => e.id === id);
   if (!ex) return <Tela voltar={router.back}><Texto suave>Exercício não encontrado.</Texto></Tela>;
@@ -55,11 +56,18 @@ export default function DetalheExercicio() {
           ) : <Texto suave>A fonte não traz instruções para este exercício.</Texto>}
         </Cartao>
       )}
-      <View style={{ height: 96, borderRadius: 16, borderWidth: 1, borderStyle: 'dashed', borderColor: c.borda, alignItems: 'center', justifyContent: 'center' }}>
-        <Texto v="rotulo" suave>Espaço do mapa muscular (MuscleMap, MIT) — próxima versão</Texto>
-      </View>
+      {regioesDoExercicio(ex.nome).length > 0 && (
+        <Cartao>
+          <Texto v="corpo-forte">Músculos trabalhados</Texto>
+          <View style={{ alignItems: 'center' }}><MapaMuscular regioes={regioesDoExercicio(ex.nome)} altura={180} /></View>
+        </Cartao>
+      )}
       <Segmentado<Metrica> valor={m} onChange={setM} opcoes={[{ valor: 'carga', rotulo: 'Melhor carga' }, { valor: 'volume', rotulo: 'Volume' }, { valor: '1rm', rotulo: '1RM estimado' }]} />
-      <Cartao><GraficoBarras pontos={pontos} unidade="kg" /></Cartao>
+      <Cartao>
+        <Texto v="corpo-forte">Sua evolução</Texto>
+        {pontos.length > 1 ? <GraficoLinha testID="grafico-exercicio" pontos={pontos} unidade="kg" descricao={`${m === 'carga' ? 'Melhor carga' : m === 'volume' ? 'Volume' : '1RM estimado'} por treino em ${ex.nome}`} />
+          : <Texto suave>{pontos.length === 1 ? 'Faça este exercício em mais um treino para ver a evolução.' : 'Quando você registrar séries deste exercício, a evolução aparece aqui.'}</Texto>}
+      </Cartao>
       <Cartao>
         <Texto v="corpo-forte">Recordes</Texto>
         <ItemLista titulo="Melhor carga" valor={`${formatarKg(rec.melhorCarga)} kg`} />

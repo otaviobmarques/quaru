@@ -42,3 +42,12 @@ export function useCores(): Cores {
   return sobre ? SOBRE[escuro ? 'escuro' : 'claro'] : escuro ? temas.escuro : temas.claro;
 }
 export { espaco, raio, tipografia, toque } from './tokens';
+
+/**
+ * v0.5: contorno de elementos DENTRO de um bloco (fichas, trilhos, círculos). No claro é a tinta; no escuro a tinta
+ * é a própria cor do bloco e some, então usamos o cinza das divisórias do design v3.2 escuro (#75716B, 3,88:1 sobre o bloco #1A0E12).
+ */
+export function useContornoInterno(): string {
+  const escuro = useColorScheme() === 'dark';
+  return escuro ? '#75716B' : temas.claro.tinta;
+}

@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ActivityIndicator, Image, type ImageSourcePropType, Platform, Pressable, ScrollView, type ScrollViewInstance, StyleSheet, Switch, Text, TextInput, useWindowDimensions, View, type TextInputProps } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -6,8 +7,9 @@ import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
 import { Simbolo } from '@/componentes/logo';
 import { useEstado, temExemplo } from '@/estado/armazem';
-import { Bloco, espaco, ProvedorSobreFundo, raio, tipografia, toque, useCores, useCoresBase, useSobreFundo } from '@/tema/tema';
+import { Bloco, espaco, ProvedorSobreFundo, raio, tipografia, toque, useContornoInterno, useCores, useCoresBase, useSobreFundo } from '@/tema/tema';
 import { apoio } from '@/tema/tokens';
+import { useFonteTitulo } from '@/tema/fontes';
 
 export const LARGURA_COLUNA = 480; // celular-primeiro; no computador a coluna não estica (P2-7)
 
@@ -33,20 +35,22 @@ export function Tela({ titulo, children, rodape, voltar, iconeVoltar = '‹', ro
   const { estado } = useEstado();
   const { width } = useWindowDimensions();
   // v3.2: título do topo sem corte — quebra linha (sem numberOfLines) e 1,25rem (20 px) até 400 px de largura.
-  const tamTitulo = width <= 400 ? { fontSize: 20, lineHeight: 26 } : null;
+  const tamTitulo = width <= 400 ? { fontSize: 20, lineHeight: 26 } : { fontSize: 24, lineHeight: 30 };
+  const ft = useFonteTitulo();
   return (
     <ProvedorSobreFundo>
     <SafeAreaView style={{ flex: 1, backgroundColor: c.fundo }} edges={['top']}>
       <View style={[s.coluna, { flex: 1 }]}>
         {(titulo || voltar || logo || acaoTopo) && (
-          <View style={s.barra}>
-            {logo && <View style={{ paddingLeft: espaco[2] }}><Simbolo tamanho={36} /></View>}
+          <View style={[s.barra, { flexWrap: 'wrap', rowGap: 4 }]}>
+            {logo && <View style={{ paddingLeft: espaco[2] }}><BlocoTinta raio={12} sombra={3} fundo="#FFFFFF"><View style={{ padding: 3 }}><Simbolo tamanho={30} /></View></BlocoTinta></View>}
             {voltar && <BotaoIcone rotulo={rotuloVoltar} onPress={voltar}><Text style={{ color: f, fontSize: 24 }}>{iconeVoltar}</Text></BotaoIcone>}
-            {titulo ? <Text accessibilityRole="header" testID="titulo-topo" style={[t(logo ? 'titulo-3' : 'titulo-2'), !logo && tamTitulo, { color: f, flex: 1, flexShrink: 1, textAlign: logo ? 'right' : 'left', paddingRight: logo ? espaco[2] : 0 }]}>{titulo}</Text> : null}
+            {titulo ? <Text accessibilityRole="header" testID="titulo-topo" style={[t('titulo-2'), ft, tamTitulo, { color: f, flexGrow: 1, flexShrink: 1, flexBasis: 120, paddingLeft: logo ? espaco[1] : 0 }]}>{titulo}</Text> : null}
             {acaoTopo}
+            {temExemplo(estado) && <SeloSimulacao />}
           </View>
         )}
-        {temExemplo(estado) && <SeloExemplo texto="Dados de EXEMPLO (fictícios) carregados — remova em Perfil." />}
+        {temExemplo(estado) && !(titulo || voltar || logo || acaoTopo) && <View style={{ paddingHorizontal: espaco[4], paddingTop: espaco[2] }}><SeloSimulacao /></View>}
         {semRolagem
           ? <View style={{ flex: 1, paddingHorizontal: espaco[4], paddingTop: espaco[4], gap: espaco[3] }}>{children}</View>
           : <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: espaco[4], gap: espaco[4], paddingBottom: espaco[8] }}>{children}</ScrollView>}
@@ -57,6 +61,22 @@ export function Tela({ titulo, children, rodape, voltar, iconeVoltar = '‹', ro
   );
 }
 const paletaTopo = (c: ReturnType<typeof useCoresBase>) => c['texto-sobre-fundo'];
+
+/**
+ * Selo SIMULAÇÃO do topo (v3.2) quando há dados de exemplo. O leitor de tela ouve a explicação completa;
+ * tocar leva ao Perfil, onde os dados de exemplo são removidos.
+ */
+export function SeloSimulacao() {
+  const c = useCores();
+  return (
+    <Pressable testID="selo-simulacao" accessibilityRole="button" accessibilityLabel="Simulação: dados de EXEMPLO (fictícios) carregados. Toque para remover em Perfil."
+      onPress={() => router.push('/perfil')} style={{ minHeight: 44, justifyContent: 'center', marginLeft: 'auto', paddingRight: espaco[2] }}>
+      <View style={{ backgroundColor: apoio.energia, borderWidth: 1.5, borderColor: c.texto, paddingVertical: 3, paddingHorizontal: 10, borderRadius: raio.pilula }}>
+        <Text style={[t('legenda'), { color: apoio['sobre-energia'], fontWeight: '800', letterSpacing: 0.6 }]}>SIMULAÇÃO</Text>
+      </View>
+    </Pressable>
+  );
+}
 
 /** Selo amarelo (energia) com borda no tom do texto: SIMULAÇÃO/EXEMPLO e chamadas do design v2.1. */
 export function SeloExemplo({ texto = 'EXEMPLO' }: { texto?: string }) {
@@ -82,7 +102,9 @@ export function FundoDegrade({ id = 'degrade', raioCanto = 0 }: { id?: string; r
 
 export function Texto({ children, v = 'corpo', suave, cor, style, numberOfLines, lang }: { children: ReactNode; v?: keyof typeof tipografia; suave?: boolean; cor?: string; style?: object; numberOfLines?: number; /** v0.4.4: idioma do trecho (web), ex.: "en" no texto original da fonte. */ lang?: string }) {
   const c = useCores();
-  return <Text {...((lang ? { lang } : {}) as object)} numberOfLines={numberOfLines} style={[t(v), { color: cor ?? (suave ? c['texto-suave'] : c.texto), fontVariant: ['tabular-nums'] }, style]}>{children}</Text>;
+  const ft = useFonteTitulo();
+  const titulo = v === 'titulo-1' || v === 'titulo-2' || v === 'numero-grande'; // v3.2: títulos e números grandes em Bricolage
+  return <Text {...((lang ? { lang } : {}) as object)} numberOfLines={numberOfLines} style={[t(v), titulo && ft, { color: cor ?? (suave ? c['texto-suave'] : c.texto), fontVariant: ['tabular-nums'] }, style]}>{children}</Text>;
 }
 
 export type VarBotao = 'principal' | 'secundario' | 'texto' | 'destrutivo' | 'perigo';
@@ -138,13 +160,37 @@ export function BotaoIcone({ rotulo, onPress, children, testID }: { rotulo: stri
   );
 }
 
-export function Cartao({ children, destaque, onPress }: { children: ReactNode; destaque?: boolean; onPress?: () => void }) {
-  const c = useCores(); // contorno e foco: contra o rosa
+/** Sombra sólida deslocada dos blocos v3.2 (5px 5px 0 tinta). */
+export const SOMBRA_BLOCO = 5;
+
+/**
+ * Bloco v3.2: contorno tinta de 2 px e sombra sólida deslocada, feita com uma camada atrás
+ * (funciona igual no Android, que não tem sombra deslocada sem desfoque).
+ */
+export function BlocoTinta({ children, raio: r = raio.grande * 1.5, fundo, girar, estilo, sombra = SOMBRA_BLOCO, testID }: { children: ReactNode; raio?: number; fundo?: string; girar?: string; estilo?: object; sombra?: number; testID?: string }) {
   const b = useCoresBase();
-  const estilo = [s.cartao, { backgroundColor: b.superficie, borderColor: destaque ? c.primaria : b.borda, borderWidth: destaque ? 2 : 1.5 }];
-  return onPress
-    ? <Pressable accessibilityRole="button" onPress={onPress} style={(st) => [estilo, foco(c, (st as { focused?: boolean }).focused)]}><Bloco>{children}</Bloco></Pressable>
-    : <View style={estilo}><Bloco>{children}</Bloco></View>;
+  return (
+    <View testID={testID} style={[{ marginRight: sombra, marginBottom: sombra }, girar ? { transform: [{ rotate: girar }] } : null, estilo]}>
+      <View aria-hidden style={{ position: 'absolute', top: sombra, left: sombra, right: -sombra, bottom: -sombra, borderRadius: r, backgroundColor: b.tinta }} />
+      <View style={{ borderRadius: r, borderWidth: 2, borderColor: b.tinta, backgroundColor: fundo ?? b.superficie, overflow: 'hidden' }}>
+        <Bloco>{children}</Bloco>
+      </View>
+    </View>
+  );
+}
+
+/** Cartão v3.2 (bloco com contorno tinta e sombra). `destaque`: faixa vermelha no topo. Tocável quando tem onPress. */
+export function Cartao({ children, destaque, onPress, rotulo }: { children: ReactNode; destaque?: boolean; onPress?: () => void; rotulo?: string }) {
+  const c = useCores(); // foco: contra o rosa
+  const b = useCoresBase();
+  const corpo = <View style={[s.cartao, destaque && { borderTopWidth: 6, borderTopColor: b.primaria }]}><Bloco>{children}</Bloco></View>;
+  if (!onPress) return <BlocoTinta raio={raio.grande + 4}>{corpo}</BlocoTinta>;
+  return (
+    <Pressable accessibilityRole="button" accessibilityLabel={rotulo} onPress={onPress}
+      style={(st) => { const { pressed, focused } = st as { pressed: boolean; focused?: boolean }; return [{ borderRadius: raio.grande + 4, transform: [{ translateX: pressed ? 2 : 0 }, { translateY: pressed ? 2 : 0 }] }, foco(c, focused)]; }}>
+      <BlocoTinta raio={raio.grande + 4} sombra={SOMBRA_BLOCO}>{corpo}</BlocoTinta>
+    </Pressable>
+  );
 }
 
 export function Selo({ texto, tom = 'secundaria' }: { texto: string; tom?: 'primaria' | 'sucesso' | 'secundaria' | 'alerta' | 'erro' }) {
@@ -304,33 +350,38 @@ export function Toast({ texto, acao, onAcao, onFim, fixo }: { texto: string; aca
   );
 }
 
-/** Gráfico de barras simples (sem biblioteca externa). Mostra o valor atual em texto acima. */
-export function GraficoBarras({ pontos, unidade }: { pontos: { rotulo: string; valor: number }[]; unidade: string }) {
-  const c = useCores();
-  if (pontos.length < 2) return <Texto suave>Registre pelo menos 2 vezes para ver o gráfico.</Texto>;
-  const max = Math.max(...pontos.map((p) => p.valor));
-  const min = Math.min(...pontos.map((p) => p.valor)) * 0.9;
-  return (
-    <View accessible accessibilityLabel={`Gráfico: último valor ${pontos.at(-1)!.valor} ${unidade}`} style={{ gap: espaco[2] }}>
-      <Texto v="numero-grande">{pontos.at(-1)!.valor.toLocaleString('pt-BR')} <Texto v="corpo" suave>{unidade}</Texto></Texto>
-      <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 120, gap: 6 }}>
-        {pontos.map((p, i) => (
-          <View key={i} style={{ flex: 1, alignItems: 'center', gap: 4 }}>
-            <View style={{ width: '100%', height: Math.max(6, ((p.valor - min) / (max - min || 1)) * 100), backgroundColor: i === pontos.length - 1 ? c.primaria : c.secundaria, borderRadius: 4 }} />
-            <Text style={[t('legenda'), { color: c['texto-suave'] }]}>{p.rotulo}</Text>
-          </View>
-        ))}
-      </View>
-    </View>
-  );
-}
-
 export const s = StyleSheet.create({
   coluna: { width: '100%', maxWidth: LARGURA_COLUNA, alignSelf: 'center' },
   barra: { height: 56, flexDirection: 'row', alignItems: 'center', gap: espaco[2], paddingHorizontal: espaco[2] },
   icone: { width: 44, height: 44, alignItems: 'center', justifyContent: 'center' },
   botao: { borderRadius: raio.medio, alignItems: 'center', justifyContent: 'center', paddingHorizontal: espaco[4] },
-  cartao: { borderRadius: raio.grande, padding: espaco[4], gap: espaco[2] },
+  cartao: { padding: espaco[4], gap: espaco[2] },
   campo: { height: 52, minWidth: 0, borderRadius: raio.medio, paddingHorizontal: espaco[3], fontSize: 16 },
   linha: { flexDirection: 'row', gap: espaco[3], alignItems: 'center' },
 });
+
+/** Adesivo amarelo levemente girado (v3.2): "Bora treinar hoje?", "Leva 2 minutos". Decorativo, texto lido normalmente. */
+export function Adesivo({ texto, girar = '-3deg' }: { texto: string; girar?: string }) {
+  const ft = useFonteTitulo();
+  return (
+    <View style={{ alignSelf: 'flex-start', transform: [{ rotate: girar }], marginBottom: 3, marginRight: 3 }}>
+      <View aria-hidden style={{ position: 'absolute', top: 3, left: 3, right: -3, bottom: -3, borderRadius: 10, backgroundColor: apoio['sobre-energia'] }} />
+      <View style={{ backgroundColor: apoio.energia, borderWidth: 2, borderColor: apoio['sobre-energia'], borderRadius: 10, paddingHorizontal: 12, paddingVertical: 4 }}>
+        <Text style={[{ color: apoio['sobre-energia'], fontSize: 15, lineHeight: 20 }, ft]}>{texto}</Text>
+      </View>
+    </View>
+  );
+}
+
+/** Barra de progresso (trilho + preenchimento) com papel de progressbar para o leitor de tela. */
+export function Trilho({ valor, rotulo, cor }: { valor: number; rotulo: string; cor?: string }) {
+  const b = useCoresBase();
+  const contorno = useContornoInterno();
+  const v = Math.max(0, Math.min(1, valor));
+  return (
+    <View accessibilityRole="progressbar" accessibilityLabel={rotulo} accessibilityValue={{ min: 0, max: 100, now: Math.round(v * 100) }}
+      style={{ height: 14, borderRadius: 7, borderWidth: 1.5, borderColor: contorno, backgroundColor: b['superficie-2'], overflow: 'hidden' }}>
+      <View style={{ width: `${v * 100}%`, height: '100%', backgroundColor: cor ?? b.secundaria }} />
+    </View>
+  );
+}

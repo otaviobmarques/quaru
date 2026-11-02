@@ -22,7 +22,7 @@ describe('telas', () => {
     const e = acoes.carregarExemplo(acoes.consentir(acoes.entrar(estadoInicial(), 'a@exemplo.test'), { dadosSaude: true, iaVisaoEua: false }));
     await comEstado(<Inicio />, e);
     expect(await screen.findByText(/TREINO DE HOJE/)).toBeTruthy();
-    expect(screen.getByText(/Dados de EXEMPLO/)).toBeTruthy();
+    expect(screen.getByTestId('selo-simulacao').props.accessibilityLabel).toMatch(/dados de EXEMPLO/);
   });
   it('Sobre mostra o aviso MIT do MuscleMap', async () => {
     await comEstado(<Sobre />);

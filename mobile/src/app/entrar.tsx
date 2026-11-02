@@ -1,4 +1,3 @@
-import { useFonts } from 'expo-font';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { ActivityIndicator, Linking, Platform, Pressable, ScrollView, Text, useColorScheme, useWindowDimensions, View } from 'react-native';
@@ -14,6 +13,7 @@ import { autenticacaoDisponivel, linksJuridicos, marca, type LinkJuridico } from
 import { acoes, useEstado } from '@/estado/armazem';
 import { Bloco, ProvedorSobreFundo, useCores, useCoresBase } from '@/tema/tema';
 import { apoio, espaco, raio } from '@/tema/tokens';
+import { useFonteTitulo } from '@/tema/fontes';
 
 /** Estados visuais do design (tela-08). "carregando" e "erro" só aparecem pela galeria/capturas (?estado=). */
 export type EstadoLogin = 'normal' | 'carregando' | 'erro';
@@ -22,8 +22,6 @@ export function abrirLinkJuridico(l: LinkJuridico) {
   if (l.tipo === 'interno') router.push(l.rota as never); else Linking.openURL(l.url);
 }
 
-/** Fonte de títulos da identidade v3.2 (Bricolage Grotesque 800, SIL OFL 1.1; instância estática e só latim). */
-export const FONTE_TITULO = 'BricolageGrotesque-ExtraBold';
 /** A partir desta largura entra a vitrine ao lado do formulário (prancha v3.2 "computador"). */
 const LARGURA_VITRINE = 1024;
 const SOMBRA = 5; // deslocamento da sombra sólida dos blocos v3.2 (5px 5px 0 tinta)
@@ -114,12 +112,13 @@ function Separador({ texto }: { texto: string }) {
 }
 
 /** Vitrine do computador: adesivo amarelo e ilustração num bloco (prancha v3.2). Decorativa. */
-function Vitrine({ fonte }: { fonte?: string }) {
+function Vitrine() {
+  const ft = useFonteTitulo();
   return (
     <View style={{ width: 340, gap: espaco[3], paddingTop: espaco[12] }}>
       <View style={{ alignSelf: 'flex-start', transform: [{ rotate: '-3deg' }], backgroundColor: apoio.energia, borderWidth: 2, borderColor: apoio['sobre-energia'], borderRadius: 10, paddingHorizontal: 14, paddingVertical: 6,
         shadowColor: apoio['sobre-energia'], shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 3, height: 3 } }}>
-        <Text style={{ color: apoio['sobre-energia'], fontSize: 15, lineHeight: 20, fontFamily: fonte }}>Treino, água e comida num lugar só</Text>
+        <Text style={{ color: apoio['sobre-energia'], fontSize: 15, lineHeight: 20, ...ft }}>Treino, água e comida num lugar só</Text>
       </View>
       <BlocoTinta>
         <View style={{ alignItems: 'center', padding: espaco[4] }}><Ilustracao nome="boas-vindas" descricao="Pessoa comemorando o treino" largura={280} /></View>
@@ -138,8 +137,7 @@ export default function Entrar() {
   const c = useCores();
   const b = useCoresBase();
   const { width } = useWindowDimensions();
-  const [fonteOk] = useFonts({ [FONTE_TITULO]: require('../../assets/fontes/BricolageGrotesque-ExtraBold.ttf') });
-  const fonte = fonteOk ? FONTE_TITULO : undefined;
+  const ft = useFonteTitulo();
   const { aplicar, estado: est } = useEstado();
   const { estado: e0 } = useLocalSearchParams<{ estado?: string }>();
   const demo = (__DEV__ || process.env.EXPO_PUBLIC_CAPTURAS === '1');
@@ -158,7 +156,7 @@ export default function Entrar() {
     <SafeAreaView style={{ flex: 1, backgroundColor: c.fundo }} edges={['top']}>
       <ProvedorSobreFundo>
         <ScrollView contentContainerStyle={{ paddingBottom: espaco[8], flexDirection: 'row', justifyContent: 'center', gap: espaco[12], paddingHorizontal: largo ? espaco[8] : 0 }}>
-          {largo && <Vitrine fonte={fonte} />}
+          {largo && <Vitrine />}
           <View style={{ width: '100%', maxWidth: LARGURA_COLUNA }}>
             {/* Topo v3.2: logo colorida num "adesivo" branco levemente girado e o slogan grande na fonte de títulos. */}
             <View style={{ padding: espaco[4], paddingTop: espaco[5], gap: espaco[4], alignItems: 'flex-start' }}>
@@ -171,7 +169,7 @@ export default function Entrar() {
               </BlocoTinta>
               {marca.slogan ? (
                 <Text testID="slogan" accessibilityRole="header" aria-level={1}
-                  style={{ color: c.texto, fontFamily: fonte, fontWeight: fonte ? undefined : '800', fontSize: tituloGrande, lineHeight: tituloGrande * 1.02, letterSpacing: -0.02 * tituloGrande }}>
+                  style={{ color: c.texto, ...ft, fontSize: tituloGrande, lineHeight: tituloGrande * 1.02, letterSpacing: -0.02 * tituloGrande }}>
                   {marca.slogan}
                 </Text>
               ) : null}
@@ -181,7 +179,7 @@ export default function Entrar() {
               <BlocoTinta>
                 <View style={{ padding: espaco[4], gap: espaco[3] }} accessibilityLabel={`Entrar no ${marca.nome}`}>
                   {estado === 'erro' && <Aviso tom="erro" titulo="E-mail ou senha incorretos." texto="Confira os dados e tente de novo." />}
-                  <Text accessibilityRole="header" style={{ color: b.texto, fontFamily: fonte, fontWeight: fonte ? undefined : '800', fontSize: 20, lineHeight: 26 }}>Comece agora</Text>
+                  <Text accessibilityRole="header" style={{ color: b.texto, ...ft, fontSize: 20, lineHeight: 26 }}>Comece agora</Text>
                   <BotaoContinuar onPress={continuar} />
                   <Texto v="rotulo" cor={b['texto-suave']}>Sem cadastro: seus dados ficam só neste aparelho.</Texto>
 

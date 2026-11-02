@@ -3,7 +3,8 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { Aviso, Botao, Campo, Cartao, EstadoVazio, GraficoBarras, ItemLista, Tela, Texto } from '@/componentes/ui';
+import { GraficoLinha } from '@/componentes/graficos';
+import { Aviso, Botao, Campo, Cartao, EstadoVazio, ItemLista, Tela, Texto } from '@/componentes/ui';
 import { dataCurta } from '@/dominio/consultas';
 import { formatarKg, lerNumero } from '@/dominio/metricas';
 import { acoes, temSaude, useEstado } from '@/estado/armazem';
@@ -34,12 +35,18 @@ export default function Peso() {
       </View>
       {lista.length === 0 ? <EstadoVazio titulo="Sem registros" texto="Registre seu peso para acompanhar a evolução." /> : (
         <>
-          <Cartao><GraficoBarras unidade="kg" pontos={lista.slice(-10).map((p) => ({ rotulo: dataCurta(p.medidoEm), valor: p.pesoKg }))} /></Cartao>
+          <Cartao>
+            <Texto v="corpo-forte">Evolução do peso</Texto>
+            <Texto v="numero-grande">{formatarKg(lista.at(-1)!.pesoKg)} <Texto v="corpo" suave>kg</Texto></Texto>
+            {lista.length > 1 && <Texto v="rotulo" suave>{(() => { const d = lista.at(-1)!.pesoKg - lista[Math.max(0, lista.length - 30)].pesoKg; return `${d > 0 ? '+' : d < 0 ? '−' : ''}${formatarKg(Math.abs(d))} kg desde ${dataCurta(lista[Math.max(0, lista.length - 30)].medidoEm)}`; })()}</Texto>}
+            {lista.length > 1 ? <GraficoLinha testID="grafico-peso" unidade="kg" descricao="Peso corporal ao longo do tempo" pontos={lista.slice(-30).map((p) => ({ rotulo: dataCurta(p.medidoEm), valor: p.pesoKg }))} />
+              : <Texto suave>Registre pelo menos 2 vezes para ver o gráfico.</Texto>}
+          </Cartao>
           {alturaCm ? (
             <Cartao>
               <Texto v="legenda" suave>IMC (ALTURA {alturaCm} CM)</Texto>
               {imcAtual != null && <Texto v="rotulo" suave>Último: {formatarImc(imcAtual)} {imcSeAplica(estado.perfil?.faixaIdade) ? ` · faixa ${ROTULO_FAIXA[faixaImc(imcAtual)]}` : ' · faixa adulta não se aplica a menores de 18'}</Texto>}
-              <GraficoBarras unidade="de IMC" pontos={lista.slice(-10).map((p) => ({ rotulo: dataCurta(p.medidoEm), valor: calcularImc(p.pesoKg, alturaCm) ?? 0 }))} />
+              {lista.length > 1 && <GraficoLinha unidade="de IMC" descricao="IMC ao longo do tempo" pontos={lista.slice(-30).map((p) => ({ rotulo: dataCurta(p.medidoEm), valor: calcularImc(p.pesoKg, alturaCm) ?? 0 }))} />}
               <Aviso tom="secundaria" titulo="Sobre o IMC" texto={AVISO_IMC} />
             </Cartao>
           ) : <Texto v="rotulo" suave>Informe a altura no Perfil para ver a evolução do IMC.</Texto>}

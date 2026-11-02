@@ -208,7 +208,7 @@ describe('treinos sugeridos', () => {
   it('cartão com tempo, exercícios, equipamento e mapa; filtro por área; adicionar ao plano', async () => {
     await montar(<TreinosSugeridos />, base());
     expect(screen.getByText(/Procure um profissional de educação física/)).toBeTruthy();
-    expect(screen.getAllByTestId('mapa-muscular').length).toBe(8); // v0.4.4: + Em casa com elástico
+    expect(screen.getAllByTestId('mapa-muscular').length).toBe(9); // v0.4.4: + Em casa com elástico; v0.5: + mapa do foco no topo
     expect(screen.getAllByLabelText(/^Mapa muscular: trabalha/).length).toBe(8);
     await fireEvent.press(screen.getAllByText('Inferiores')[0]); // a ficha vem antes dos cartões
     expect(screen.queryByTestId('adicionar-superiores-i')).toBeNull();

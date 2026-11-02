@@ -7,12 +7,13 @@ import { mensagemRecusa, problemaSerie } from '@/dominio/validacao';
 import { Aviso, Botao, Cartao, Selo, Tela, Texto } from '@/componentes/ui';
 import { seriesDaSessao } from '@/dominio/consultas';
 import { ehRecorde, formatarKg, lerNumero, ultimaVez } from '@/dominio/metricas';
+import { AVISO_PROGRESSAO, sugerirProgressao } from '@/dominio/progressao';
 import type { Serie, TipoSerie } from '@/dominio/tipos';
 import { acoes, todosExercicios, useEstado } from '@/estado/armazem';
 import { novoId } from '@/servicos/id';
 import { alertarFimDescanso, prepararAlertaDescanso } from '@/servicos/alerta-descanso';
 import { agendarFimDescanso, cancelarDescanso, pedirPermissao } from '@/servicos/notificacao';
-import { useCores } from '@/tema/tema';
+import { useContornoInterno, useCores, useCoresBase } from '@/tema/tema';
 import { agoraMs } from '@/servicos/relogio';
 
 const TIPOS: TipoSerie[] = ['normal', 'aquecimento', 'falha', 'drop'];
@@ -22,6 +23,8 @@ const SIGLA: Record<TipoSerie, string> = { normal: 'N', aquecimento: 'A', falha:
 export default function Treino() {
   const { estado, aplicar } = useEstado();
   const c = useCores();
+  const b = useCoresBase();
+  const contorno = useContornoInterno();
   const sessao = estado.sessoes.find((s) => !s.finalizadaEm && !s.excluidoEm);
   const [rascunho, setRascunho] = useState<Record<string, { kg: string; reps: string; tipo: TipoSerie }>>({});
   const [descanso, setDescanso] = useState<{ fim: number; exercicio: string } | null>(null);
@@ -154,6 +157,29 @@ export default function Treino() {
             <Pressable accessibilityRole="button" onPress={() => router.push(`/exercicio/${exId}`)}><Texto v="titulo-3">{ex?.nome}</Texto></Pressable>
             <DemonstracaoExercicio exercicioId={exId} nome={ex?.nome ?? 'exercício'} />
             <Texto v="rotulo" suave>{ult.length ? `Última vez: ${ult.map((s) => `${formatarKg(s.cargaKg)} kg × ${s.reps}`).join(' · ')}` : 'Primeira vez neste exercício'}</Texto>
+            {(() => {
+              const prog = sugerirProgressao(ult, p.alvo?.repsAlvo ?? null);
+              if (!prog || minhas.some((s) => s.concluidaEm)) return null;
+              const texto = prog.tipo === 'carga'
+                ? `Você bateu as ${p.alvo?.repsAlvo} repetições em todas as séries. Que tal ${formatarKg(prog.paraKg)} kg hoje (+${formatarKg(prog.incrementoKg)} kg)?`
+                : `Você bateu as ${p.alvo?.repsAlvo} repetições em todas as séries. Que tal ${prog.paraReps} repetições hoje?`;
+              const aplicarProg = () => {
+                const novo = { ...rascunho };
+                for (let o = 1; o <= n; o++) {
+                  const k = `${exId}:${o}`; const base = novo[k] ?? { ...sugestao(p, o), tipo: 'normal' as TipoSerie };
+                  if (base.tipo === 'aquecimento') continue;
+                  novo[k] = prog.tipo === 'carga' ? { ...base, kg: String(prog.paraKg).replace('.', ',') } : { ...base, reps: String(prog.paraReps) };
+                }
+                setRascunho(novo);
+              };
+              return (
+                <View testID={`progressao-${exId}`} style={{ gap: 6, padding: 10, borderRadius: 12, borderWidth: 1.5, borderColor: contorno, backgroundColor: b['primaria-suave'] }}>
+                  <Texto v="rotulo" cor={b.texto}>📈 {texto}</Texto>
+                  <Texto v="legenda" cor={b['texto-suave']}>{AVISO_PROGRESSAO}</Texto>
+                  <Botao v="secundario" titulo={prog.tipo === 'carga' ? `Usar ${formatarKg(prog.paraKg)} kg` : `Usar ${prog.paraReps} repetições`} onPress={aplicarProg} testID={`usar-progressao-${exId}`} />
+                </View>
+              );
+            })()}
             <View style={{ flexDirection: 'row', gap: 8 }} importantForAccessibility="no-hide-descendants">
               <Texto v="legenda" suave style={{ width: 44, textAlign: 'center' }}>SÉRIE</Texto>
               <Texto v="legenda" suave style={{ flex: 1, textAlign: 'center' }}>KG</Texto>

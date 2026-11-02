@@ -5,6 +5,8 @@ export interface DadosExportacao {
   /** v0.4.1: perfil local (nome, foto/avatar, altura, meta de água) e água. */
   perfil?: { nome: string | null; avatar: { tipo: 'ilustrado'; id: string } | { tipo: 'foto'; uri: string } | null; alturaCm: number | null; metaAguaMl?: number | null } & import('./tour').DadosTour & { treino?: unknown };
   agua?: { id: string; ml: number; registradoEm: string }[];
+  /** v0.5: diário alimentar simples. */
+  diario?: { dia: string; momento: string; avaliacao: string }[];
 }
 
 /** Número com vírgula decimal (padrão do Excel no Brasil, L3). */
@@ -43,7 +45,7 @@ peso_corporal.csv: medido_em; peso_kg.
 agua.csv: registrado_em; ml.
 perfil (em dados.json): nome, altura_cm, meta de água, avatar, objetivo e os dados do tour guiado (faixa de idade, experiência, tempo e local de treino, áreas, restrições ou lesões, preferência alimentar, lembretes, cidade e bairro); a foto de perfil, se houver, vai também como foto-perfil.jpg.
 CSV em UTF-8, separador ';' e vírgula decimal.
-refeicoes.csv: entra quando o diário alimentar (pacote @domma/nutricao) for integrado.
+diario_alimentar.csv: dia; refeicao; como_foi (bem, mais-ou-menos ou pulei).
 `;
 
 export function arquivosExportacao(d: DadosExportacao): Record<string, string> {
@@ -52,14 +54,16 @@ export function arquivosExportacao(d: DadosExportacao): Record<string, string> {
     'treinos.csv': treinosCsv(d),
     'peso_corporal.csv': pesoCsv(d),
     'agua.csv': aguaCsv(d),
+    'diario_alimentar.csv': [linha(['dia', 'refeicao', 'como_foi']), ...(d.diario ?? []).map((r) => linha([r.dia, r.momento, r.avaliacao]))].join('\n') + '\n',
     'LEIA-ME.txt': LEIA_ME,
   };
 }
 
 /** Monta os dados exportados a partir do estado (inclui perfil e água da v0.4.1). */
-export function dadosParaExportar(e: { rotinas: Rotina[]; sessoes: SessaoTreino[]; series: Serie[]; pesos: PesoCorporal[]; exercicios: Exercicio[]; perfil?: DadosExportacao['perfil']; agua?: DadosExportacao['agua'] }): DadosExportacao {
+export function dadosParaExportar(e: { rotinas: Rotina[]; sessoes: SessaoTreino[]; series: Serie[]; pesos: PesoCorporal[]; exercicios: Exercicio[]; perfil?: DadosExportacao['perfil']; agua?: DadosExportacao['agua']; diario?: DadosExportacao['diario'] }): DadosExportacao {
   return { rotinas: e.rotinas, sessoes: e.sessoes, series: e.series, pesos: e.pesos, exercicios: e.exercicios,
-    perfil: e.perfil ?? { nome: null, avatar: null, alturaCm: null }, agua: (e.agua ?? []).map(({ id, ml, registradoEm }) => ({ id, ml, registradoEm })) };
+    perfil: e.perfil ?? { nome: null, avatar: null, alturaCm: null }, agua: (e.agua ?? []).map(({ id, ml, registradoEm }) => ({ id, ml, registradoEm })),
+    diario: (e.diario ?? []).map(({ dia, momento, avaliacao }) => ({ dia, momento, avaliacao })) };
 }
 
 /** Bytes da foto de perfil (data URI base64) para ir como arquivo separado no .zip. */

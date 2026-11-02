@@ -33,7 +33,7 @@ jobs:
       - name: Animações de exercícios e .nojekyll
         run: |
           mkdir -p dist/exercicios
-          cp -rn public/exercicios/. dist/exercicios/
+          cp -r --update=none public/exercicios/. dist/exercicios/
           touch dist/.nojekyll
           test -f dist/index.html
       - uses: actions/upload-pages-artifact@v3

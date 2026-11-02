@@ -7,7 +7,10 @@ import { gerarExemplo } from '@/dominio/exemplo';
 import { enfileirar, type ItemFila } from '@/dominio/sincronizacao';
 import { ativo, conceder, revogar, type Finalidade, type RegistroConsentimento } from '@/dominio/consentimento';
 import { novoId } from '@/servicos/id';
+import { pedirArmazenamentoPersistente } from '@/servicos/protecao-dados';
 import { AGUA_MAX_ML, AGUA_MIN_ML, META_MAX_ML, META_MIN_ML, type RegistroAgua } from '@/dominio/agua';
+import { marcar, type Avaliacao, type RegistroDiario } from '@/dominio/diario';
+import type { Momento } from '@/dominio/refeicoes';
 import { DIAS_MAX, DIAS_MIN, type PerfilTreino } from '@/dominio/objetivo';
 import { LIMITE_TEXTO_LOCAL, validarHora, type DadosTour } from '@/dominio/tour';
 import type { Exercicio, PesoCorporal, Rotina, Serie, SessaoTreino } from '@/dominio/tipos';
@@ -27,6 +30,11 @@ export interface Estado {
   perfil?: PerfilCompleto;
   /** v0.4.1: copos de água (dado de saúde, cifrado com o resto do estado). */
   agua?: RegistroAgua[];
+  /** v0.5: diário alimentar simples (como foi cada refeição; dado de saúde). */
+  diario?: RegistroDiario[];
+  /** v0.5: quando a pessoa exportou os dados pela última vez e quando adiou o lembrete de cópia. */
+  ultimaExportacaoEm?: string | null;
+  lembreteBackupAdiadoEm?: string | null;
   exercicios: Exercicio[]; // próprios do usuário (a biblioteca Domma vem de BIBLIOTECA)
   rotinas: Rotina[];
   sessoes: SessaoTreino[];
@@ -91,6 +99,13 @@ export const acoes = {
     if (!temSaude(e)) throw new Error('sem_consentimento');
     if (!(Number.isInteger(r.ml) && r.ml >= AGUA_MIN_ML && r.ml <= AGUA_MAX_ML)) throw new Error('valor_invalido');
     return { ...e, agua: [...(e.agua ?? []), r] };
+  },
+  registrarExportacao: (e: Estado): Estado => ({ ...e, ultimaExportacaoEm: agora(), lembreteBackupAdiadoEm: null }),
+  adiarLembreteBackup: (e: Estado): Estado => ({ ...e, lembreteBackupAdiadoEm: agora() }),
+  /** Diário alimentar (v0.5): exige consentimento de saúde. `avaliacao` null desmarca. */
+  marcarRefeicao: (e: Estado, dia: string, momento: Momento, avaliacao: Avaliacao | null): Estado => {
+    if (!temSaude(e)) throw new Error('sem_consentimento');
+    return { ...e, diario: marcar(e.diario ?? [], dia, momento, avaliacao, agora()) };
   },
   /** Desfazer: remove o registro (é o último toque da pessoa; não há sincronização de água). */
   desfazerAgua: (e: Estado, id: string): Estado => ({ ...e, agua: (e.agua ?? []).filter((r) => r.id !== id) }),
@@ -196,13 +211,14 @@ export const precisaApresentacao = (e: Estado) => !e.apresentacaoVistaEm;
 export const temExemplo = (e: Estado) => [e.rotinas, e.sessoes, e.series, e.pesos].some((l) => l.some((r) => r.exemplo));
 export const todosExercicios = (e: Estado) => [...BIBLIOTECA, ...e.exercicios];
 
-type Ctx = { estado: Estado; pronto: boolean; aplicar: (f: (e: Estado) => Estado) => void; modoArmazenamento: Modo | 'memoria'; apagarDadosDoAparelho: () => Promise<void> };
+type Ctx = { estado: Estado; pronto: boolean; aplicar: (f: (e: Estado) => Estado) => void; modoArmazenamento: Modo | 'memoria'; apagarDadosDoAparelho: () => Promise<void>; /** v0.5 (web): o navegador aceitou guardar os dados de forma persistente? null = sem resposta/suporte. */ persistente?: boolean | null };
 const Contexto = createContext<Ctx | null>(null);
 
 export function ProvedorEstado({ children, inicial }: { children: ReactNode; inicial?: Estado }) {
   const [estado, setEstado] = useState<Estado>(inicial ?? estadoInicial());
   const [pronto, setPronto] = useState(!!inicial);
   const [arm, setArm] = useState<Armazenamento | null>(null);
+  const [persistente, setPersistente] = useState<boolean | null>(null);
   // ADR-0010: banco cifrado (SQLCipher) no aparelho; migra do AsyncStorage na primeira abertura.
   useEffect(() => {
     if (inicial) return;
@@ -213,6 +229,7 @@ export function ProvedorEstado({ children, inicial }: { children: ReactNode; ini
       if (!vivo) return;
       if (t) { try { const e = migrarEstado(JSON.parse(t)); if (e) setEstado(e); } catch { /* estado corrompido: começa vazio */ } }
       setArm(a); setPronto(true);
+      if (a.modo === 'web') pedirArmazenamentoPersistente().then((r) => { if (vivo) setPersistente(r); }).catch(() => {});
     })();
     return () => { vivo = false; };
   }, [inicial]);
@@ -239,7 +256,7 @@ export function ProvedorEstado({ children, inicial }: { children: ReactNode; ini
   };
   // REG-01: rede de segurança – uma regra recusada nunca derruba a tela; o estado fica como estava.
   const aplicar = (f: (e: Estado) => Estado) => setEstado((e) => { try { return f(e); } catch (err) { console.warn('[armazem] alteração recusada:', (err as Error).message); return e; } });
-  return <Contexto value={{ estado, pronto, aplicar, modoArmazenamento: arm?.modo ?? 'memoria', apagarDadosDoAparelho }}>{children}</Contexto>;
+  return <Contexto value={{ estado, pronto, aplicar, modoArmazenamento: arm?.modo ?? 'memoria', apagarDadosDoAparelho, persistente }}>{children}</Contexto>;
 }
 
 export function useEstado() {
