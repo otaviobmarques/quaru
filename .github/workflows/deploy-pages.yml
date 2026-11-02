@@ -24,7 +24,13 @@ jobs:
           cache: npm
           cache-dependency-path: mobile/package-lock.json
       - run: npm ci
+      # v0.6: com as variáveis do repositório SUPABASE_URL e SUPABASE_ANON_KEY (Settings → Secrets and variables →
+      # Actions → Variables), o app exige login por convite. Sem elas, segue no modo local (como antes).
+      # São valores PÚBLICOS (URL do projeto e chave anon). A service_role NUNCA entra aqui.
       - name: Export web (baseUrl /quaru vem de experiments.baseUrl no app.json)
+        env:
+          EXPO_PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
         run: |
           node scripts/gerar-novidades.mjs
           npx expo export --platform web --output-dir dist
@@ -36,6 +42,16 @@ jobs:
           cp -r --update=none public/exercicios/. dist/exercicios/
           touch dist/.nojekyll
           test -f dist/index.html
+      - name: Painel de administração (/quaru/admin/)
+        env:
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          URL_APP: ${{ vars.URL_APP }}
+        run: |
+          mkdir -p dist/admin
+          cp -r ../admin/. dist/admin/
+          node -e "const v={supabaseUrl:process.env.SUPABASE_URL||'',supabaseAnonKey:process.env.SUPABASE_ANON_KEY||'',urlApp:process.env.URL_APP||''};require('fs').writeFileSync('dist/admin/config.js','window.QUARU_ADMIN = '+JSON.stringify(v)+';\n')"
+          test -f dist/admin/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: mobile/dist

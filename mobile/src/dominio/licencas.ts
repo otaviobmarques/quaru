@@ -24,6 +24,8 @@ SOFTWARE.`;
 export const OUTRAS = [
   { nome: 'MuscleMap', licenca: 'MIT', obs: 'Previsto para o mapa muscular; ainda não incluído no código desta versão.' },
   { nome: 'Fonte Inter', licenca: 'SIL Open Font License 1.1', obs: 'Prevista no design; esta versão usa a fonte do sistema.' },
+  { nome: '@supabase/supabase-js', licenca: 'MIT', obs: 'Login por convite (v0.6). Também empacotado no painel de administração.' },
+  { nome: 'react-native-url-polyfill', licenca: 'MIT', obs: 'URL completa no aparelho, usada pelo cliente do Supabase.' },
   { nome: 'Fonte Bricolage Grotesque', licenca: 'SIL Open Font License 1.1', obs: 'Títulos do login (identidade v3.2). Instância 800 só com caracteres latinos; texto da licença em mobile/assets/fontes/.' },
   { nome: 'Ícones Lucide', licenca: 'ISC', obs: 'Previstos no design; esta versão usa símbolos de texto.' },
   { nome: 'Imagens dos exercícios: Free Exercise DB (github.com/yuhonas/free-exercise-db)', licenca: 'Unlicense (domínio público)', obs: '22 fotos (posição inicial), reduzidas para 480 px. Conjunto derivado de wrkout/exercises.json (Ollie Jennings). Ver ADR-0012.' },

@@ -4,6 +4,7 @@ import { Platform, View } from 'react-native';
 
 import { Aviso, Botao, Campo, Cartao, ItemLista, Tela, Texto } from '@/componentes/ui';
 import { acoes, temExemplo, temSaude, useEstado } from '@/estado/armazem';
+import { useSessao } from '@/estado/sessao';
 import { OBJETIVOS } from '@/dominio/objetivo';
 import { FotoPerfil } from '@/componentes/avatares';
 import { marca } from '@/config/marca';
@@ -24,6 +25,7 @@ const TEXTO_MODO = {
 /** Tela 12 – Perfil/privacidade, com 12b (confirmar exclusão digitando EXCLUIR). */
 export default function Perfil() {
   const { estado, aplicar, modoArmazenamento, persistente } = useEstado();
+  const sessao = useSessao();
   const { excluir: pedirExcluir } = useLocalSearchParams<{ excluir?: string }>();
   // Compatibilidade: /perfil?excluir=1 (link de Consentimentos) abre direto a folha de apagar na tela Sair.
   useEffect(() => { if (pedirExcluir === '1') router.replace('/sair?apagar=1'); }, [pedirExcluir]);
@@ -78,7 +80,9 @@ export default function Perfil() {
         ) : <Texto v="rotulo" suave>{estado.perfil?.alturaCm ? 'Registre um peso para ver o IMC.' : 'Informe a altura e registre um peso para ver o IMC.'}</Texto>}
         <Aviso tom="secundaria" titulo="Sobre o IMC" texto={AVISO_IMC} />
       </Cartao>
-      <Texto suave>{Platform.OS === 'web' ? 'Modo local · sem cadastro · dados só neste navegador' : 'Modo local · sem cadastro · dados só neste aparelho'}</Texto>
+      {sessao.modo === 'conta' && sessao.usuario
+        ? <Texto suave>Conta: {sessao.usuario.email}{sessao.acesso?.papel === 'admin' ? ' · administrador' : ''} · treinos guardados {Platform.OS === 'web' ? 'neste navegador' : 'neste aparelho'}</Texto>
+        : <Texto suave>{Platform.OS === 'web' ? 'Modo local · sem cadastro · dados só neste navegador' : 'Modo local · sem cadastro · dados só neste aparelho'}</Texto>}
       <Texto v="rotulo" suave>{TEXTO_MODO[modoArmazenamento]}</Texto>
       {modoArmazenamento === 'web' && <Aviso tom="alerta" titulo="Versão web" texto="Dados salvos neste navegador, sem criptografia do aparelho. Quem usar este navegador ou computador pode vê-los. Limpar os dados do site apaga tudo; exporte seus dados com frequência." />}
       {modoArmazenamento === 'web' && persistente != null && <Texto v="legenda" suave>{persistente ? 'O navegador aceitou guardar os dados de forma persistente (ele não apaga sozinho por falta de espaço).' : 'O navegador não garantiu guardar os dados de forma persistente. Instalar o app na tela inicial ajuda.'}</Texto>}
