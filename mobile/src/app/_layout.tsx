@@ -1,10 +1,11 @@
-import { Stack } from 'expo-router';
+import { router, Stack, usePathname } from 'expo-router';
 import { useEffect } from 'react';
 import { Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AvisoAtualizacao } from '@/componentes/aviso-atualizacao';
 import { acoes, ProvedorEstado, useEstado } from '@/estado/armazem';
+import { ProvedorSessao, useSessao } from '@/estado/sessao';
 import { planoLembretes } from '@/dominio/lembretes';
 import { diaLocal } from '@/dominio/treino-de-hoje';
 import { agendarLembretes } from '@/servicos/notificacoes';
@@ -23,6 +24,17 @@ function Lembretes() {
     agendarLembretes(planoLembretes(l), (x) => !(x.tipo === 'treino' && treinouHoje)).catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chave, pronto, treinouHoje]);
+  return null;
+}
+
+/** Rotas abertas sem login quando a conta é obrigatória (v0.6). */
+const ROTAS_ABERTAS = ['/', '/entrar', '/definir-senha', '/juridico'];
+/** v0.6: com conta obrigatória, qualquer endereço do app sem sessão ativa volta para a tela de entrar. */
+function GuardaConta() {
+  const s = useSessao();
+  const caminho = usePathname();
+  const bloqueia = s.modo === 'conta' && s.pronta && !(s.usuario && s.acesso?.ativo) && !ROTAS_ABERTAS.includes(caminho);
+  useEffect(() => { if (bloqueia) router.replace(s.link ? '/definir-senha' : '/entrar'); }, [bloqueia, s.link]);
   return null;
 }
 
@@ -56,12 +68,15 @@ export default function Layout() {
   useFonts(ARQUIVOS_FONTES); // começa a carregar a fonte de títulos já na abertura
   return (
     <SafeAreaProvider>
+      <ProvedorSessao>
       <ProvedorEstado>
         <SementeDev />
         <Lembretes />
+        <GuardaConta />
         <Stack screenOptions={{ headerShown: false }} />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>
+      </ProvedorSessao>
     </SafeAreaProvider>
   );
 }

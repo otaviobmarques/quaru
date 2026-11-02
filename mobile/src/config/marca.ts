@@ -5,6 +5,7 @@
  * continuam neutros, aguardando decisão.
  */
 import dados from './marca.json';
+import { configServidor } from './servidor';
 
 /** Valores em src/config/marca.json (nome, empresa, versão e slogan). Slogan escolhido pelo Otávio em 01/11/2026. */
 export const marca = dados as { nome: string; empresa: string; versao: string; slogan: string };
@@ -20,7 +21,8 @@ export const linksJuridicos: { termos: LinkJuridico; privacidade: LinkJuridico }
 };
 
 /**
- * Autenticação com conta (e-mail/senha e Google). Desligada: o Supabase ainda não está ligado (ADR-0004, ADR-0017).
- * Enquanto for false, Entrar, Criar conta, Esqueci minha senha e Google aparecem desativados com o aviso "em breve".
+ * Autenticação com conta (v0.6, ADR-0022): liga sozinha quando o Supabase está configurado (variáveis
+ * EXPO_PUBLIC_SUPABASE_*). Com ela ligada, só entra quem foi convidado pelo administrador: não há
+ * "Continuar sem conta", "Criar conta" nem Google. Sem as variáveis (desenvolvimento e testes), segue o modo local.
  */
-export const autenticacaoDisponivel = false as boolean;
+export const autenticacaoDisponivel = configServidor.modo === 'supabase';

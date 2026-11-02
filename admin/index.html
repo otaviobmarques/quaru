@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src https://*.supabase.co; img-src 'self' data:; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Quaru · Administração</title>
+  <link rel="stylesheet" href="estilo.css">
+  <script src="config.js"></script>
+  <script type="module" src="admin.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <span class="adesivo-logo bloco"><img src="logo.svg" alt="Quaru" width="120" height="45"></span>
+    <h1>Administração</h1>
+    <button id="sair" class="link" type="button" hidden>Sair</button>
+  </header>
+
+  <main>
+    <p id="aviso-config" class="aviso erro" role="alert" hidden>O painel ainda não está ligado ao servidor. Siga o guia em docs/supabase-passo-a-passo.md.</p>
+
+    <!-- Entrar -->
+    <section id="tela-entrar" class="bloco cartao" hidden aria-labelledby="t-entrar">
+      <h2 id="t-entrar">Entrar</h2>
+      <p class="suave">Só para administradores do Quaru.</p>
+      <form id="form-entrar" novalidate>
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="username" required>
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" autocomplete="current-password" required>
+        <button class="botao" type="submit">Entrar</button>
+        <button id="esqueci" class="link" type="button">Esqueci minha senha</button>
+      </form>
+      <p id="msg-entrar" class="msg" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Painel -->
+    <section id="tela-painel" hidden>
+      <div class="bloco cartao">
+        <h2>Cadastrar usuário</h2>
+        <p class="suave">A pessoa recebe um convite por e-mail e cria a própria senha. Ninguém entra no app sem convite.</p>
+        <form id="form-convidar" class="linha-form" novalidate>
+          <div><label for="c-email">E-mail</label><input id="c-email" type="email" autocomplete="off" required></div>
+          <div><label for="c-nome">Nome (opcional)</label><input id="c-nome" type="text" maxlength="80" autocomplete="off"></div>
+          <div><label for="c-papel">Papel</label>
+            <select id="c-papel"><option value="usuario">Usuário do app</option><option value="admin">Administrador</option></select></div>
+          <button class="botao" type="submit">Enviar convite</button>
+        </form>
+        <p id="msg-convidar" class="msg" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="bloco cartao">
+        <div class="cabeca-lista">
+          <h2>Usuários <span id="contagem" class="selo"></span></h2>
+          <label class="busca"><span class="sr">Buscar</span><input id="busca" type="search" placeholder="Buscar por e-mail ou nome"></label>
+        </div>
+        <p id="msg-lista" class="msg" role="status" aria-live="polite"></p>
+        <div class="rolagem">
+          <table>
+            <thead><tr><th scope="col">Usuário</th><th scope="col">Papel</th><th scope="col">Situação</th><th scope="col">Último acesso</th><th scope="col"><span class="sr">Ações</span></th></tr></thead>
+            <tbody id="linhas"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="confirmar" aria-labelledby="conf-t">
+    <form method="dialog">
+      <h2 id="conf-t">Remover usuário</h2>
+      <p id="conf-texto"></p>
+      <label for="conf-campo">Digite o e-mail para confirmar</label>
+      <input id="conf-campo" type="text" autocomplete="off">
+      <div class="acoes"><button value="cancelar" class="botao secundario">Cancelar</button><button id="conf-ok" value="ok" class="botao perigo" disabled>Remover</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

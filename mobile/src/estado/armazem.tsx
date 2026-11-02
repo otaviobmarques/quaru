@@ -20,6 +20,8 @@ export interface Estado {
   versao: 2;
   /** Modo local não coleta e-mail (minimização, ADR-0009). */
   usuario: { modo: 'local'; criadoEm: string } | null;
+  /** v0.6: conta (Supabase Auth) dona dos dados deste aparelho. Só o id e o e-mail; a senha nunca passa por aqui. */
+  conta?: { id: string; email: string } | null;
   /** Histórico de consentimentos: um registro por concessão, revogação sem apagar. */
   consentimentos: RegistroConsentimento[];
   /** Quando a pessoa passou pela tela de consentimentos inicial (mesmo sem autorizar). */
@@ -173,6 +175,14 @@ export const acoes = {
   excluirTudo: (): Estado => estadoInicial(),
   /** v0.4.3: sair sem apagar. Só desliga o usuário; treinos, perfil e consentimentos ficam no aparelho. */
   sair: (e: Estado): Estado => ({ ...e, usuario: null }),
+  /**
+   * v0.6: entrar com conta. Os dados que já estão no aparelho passam a ser dessa conta. Se o aparelho tem dados de
+   * OUTRA conta, recusa ('outra_conta'): a pessoa precisa sair e apagar os dados deste aparelho antes (nada se mistura).
+   */
+  entrarConta: (e: Estado, conta: { id: string; email: string }): Estado => {
+    if (e.conta && e.conta.id !== conta.id && temDadosPessoais(e)) throw new Error('outra_conta');
+    return { ...e, conta: { id: conta.id, email: conta.email }, usuario: e.usuario ?? { modo: 'local', criadoEm: agora() } };
+  },
   /** Tela "Itens com erro": descarta um item da fila (o dado local fica como está). */
   descartarItemFila: (e: Estado, id: string): Estado => ({ ...e, fila: e.fila.filter((i) => i.registro.id !== id) }),
   /** Corrige o nome de um item recusado: grava a correção pela regra normal e tira a marca de erro. */
@@ -187,6 +197,10 @@ export const acoes = {
     return { ...e, fila };
   },
 };
+
+/** Há algo da pessoa no aparelho (além de dados de exemplo)? */
+export const temDadosPessoais = (e: Estado) =>
+  e.rotinas.some((r) => !r.exemplo) || e.sessoes.some((r) => !r.exemplo) || e.pesos.some((r) => !r.exemplo) || (e.agua ?? []).length > 0 || (e.diario ?? []).length > 0;
 
 export const temSaude = (e: Estado) => !!ativo(e.consentimentos, 'dados_saude');
 export const temIa = (e: Estado) => !!ativo(e.consentimentos, 'ia_visao_eua');
