@@ -11,6 +11,7 @@ import Treinos, { SECOES_TREINOS } from '@/app/(abas)/treinos';
 import Entrar from '@/app/entrar';
 import { marca } from '@/config/marca';
 import { acoes, estadoInicial, ProvedorEstado } from '@/estado/armazem';
+import { temas } from '@/tema/tokens';
 
 let mockParams: Record<string, string> = {};
 jest.mock('expo-router', () => {
@@ -78,14 +79,16 @@ describe('aba Treinos', () => {
   });
 });
 
-describe('slogan do login v2.2', () => {
-  it('logo abaixo do logo, branco, Inter 18/600, centralizado, texto da variável única', async () => {
+describe('slogan do login v3.2', () => {
+  it('abaixo do logo, título grande na cor do texto sobre o rosa, alinhado à esquerda, texto da variável única', async () => {
     await montar(<Entrar />, estadoInicial());
     const s = await screen.findByTestId('slogan');
     expect(s.props.children).toBe(marca.slogan);
     expect(marca.slogan).toBe('Seu treino, no seu ritmo.');
     const st = StyleSheet.flatten(s.props.style);
-    expect(st).toMatchObject({ color: '#FFFFFF', fontFamily: 'Inter', fontSize: 18, fontWeight: '600', textAlign: 'center' });
+    expect(st.color).toBe(temas.claro['texto-sobre-fundo']);
+    expect(st.fontSize).toBeGreaterThanOrEqual(34);
+    expect(st.textAlign).toBeUndefined();
     expect(screen.getAllByTestId('slogan')).toHaveLength(1);
     expect(screen.queryByText('[slogan a definir]')).toBeNull();
   });
