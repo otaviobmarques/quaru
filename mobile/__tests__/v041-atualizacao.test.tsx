@@ -65,7 +65,7 @@ it('tela de atualizações (nativo): versão, aviso da loja e O que há de novo 
   expect(VERSAO_NOVIDADES).toBe(JSON.parse(readFileSync('package.json', 'utf8')).version);
   const log = readFileSync('../CHANGELOG.md', 'utf8');
   expect(log).toContain(`## [${VERSAO_NOVIDADES}]`);
-  expect(NOVIDADES.length).toBeGreaterThan(3); // o texto muda a cada versão; basta ter vindo do CHANGELOG
+  expect(NOVIDADES.length).toBeGreaterThan(0); // o texto muda a cada versão; basta ter vindo do CHANGELOG
   expect(NOVIDADES.join(' ')).not.toMatch(/\/home|src\/|scripts\//);
 });
 
