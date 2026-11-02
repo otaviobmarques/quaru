@@ -24,13 +24,14 @@ jobs:
           cache: npm
           cache-dependency-path: mobile/package-lock.json
       - run: npm ci
-      # v0.6: com as variáveis do repositório SUPABASE_URL e SUPABASE_ANON_KEY (Settings → Secrets and variables →
-      # Actions → Variables), o app exige login por convite. Sem elas, segue no modo local (como antes).
-      # São valores PÚBLICOS (URL do projeto e chave anon). A service_role NUNCA entra aqui.
+      # v0.6: com SUPABASE_URL e SUPABASE_ANON_KEY o app exige login por convite (sem elas, segue no modo local).
+      # Padrão: o projeto Supabase "quaru". As variáveis do repositório (Settings → Secrets and variables → Actions →
+      # Variables), se existirem, têm prioridade. São valores PÚBLICOS (URL do projeto e chave anon, protegida pela
+      # RLS); a service_role NUNCA entra aqui.
       - name: Export web (baseUrl /quaru vem de experiments.baseUrl no app.json)
         env:
-          EXPO_PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          EXPO_PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://gnmbrcdqljhtoxxkuekz.supabase.co' }}
+          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdubWJyY2RxbGpodG94eGt1ZWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM1NTY1MjQsImV4cCI6MjEwOTEzMjUyNH0.K3dqSYthWnC2NhLQ6TAVQJhXkwJB2vPZu-ps72Ud2YA' }}
         run: |
           node scripts/gerar-novidades.mjs
           npx expo export --platform web --output-dir dist
@@ -44,9 +45,9 @@ jobs:
           test -f dist/index.html
       - name: Painel de administração (/quaru/admin/)
         env:
-          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
-          URL_APP: ${{ vars.URL_APP }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://gnmbrcdqljhtoxxkuekz.supabase.co' }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdubWJyY2RxbGpodG94eGt1ZWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM1NTY1MjQsImV4cCI6MjEwOTEzMjUyNH0.K3dqSYthWnC2NhLQ6TAVQJhXkwJB2vPZu-ps72Ud2YA' }}
+          URL_APP: ${{ vars.URL_APP || 'https://otaviobmarques.github.io/quaru/' }}
         run: |
           mkdir -p dist/admin
           cp -r ../admin/. dist/admin/

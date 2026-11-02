@@ -13,9 +13,16 @@ beforeEach(async () => {
 });
 
 describe('perfis e administrador (v0.6)', () => {
-  it('todo usuário novo ganha perfil "usuario" ativo', async () => {
+  it('todo usuário novo ganha perfil "usuario" BLOQUEADO (só o convite do painel ativa)', async () => {
     const r = await db.query<{ papel: string; ativo: boolean }>(`select papel, ativo from public.perfis where usuario_id = $1`, [A]);
-    expect(r.rows[0]).toEqual({ papel: 'usuario', ativo: true });
+    expect(r.rows[0]).toEqual({ papel: 'usuario', ativo: false });
+  });
+  it('permissões como no Supabase real: sem TRUNCATE/DELETE, anon sem acesso, tornar_admin fechada', async () => {
+    const r = await db.query<Record<string, boolean>>(`select
+      has_table_privilege('authenticated', 'public.rotinas', 'truncate') as t, has_table_privilege('authenticated', 'public.series', 'delete') as d,
+      has_table_privilege('anon', 'public.perfis', 'select') as a, has_function_privilege('authenticated', 'public.tornar_admin(text)', 'execute') as f,
+      has_function_privilege('anon', 'public.meu_acesso()', 'execute') as m, has_function_privilege('authenticated', 'public.meu_acesso()', 'execute') as ok`);
+    expect(r.rows[0]).toEqual({ t: false, d: false, a: false, f: false, m: false, ok: true });
   });
   it('tornar_admin promove pelo e-mail e falha para e-mail não convidado', async () => {
     const r = await db.query<{ papel: string }>(`select papel from public.perfis where usuario_id = $1`, [ADMIN]);
@@ -24,7 +31,7 @@ describe('perfis e administrador (v0.6)', () => {
   });
   it('meu_acesso devolve papel e situação do próprio perfil', async () => {
     const r = await como(db, A, (q) => q<{ a: { papel: string; ativo: boolean } }>(`select public.meu_acesso() as a`));
-    expect(r.rows[0].a).toEqual({ papel: 'usuario', ativo: true });
+    expect(r.rows[0].a).toEqual({ papel: 'usuario', ativo: false });
     const adm = await como(db, ADMIN, (q) => q<{ ok: boolean }>(`select public.eh_admin() as ok`));
     expect(adm.rows[0].ok).toBe(true);
   });

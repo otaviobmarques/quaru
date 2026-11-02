@@ -3,14 +3,16 @@
 // a service_role, que existe apenas aqui no servidor (variável SUPABASE_SERVICE_ROLE_KEY, nunca no navegador nem no app).
 //
 // Variáveis (Painel do Supabase → Edge Functions → Secrets):
-//   ORIGENS_ADMIN  endereços que podem chamar, separados por vírgula (ex.: https://otaviobmarques.github.io)
-//   URL_APP        para onde o convite leva depois de criar a senha (ex.: https://otaviobmarques.github.io/quaru/)
+//   ORIGENS_ADMIN  (opcional) endereços que podem chamar, separados por vírgula. Padrão: https://otaviobmarques.github.io
+//   URL_APP        (opcional) para onde o convite leva para criar a senha. Padrão: https://otaviobmarques.github.io/quaru/
 // SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY já vêm prontas no Supabase.
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4';
 import { lerPedido, recusar, type PerfilResumo } from './regras.ts';
 
 const env = (k: string) => Deno.env.get(k) ?? '';
-const ORIGENS = env('ORIGENS_ADMIN').split(',').map((s) => s.trim()).filter(Boolean);
+// Padrões do site publicado (valores públicos); as variáveis, se existirem, têm prioridade.
+const ORIGENS = (env('ORIGENS_ADMIN') || 'https://otaviobmarques.github.io').split(',').map((s) => s.trim()).filter(Boolean);
+const URL_APP = env('URL_APP') || 'https://otaviobmarques.github.io/quaru/';
 const BANIDO = '876000h'; // ~100 anos: o Auth recusa login e renovação do token
 
 function cabecalhos(origem: string | null): Record<string, string> {
@@ -65,16 +67,16 @@ Deno.serve(async (req) => {
         }
         const lista = usuarios.map((u) => {
           const pf = perfis.find((x) => x.usuario_id === u.id);
-          return { id: u.id, email: u.email ?? '', nome: pf?.nome ?? null, papel: pf?.papel ?? 'usuario', ativo: pf?.ativo ?? true,
+          return { id: u.id, email: u.email ?? '', nome: pf?.nome ?? null, papel: pf?.papel ?? 'usuario', ativo: pf?.ativo ?? false,
             criado_em: u.created_at, ultimo_acesso: u.last_sign_in_at ?? null, convite_pendente: !u.email_confirmed_at && !u.last_sign_in_at, eu: u.id === eu.usuario_id };
         }).sort((a, b) => a.email.localeCompare(b.email));
         return resposta(origem, 200, { usuarios: lista });
       }
       case 'convidar': {
-        const { data, error } = await admin.auth.admin.inviteUserByEmail(p.email, { redirectTo: env('URL_APP') || undefined, data: { nome: p.nome ?? null } });
+        const { data, error } = await admin.auth.admin.inviteUserByEmail(p.email, { redirectTo: URL_APP, data: { nome: p.nome ?? null } });
         if (error) return resposta(origem, error.status === 422 ? 409 : 400, { erro: /registered|exists/i.test(error.message) ? 'Esse e-mail já tem conta.' : 'Não foi possível enviar o convite.' });
-        // O gatilho já criou o perfil; completa nome, papel e quem convidou.
-        await admin.from('perfis').update({ nome: p.nome ?? null, papel: p.papel ?? 'usuario', convidado_por: eu.usuario_id }).eq('usuario_id', data.user.id);
+        // O gatilho criou o perfil BLOQUEADO; o convite o ativa e completa nome, papel e quem convidou.
+        await admin.from('perfis').upsert({ usuario_id: data.user.id, nome: p.nome ?? null, papel: p.papel ?? 'usuario', ativo: true, convidado_por: eu.usuario_id });
         return resposta(origem, 200, { ok: true, id: data.user.id });
       }
       case 'reenviar': {
@@ -82,8 +84,8 @@ Deno.serve(async (req) => {
         if (error || !data.user?.email) return resposta(origem, 404, { erro: 'Usuário não encontrado.' });
         const jaEntrou = !!data.user.email_confirmed_at || !!data.user.last_sign_in_at;
         const r = jaEntrou
-          ? await createClient(env('SUPABASE_URL'), env('SUPABASE_ANON_KEY')).auth.resetPasswordForEmail(data.user.email, { redirectTo: env('URL_APP') || undefined })
-          : await admin.auth.admin.inviteUserByEmail(data.user.email, { redirectTo: env('URL_APP') || undefined });
+          ? await createClient(env('SUPABASE_URL'), env('SUPABASE_ANON_KEY')).auth.resetPasswordForEmail(data.user.email, { redirectTo: URL_APP })
+          : await admin.auth.admin.inviteUserByEmail(data.user.email, { redirectTo: URL_APP });
         if (r.error) return resposta(origem, 400, { erro: 'Não foi possível reenviar.' });
         return resposta(origem, 200, { ok: true, enviado: jaEntrou ? 'redefinir-senha' : 'convite' });
       }

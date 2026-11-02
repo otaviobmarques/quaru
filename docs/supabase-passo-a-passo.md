@@ -1,5 +1,10 @@
 # Ligar o login por convite e o painel de administração (v0.6)
 
+> **Situação em 02/11/2026:** os passos 1, 4, 5, 6 e 7 já foram feitos no projeto `quaru`
+> (`gnmbrcdqljhtoxxkuekz`): banco com as 8 migrações, função `admin-usuarios` publicada, administrador
+> otaviobmarques@gmail.com criado e o deploy ligado ao projeto. **Faltam só os passos 2 e 3, no painel do Supabase.**
+> Os endereços da função já vêm como padrão no código; as variáveis `ORIGENS_ADMIN` e `URL_APP` são opcionais.
+
 Guia para quem administra o projeto Quaru no Supabase. Tudo aqui é feito no painel do Supabase
 (https://supabase.com/dashboard) e nas configurações do repositório no GitHub. **Nenhuma senha ou chave secreta
 vai para o código.** Leva uns 20 minutos.
@@ -17,10 +22,11 @@ No projeto Quaru: **SQL Editor → New query**. Cole e rode, **na ordem**, cada 
 3. `20261101000003_consentimentos_historico.sql`
 4. `20261101000004_correcoes_qa.sql`
 5. `20261101000005_nome_espacos_unicode.sql`
-6. `20261102000006_perfis_admin.sql` ← novo: perfis, papel de administrador e bloqueio
+6. `20261102000006_perfis_admin.sql`: perfis, papel de administrador e bloqueio
+7. `20261102000007_permissoes_supabase.sql`: tira as permissões que o Supabase dá por padrão (TRUNCATE, DELETE, funções abertas)
+8. `20261102000008_search_path_gatilhos.sql`
 
-Se em **Table Editor** já aparecem tabelas como `consentimentos` e `rotinas`, os cinco primeiros já foram
-aplicados: rode só o 6.
+Rode só os que ainda não aparecem em **Database → Migrations**.
 
 Quem usa a linha de comando pode fazer o mesmo com `backend/scripts/aplicar-migracoes.sh`.
 

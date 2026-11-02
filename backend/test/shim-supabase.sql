@@ -10,3 +10,8 @@ do $$ begin
 end $$;
 grant usage on schema public, auth to anon, authenticated, service_role;
 grant execute on function auth.uid() to anon, authenticated;
+
+-- Como no Supabase real: tabelas e funções novas em public ganham TODOS os privilégios para anon e authenticated.
+-- (Foi isso que deixou tornar_admin e TRUNCATE abertos no projeto; a migração 0007 corrige e os testes conferem.)
+alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
+alter default privileges in schema public grant execute on functions to anon, authenticated, service_role;
