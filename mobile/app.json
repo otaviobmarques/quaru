@@ -2,7 +2,7 @@
   "expo": {
     "name": "Quaru",
     "slug": "app-academia",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "app-academia",
@@ -29,7 +29,7 @@
       "lang": "pt-BR",
       "themeColor": "#F2A0B0",
       "backgroundColor": "#F2A0B0",
-      "description": "Quaru: registro de treinos no seu aparelho."
+      "description": "Registre seus treinos, acompanhe a evolução, a água e a alimentação. Acesso por convite."
     },
     "plugins": [
       "expo-router",

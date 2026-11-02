@@ -6,11 +6,24 @@ export interface PerfilResumo { usuario_id: string; papel: Papel; ativo: boolean
 export type Pedido =
   | { acao: 'listar' }
   | { acao: 'convidar'; email: string; nome?: string; papel?: Papel }
+  | { acao: 'criar'; email: string; nome?: string; papel?: Papel; senha: string; trocar: boolean }
+  | { acao: 'senha'; usuario_id: string; senha: string; trocar: boolean }
   | { acao: 'bloquear' | 'desbloquear' | 'remover' | 'reenviar'; usuario_id: string }
   | { acao: 'papel'; usuario_id: string; papel: Papel };
 
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+export const SENHA_MIN = 8;
+export const SENHA_MAX = 72; // limite do bcrypt usado pelo Supabase Auth
+
+/** Senha aceita: 8 a 72 caracteres, com letra e número, sem espaço nas pontas. Devolve a mensagem de erro ou null. */
+export function problemaSenha(senha: unknown): string | null {
+  if (typeof senha !== 'string' || senha.length < SENHA_MIN) return `A senha precisa ter pelo menos ${SENHA_MIN} caracteres.`;
+  if (senha.length > SENHA_MAX) return `A senha pode ter no máximo ${SENHA_MAX} caracteres.`;
+  if (senha !== senha.trim()) return 'A senha não pode começar nem terminar com espaço.';
+  if (!/[A-Za-zÀ-ÿ]/.test(senha) || !/\d/.test(senha)) return 'Use letras e números na senha.';
+  return null;
+}
 
 /** Valida o corpo do pedido. Retorna o pedido normalizado ou uma mensagem de erro em português. */
 export function lerPedido(corpo: unknown): Pedido | { erro: string } {
@@ -24,6 +37,20 @@ export function lerPedido(corpo: unknown): Pedido | { erro: string } {
       const nome = typeof c.nome === 'string' ? c.nome.trim().slice(0, 80) : '';
       const papel = c.papel === 'admin' ? 'admin' : 'usuario';
       return { acao: 'convidar', email, nome: nome || undefined, papel };
+    }
+    case 'criar': {
+      const email = typeof c.email === 'string' ? c.email.trim().toLowerCase() : '';
+      if (!EMAIL.test(email)) return { erro: 'Digite um e-mail válido.' };
+      const erroSenha = problemaSenha(c.senha);
+      if (erroSenha) return { erro: erroSenha };
+      const nome = typeof c.nome === 'string' ? c.nome.trim().slice(0, 80) : '';
+      return { acao: 'criar', email, nome: nome || undefined, papel: c.papel === 'admin' ? 'admin' : 'usuario', senha: c.senha as string, trocar: c.trocar !== false };
+    }
+    case 'senha': {
+      if (typeof c.usuario_id !== 'string' || !UUID.test(c.usuario_id)) return { erro: 'Usuário inválido.' };
+      const erroSenha = problemaSenha(c.senha);
+      if (erroSenha) return { erro: erroSenha };
+      return { acao: 'senha', usuario_id: c.usuario_id, senha: c.senha as string, trocar: c.trocar !== false };
     }
     case 'bloquear': case 'desbloquear': case 'remover': case 'reenviar':
       if (typeof c.usuario_id !== 'string' || !UUID.test(c.usuario_id)) return { erro: 'Usuário inválido.' };
@@ -41,7 +68,8 @@ export function lerPedido(corpo: unknown): Pedido | { erro: string } {
  * Retorna a mensagem de recusa ou null se pode seguir.
  */
 export function recusar(p: Pedido, quem: string, perfis: PerfilResumo[]): string | null {
-  if (p.acao === 'listar' || p.acao === 'convidar' || p.acao === 'reenviar' || p.acao === 'desbloquear') return null;
+  if (p.acao === 'listar' || p.acao === 'convidar' || p.acao === 'criar' || p.acao === 'reenviar' || p.acao === 'desbloquear') return null;
+  if (p.acao === 'senha') return perfis.some((x) => x.usuario_id === p.usuario_id) ? null : 'Usuário não encontrado.';
   const alvo = perfis.find((x) => x.usuario_id === p.usuario_id);
   if (!alvo) return 'Usuário não encontrado.';
   const tiraAdmin = (p.acao === 'papel' && p.papel === 'usuario') || p.acao === 'bloquear' || p.acao === 'remover';

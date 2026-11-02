@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, Path, SvgXml } from 'react-native-svg';
 
 import { BotaoGoogle } from '@/componentes/botao-google';
+import { InstalarApp } from '@/componentes/instalar-app';
 import { Ilustracao } from '@/componentes/ilustracoes';
 import { AssinaturaDomma } from '@/componentes/simbolo-domma';
 import { Aviso, Botao, Campo, LARGURA_COLUNA, Texto } from '@/componentes/ui';
@@ -272,6 +273,7 @@ export default function Entrar() {
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: espaco[3], marginTop: espaco[2] }}>
                 <Texto v="rotulo">Desenvolvido por</Texto><AssinaturaDomma largura={136} />
               </View>
+              <View style={{ alignSelf: 'stretch', marginTop: espaco[2] }}><InstalarApp compacto /></View>
               {Platform.OS === 'web' && <Texto v="legenda" suave>Versão {marca.versao}</Texto>}
             </View>
           </View>

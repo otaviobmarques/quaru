@@ -64,7 +64,8 @@ if (!configurado) {
       const situacao = el('td', {}, el('span', { className: !u.ativo ? 'selo vermelho' : 'selo cinza', textContent: !u.ativo ? 'BLOQUEADO' : u.convite_pendente ? 'CONVITE ENVIADO' : 'ATIVO' }));
       const acesso = el('td', { textContent: fmtData(u.ultimo_acesso) });
       const acoes = el('td', { className: 'acoes' });
-      acoes.append(botao(u.convite_pendente ? 'Reenviar convite' : 'Redefinir senha', 'secundario', () => acao({ acao: 'reenviar', usuario_id: u.id }, u.convite_pendente ? 'Convite reenviado.' : 'E-mail para redefinir a senha enviado.'), `${u.convite_pendente ? 'Reenviar convite' : 'Redefinir senha'} de ${u.email}`));
+      acoes.append(botao('Definir senha', 'secundario', () => definirSenha(u), `Definir nova senha de ${u.email}`));
+      acoes.append(botao(u.convite_pendente ? 'Reenviar convite' : 'E-mail de senha', 'secundario', () => acao({ acao: 'reenviar', usuario_id: u.id }, u.convite_pendente ? 'Convite reenviado.' : 'E-mail para redefinir a senha enviado.'), `${u.convite_pendente ? 'Reenviar convite' : 'Enviar e-mail para redefinir a senha'} de ${u.email}`));
       if (!u.eu) {
         acoes.append(botao(u.papel === 'admin' ? 'Tirar admin' : 'Tornar admin', 'secundario', () => acao({ acao: 'papel', usuario_id: u.id, papel: u.papel === 'admin' ? 'usuario' : 'admin' }, 'Papel alterado.'), `${u.papel === 'admin' ? 'Tirar admin de' : 'Tornar admin'} ${u.email}`));
         acoes.append(botao(u.ativo ? 'Bloquear' : 'Desbloquear', 'secundario', () => acao({ acao: u.ativo ? 'bloquear' : 'desbloquear', usuario_id: u.id }, u.ativo ? 'Usuário bloqueado: não consegue mais entrar.' : 'Usuário desbloqueado.'), `${u.ativo ? 'Bloquear' : 'Desbloquear'} ${u.email}`));
@@ -104,19 +105,73 @@ if (!configurado) {
     await sb.auth.resetPasswordForEmail(email, { redirectTo: cfg.urlApp || undefined });
     msg($('msg-entrar'), 'Se o e-mail tiver conta, enviamos um link para criar uma nova senha.', 'ok'); // não revela se existe
   });
+  // Senha legível (sem 0/O, 1/l/I), gerada no navegador com crypto.getRandomValues.
+  function gerarSenha() {
+    const letras = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ', numeros = '23456789';
+    const sorteio = (alf, n) => Array.from(crypto.getRandomValues(new Uint32Array(n)), (x) => alf[x % alf.length]).join('');
+    return `Quaru-${sorteio(letras + numeros, 4)}${sorteio(numeros, 1)}-${sorteio(letras, 1)}${sorteio(letras + numeros, 4)}`;
+  }
+  const modo = () => document.querySelector('input[name=modo]:checked')?.value ?? 'senha';
+  function atualizarModo() {
+    const comSenha = modo() === 'senha';
+    $('bloco-senha').hidden = !comSenha;
+    $('c-enviar').textContent = comSenha ? 'Criar usuário' : 'Enviar convite';
+    msg($('msg-convidar'), ''); $('dados-acesso').hidden = true;
+  }
+  for (const r of document.querySelectorAll('input[name=modo]')) r.addEventListener('change', atualizarModo);
+  $('gerar-c-senha').addEventListener('click', () => { $('c-senha').value = gerarSenha(); $('c-senha').type = 'text'; $('ver-c-senha').textContent = 'Ocultar'; });
+  $('ver-c-senha').addEventListener('click', () => { const v = $('c-senha').type === 'password'; $('c-senha').type = v ? 'text' : 'password'; $('ver-c-senha').textContent = v ? 'Ocultar' : 'Mostrar'; $('ver-c-senha').setAttribute('aria-label', v ? 'Ocultar senha' : 'Mostrar senha'); });
+  $('copiar-dados').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('dados-texto').textContent); $('copiar-dados').textContent = 'Copiado ✓'; } catch { $('copiar-dados').textContent = 'Selecione e copie'; }
+  });
+
   $('form-convidar').addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = $('c-email').value.trim();
-    msg($('msg-convidar'), 'Enviando convite…');
+    const comSenha = modo() === 'senha';
+    const senha = $('c-senha').value;
+    $('dados-acesso').hidden = true;
+    msg($('msg-convidar'), comSenha ? 'Criando usuário…' : 'Enviando convite…');
     try {
-      await chamar({ acao: 'convidar', email, nome: $('c-nome').value.trim(), papel: $('c-papel').value });
-      msg($('msg-convidar'), `Convite enviado para ${email}.`, 'ok');
-      $('form-convidar').reset();
+      if (comSenha) {
+        await chamar({ acao: 'criar', email, nome: $('c-nome').value.trim(), papel: $('c-papel').value, senha, trocar: $('c-trocar').checked });
+        msg($('msg-convidar'), `Usuário ${email} criado. Ele já pode entrar.`, 'ok');
+        $('dados-texto').textContent = `Seu acesso ao Quaru\nEndereço: ${cfg.urlApp || location.origin + '/quaru/'}\nE-mail: ${email}\nSenha: ${senha}${$('c-trocar').checked ? '\nNo primeiro acesso, o app vai pedir para você criar a sua senha.' : ''}`;
+        $('copiar-dados').textContent = 'Copiar';
+        $('dados-acesso').hidden = false;
+      } else {
+        await chamar({ acao: 'convidar', email, nome: $('c-nome').value.trim(), papel: $('c-papel').value });
+        msg($('msg-convidar'), `Convite enviado para ${email}.`, 'ok');
+      }
+      $('form-convidar').reset(); $('c-senha').type = 'password'; $('ver-c-senha').textContent = 'Mostrar';
       await carregar(false);
     } catch (er) { msg($('msg-convidar'), er.message, 'erro'); }
   });
+
+  function definirSenha(u) {
+    const d = $('dialogo-senha');
+    $('ds-texto').textContent = `Conta: ${u.email}`;
+    $('ds-campo').value = gerarSenha(); $('ds-trocar').checked = true; msg($('ds-msg'), '');
+    $('ds-gerar').onclick = () => { $('ds-campo').value = gerarSenha(); };
+    $('ds-ok').onclick = async (ev) => {
+      ev.preventDefault();
+      const senha = $('ds-campo').value;
+      msg($('ds-msg'), 'Salvando…');
+      try {
+        await chamar({ acao: 'senha', usuario_id: u.id, senha, trocar: $('ds-trocar').checked });
+        d.close();
+        msg($('msg-convidar'), `Senha de ${u.email} trocada.`, 'ok');
+        $('dados-texto').textContent = `Seu acesso ao Quaru\nEndereço: ${cfg.urlApp || location.origin + '/quaru/'}\nE-mail: ${u.email}\nSenha: ${senha}${$('ds-trocar').checked ? '\nNo próximo acesso, o app vai pedir para você criar a sua senha.' : ''}`;
+        $('copiar-dados').textContent = 'Copiar'; $('dados-acesso').hidden = false;
+        $('dados-acesso').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch (er) { msg($('ds-msg'), er.message, 'erro'); }
+    };
+    d.showModal();
+  }
+
   $('busca').addEventListener('input', desenhar);
   $('sair').addEventListener('click', async () => { await sb.auth.signOut(); usuarios = []; $('linhas').replaceChildren(); mostrar('tela-entrar'); });
 
+  atualizarModo();
   iniciar();
 }

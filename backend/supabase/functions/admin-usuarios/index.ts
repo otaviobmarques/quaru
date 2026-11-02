@@ -79,6 +79,20 @@ Deno.serve(async (req) => {
         await admin.from('perfis').upsert({ usuario_id: data.user.id, nome: p.nome ?? null, papel: p.papel ?? 'usuario', ativo: true, convidado_por: eu.usuario_id });
         return resposta(origem, 200, { ok: true, id: data.user.id });
       }
+      case 'criar': {
+        // Conta já confirmada, com a senha escolhida pelo admin. Com "trocar", o app pede uma senha pessoal no 1º acesso.
+        const { data, error } = await admin.auth.admin.createUser({ email: p.email, password: p.senha, email_confirm: true, user_metadata: { nome: p.nome ?? null, trocar_senha: p.trocar } });
+        if (error) return resposta(origem, /registered|exists/i.test(error.message) ? 409 : 400, { erro: /registered|exists/i.test(error.message) ? 'Esse e-mail já tem conta.' : /password/i.test(error.message) ? 'Senha recusada pelo servidor: use uma senha mais forte.' : 'Não foi possível criar o usuário.' });
+        await admin.from('perfis').upsert({ usuario_id: data.user.id, nome: p.nome ?? null, papel: p.papel ?? 'usuario', ativo: true, convidado_por: eu.usuario_id });
+        return resposta(origem, 200, { ok: true, id: data.user.id });
+      }
+      case 'senha': {
+        const { data: atual, error: e1 } = await admin.auth.admin.getUserById(p.usuario_id);
+        if (e1 || !atual.user) return resposta(origem, 404, { erro: 'Usuário não encontrado.' });
+        const { error } = await admin.auth.admin.updateUserById(p.usuario_id, { password: p.senha, user_metadata: { ...(atual.user.user_metadata ?? {}), trocar_senha: p.trocar } });
+        if (error) return resposta(origem, 400, { erro: /password/i.test(error.message) ? 'Senha recusada pelo servidor: use uma senha mais forte.' : 'Não foi possível trocar a senha.' });
+        return resposta(origem, 200, { ok: true });
+      }
       case 'reenviar': {
         const { data, error } = await admin.auth.admin.getUserById(p.usuario_id);
         if (error || !data.user?.email) return resposta(origem, 404, { erro: 'Usuário não encontrado.' });

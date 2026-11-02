@@ -7,11 +7,24 @@ import { join, relative, sep } from 'node:path';
 const dist = process.argv[2] ?? 'dist';
 const BASE = '/quaru/'; // igual a experiments.baseUrl do app.json
 const idx = join(dist, 'index.html');
+const SITE = 'https://otaviobmarques.github.io' + BASE;
+const TITULO = 'Quaru · Seu treino, no seu ritmo.';
+const DESCRICAO = 'Registre seus treinos, acompanhe a evolução, a água e a alimentação. Acesso por convite.';
 let html = readFileSync(idx, 'utf8');
 if (!html.includes('manifest.webmanifest')) {
-  html = html.replace('<html lang="en">', '<html lang="pt-BR">').replace(/<title>[^<]*<\/title>/, '<title>Quaru</title>').replace(/<noscript>[^<]*<\/noscript>/, '<noscript>Ative o JavaScript para usar o Quaru.</noscript>').replace('</head>', [
+  html = html.replace(/<meta name="description"[^>]*>/g, '').replace('<html lang="en">', '<html lang="pt-BR">').replace(/<title>[^<]*<\/title>/, '<title>Quaru · Seu treino, no seu ritmo.</title>').replace(/<noscript>[^<]*<\/noscript>/, '<noscript>Ative o JavaScript para usar o Quaru.</noscript>').replace('</head>', [
     `<link rel="manifest" href="${BASE}manifest.webmanifest">`,
     `<link rel="icon" type="image/svg+xml" href="${BASE}icones/quaru.svg">`, // v0.4.1: símbolo oficial (quaru_v2)
+    `<link rel="icon" type="image/png" sizes="32x32" href="${BASE}icones/favicon-32.png">`,
+    // v0.6.1: pré-visualização do link (WhatsApp, Instagram, Facebook, X, LinkedIn, Telegram). A imagem precisa de URL absoluta.
+    `<meta name="description" content="${DESCRICAO}">`,
+    '<meta property="og:type" content="website">', '<meta property="og:site_name" content="Quaru">', '<meta property="og:locale" content="pt_BR">',
+    `<meta property="og:title" content="${TITULO}">`, `<meta property="og:description" content="${DESCRICAO}">`, `<meta property="og:url" content="${SITE}">`,
+    `<meta property="og:image" content="${SITE}og-quaru.jpg">`, '<meta property="og:image:type" content="image/jpeg">',
+    '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+    `<meta property="og:image:alt" content="Quaru: Seu treino, no seu ritmo. Telas do app de treino.">`,
+    '<meta name="twitter:card" content="summary_large_image">', `<meta name="twitter:title" content="${TITULO}">`,
+    `<meta name="twitter:description" content="${DESCRICAO}">`, `<meta name="twitter:image" content="${SITE}og-quaru.jpg">`,
     `<link rel="apple-touch-icon" href="${BASE}icones/apple-touch-icon.png">`,
     '<meta name="apple-mobile-web-app-capable" content="yes">',
     '<meta name="mobile-web-app-capable" content="yes">',
@@ -28,7 +41,7 @@ const andar = (d) => { for (const n of readdirSync(d)) { const p = join(d, n); i
 andar(dist);
 // v0.4.4 (ADR-0020): as mídias do catálogo (exercicios/*.webp, ~876 animações) NÃO entram no pré-cache;
 // são baixadas quando a pessoa abre o exercício e guardadas no cache de mídia (abaixo).
-const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].includes(f) && !f.endsWith('.map') && !f.startsWith('exercicios/') && !f.startsWith('admin/')).sort();
+const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].includes(f) && !f.endsWith('.map') && !f.startsWith('exercicios/') && !f.startsWith('admin/') && !f.startsWith('loja/') && f !== 'og-quaru.jpg').sort();
 const hash = createHash('sha256'); for (const f of lista) hash.update(f).update(readFileSync(join(dist, f)));
 const versao = hash.digest('hex').slice(0, 12);
 const sw = `// Service worker do Quaru web (gerado por scripts/pos-export-web.mjs). Só guarda os arquivos do app para uso offline;
