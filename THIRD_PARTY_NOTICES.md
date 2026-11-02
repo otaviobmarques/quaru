@@ -5,6 +5,7 @@ Mesmo conteúdo da tela "Sobre e licenças" (`mobile/src/dominio/licencas.ts`).
 |---|---|---|
 | MuscleMap | MIT | Não incluído: o mapa muscular da v0.4.1 é desenho próprio |
 | Fonte Inter | SIL OFL 1.1 | Prevista no design; app usa fonte do sistema |
+| Fonte Bricolage Grotesque | SIL OFL 1.1 | Títulos do login (identidade v3.2); instância 800 só latim, licença em `mobile/assets/fontes/` |
 | Ícones Lucide | ISC | Previstos no design; app usa símbolos de texto |
 | react-native-svg | MIT | Ilustrações, avatares, mapa muscular e logotipo (v0.4.1); desenhos próprios |
 | expo-image-picker, expo-image-manipulator | MIT | Foto de perfil, recorte e compressão no aparelho (v0.4.1) |
