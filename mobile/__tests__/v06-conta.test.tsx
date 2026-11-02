@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { acoes, estadoInicial, ProvedorEstado } from '@/estado/armazem';
 
 jest.mock('@/config/marca', () => ({ ...jest.requireActual('@/config/marca'), autenticacaoDisponivel: true }));
-const mockSessao = { modo: 'conta', pronta: true, usuario: null, acesso: null, aviso: null as string | null, link: null,
+const mockSessao = { modo: 'conta', pronta: true, usuario: null as { id: string; email: string } | null, acesso: null, aviso: null as string | null, link: null, trocarSenha: false,
   entrar: jest.fn(async () => null as string | null), esqueci: jest.fn(async () => null), definirSenha: jest.fn(async () => null), sair: jest.fn(async () => {}), limparLink: jest.fn() };
 jest.mock('@/estado/sessao', () => ({ ...jest.requireActual('@/estado/sessao'), useSessao: () => mockSessao }));
 jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn() }, useLocalSearchParams: () => ({}) }));
@@ -17,13 +17,14 @@ jest.mock('expo-secure-store', () => ({
   deleteItemAsync: async (k: string) => { mockCofre.delete(k); },
 }));
 
+import DefinirSenha from '@/app/definir-senha';
 import Entrar from '@/app/entrar';
 import { armazenamentoSeguro } from '@/servicos/supabase';
 
 const montar = (ui: React.ReactElement) => render(
   <SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 390, height: 844 }, insets: { top: 0, left: 0, right: 0, bottom: 0 } }}><ProvedorEstado inicial={estadoInicial()}>{ui}</ProvedorEstado></SafeAreaProvider>);
 
-beforeEach(() => { jest.clearAllMocks(); mockSessao.aviso = null; mockSessao.entrar.mockImplementation(async () => null); });
+beforeEach(() => { jest.clearAllMocks(); mockSessao.aviso = null; mockSessao.usuario = null; mockSessao.trocarSenha = false; mockSessao.entrar.mockImplementation(async () => null); });
 
 describe('tela de entrar com conta obrigatória', () => {
   it('não tem "Continuar sem conta", "Criar conta" nem Google; explica que é por convite', async () => {
@@ -103,5 +104,22 @@ describe('sessão guardada no Keychain/Keystore', () => {
     expect([...mockCofre.keys()].filter((x) => x.startsWith('k.'))).toEqual(['k.0', 'k.n']);
     await armazenamentoSeguro.removeItem('k');
     expect(await armazenamentoSeguro.getItem('k')).toBeNull();
+  });
+});
+
+describe('senha criada pelo administrador (v0.6.1)', () => {
+  it('no 1º acesso pede para criar a própria senha e confere as duas', async () => {
+    mockSessao.usuario = { id: 'u1', email: 'amigo@exemplo.com' }; mockSessao.trocarSenha = true;
+    await montar(<DefinirSenha />);
+    expect(screen.getByText('Por segurança, troque a senha que você recebeu')).toBeTruthy();
+    await fireEvent.changeText(screen.getByTestId('nova-senha'), 'MinhaSenha9');
+    await fireEvent.changeText(screen.getByTestId('nova-senha-conf'), 'Outra9999');
+    await fireEvent.press(screen.getByTestId('salvar-senha'));
+    expect(await screen.findByText('As duas senhas não são iguais.')).toBeTruthy();
+    expect(mockSessao.definirSenha).not.toHaveBeenCalled();
+    await fireEvent.changeText(screen.getByTestId('nova-senha-conf'), 'MinhaSenha9');
+    await fireEvent.press(screen.getByTestId('salvar-senha'));
+    await waitFor(() => expect(mockSessao.definirSenha).toHaveBeenCalledWith('MinhaSenha9'));
+    expect(mockRouter.replace).toHaveBeenCalledWith('/');
   });
 });

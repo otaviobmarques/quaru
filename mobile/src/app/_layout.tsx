@@ -33,8 +33,11 @@ const ROTAS_ABERTAS = ['/', '/entrar', '/definir-senha', '/juridico'];
 function GuardaConta() {
   const s = useSessao();
   const caminho = usePathname();
-  const bloqueia = s.modo === 'conta' && s.pronta && !(s.usuario && s.acesso?.ativo) && !ROTAS_ABERTAS.includes(caminho);
-  useEffect(() => { if (bloqueia) router.replace(s.link ? '/definir-senha' : '/entrar'); }, [bloqueia, s.link]);
+  const logado = !!(s.usuario && s.acesso?.ativo);
+  const bloqueia = s.modo === 'conta' && s.pronta && !logado && !ROTAS_ABERTAS.includes(caminho);
+  // v0.6.1: senha passada pelo admin com "trocar no 1º acesso": só sai da tela de criar senha depois de trocar.
+  const forcaTroca = s.modo === 'conta' && s.pronta && logado && s.trocarSenha && caminho !== '/definir-senha' && caminho !== '/juridico';
+  useEffect(() => { if (bloqueia) router.replace(s.link ? '/definir-senha' : '/entrar'); else if (forcaTroca) router.replace('/definir-senha'); }, [bloqueia, forcaTroca, s.link]);
   return null;
 }
 

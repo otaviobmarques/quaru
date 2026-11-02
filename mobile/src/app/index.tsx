@@ -23,7 +23,7 @@ export default function Entrada() {
 
   if (!pronto || !s.pronta) return <Carregando />;
   if (conta) {
-    if (s.link) return <Redirect href="/definir-senha" />;
+    if (s.link || (logado && s.trocarSenha)) return <Redirect href="/definir-senha" />;
     if (!logado) return <Redirect href="/entrar" />;
     if (outraConta) return (
       <Tela titulo="Outra conta neste aparelho">

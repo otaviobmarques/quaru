@@ -40,15 +40,34 @@
     <section id="tela-painel" hidden>
       <div class="bloco cartao">
         <h2>Cadastrar usuário</h2>
-        <p class="suave">A pessoa recebe um convite por e-mail e cria a própria senha. Ninguém entra no app sem convite.</p>
-        <form id="form-convidar" class="linha-form" novalidate>
-          <div><label for="c-email">E-mail</label><input id="c-email" type="email" autocomplete="off" required></div>
-          <div><label for="c-nome">Nome (opcional)</label><input id="c-nome" type="text" maxlength="80" autocomplete="off"></div>
-          <div><label for="c-papel">Papel</label>
-            <select id="c-papel"><option value="usuario">Usuário do app</option><option value="admin">Administrador</option></select></div>
-          <button class="botao" type="submit">Enviar convite</button>
+        <fieldset class="modo">
+          <legend>Como dar o acesso</legend>
+          <label class="opcao"><input type="radio" name="modo" value="senha" checked> Criar com senha <span class="suave">(você passa o e-mail e a senha para a pessoa)</span></label>
+          <label class="opcao"><input type="radio" name="modo" value="convite"> Enviar convite por e-mail <span class="suave">(a pessoa cria a própria senha pelo link)</span></label>
+        </fieldset>
+        <form id="form-convidar" novalidate>
+          <div class="linha-form">
+            <div><label for="c-email">E-mail</label><input id="c-email" type="email" autocomplete="off" required></div>
+            <div><label for="c-nome">Nome (opcional)</label><input id="c-nome" type="text" maxlength="80" autocomplete="off"></div>
+            <div><label for="c-papel">Papel</label>
+              <select id="c-papel"><option value="usuario">Usuário do app</option><option value="admin">Administrador</option></select></div>
+          </div>
+          <div id="bloco-senha" class="linha-senha">
+            <div><label for="c-senha">Senha</label>
+              <div class="campo-senha"><input id="c-senha" type="password" autocomplete="new-password" minlength="8" maxlength="72" aria-describedby="dica-senha">
+                <button type="button" class="botao peq secundario" id="ver-c-senha" aria-label="Mostrar senha">Mostrar</button></div>
+              <p id="dica-senha" class="suave peq">Pelo menos 8 caracteres, com letras e números.</p></div>
+            <button type="button" class="botao secundario" id="gerar-c-senha">Gerar senha</button>
+            <label class="opcao"><input type="checkbox" id="c-trocar" checked> Pedir para a pessoa trocar a senha no primeiro acesso</label>
+          </div>
+          <button class="botao" type="submit" id="c-enviar">Criar usuário</button>
         </form>
         <p id="msg-convidar" class="msg" role="status" aria-live="polite"></p>
+        <div id="dados-acesso" class="dados-acesso" hidden>
+          <p><b>Dados para enviar à pessoa</b> (aparecem só agora):</p>
+          <pre id="dados-texto"></pre>
+          <button type="button" class="botao peq secundario" id="copiar-dados">Copiar</button>
+        </div>
       </div>
 
       <div class="bloco cartao">
@@ -66,6 +85,19 @@
       </div>
     </section>
   </main>
+
+  <dialog id="dialogo-senha" aria-labelledby="ds-t">
+    <form method="dialog" id="form-senha">
+      <h2 id="ds-t">Definir nova senha</h2>
+      <p id="ds-texto"></p>
+      <label for="ds-campo">Nova senha</label>
+      <div class="campo-senha"><input id="ds-campo" type="text" autocomplete="off" maxlength="72"><button type="button" class="botao peq secundario" id="ds-gerar">Gerar</button></div>
+      <p class="suave peq">Pelo menos 8 caracteres, com letras e números. A senha antiga deixa de valer.</p>
+      <label class="opcao"><input type="checkbox" id="ds-trocar" checked> Pedir para a pessoa trocar no próximo acesso</label>
+      <p id="ds-msg" class="msg" role="status" aria-live="polite"></p>
+      <div class="acoes"><button value="cancelar" class="botao secundario">Cancelar</button><button id="ds-ok" value="ok" class="botao">Salvar senha</button></div>
+    </form>
+  </dialog>
 
   <dialog id="confirmar" aria-labelledby="conf-t">
     <form method="dialog">

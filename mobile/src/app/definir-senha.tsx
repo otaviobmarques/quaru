@@ -12,6 +12,7 @@ import { SENHA_MINIMA, useSessao } from '@/estado/sessao';
 export default function DefinirSenha() {
   const s = useSessao();
   const convite = s.link !== 'recovery';
+  const troca = !s.link && s.trocarSenha; // senha criada pelo admin: a pessoa cria a própria no 1º acesso
   const [senha, setSenha] = useState('');
   const [conf, setConf] = useState('');
   const [erro, setErro] = useState<string | null>(null);
@@ -33,8 +34,9 @@ export default function DefinirSenha() {
   );
   return (
     <Tela titulo={convite ? 'Crie sua senha' : 'Nova senha'}>
-      <Texto v="titulo-1">{convite ? 'Bem-vindo ao Quaru!' : 'Crie uma nova senha'}</Texto>
+      <Texto v="titulo-1">{troca ? 'Crie a sua senha' : convite ? 'Bem-vindo ao Quaru!' : 'Crie uma nova senha'}</Texto>
       <Texto suave>Conta: {s.usuario.email}</Texto>
+      {troca && <Aviso tom="secundaria" titulo="Por segurança, troque a senha que você recebeu" texto="Ela foi criada pelo administrador. Depois de salvar a sua, a antiga deixa de valer." />}
       <Cartao>
         <View style={{ gap: 12 }}>
           <Campo rotulo="Senha" value={senha} onChangeText={(t) => { setSenha(t); setErro(null); }} secureTextEntry autoComplete="new-password" textContentType="newPassword"

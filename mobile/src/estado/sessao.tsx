@@ -17,6 +17,8 @@ type CtxSessao = {
   aviso: string | null;
   /** Link de convite ou de nova senha que abriu o app (web): leva à tela de criar senha. */
   link: 'invite' | 'recovery' | null;
+  /** v0.6.1: o admin criou a conta (ou trocou a senha) e pediu para a pessoa criar a própria senha no 1º acesso. */
+  trocarSenha: boolean;
   entrar: (email: string, senha: string) => Promise<string | null>;
   esqueci: (email: string) => Promise<string | null>;
   definirSenha: (senha: string) => Promise<string | null>;
@@ -88,6 +90,7 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
     pronta,
     usuario: sessao ? { id: sessao.user.id, email: sessao.user.email ?? '' } : null,
     acesso, aviso, link,
+    trocarSenha: sessao?.user.user_metadata?.trocar_senha === true,
     limparLink: () => setLink(null),
     entrar: async (email, senha) => {
       if (!sb) return null;
@@ -107,7 +110,7 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
     definirSenha: async (senha) => {
       if (!sb) return null;
       if (senha.length < SENHA_MINIMA) return MSG.senhaCurta;
-      const { error } = await sb.auth.updateUser({ password: senha });
+      const { error } = await sb.auth.updateUser({ password: senha, data: { trocar_senha: false } });
       if (error) return /fetch|network/i.test(error.message) ? MSG.rede : 'O link expirou. Peça um novo ao administrador ou use "Esqueci minha senha".';
       setLink(null);
       return null;
@@ -119,7 +122,7 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
 
 /** Sem provedor (modo local e testes): sessão "local", sempre pronta, sem conta. */
 const LOCAL: CtxSessao = {
-  modo: 'local', pronta: true, usuario: null, acesso: null, aviso: null, link: null,
+  modo: 'local', pronta: true, usuario: null, acesso: null, aviso: null, link: null, trocarSenha: false,
   entrar: async () => null, esqueci: async () => null, definirSenha: async () => null, sair: async () => {}, limparLink: () => {},
 };
 export function useSessao(): CtxSessao {

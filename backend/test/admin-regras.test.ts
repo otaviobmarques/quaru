@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { lerPedido, recusar, type PerfilResumo } from '../supabase/functions/admin-usuarios/regras';
+import { lerPedido, problemaSenha, recusar, type PerfilResumo } from '../supabase/functions/admin-usuarios/regras';
 
 const EU = '00000000-0000-4000-8000-0000000000ad';
 const OUTRO = '00000000-0000-4000-8000-00000000000a';
@@ -35,5 +35,29 @@ describe('painel: proteções', () => {
     expect(recusar({ acao: 'bloquear', usuario_id: OUTRO }, EU, perfis)).toBeNull();
     expect(recusar({ acao: 'papel', usuario_id: OUTRO, papel: 'admin' }, EU, perfis)).toBeNull();
     expect(recusar({ acao: 'remover', usuario_id: '00000000-0000-4000-8000-0000000000ff' }, EU, perfis)).toBe('Usuário não encontrado.');
+  });
+});
+
+describe('painel: criar com senha e definir senha', () => {
+  it('criar normaliza o e-mail e pede troca no primeiro acesso por padrão', () => {
+    expect(lerPedido({ acao: 'criar', email: ' Bia@Ex.com ', senha: 'Amigo2026!' })).toEqual({ acao: 'criar', email: 'bia@ex.com', nome: undefined, papel: 'usuario', senha: 'Amigo2026!', trocar: true });
+    expect(lerPedido({ acao: 'criar', email: 'bia@ex.com', senha: 'Amigo2026!', trocar: false })).toMatchObject({ trocar: false });
+  });
+  it('senha fraca ou estranha é recusada com mensagem clara', () => {
+    expect(problemaSenha('curta1')).toMatch(/pelo menos 8/);
+    expect(problemaSenha('somenteletras')).toMatch(/letras e números/);
+    expect(problemaSenha('12345678')).toMatch(/letras e números/);
+    expect(problemaSenha(' Espaco123')).toMatch(/espaço/);
+    expect(problemaSenha('a1'.repeat(40))).toMatch(/no máximo 72/);
+    expect(problemaSenha(undefined)).toMatch(/pelo menos 8/);
+    expect(problemaSenha('Treino2026')).toBeNull();
+    expect(lerPedido({ acao: 'criar', email: 'x@y.com', senha: 'fraca' })).toEqual({ erro: 'A senha precisa ter pelo menos 8 caracteres.' });
+  });
+  it('definir senha exige usuário válido e existente', () => {
+    expect(lerPedido({ acao: 'senha', usuario_id: 'x', senha: 'Treino2026' })).toEqual({ erro: 'Usuário inválido.' });
+    const p = lerPedido({ acao: 'senha', usuario_id: OUTRO, senha: 'Treino2026' });
+    expect(p).toEqual({ acao: 'senha', usuario_id: OUTRO, senha: 'Treino2026', trocar: true });
+    expect(recusar(p as never, EU, perfis)).toBeNull();
+    expect(recusar({ acao: 'senha', usuario_id: '00000000-0000-4000-8000-0000000000ff', senha: 'Treino2026', trocar: true }, EU, perfis)).toBe('Usuário não encontrado.');
   });
 });
