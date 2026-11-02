@@ -1,0 +1,7859 @@
+{
+"3_4_Sit-Up": {
+"bytes": {
+"anim": 14780,
+"mini": 662,
+"poster": 4258
+},
+"hash": "e00f85521ec56c4b80f2947344b407041043cf10c1ed527327f184b52875263c",
+"q": 45
+},
+"90_90_Hamstring": {
+"bytes": {
+"anim": 28088,
+"mini": 1154,
+"poster": 5762
+},
+"hash": "e3042997d44245c6dbfc094cfd7f44a8abbb867604095f8dcd2caa808eaa18eb",
+"q": 45
+},
+"Ab_Crunch_Machine": {
+"bytes": {
+"anim": 41680,
+"mini": 1230,
+"poster": 9410
+},
+"hash": "102a092470cefea8af97521a3218343d17c245d09ec6f8f27725fd13c2ccf4da",
+"q": 45
+},
+"Ab_Roller": {
+"bytes": {
+"anim": 30294,
+"mini": 998,
+"poster": 6506
+},
+"hash": "8b39c8c3d0d1528d45d0f037f931fece55c320e5535573759c431a71a4c8ccc5",
+"q": 45
+},
+"Adductor": {
+"bytes": {
+"anim": 27674,
+"mini": 1152,
+"poster": 5720
+},
+"hash": "2337d575bb5f84404ac9b8d7aad0432afcb9bd995050a570d5afaccf759367e9",
+"q": 45
+},
+"Adductor_Groin": {
+"bytes": {
+"anim": 25360,
+"mini": 1058,
+"poster": 5242
+},
+"hash": "c968e7713b0158edc10cf60349cff5efc14e5116ab25ffb86245fda9954f394b",
+"q": 45
+},
+"Advanced_Kettlebell_Windmill": {
+"bytes": {
+"anim": 25608,
+"mini": 954,
+"poster": 5518
+},
+"hash": "5efd406535bb9a92bef064dd3c1f92addf364a393bca35fe78096717c52fc2fc",
+"q": 45
+},
+"Air_Bike": {
+"bytes": {
+"anim": 24310,
+"mini": 900,
+"poster": 5252
+},
+"hash": "d77c7e499288303ab3665099f368f78157f5172bf36fcb92580c12b97d6cfdf7",
+"q": 45
+},
+"All_Fours_Quad_Stretch": {
+"bytes": {
+"anim": 27914,
+"mini": 1098,
+"poster": 5408
+},
+"hash": "beff4bbe9db78c330d012f03e967cf06e51119ef2e3d81a06e1a04e234aa58ae",
+"q": 45
+},
+"Alternate_Hammer_Curl": {
+"bytes": {
+"anim": 34536,
+"mini": 1278,
+"poster": 7728
+},
+"hash": "d0623d4e1148741b77d37c85860a5d16426540a1810e853fdbfcda83744c0c0c",
+"q": 45
+},
+"Alternate_Heel_Touchers": {
+"bytes": {
+"anim": 25520,
+"mini": 942,
+"poster": 5780
+},
+"hash": "7fd18faa06f91453280face1fe409417774ba4ffd1603681ed17d58223a0dca1",
+"q": 45
+},
+"Alternate_Incline_Dumbbell_Curl": {
+"bytes": {
+"anim": 27926,
+"mini": 1046,
+"poster": 6068
+},
+"hash": "783573be223431d52bb969aee282d045e71a5dd7b68ecb049287be7ad9525109",
+"q": 45
+},
+"Alternate_Leg_Diagonal_Bound": {
+"bytes": {
+"anim": 13604,
+"mini": 556,
+"poster": 2916
+},
+"hash": "eff6efb99babd3ecd89c21732c2044a2e1078a5cfe484ae63ce45a298a9ff5e3",
+"q": 45
+},
+"Alternating_Cable_Shoulder_Press": {
+"bytes": {
+"anim": 29112,
+"mini": 968,
+"poster": 6572
+},
+"hash": "9a5ef3737b9f586262438ed4d637900cc9a9e6dc2059ded121a594422bd997e6",
+"q": 45
+},
+"Alternating_Deltoid_Raise": {
+"bytes": {
+"anim": 39270,
+"mini": 1330,
+"poster": 8532
+},
+"hash": "1df727a97afa2229b1a89d48c196c8da23b2eb9f8d83dac4613090930674221a",
+"q": 45
+},
+"Alternating_Floor_Press": {
+"bytes": {
+"anim": 23842,
+"mini": 924,
+"poster": 5136
+},
+"hash": "36f85675ea55e51cc66a48e51a45ad1663510b26468057c42059085b54c00819",
+"q": 45
+},
+"Alternating_Hang_Clean": {
+"bytes": {
+"anim": 24276,
+"mini": 918,
+"poster": 5518
+},
+"hash": "9ee1872f5dc8a2732f5c593a5926b73de8a4ab4542ec525fdcd49b9fe0e38aaa",
+"q": 45
+},
+"Alternating_Kettlebell_Press": {
+"bytes": {
+"anim": 24326,
+"mini": 876,
+"poster": 5278
+},
+"hash": "71d1e188ca0d57e5060e4ead5665652b220aeca2c879e76fd4915a0cce9e9f37",
+"q": 45
+},
+"Alternating_Kettlebell_Row": {
+"bytes": {
+"anim": 23962,
+"mini": 952,
+"poster": 5190
+},
+"hash": "8cd4a4a80577bfcd5a76b7f2e0754edf8f33c38f6cae57cb95617639a0e1018a",
+"q": 45
+},
+"Alternating_Renegade_Row": {
+"bytes": {
+"anim": 21034,
+"mini": 948,
+"poster": 4968
+},
+"hash": "815591c368c16f93ea7ffebee5daebb76ecc709fe470fd5ef52f5a953ea88492",
+"q": 45
+},
+"Ankle_Circles": {
+"bytes": {
+"anim": 18714,
+"mini": 698,
+"poster": 4312
+},
+"hash": "eefe1932a9ed26f70352bd960945551a4f0c6f0f2d151189c719544b38b947d3",
+"q": 45
+},
+"Ankle_On_The_Knee": {
+"bytes": {
+"anim": 26260,
+"mini": 994,
+"poster": 4618
+},
+"hash": "00a44c4564f6ada2bdae66b4f05d99ba6d12dd0c4f8982d70b3b19118e147d1d",
+"q": 45
+},
+"Anterior_Tibialis-SMR": {
+"bytes": {
+"anim": 24694,
+"mini": 1120,
+"poster": 5418
+},
+"hash": "8b828a8b37f645e17ee0e6bef31c4dc0d702a4242140f4b05ce36a4e90f3f7c2",
+"q": 45
+},
+"Anti-Gravity_Press": {
+"bytes": {
+"anim": 31772,
+"mini": 1020,
+"poster": 7144
+},
+"hash": "ac95a44561118c41866af5826f13622bc17e6a2eaa9681148ff1bb47ec1be81d",
+"q": 45
+},
+"Arm_Circles": {
+"bytes": {
+"anim": 32560,
+"mini": 1166,
+"poster": 7056
+},
+"hash": "1fde9cba09bf4019ef82c4018df417d78d99ee9bacdc983fcc1914353d64753a",
+"q": 45
+},
+"Arnold_Dumbbell_Press": {
+"bytes": {
+"anim": 33370,
+"mini": 1166,
+"poster": 7364
+},
+"hash": "95ade9414daa89746e82d3674b9d6bf83fb281b1125b9ded0c1c444f73262c17",
+"q": 45
+},
+"Around_The_Worlds": {
+"bytes": {
+"anim": 44842,
+"mini": 1650,
+"poster": 9862
+},
+"hash": "73772783006abf8c2d6e1749f0179b905278b32c1c5ec3c134b84abe3c65d853",
+"q": 45
+},
+"Atlas_Stone_Trainer": {
+"bytes": {
+"anim": 25746,
+"mini": 850,
+"poster": 5450
+},
+"hash": "630800e72247067075faa9e9a77e743bc309744e2313380151ee0acb3889196f",
+"q": 45
+},
+"Atlas_Stones": {
+"bytes": {
+"anim": 41142,
+"mini": 1194,
+"poster": 9552
+},
+"hash": "df20fc95781858d2ac3baa45207a3740f117c08d9c8836302928ec84bfe0f072",
+"q": 45
+},
+"Axle_Deadlift": {
+"bytes": {
+"anim": 27930,
+"mini": 848,
+"poster": 5874
+},
+"hash": "3bfc58b838734632482f92220ba0774440ae57c83cc01a68897507c6b363e338",
+"q": 45
+},
+"Back_Flyes_-_With_Bands": {
+"bytes": {
+"anim": 26966,
+"mini": 1048,
+"poster": 5870
+},
+"hash": "5aa79d94ac7800074b808a038b02a4a3d41d32598649dca1fc160149684aa771",
+"q": 45
+},
+"Backward_Drag": {
+"bytes": {
+"anim": 33324,
+"mini": 872,
+"poster": 4688
+},
+"hash": "e6b0e1bbe8c74f9f0a1c1726d6387f4ea495e5fd8bbf43fbd6eb018b38fb246b",
+"q": 45
+},
+"Backward_Medicine_Ball_Throw": {
+"bytes": {
+"anim": 17270,
+"mini": 580,
+"poster": 3456
+},
+"hash": "a5a45b622767a633bf112e42d125a3a34c900303a4fe7d3fefb6ccd23ee31f7e",
+"q": 45
+},
+"Balance_Board": {
+"bytes": {
+"anim": 27266,
+"mini": 1130,
+"poster": 5872
+},
+"hash": "ae86c796114ad906a4cbc7b86d3b60e3aa1ea4594a4f83e5fbb95fb558e84017",
+"q": 45
+},
+"Ball_Leg_Curl": {
+"bytes": {
+"anim": 57902,
+"mini": 1514,
+"poster": 13894
+},
+"hash": "b3779ac155767fd93e86a3386e25748b7558f979e56b2dbfbdea04f2b989e2a7",
+"q": 45
+},
+"Band_Assisted_Pull-Up": {
+"bytes": {
+"anim": 33920,
+"mini": 1136,
+"poster": 6992
+},
+"hash": "0965a9c10bc14df1e8c480b23cb1fcb5c2dca0cb073f87138026371cf9997b19",
+"q": 45
+},
+"Band_Good_Morning": {
+"bytes": {
+"anim": 28860,
+"mini": 1102,
+"poster": 5974
+},
+"hash": "bfca7a9972d7a2a0d2b508f2aea2f30accf53aa75f8d8ec40e511a01829f47b1",
+"q": 45
+},
+"Band_Good_Morning_Pull_Through": {
+"bytes": {
+"anim": 36056,
+"mini": 1380,
+"poster": 8162
+},
+"hash": "6a417fb86e4f8b15f4015632cb247ae20d0064a90d9497f193f0554459539ca2",
+"q": 45
+},
+"Band_Hip_Adductions": {
+"bytes": {
+"anim": 25032,
+"mini": 838,
+"poster": 5644
+},
+"hash": "5836feb046638ff790a5c388d3ccb233e8e87a1dfb4ed9575617b8f7e2384281",
+"q": 45
+},
+"Band_Pull_Apart": {
+"bytes": {
+"anim": 40146,
+"mini": 1444,
+"poster": 9112
+},
+"hash": "b3229c65d8e62436e3a618bd21451f63d509227d703c42a9debb4edab71c5d86",
+"q": 45
+},
+"Band_Skull_Crusher": {
+"bytes": {
+"anim": 47352,
+"mini": 1488,
+"poster": 10746
+},
+"hash": "289780a22b4a96eca8cee57c37bc8cb3ba7f3c4fcac7e844b003889a462a5b4a",
+"q": 45
+},
+"Barbell_Ab_Rollout": {
+"bytes": {
+"anim": 26152,
+"mini": 894,
+"poster": 5524
+},
+"hash": "e11efee1c4bc1b94d2c9582f3f6c879ebdfc590886e60ff4e5588b87458c17b4",
+"q": 45
+},
+"Barbell_Ab_Rollout_-_On_Knees": {
+"bytes": {
+"anim": 40872,
+"mini": 1458,
+"poster": 8762
+},
+"hash": "9ecd6e09de73ea30076de127740e1149a37f8caffa2d84092a9bb7b49e311d4b",
+"q": 45
+},
+"Barbell_Bench_Press_-_Medium_Grip": {
+"bytes": {
+"anim": 44222,
+"mini": 1522,
+"poster": 9782
+},
+"hash": "751a2fec097b851cc88843da910893575d3611fd34afeba0c4eac4a80185d3cb",
+"q": 45
+},
+"Barbell_Curl": {
+"bytes": {
+"anim": 29760,
+"mini": 1122,
+"poster": 6278
+},
+"hash": "15f8e9881246a11a4cde10eecfb0db4f487ea35e117ab6e8bbc4db3af65c35ac",
+"q": 45
+},
+"Barbell_Curls_Lying_Against_An_Incline": {
+"bytes": {
+"anim": 30320,
+"mini": 1094,
+"poster": 6808
+},
+"hash": "7a13bef039e2e776de8a0a60e96f227810697f61d6f3997222295722eb639829",
+"q": 45
+},
+"Barbell_Deadlift": {
+"bytes": {
+"anim": 40612,
+"mini": 1368,
+"poster": 8820
+},
+"hash": "22179bce2c85457b79c67ca63f04a533ac6b7b4f4dcbecc9fac5e24998fa40cf",
+"q": 45
+},
+"Barbell_Full_Squat": {
+"bytes": {
+"anim": 45438,
+"mini": 1564,
+"poster": 9932
+},
+"hash": "7be83e6ae5d497f763c2abcfac8ef332ff12389912be234933ea0ab08a552e36",
+"q": 45
+},
+"Barbell_Glute_Bridge": {
+"bytes": {
+"anim": 29174,
+"mini": 1200,
+"poster": 6542
+},
+"hash": "dc967f038bfefd9c019e09e682e5b2d4453844b6fc81a7871753b4b6070494e4",
+"q": 45
+},
+"Barbell_Guillotine_Bench_Press": {
+"bytes": {
+"anim": 39558,
+"mini": 1246,
+"poster": 8750
+},
+"hash": "ed0d3b09a98df684b4f1d7e381dfff8741611a61bbc0b564aa741ea926595b3b",
+"q": 45
+},
+"Barbell_Hack_Squat": {
+"bytes": {
+"anim": 43468,
+"mini": 1556,
+"poster": 9886
+},
+"hash": "d541912157e3398ccdd3f00f9dea1b7be1d178ab75530011b24d2556b4a2fe14",
+"q": 45
+},
+"Barbell_Hip_Thrust": {
+"bytes": {
+"anim": 32926,
+"mini": 1364,
+"poster": 7172
+},
+"hash": "2a4a54d3fa4ebd819f80f8d0c398231a0468431d19ec31c9f0b7020be8575c43",
+"q": 45
+},
+"Barbell_Incline_Bench_Press_-_Medium_Grip": {
+"bytes": {
+"anim": 40752,
+"mini": 1622,
+"poster": 9972
+},
+"hash": "050ea42ded3dc2d87cb131a978b4b9d464d6fbd800bd39d7f71fb295c77426e5",
+"q": 45
+},
+"Barbell_Incline_Shoulder_Raise": {
+"bytes": {
+"anim": 46102,
+"mini": 1448,
+"poster": 10134
+},
+"hash": "e37225dceb194f9e074f75bfc86d369d8d5cf3a7db37eb181c71f7a990f14453",
+"q": 45
+},
+"Barbell_Lunge": {
+"bytes": {
+"anim": 42596,
+"mini": 1462,
+"poster": 8514
+},
+"hash": "47233d49b5be005b31cba5300e57f0043750667d425f52db0f1a6369dc71672f",
+"q": 45
+},
+"Barbell_Rear_Delt_Row": {
+"bytes": {
+"anim": 40102,
+"mini": 1520,
+"poster": 8960
+},
+"hash": "63a3713a6fbe561673d4a821c980d6fc33e2c662c2e212696d5eb2bb2e3cfb9c",
+"q": 45
+},
+"Barbell_Rollout_from_Bench": {
+"bytes": {
+"anim": 25482,
+"mini": 940,
+"poster": 6942
+},
+"hash": "33901614cd2b7d7f1d41080451a157ed8599b3439c77804de7a3c839a150b7f8",
+"q": 45
+},
+"Barbell_Seated_Calf_Raise": {
+"bytes": {
+"anim": 40684,
+"mini": 1402,
+"poster": 8820
+},
+"hash": "3883a90dbf6b5720f0cee00fa085d464e074771092cd9027ea78701a0da8ed7c",
+"q": 45
+},
+"Barbell_Shoulder_Press": {
+"bytes": {
+"anim": 43882,
+"mini": 1492,
+"poster": 9642
+},
+"hash": "e65f4fd9a178a8ce4897ee56e8ac4f664e929c21ab98c8c4fe64be8278aefa64",
+"q": 45
+},
+"Barbell_Shrug": {
+"bytes": {
+"anim": 35798,
+"mini": 1350,
+"poster": 7810
+},
+"hash": "f61dde36b2d24f00ffb812dbf3739c2ded0640c2f3a14719576f77504207b8df",
+"q": 45
+},
+"Barbell_Shrug_Behind_The_Back": {
+"bytes": {
+"anim": 40478,
+"mini": 1522,
+"poster": 8784
+},
+"hash": "f830fc243decb50d69eb6250c65f1f2ac388d033f5c3c9230c24788a4ee0c32b",
+"q": 45
+},
+"Barbell_Side_Bend": {
+"bytes": {
+"anim": 38546,
+"mini": 1352,
+"poster": 8160
+},
+"hash": "9d487adb61f5d3d389d734b5f95f1123e93b735f196f3163a125cae3062b4cbd",
+"q": 45
+},
+"Barbell_Side_Split_Squat": {
+"bytes": {
+"anim": 41954,
+"mini": 1486,
+"poster": 9092
+},
+"hash": "ceb50679868e97dd423ae5267cb43137a732399a1377a8e19351124fd1afd9e5",
+"q": 45
+},
+"Barbell_Squat": {
+"bytes": {
+"anim": 46280,
+"mini": 1580,
+"poster": 9902
+},
+"hash": "6874df18b1770e9c496ff4488d1ee870cdcf336eb967690f2d1bfd6b29d53dd0",
+"q": 45
+},
+"Barbell_Squat_To_A_Bench": {
+"bytes": {
+"anim": 46912,
+"mini": 1652,
+"poster": 10102
+},
+"hash": "4cdfd3ba23f42e71d21b11ecd236c22bcd1e4e9121a0745fee976728f0729fb1",
+"q": 45
+},
+"Barbell_Step_Ups": {
+"bytes": {
+"anim": 43448,
+"mini": 1586,
+"poster": 9686
+},
+"hash": "835bcf495849973603165d167376c42e98d09de1659a16be00ba056a0e3662b3",
+"q": 45
+},
+"Barbell_Walking_Lunge": {
+"bytes": {
+"anim": 48788,
+"mini": 1498,
+"poster": 10698
+},
+"hash": "e74b523c82005cc7cb7dbe09eef5e321b5de6ac3a999a9659052ae937162ac2e",
+"q": 45
+},
+"Battling_Ropes": {
+"bytes": {
+"anim": 33438,
+"mini": 1306,
+"poster": 7240
+},
+"hash": "31cf120c778655661165c2274b279c947b40d47cbb1164356d6f0a5cd08e6068",
+"q": 45
+},
+"Bear_Crawl_Sled_Drags": {
+"bytes": {
+"anim": 29274,
+"mini": 956,
+"poster": 5584
+},
+"hash": "ae76ee8e388a87620505809ba4acafbefc5f77658c234bd9b78207cf363a209c",
+"q": 45
+},
+"Behind_Head_Chest_Stretch": {
+"bytes": {
+"anim": 26392,
+"mini": 1140,
+"poster": 5700
+},
+"hash": "51fcc0344bbd41e9c8a3f4dc6b5747806e9b295f8525a78c39340fe419f28f20",
+"q": 45
+},
+"Bench_Dips": {
+"bytes": {
+"anim": 31800,
+"mini": 1172,
+"poster": 7130
+},
+"hash": "0ced1ca91bab300e50baec17d39e4cd8feb185c8ef7856cdc32877e909c9e282",
+"q": 45
+},
+"Bench_Jump": {
+"bytes": {
+"anim": 30360,
+"mini": 1036,
+"poster": 7140
+},
+"hash": "ee41fb011b30ba5a73583df72bc34f6fa2488247e4f5f7e0a53ff4fafbf4057f",
+"q": 45
+},
+"Bench_Press_-_Powerlifting": {
+"bytes": {
+"anim": 29634,
+"mini": 1284,
+"poster": 7640
+},
+"hash": "8438dfcb32541addbc78e28f9d49f667de34c96dcc99ecae9781af37abeca382",
+"q": 45
+},
+"Bench_Press_-_With_Bands": {
+"bytes": {
+"anim": 43604,
+"mini": 1610,
+"poster": 9812
+},
+"hash": "af4bd9a79c61d6d9faa2b2e92a47755585d90d3596ecc9c25c167f305ba43aab",
+"q": 45
+},
+"Bench_Press_with_Chains": {
+"bytes": {
+"anim": 42520,
+"mini": 1412,
+"poster": 8840
+},
+"hash": "c115c8c08d4616403e420d5ecf9aaff0b650df40411f5170fac310cc68cfe41f",
+"q": 45
+},
+"Bench_Sprint": {
+"bytes": {
+"anim": 24198,
+"mini": 1094,
+"poster": 7742
+},
+"hash": "27deaba6e55bedee9bb30738ad693a5cad49cfef21c96305901976c3c2d7405e",
+"q": 45
+},
+"Bent-Arm_Barbell_Pullover": {
+"bytes": {
+"anim": 38226,
+"mini": 1378,
+"poster": 8046
+},
+"hash": "34f465a59a8bee232e2bc57c1cc67d4fbadf3cb5e688e382509a5adb564f2ef4",
+"q": 45
+},
+"Bent-Arm_Dumbbell_Pullover": {
+"bytes": {
+"anim": 28374,
+"mini": 1314,
+"poster": 8054
+},
+"hash": "d1cc67a552d1e4d376dcd937028d2efc39ddcbd66db35f86b7d83623777ace0e",
+"q": 45
+},
+"Bent-Knee_Hip_Raise": {
+"bytes": {
+"anim": 33964,
+"mini": 1480,
+"poster": 8682
+},
+"hash": "be325fb3c747dfe976b48c01b56dcd321ac01269d0c44acdf7d57f8f89e80882",
+"q": 45
+},
+"Bent_Over_Barbell_Row": {
+"bytes": {
+"anim": 41628,
+"mini": 1472,
+"poster": 8672
+},
+"hash": "6c3ddebde8516a6af2c979ede52db08993996e7104b4083490d2926cf3400a25",
+"q": 45
+},
+"Bent_Over_Dumbbell_Rear_Delt_Raise_With_Head_On_Bench": {
+"bytes": {
+"anim": 34284,
+"mini": 1214,
+"poster": 7308
+},
+"hash": "7c92766df19bf805175b3822b812a82fcffbe4d519f7fac6bd7c7136164fbe2d",
+"q": 45
+},
+"Bent_Over_Low-Pulley_Side_Lateral": {
+"bytes": {
+"anim": 35208,
+"mini": 1110,
+"poster": 7620
+},
+"hash": "ab1235dd44b73f6ab09ae73e615f68e3c0668865ec1eadb607b91d6a4b9be631",
+"q": 45
+},
+"Bent_Over_One-Arm_Long_Bar_Row": {
+"bytes": {
+"anim": 40812,
+"mini": 1402,
+"poster": 8716
+},
+"hash": "08f08f3d52454b2aa254277441eead80ae0a27a871b394c708f50d1bd937c307",
+"q": 45
+},
+"Bent_Over_Two-Arm_Long_Bar_Row": {
+"bytes": {
+"anim": 41874,
+"mini": 1416,
+"poster": 9068
+},
+"hash": "298e1e343d314d1b785a3eef77f97f401c37930d5e578ffdec132c793f0c27e0",
+"q": 45
+},
+"Bent_Over_Two-Dumbbell_Row": {
+"bytes": {
+"anim": 39464,
+"mini": 1498,
+"poster": 9188
+},
+"hash": "01496297b0fec54bb3aff4d67e0ec253bf1c4d29a654fb67b3d35f37569d9c86",
+"q": 45
+},
+"Bent_Over_Two-Dumbbell_Row_With_Palms_In": {
+"bytes": {
+"anim": 27008,
+"mini": 1154,
+"poster": 6552
+},
+"hash": "27bc886e2d3f2f0087e2e25d4415338142daf50d5e0889e0225c135f2b0680e9",
+"q": 45
+},
+"Bent_Press": {
+"bytes": {
+"anim": 25730,
+"mini": 926,
+"poster": 5350
+},
+"hash": "1f5b464f1859654cdd7480605eeb1aaf0c14226d7197fa87202a87ca75fffcf6",
+"q": 45
+},
+"Bicycling": {
+"bytes": {
+"anim": 50818,
+"mini": 1594,
+"poster": 13456
+},
+"hash": "897518cf9bb9b31fea416b0227b5155aeada3e5865c25a4308461b9af10d7da0",
+"q": 45
+},
+"Bicycling_Stationary": {
+"bytes": {
+"anim": 41690,
+"mini": 1512,
+"poster": 9516
+},
+"hash": "00afd9e5aea3bd7c4713c38c3979843a906465cd2b8e4820658f346670c4c5e2",
+"q": 45
+},
+"Board_Press": {
+"bytes": {
+"anim": 33456,
+"mini": 1280,
+"poster": 7052
+},
+"hash": "ae82777c67ab1efe8ebb7af068a76660ae570b135caccae9ab5e927d3be905c3",
+"q": 45
+},
+"Body-Up": {
+"bytes": {
+"anim": 31170,
+"mini": 1050,
+"poster": 5948
+},
+"hash": "20161ada2207ec51c62f60051589ce2ebee9b515229d7e66bc560c6a15be207c",
+"q": 45
+},
+"Body_Tricep_Press": {
+"bytes": {
+"anim": 39118,
+"mini": 1220,
+"poster": 8972
+},
+"hash": "057eb90589bfcadb64397f3b97522685b1a5a07a81864e0a2c8ffd799de2f96b",
+"q": 45
+},
+"Bodyweight_Flyes": {
+"bytes": {
+"anim": 20576,
+"mini": 868,
+"poster": 5394
+},
+"hash": "1929fa2d87cdf84a7601fccf5d4b7d01a4b8a48288c712fb4ebdadd4d9c07120",
+"q": 45
+},
+"Bodyweight_Mid_Row": {
+"bytes": {
+"anim": 23592,
+"mini": 1038,
+"poster": 5798
+},
+"hash": "73e88b1e1d7b5ce1fb29fa415a60f0687d46efaee3f252efef3a3d30f77babe2",
+"q": 45
+},
+"Bodyweight_Squat": {
+"bytes": {
+"anim": 15438,
+"mini": 518,
+"poster": 3702
+},
+"hash": "624aaa820413041b0f22a2ce47db14ef2a6ded63239c9173b2cb9306852f2432",
+"q": 45
+},
+"Bodyweight_Walking_Lunge": {
+"bytes": {
+"anim": 49316,
+"mini": 1438,
+"poster": 10396
+},
+"hash": "d153c02b12f7e734f9d5fd54b06af1c866309543b324e4f27a9f6559d0f519a9",
+"q": 45
+},
+"Bosu_Ball_Cable_Crunch_With_Side_Bends": {
+"bytes": {
+"anim": 36334,
+"mini": 1332,
+"poster": 8304
+},
+"hash": "2a0af1890bb52c79635a8a09dabb86236c59f672f51ad8cefff27ec89689e5d1",
+"q": 45
+},
+"Bottoms-Up_Clean_From_The_Hang_Position": {
+"bytes": {
+"anim": 24854,
+"mini": 916,
+"poster": 5536
+},
+"hash": "6b8e38dac9ea9302af39835d1df1bf370c7b94a2ed00cb32a66eeceb3bbc4a3a",
+"q": 45
+},
+"Bottoms_Up": {
+"bytes": {
+"anim": 24862,
+"mini": 898,
+"poster": 5590
+},
+"hash": "be84ecf850c25d9f362490d9c1cf4c26381f7106c399fed653c079be74baedca",
+"q": 45
+},
+"Box_Jump_Multiple_Response": {
+"bytes": {
+"anim": 16906,
+"mini": 556,
+"poster": 3156
+},
+"hash": "be383aa9622874bf79d4998ae21d9375f1ecdcd846c3a0f8db601d19e0a7660f",
+"q": 45
+},
+"Box_Skip": {
+"bytes": {
+"anim": 43688,
+"mini": 1426,
+"poster": 9104
+},
+"hash": "8304434d7728c5021e6887ee55b8466637c7dfce4cf0d2fa81df029071e018e8",
+"q": 45
+},
+"Box_Squat": {
+"bytes": {
+"anim": 37326,
+"mini": 1362,
+"poster": 7420
+},
+"hash": "0a84619ae9d67e4c347f70dba40243d9dcd0f2f0cf557f454298a13a1a158439",
+"q": 45
+},
+"Box_Squat_with_Bands": {
+"bytes": {
+"anim": 38010,
+"mini": 1312,
+"poster": 7436
+},
+"hash": "6969d4f4e2ac616167b0360e8fa2afefb4a55937143dca615e0e29cdfebe086a",
+"q": 45
+},
+"Box_Squat_with_Chains": {
+"bytes": {
+"anim": 42508,
+"mini": 1402,
+"poster": 8708
+},
+"hash": "aae2faaa4ece07206866efef5da0359e0b59b3b275f0e2b1701793ff66aeb87c",
+"q": 45
+},
+"Brachialis-SMR": {
+"bytes": {
+"anim": 4782,
+"mini": 1124,
+"poster": 5516
+},
+"hash": "22d4e1431879708be7a7ba3b0eb4f64c7adc3506cb8bf7f9919ce2d8df851ec7",
+"q": 45
+},
+"Bradford_Rocky_Presses": {
+"bytes": {
+"anim": 32520,
+"mini": 1082,
+"poster": 7044
+},
+"hash": "018f2cc0eb0d539b0faeb0cc5616d8947840750335efff2b2a053356bd5841cb",
+"q": 45
+},
+"Butt-Ups": {
+"bytes": {
+"anim": 19414,
+"mini": 880,
+"poster": 5578
+},
+"hash": "d71fe5ff7cfbc103cd8c32d9a09eaa9351d18163f1d66622d3af90da4661ce04",
+"q": 45
+},
+"Butt_Lift_Bridge": {
+"bytes": {
+"anim": 24794,
+"mini": 918,
+"poster": 5268
+},
+"hash": "27fc8de598a21579138a0c51eac11f2b2e2e660522d9702bd7cf28afc44f4993",
+"q": 45
+},
+"Butterfly": {
+"bytes": {
+"anim": 46208,
+"mini": 1382,
+"poster": 11076
+},
+"hash": "14eafb546da7020b6d6545d510d554eb0d3806b5a80fd715ab4ef35bd19b834c",
+"q": 45
+},
+"Cable_Chest_Press": {
+"bytes": {
+"anim": 39292,
+"mini": 1288,
+"poster": 9020
+},
+"hash": "2e272aaa28ff6eeed1de1d715defc4671e7319014d8d2634a56ccce836381db7",
+"q": 45
+},
+"Cable_Crossover": {
+"bytes": {
+"anim": 41206,
+"mini": 1174,
+"poster": 8900
+},
+"hash": "292752704afd9fdfe8e1c799307ac1c5b164d944e27503b8c601f2de18e55280",
+"q": 45
+},
+"Cable_Crunch": {
+"bytes": {
+"anim": 33982,
+"mini": 1046,
+"poster": 7396
+},
+"hash": "5f2385c59c4ec66f5473c00beb2e4d5ff43c3c1f4efd5cc62a363c35bac7eb4b",
+"q": 45
+},
+"Cable_Deadlifts": {
+"bytes": {
+"anim": 40876,
+"mini": 1350,
+"poster": 9356
+},
+"hash": "e0713864f167e2c6841aa58c5a3e690748368b64d050ce1fdaf0b8bfb74967cf",
+"q": 45
+},
+"Cable_Hammer_Curls_-_Rope_Attachment": {
+"bytes": {
+"anim": 40250,
+"mini": 1228,
+"poster": 8966
+},
+"hash": "6b5dc77d968614368ca2d3c59ab6318f5c76ee2fd292231e29fa23ad5fc0e4c6",
+"q": 45
+},
+"Cable_Hip_Adduction": {
+"bytes": {
+"anim": 37206,
+"mini": 1192,
+"poster": 8702
+},
+"hash": "261d3def4f7f178c0310a0d454510a0a060c1a0b52ecd6436b01feedb7691224",
+"q": 45
+},
+"Cable_Incline_Pushdown": {
+"bytes": {
+"anim": 30212,
+"mini": 968,
+"poster": 6874
+},
+"hash": "88b784cf9f5172ef17b8f62b0d6eb8af72eae85cc5222d9ca566213811910820",
+"q": 45
+},
+"Cable_Incline_Triceps_Extension": {
+"bytes": {
+"anim": 49702,
+"mini": 1514,
+"poster": 10572
+},
+"hash": "17ebf32c3002d71bb6b3d8e9c0b850e986bf76441f5dce3d00a93172a6c9d7f4",
+"q": 45
+},
+"Cable_Internal_Rotation": {
+"bytes": {
+"anim": 27700,
+"mini": 1024,
+"poster": 6570
+},
+"hash": "ca14d3208d26e9a092c0faa0bc408f875c74f06f4cac9ba373c23ddbf62f586e",
+"q": 45
+},
+"Cable_Iron_Cross": {
+"bytes": {
+"anim": 20984,
+"mini": 904,
+"poster": 6390
+},
+"hash": "3b173eba46db2f70afabd1ac736c223ce83fadbf549241bcdf8829952d34e47c",
+"q": 45
+},
+"Cable_Judo_Flip": {
+"bytes": {
+"anim": 37716,
+"mini": 1278,
+"poster": 7794
+},
+"hash": "9c83fe3fa3240eedde9043c8225618d2f3d50d214ef412b9c8eb88b431ea4976",
+"q": 45
+},
+"Cable_Lying_Triceps_Extension": {
+"bytes": {
+"anim": 41612,
+"mini": 1224,
+"poster": 8742
+},
+"hash": "cbc5a742c97d2f385c6ce84b1c5888013461af8065106f67553b0fc0d87d5324",
+"q": 45
+},
+"Cable_One_Arm_Tricep_Extension": {
+"bytes": {
+"anim": 34080,
+"mini": 1074,
+"poster": 7538
+},
+"hash": "eeea6845ded96e4faf15941bcc85172eed2cde9ef26e7787d5131c0eea2051e5",
+"q": 45
+},
+"Cable_Preacher_Curl": {
+"bytes": {
+"anim": 51758,
+"mini": 1458,
+"poster": 11382
+},
+"hash": "0f0c7b2603a228c5a39b7615dfdb3cd4269b057e012a727a09ffee74851b11c9",
+"q": 45
+},
+"Cable_Rear_Delt_Fly": {
+"bytes": {
+"anim": 34412,
+"mini": 1176,
+"poster": 7308
+},
+"hash": "d611c3de1947808b355625c021f2a739cd06602059812372fbf22ae7ba035861",
+"q": 45
+},
+"Cable_Reverse_Crunch": {
+"bytes": {
+"anim": 45388,
+"mini": 1338,
+"poster": 10564
+},
+"hash": "b0d3367a5c6d3afd398e309812c01741aaada028af34736c93f0e2707536f17d",
+"q": 45
+},
+"Cable_Rope_Overhead_Triceps_Extension": {
+"bytes": {
+"anim": 49722,
+"mini": 1386,
+"poster": 11106
+},
+"hash": "aee47440c2b58c5b24d066c9d68b7698e68b9a96beea6d88deffb089331ed309",
+"q": 45
+},
+"Cable_Rope_Rear-Delt_Rows": {
+"bytes": {
+"anim": 51890,
+"mini": 1420,
+"poster": 11540
+},
+"hash": "ae8479c3ddb9d003ece5f73a04b43b42f3c60ee4283a6c63ed3e0ff9c237a637",
+"q": 45
+},
+"Cable_Russian_Twists": {
+"bytes": {
+"anim": 40910,
+"mini": 1242,
+"poster": 8136
+},
+"hash": "4fb694dea1562f00d30fe21db2a585b246ae6ac4d5f133cb178910909a4d0e79",
+"q": 45
+},
+"Cable_Seated_Crunch": {
+"bytes": {
+"anim": 36330,
+"mini": 1106,
+"poster": 8078
+},
+"hash": "dddc95ef7e64dbd03444250489591c4591c588584d8ef2a3c42de91a8dac374b",
+"q": 45
+},
+"Cable_Seated_Lateral_Raise": {
+"bytes": {
+"anim": 31662,
+"mini": 922,
+"poster": 6928
+},
+"hash": "346fd2ce4bc6dac32f2fd77c38ce8f66758cb663502b6b30d8905a66df0f631b",
+"q": 45
+},
+"Cable_Shoulder_Press": {
+"bytes": {
+"anim": 45948,
+"mini": 1522,
+"poster": 9978
+},
+"hash": "6fa1d107a98920f2b5e9d065a28f5fd2d1d5bd440fdbef0d64a5e9de24e4591d",
+"q": 45
+},
+"Cable_Shrugs": {
+"bytes": {
+"anim": 56458,
+"mini": 1412,
+"poster": 12498
+},
+"hash": "f53d75be9b449d9462dc7296de539e19953414bf13bf03e1888c3774c0216700",
+"q": 45
+},
+"Cable_Wrist_Curl": {
+"bytes": {
+"anim": 33582,
+"mini": 1154,
+"poster": 7476
+},
+"hash": "84d54c66585510db9e0f49d0520605146978e00fb0b6cced707fc9857945b5b6",
+"q": 45
+},
+"Calf-Machine_Shoulder_Shrug": {
+"bytes": {
+"anim": 27318,
+"mini": 968,
+"poster": 6352
+},
+"hash": "58f979578a11c15aa61893a6cf25c85a1c0e886287e3ea39f0ce5a1e7856bff4",
+"q": 45
+},
+"Calf_Press": {
+"bytes": {
+"anim": 38848,
+"mini": 1264,
+"poster": 8336
+},
+"hash": "8a4ec25dead1027113596a3e99727164f7921b7ec594a8314cc203b0ad98b79f",
+"q": 45
+},
+"Calf_Press_On_The_Leg_Press_Machine": {
+"bytes": {
+"anim": 44624,
+"mini": 1350,
+"poster": 10130
+},
+"hash": "2e0e7fcd1ae5247d5d8b7c95883ef2c7e99f22f5471d0556b9a151cac409f262",
+"q": 45
+},
+"Calf_Raise_On_A_Dumbbell": {
+"bytes": {
+"anim": 26516,
+"mini": 988,
+"poster": 5674
+},
+"hash": "5853188ed3f5aa09fcbd901fdc6cfa26f3083e0533a1d602c6daa5e7fa0fab8c",
+"q": 45
+},
+"Calf_Raises_-_With_Bands": {
+"bytes": {
+"anim": 26886,
+"mini": 970,
+"poster": 5886
+},
+"hash": "79f25b42494145932456eaf7c7a9d4150d622f0b16dfb573d81cba9cd5e99f95",
+"q": 45
+},
+"Calf_Stretch_Elbows_Against_Wall": {
+"bytes": {
+"anim": 24596,
+"mini": 922,
+"poster": 4648
+},
+"hash": "d2d8f09c5b47c3aeba6149b2601eca321b04f60d470d800fe5a384e9c92d10ce",
+"q": 45
+},
+"Calf_Stretch_Hands_Against_Wall": {
+"bytes": {
+"anim": 23374,
+"mini": 976,
+"poster": 4756
+},
+"hash": "9ec21a84e9a269f4abcb2e522e480fb3705f919213fc43a6c3869d555e6f3873",
+"q": 45
+},
+"Calves-SMR": {
+"bytes": {
+"anim": 25958,
+"mini": 1088,
+"poster": 5454
+},
+"hash": "ea40775250fbe8b7b8e4b2ff9a9d43671590b2ca7ef22fd3c98f9d9fc0fdf359",
+"q": 45
+},
+"Car_Deadlift": {
+"bytes": {
+"anim": 37448,
+"mini": 1366,
+"poster": 8414
+},
+"hash": "1b1a457344a37ebf6aca87a12c32f5ef3fb3905b9c9465638f473ddf8a4d19d2",
+"q": 45
+},
+"Car_Drivers": {
+"bytes": {
+"anim": 22118,
+"mini": 954,
+"poster": 6198
+},
+"hash": "d7a02c390666b618e46a2dbdcba1fc6723f200fba7dd6099a8b9c2a17dc04448",
+"q": 45
+},
+"Carioca_Quick_Step": {
+"bytes": {
+"anim": 13124,
+"mini": 528,
+"poster": 3440
+},
+"hash": "f424e4937ee4c4a3ad118f2769f42e3d4a8276999d7f9cfa21191b88045f1e0d",
+"q": 45
+},
+"Cat_Stretch": {
+"bytes": {
+"anim": 22168,
+"mini": 1098,
+"poster": 5408
+},
+"hash": "57ff49b5f03156c2cd71560effaf6578d1340836e32171d15d00f5bd45180b27",
+"q": 45
+},
+"Catch_and_Overhead_Throw": {
+"bytes": {
+"anim": 26582,
+"mini": 1044,
+"poster": 5918
+},
+"hash": "3d4343a18c85601952a641b0d76fe197d20b18e1d6421bdeffdde309213e1652",
+"q": 45
+},
+"Chain_Handle_Extension": {
+"bytes": {
+"anim": 30900,
+"mini": 1254,
+"poster": 6536
+},
+"hash": "22f3ed9c6a097051670b428218187981e9f900056c63154879d9208b46cce3fc",
+"q": 45
+},
+"Chain_Press": {
+"bytes": {
+"anim": 36128,
+"mini": 1296,
+"poster": 7642
+},
+"hash": "a371b5db22db5cb3e0f20e1fed27c9dd9892f50e394e39681aac155e5dd0d51e",
+"q": 45
+},
+"Chair_Leg_Extended_Stretch": {
+"bytes": {
+"anim": 24858,
+"mini": 1082,
+"poster": 5316
+},
+"hash": "b4a9ba37eca2196fe5e00752814590d9a08ee1d4e936a1a83f5f505a07b18261",
+"q": 45
+},
+"Chair_Lower_Back_Stretch": {
+"bytes": {
+"anim": 25364,
+"mini": 910,
+"poster": 4160
+},
+"hash": "6a09e81e9415b8865daad4ff4616683cd288a92216bc8726866cbcd4084c101c",
+"q": 45
+},
+"Chair_Squat": {
+"bytes": {
+"anim": 33506,
+"mini": 1170,
+"poster": 7218
+},
+"hash": "d9a1888cd6bd0062b0e2984b0acc2d941ec1a2cbb980d9f1b4eb8d029972b1d8",
+"q": 45
+},
+"Chair_Upper_Body_Stretch": {
+"bytes": {
+"anim": 27712,
+"mini": 1030,
+"poster": 5068
+},
+"hash": "bcf73c1415e0a683841c66023fcc68014951aec6fa5cd0128b34002fada6217b",
+"q": 45
+},
+"Chest_And_Front_Of_Shoulder_Stretch": {
+"bytes": {
+"anim": 21122,
+"mini": 906,
+"poster": 4104
+},
+"hash": "e8e1a3b8e3c12e82f6b4238d653906fb041dcfab58335f0311ce7ce997761c0c",
+"q": 45
+},
+"Chest_Push_from_3_point_stance": {
+"bytes": {
+"anim": 20774,
+"mini": 726,
+"poster": 4258
+},
+"hash": "cb0fcf33c63f25a191c1924bf65883ec398b5c0df6d2b3fb0f11559ebe509fe9",
+"q": 45
+},
+"Chest_Push_multiple_response": {
+"bytes": {
+"anim": 22232,
+"mini": 738,
+"poster": 4864
+},
+"hash": "760aed7c34ba505533ab52a330ac0ec6607679e75caf145ded51c02d14c51ed0",
+"q": 45
+},
+"Chest_Push_single_response": {
+"bytes": {
+"anim": 20938,
+"mini": 736,
+"poster": 4350
+},
+"hash": "aabf43db84f345de0245b5d0d5515da2a9a2a3599802bc7e07b520efb6be4008",
+"q": 45
+},
+"Chest_Push_with_Run_Release": {
+"bytes": {
+"anim": 18360,
+"mini": 666,
+"poster": 3738
+},
+"hash": "78efde0143d1f1678217c810893ee9357f7637f5da836fef4b767e026aadf484",
+"q": 45
+},
+"Chest_Stretch_on_Stability_Ball": {
+"bytes": {
+"anim": 25900,
+"mini": 982,
+"poster": 5432
+},
+"hash": "62e360a8caadd54a62a56f29d071a1c277d1f9e7848602bc802a4ab6a84f48a4",
+"q": 45
+},
+"Childs_Pose": {
+"bytes": {
+"anim": 22958,
+"mini": 1038,
+"poster": 5208
+},
+"hash": "436c60b2bbd0b77cc894f3ba5afc0f1ea6e50a9e237d0fda068607fae430ab0e",
+"q": 45
+},
+"Chin-Up": {
+"bytes": {
+"anim": 25388,
+"mini": 1006,
+"poster": 5360
+},
+"hash": "f063fa5800eaff921d07dfc93993287eabc864daaf81c73a18e4c231fc9df444",
+"q": 45
+},
+"Chin_To_Chest_Stretch": {
+"bytes": {
+"anim": 25300,
+"mini": 1112,
+"poster": 4408
+},
+"hash": "767af750e73f5a70c655755220e74c67977cc64c6c6157311f5f151f7f069165",
+"q": 45
+},
+"Circus_Bell": {
+"bytes": {
+"anim": 42784,
+"mini": 1330,
+"poster": 10422
+},
+"hash": "59b130a2f81f4f5480ae0440f11966c26924f94ce63b55f80df5d9d2fb2d0599",
+"q": 45
+},
+"Clean": {
+"bytes": {
+"anim": 27926,
+"mini": 944,
+"poster": 5594
+},
+"hash": "cdbed8d0cfdd4f0bf8baf3a58487af76edffaa3b132f001081b9f2bd85ed102b",
+"q": 45
+},
+"Clean_Deadlift": {
+"bytes": {
+"anim": 30126,
+"mini": 1118,
+"poster": 6742
+},
+"hash": "3f8b81bc4221e1388191b4214a76cc90a05b01b01f445584b5603325322e088d",
+"q": 45
+},
+"Clean_Pull": {
+"bytes": {
+"anim": 26324,
+"mini": 1012,
+"poster": 5960
+},
+"hash": "75c7634b45bd60eece10dbb6b80305d184b74d3b439a9d7aef9cc5b4851045d7",
+"q": 45
+},
+"Clean_Shrug": {
+"bytes": {
+"anim": 27146,
+"mini": 1098,
+"poster": 6034
+},
+"hash": "a11362a90ec69fd9b281fd10921e29b65f8417b1fba67afccea1013ccfde5e12",
+"q": 45
+},
+"Clean_and_Jerk": {
+"bytes": {
+"anim": 29476,
+"mini": 1048,
+"poster": 6348
+},
+"hash": "862d13113834f00767c084b891b3205f6838c4b514e8c12f5e108d686f1eb0df",
+"q": 45
+},
+"Clean_and_Press": {
+"bytes": {
+"anim": 51752,
+"mini": 1606,
+"poster": 10398
+},
+"hash": "aa0982904457f4c4a8dc1207ce89e741ebf103af6f40c3fcf0d06f7f72d8c536",
+"q": 45
+},
+"Clean_from_Blocks": {
+"bytes": {
+"anim": 33254,
+"mini": 1170,
+"poster": 7198
+},
+"hash": "81f859fcc374801e35ad7444f22d9968b678972d9b36ea85c0b22fdfaef17f76",
+"q": 45
+},
+"Clock_Push-Up": {
+"bytes": {
+"anim": 16256,
+"mini": 796,
+"poster": 5004
+},
+"hash": "0986574d0a9cec873a4e026b45b6c4d759678742cc1093a7624365ab1e60c0e1",
+"q": 45
+},
+"Close-Grip_Barbell_Bench_Press": {
+"bytes": {
+"anim": 39686,
+"mini": 1286,
+"poster": 8790
+},
+"hash": "883db18772e3cf9ba41b1ba1ef0d9a5627414ff6f47851f06e1c6063e8e80fc5",
+"q": 45
+},
+"Close-Grip_Dumbbell_Press": {
+"bytes": {
+"anim": 14868,
+"mini": 924,
+"poster": 5496
+},
+"hash": "d9d628e88a7fb1fefabae65b4f80b6974426f1361cacd2ee558c1580d177899a",
+"q": 45
+},
+"Close-Grip_EZ-Bar_Curl_with_Band": {
+"bytes": {
+"anim": 32108,
+"mini": 1118,
+"poster": 7034
+},
+"hash": "67b4718de4b3be3d2920367c6565c1b8733e644014e6e289a591c84380102be8",
+"q": 45
+},
+"Close-Grip_EZ-Bar_Press": {
+"bytes": {
+"anim": 38920,
+"mini": 1210,
+"poster": 8186
+},
+"hash": "fc8e658749cf3d8d82ca138d811a6badd907bdf60c7ef70ca2acd4b4ee84d3ee",
+"q": 45
+},
+"Close-Grip_EZ_Bar_Curl": {
+"bytes": {
+"anim": 39344,
+"mini": 1340,
+"poster": 8286
+},
+"hash": "77c12a7978e3a20300a512de5520f1439ede69b760502414320029567d0de5d6",
+"q": 45
+},
+"Close-Grip_Front_Lat_Pulldown": {
+"bytes": {
+"anim": 33856,
+"mini": 992,
+"poster": 7588
+},
+"hash": "47d65db0dad34e07ecb82babbfbffdee250c6350227c93d8f4b4385b50959024",
+"q": 45
+},
+"Close-Grip_Push-Up_off_of_a_Dumbbell": {
+"bytes": {
+"anim": 24122,
+"mini": 1098,
+"poster": 6806
+},
+"hash": "f44d15de11043eb1b4cd7c40818dab7e711f0fde0c7c18b5eefa33c5c9a9da1b",
+"q": 45
+},
+"Close-Grip_Standing_Barbell_Curl": {
+"bytes": {
+"anim": 27586,
+"mini": 1072,
+"poster": 6090
+},
+"hash": "4fc5759fb3c656920b83216b7033b94f5b05c0df83e51cc5626ba3f517684b2f",
+"q": 45
+},
+"Cocoons": {
+"bytes": {
+"anim": 23062,
+"mini": 876,
+"poster": 5612
+},
+"hash": "3f6320003ff58b1754ea288817dabdf2c210884f9bed64a889c0cd94c084d39c",
+"q": 45
+},
+"Conans_Wheel": {
+"bytes": {
+"anim": 35260,
+"mini": 1304,
+"poster": 7090
+},
+"hash": "474a9d9d9314799d03a92fa17543e404ccf77787621959049736fe73cd625e59",
+"q": 45
+},
+"Concentration_Curls": {
+"bytes": {
+"anim": 37218,
+"mini": 1350,
+"poster": 8362
+},
+"hash": "b4a2ebd400e5925feeb35f219f5a07ba4f1560c0cede8f91b843255eadcebfb8",
+"q": 45
+},
+"Cross-Body_Crunch": {
+"bytes": {
+"anim": 27622,
+"mini": 1044,
+"poster": 5914
+},
+"hash": "56e55d86cd2c6c6b0cdf885004b153036119648404ef9637f1591ec773c36c03",
+"q": 45
+},
+"Cross_Body_Hammer_Curl": {
+"bytes": {
+"anim": 29276,
+"mini": 1116,
+"poster": 6512
+},
+"hash": "cf3030cfcb2dfc456d5ed2a6baa87af709e1419a9253521086dff6b2ca1b03a3",
+"q": 45
+},
+"Cross_Over_-_With_Bands": {
+"bytes": {
+"anim": 33234,
+"mini": 1234,
+"poster": 7184
+},
+"hash": "c997be7cec4dab32d928eca337a15567d7e9058e962c8e21b66330af26fa6a1e",
+"q": 45
+},
+"Crossover_Reverse_Lunge": {
+"bytes": {
+"anim": 25318,
+"mini": 1110,
+"poster": 5280
+},
+"hash": "31d7906396219a06ba77626b5c5629bda6624293043dc3442be870b7836c0b3c",
+"q": 45
+},
+"Crucifix": {
+"bytes": {
+"anim": 46176,
+"mini": 1328,
+"poster": 10600
+},
+"hash": "cc491b602443a1769293521e708706752a9eccb76b32aea57b22c14e7754b7bc",
+"q": 45
+},
+"Crunch_-_Hands_Overhead": {
+"bytes": {
+"anim": 28470,
+"mini": 982,
+"poster": 6750
+},
+"hash": "e5d4968fd1ed9f7a2f1d83b5e83a0bf64ae2f9c95ccffec8b09e15f4af280917",
+"q": 45
+},
+"Crunch_-_Legs_On_Exercise_Ball": {
+"bytes": {
+"anim": 23224,
+"mini": 892,
+"poster": 5244
+},
+"hash": "1a9f779f32956d4e16463f965380ad9c6faf8192006a7966f0d71c129283a6db",
+"q": 45
+},
+"Crunches": {
+"bytes": {
+"anim": 23372,
+"mini": 854,
+"poster": 5856
+},
+"hash": "c13a77c044eb3a44452bcb55e8535e878077518fd742a37f87d37a46b1d97de3",
+"q": 45
+},
+"Cuban_Press": {
+"bytes": {
+"anim": 36400,
+"mini": 1318,
+"poster": 7780
+},
+"hash": "fdf4ee8b7e4e7a0469c8341e58940f8f53c11131253d2ce6469e8ba29e73ff0b",
+"q": 45
+},
+"Dancers_Stretch": {
+"bytes": {
+"anim": 26016,
+"mini": 1144,
+"poster": 5462
+},
+"hash": "5e49d6282ddac305b39b64917ba721a1ea30c4d9cc8387a6f871092f7f141d5c",
+"q": 45
+},
+"Dead_Bug": {
+"bytes": {
+"anim": 12950,
+"mini": 490,
+"poster": 2628
+},
+"hash": "c8eefa1163b7a9b55efd0ceb2b83897d5af1cb5e06838a80e1b2c774c4df2797",
+"q": 45
+},
+"Deadlift_with_Bands": {
+"bytes": {
+"anim": 38968,
+"mini": 1380,
+"poster": 8304
+},
+"hash": "a80ec5eb587681ffa9758f8414612546b7932ce4e9f1f8f75f68a034724c8e11",
+"q": 45
+},
+"Deadlift_with_Chains": {
+"bytes": {
+"anim": 46860,
+"mini": 1436,
+"poster": 9540
+},
+"hash": "e79d9ab3ef1aa70c547f38b226d988973d43cafe71ed36447e19346cf2d8542c",
+"q": 45
+},
+"Decline_Barbell_Bench_Press": {
+"bytes": {
+"anim": 51256,
+"mini": 1396,
+"poster": 10894
+},
+"hash": "d40ea1f74d98d082a4c19d26f1b37b6d9751e98e960a57e9532e51d1a5654104",
+"q": 45
+},
+"Decline_Close-Grip_Bench_To_Skull_Crusher": {
+"bytes": {
+"anim": 34296,
+"mini": 1226,
+"poster": 7680
+},
+"hash": "3a4fe4b91190e1e7a6ebd66c24837c094f6f5797a1437d5bc0b09e56641ed675",
+"q": 45
+},
+"Decline_Crunch": {
+"bytes": {
+"anim": 28084,
+"mini": 1080,
+"poster": 7850
+},
+"hash": "f73031bc209d7dbdd11f3ab3726c659b8cd9b6e5f38bb022d5614309df2dfd84",
+"q": 45
+},
+"Decline_Dumbbell_Bench_Press": {
+"bytes": {
+"anim": 29194,
+"mini": 1112,
+"poster": 6366
+},
+"hash": "0b6fd3a8aa4bb8f6ffbbd784f064ce9ef9f48a8fe457fe50a37b57db4fc11890",
+"q": 45
+},
+"Decline_Dumbbell_Flyes": {
+"bytes": {
+"anim": 30828,
+"mini": 1148,
+"poster": 6690
+},
+"hash": "30fc987a1c9c391630836bc88b6ec655e94c7f59c3f4f442d3f3f0212e8e0b9b",
+"q": 45
+},
+"Decline_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 26698,
+"mini": 1114,
+"poster": 5846
+},
+"hash": "fafe17f088f4ba88e81759cacaf524247f1a5665b5b7bbcd3b1e4d62a238c0dd",
+"q": 45
+},
+"Decline_EZ_Bar_Triceps_Extension": {
+"bytes": {
+"anim": 27956,
+"mini": 1150,
+"poster": 6130
+},
+"hash": "91f20c2a485590589c55d5b18da59f026b825ad889fea323b33077334dfaeb8e",
+"q": 45
+},
+"Decline_Oblique_Crunch": {
+"bytes": {
+"anim": 32114,
+"mini": 1102,
+"poster": 6506
+},
+"hash": "bfd3fe039c06e1f990bfb54ff10af1a434ba783f6affa40f5c2a744e2aa09efd",
+"q": 45
+},
+"Decline_Push-Up": {
+"bytes": {
+"anim": 34286,
+"mini": 1150,
+"poster": 7364
+},
+"hash": "2189c562d3c155cc7d1e88106314041118033353760105794a6086506a4c809f",
+"q": 45
+},
+"Decline_Reverse_Crunch": {
+"bytes": {
+"anim": 29642,
+"mini": 798,
+"poster": 5408
+},
+"hash": "c7a8f0457dfcb65398a1d8e1300a878823356c681f9fc420c6b197a0e7d76906",
+"q": 45
+},
+"Decline_Smith_Press": {
+"bytes": {
+"anim": 38308,
+"mini": 1530,
+"poster": 8646
+},
+"hash": "a0f36ef439e181f4fb52d65e38870d30016e717c05704da0a9f07fceaaf0886b",
+"q": 45
+},
+"Deficit_Deadlift": {
+"bytes": {
+"anim": 36978,
+"mini": 1226,
+"poster": 7728
+},
+"hash": "00d7d6cb694dc516fc6bbbea3102ff4bbdc5f421de34eb079f72b387c45fa429",
+"q": 45
+},
+"Depth_Jump_Leap": {
+"bytes": {
+"anim": 31376,
+"mini": 1120,
+"poster": 6448
+},
+"hash": "e935c0f666a23c0e3617a33866b01eb3827665045276ad3f9dff63b2fb8304fb",
+"q": 45
+},
+"Dip_Machine": {
+"bytes": {
+"anim": 42778,
+"mini": 1224,
+"poster": 9468
+},
+"hash": "5a206d7eb1c2a1058e51ace8f99cac30103f0505b2625937fa23a61eec5e2f5b",
+"q": 45
+},
+"Dips_-_Chest_Version": {
+"bytes": {
+"anim": 29032,
+"mini": 1060,
+"poster": 9346
+},
+"hash": "4712cde3314b4ee5add7a95547b2f2b7eb8309b69453ed40190cd842c3fb5973",
+"q": 45
+},
+"Dips_-_Triceps_Version": {
+"bytes": {
+"anim": 48340,
+"mini": 1328,
+"poster": 10132
+},
+"hash": "ca230295c027547c93e1d583ce652e48cac162afa669bac819263d90c465ce30",
+"q": 45
+},
+"Donkey_Calf_Raises": {
+"bytes": {
+"anim": 51748,
+"mini": 1554,
+"poster": 11408
+},
+"hash": "76f5284453314320ca95e131fb75ec82c632a8ba76381ebd91b71a45d26d2b73",
+"q": 45
+},
+"Double_Kettlebell_Alternating_Hang_Clean": {
+"bytes": {
+"anim": 24270,
+"mini": 910,
+"poster": 5404
+},
+"hash": "7f5fd5b065943fdc1db03d1f7323473004e462781d9f14cc9f8b836a2ebaae14",
+"q": 45
+},
+"Double_Kettlebell_Jerk": {
+"bytes": {
+"anim": 23918,
+"mini": 820,
+"poster": 5016
+},
+"hash": "90fd271bcba3584aee531d7b85d90edf9aff2984ccc09e3fde270d332a0a0f67",
+"q": 45
+},
+"Double_Kettlebell_Push_Press": {
+"bytes": {
+"anim": 25078,
+"mini": 944,
+"poster": 5494
+},
+"hash": "b11e711d4f0c6527230ba483d86473de66ad2a82f02b04f1ebcc34da85f57602",
+"q": 45
+},
+"Double_Kettlebell_Snatch": {
+"bytes": {
+"anim": 25748,
+"mini": 904,
+"poster": 5540
+},
+"hash": "c0f1a6057d427ad169763dedbda81ac6ef09c0c0b8de3fda1a022482e41c388d",
+"q": 45
+},
+"Double_Kettlebell_Windmill": {
+"bytes": {
+"anim": 24776,
+"mini": 916,
+"poster": 5160
+},
+"hash": "c8635073e436c65fc224ffb9487e5ba20281a444fe5104649ed418e3ae0316b0",
+"q": 45
+},
+"Double_Leg_Butt_Kick": {
+"bytes": {
+"anim": 12838,
+"mini": 678,
+"poster": 4004
+},
+"hash": "e28ccfdc7ea2de2dbf4621c40e4c67ef5799f53875e21067cbd3620ad5e25a51",
+"q": 45
+},
+"Downward_Facing_Balance": {
+"bytes": {
+"anim": 26604,
+"mini": 1068,
+"poster": 5398
+},
+"hash": "25ab8a1f5d954e8e88720d728451f810d3ed72806bf91787d6fba04fdc558872",
+"q": 45
+},
+"Drag_Curl": {
+"bytes": {
+"anim": 33934,
+"mini": 1256,
+"poster": 7576
+},
+"hash": "06e1cf1050ae417fe4554b0137ea834f3b4b656b13e012763c99b1fa7e817748",
+"q": 45
+},
+"Drop_Push": {
+"bytes": {
+"anim": 33458,
+"mini": 1200,
+"poster": 7246
+},
+"hash": "9549fdeb2ed3500706943f5cc9d3fd6a75c16ff05c4ed8f9062b8bf2cc409f8d",
+"q": 45
+},
+"Dumbbell_Alternate_Bicep_Curl": {
+"bytes": {
+"anim": 29994,
+"mini": 1108,
+"poster": 6478
+},
+"hash": "497ff8d23ae49763d383eb6ce2c9be5f0f1e8b7b44f526c20810c7e7c16cb5ef",
+"q": 45
+},
+"Dumbbell_Bench_Press": {
+"bytes": {
+"anim": 37028,
+"mini": 1440,
+"poster": 8160
+},
+"hash": "a4fe4379f0096106b285552af201bffb9399bc51c1a4be16d44236844952f80b",
+"q": 45
+},
+"Dumbbell_Bench_Press_with_Neutral_Grip": {
+"bytes": {
+"anim": 54498,
+"mini": 1564,
+"poster": 12736
+},
+"hash": "a0cef5545d2eed476cad6164d1b0934f736f7f546380aa5fbba873d83490341a",
+"q": 45
+},
+"Dumbbell_Bicep_Curl": {
+"bytes": {
+"anim": 29502,
+"mini": 1134,
+"poster": 6482
+},
+"hash": "bd61fadddac66fb6ef490bd84e157e9f209ca86ad5cd0effaedf9971f9ba6858",
+"q": 45
+},
+"Dumbbell_Clean": {
+"bytes": {
+"anim": 26028,
+"mini": 848,
+"poster": 5842
+},
+"hash": "4bdf7a4dafb51f74c45c3c28807a873aa37d7e3c305d845c5ac9c7a8c09ca19f",
+"q": 45
+},
+"Dumbbell_Floor_Press": {
+"bytes": {
+"anim": 31946,
+"mini": 1132,
+"poster": 6724
+},
+"hash": "1aa8410f03461c5401819cb638124d7c4158a94de8342d6fd3abb04fbdbcf7a5",
+"q": 45
+},
+"Dumbbell_Flyes": {
+"bytes": {
+"anim": 34226,
+"mini": 1248,
+"poster": 7494
+},
+"hash": "444c9c09e15432924392852240b2dd3fef42e61cdc14edc1a445843342a96dcf",
+"q": 45
+},
+"Dumbbell_Incline_Row": {
+"bytes": {
+"anim": 60340,
+"mini": 1758,
+"poster": 13526
+},
+"hash": "0f5869cd1f39faa491532c327c2baf65055e7499ca7fab8b6f348922da80c727",
+"q": 45
+},
+"Dumbbell_Incline_Shoulder_Raise": {
+"bytes": {
+"anim": 31172,
+"mini": 1124,
+"poster": 6838
+},
+"hash": "023251c755b9df45cfc26bceb2e704ccecdb020a37c693b567906e661d9c824a",
+"q": 45
+},
+"Dumbbell_Lunges": {
+"bytes": {
+"anim": 35526,
+"mini": 1224,
+"poster": 7166
+},
+"hash": "f78bee2f5b9841f9940a496be39f76cefb8c16809779f62c52ceaa9f98bd4dd1",
+"q": 45
+},
+"Dumbbell_Lying_One-Arm_Rear_Lateral_Raise": {
+"bytes": {
+"anim": 27624,
+"mini": 1076,
+"poster": 6428
+},
+"hash": "3acf182e045e283d74abd806056760c4c23122b8230cc27478e85784fe27ffdd",
+"q": 45
+},
+"Dumbbell_Lying_Pronation": {
+"bytes": {
+"anim": 24202,
+"mini": 962,
+"poster": 5290
+},
+"hash": "60009f7937643460b787743ceaa7c4889f4e5f03b9e5792101e39c1365ac04c1",
+"q": 45
+},
+"Dumbbell_Lying_Rear_Lateral_Raise": {
+"bytes": {
+"anim": 26320,
+"mini": 1032,
+"poster": 6592
+},
+"hash": "c335b9fb1c9f909247149d50e3655d95e5a6a00fc8a712c1c596cd0afd4f1241",
+"q": 45
+},
+"Dumbbell_Lying_Supination": {
+"bytes": {
+"anim": 27668,
+"mini": 980,
+"poster": 6220
+},
+"hash": "115a9ee99610eda32c9fda5ff74461b17789a9dcad9fa3bd5c586efa0acefa6f",
+"q": 45
+},
+"Dumbbell_One-Arm_Shoulder_Press": {
+"bytes": {
+"anim": 32230,
+"mini": 1162,
+"poster": 7040
+},
+"hash": "318011eb2c2a852820a1b01f3710acc6321b73dc730f60deee776e561ecd8352",
+"q": 45
+},
+"Dumbbell_One-Arm_Triceps_Extension": {
+"bytes": {
+"anim": 30212,
+"mini": 1212,
+"poster": 6810
+},
+"hash": "29fc03f63f00fa27724494b03f73fb56b980bd967a92c4e79ecb0bfeabda1859",
+"q": 45
+},
+"Dumbbell_One-Arm_Upright_Row": {
+"bytes": {
+"anim": 24890,
+"mini": 1072,
+"poster": 6282
+},
+"hash": "45e1259a86c2d1544706e79e04dc53779b5bf4001cb50dcc3495a5f2c0c98275",
+"q": 45
+},
+"Dumbbell_Prone_Incline_Curl": {
+"bytes": {
+"anim": 37534,
+"mini": 1262,
+"poster": 7982
+},
+"hash": "9b4ed4514adda41183a014f6c32088c52db52526884bfd89193f898850628be0",
+"q": 45
+},
+"Dumbbell_Raise": {
+"bytes": {
+"anim": 32902,
+"mini": 1232,
+"poster": 7342
+},
+"hash": "093289402d71290d94c4dbe95e2d2b289bde0c86b72f2bbfb8de7f9152edaaf9",
+"q": 45
+},
+"Dumbbell_Rear_Lunge": {
+"bytes": {
+"anim": 26022,
+"mini": 1054,
+"poster": 5758
+},
+"hash": "395aa5ae00e58d84acf6a635bd81afd4539b941b9a22cc078d261448c990cb95",
+"q": 45
+},
+"Dumbbell_Scaption": {
+"bytes": {
+"anim": 39822,
+"mini": 1382,
+"poster": 8626
+},
+"hash": "c1a267cee1267b3633e47ccf5ebef84c72dc0c3266669fc4578ef5d88ea7a03e",
+"q": 45
+},
+"Dumbbell_Seated_Box_Jump": {
+"bytes": {
+"anim": 57570,
+"mini": 1760,
+"poster": 13390
+},
+"hash": "499752aec50cc75242057a8b6ae6232ec4b94d7ad2d35d5dbdc908489114b1a1",
+"q": 40
+},
+"Dumbbell_Seated_One-Leg_Calf_Raise": {
+"bytes": {
+"anim": 29168,
+"mini": 1024,
+"poster": 6384
+},
+"hash": "0dd14474fd6f071be844e91985ac866480190361451bcf2f9232bb3a430a6bd8",
+"q": 45
+},
+"Dumbbell_Shoulder_Press": {
+"bytes": {
+"anim": 35402,
+"mini": 1166,
+"poster": 7782
+},
+"hash": "c7bc3b74077088d406515a9713dd555f16ce57d04c8843d7e87b03b9617684d8",
+"q": 45
+},
+"Dumbbell_Shrug": {
+"bytes": {
+"anim": 27414,
+"mini": 1082,
+"poster": 6012
+},
+"hash": "41a1c002433acb569fb819e2b22683a3fab60c2628a394e1c7c7c31238686ff7",
+"q": 45
+},
+"Dumbbell_Side_Bend": {
+"bytes": {
+"anim": 28584,
+"mini": 1090,
+"poster": 6258
+},
+"hash": "b6f40313027152a0c5fcece000ca638f4ce85e0e75f39d53c55239f5dd020182",
+"q": 45
+},
+"Dumbbell_Squat": {
+"bytes": {
+"anim": 27506,
+"mini": 1038,
+"poster": 5812
+},
+"hash": "c3ca478f670b048cd078af7fd032ee640bd0439be66ff1edb645ace2558f733c",
+"q": 45
+},
+"Dumbbell_Squat_To_A_Bench": {
+"bytes": {
+"anim": 28538,
+"mini": 1020,
+"poster": 6012
+},
+"hash": "287120c4b2a8e8895e43b3bbce2df092c77360b5a790ac3d339be6c4f7993cd0",
+"q": 45
+},
+"Dumbbell_Step_Ups": {
+"bytes": {
+"anim": 40902,
+"mini": 1338,
+"poster": 8700
+},
+"hash": "5836fbd8e2f15a605716db81837df4ab1d57e6cbe81946f37c937190dc2dc5ac",
+"q": 45
+},
+"Dumbbell_Tricep_Extension_-Pronated_Grip": {
+"bytes": {
+"anim": 57854,
+"mini": 1514,
+"poster": 14218
+},
+"hash": "203ebf08811bfa58f2f039a9e790c651ec7290699792c9e59d577f94222bf892",
+"q": 45
+},
+"Dynamic_Back_Stretch": {
+"bytes": {
+"anim": 19656,
+"mini": 860,
+"poster": 3728
+},
+"hash": "62888daa62e2dd7534da1435135bb72ddde49d50870030c0bd5eed4e2eaff8e9",
+"q": 45
+},
+"Dynamic_Chest_Stretch": {
+"bytes": {
+"anim": 19012,
+"mini": 788,
+"poster": 3680
+},
+"hash": "5ca37a6c7de93bc9589dac3069f60565988819af970601632a57aecf731d3f38",
+"q": 45
+},
+"EZ-Bar_Curl": {
+"bytes": {
+"anim": 37934,
+"mini": 1364,
+"poster": 8190
+},
+"hash": "dbc2978ce33176ec28e54f95e778515f28f810aead4b14cefd7c40d7aca6ce06",
+"q": 45
+},
+"EZ-Bar_Skullcrusher": {
+"bytes": {
+"anim": 29224,
+"mini": 1054,
+"poster": 6232
+},
+"hash": "964ddce3e62bcb019a8fb9d7202b9285a4f017b493bc1b461e1d4ffcdf8dbcd6",
+"q": 45
+},
+"Elbow_Circles": {
+"bytes": {
+"anim": 18734,
+"mini": 858,
+"poster": 3864
+},
+"hash": "a18e1286fc8d4aaf0bd90345b8a7326d5210521d3fd12b8719b82f6e033c5701",
+"q": 45
+},
+"Elbow_to_Knee": {
+"bytes": {
+"anim": 24528,
+"mini": 856,
+"poster": 5668
+},
+"hash": "4e6b72e22a12df1c2b9dd98b93b750f3fbe6bc70eb65066374d19d47b03ed69b",
+"q": 45
+},
+"Elbows_Back": {
+"bytes": {
+"anim": 21046,
+"mini": 890,
+"poster": 3976
+},
+"hash": "0298059f4feaa3eee36731e9309e21553f28fdfb20477c29c0625eb81ccc4e18",
+"q": 45
+},
+"Elevated_Back_Lunge": {
+"bytes": {
+"anim": 47758,
+"mini": 1486,
+"poster": 10400
+},
+"hash": "0293d117d2d11dc45b400d1380bd82abf82d5c44c1a258020987f1467186d9ba",
+"q": 45
+},
+"Elevated_Cable_Rows": {
+"bytes": {
+"anim": 34386,
+"mini": 1250,
+"poster": 7440
+},
+"hash": "0987ab1234041b652aa033df4666a89376b13a3f2d882ac690a0793ae8151287",
+"q": 45
+},
+"Elliptical_Trainer": {
+"bytes": {
+"anim": 59186,
+"mini": 2000,
+"poster": 14890
+},
+"hash": "947dcbf531cb80db0d27e4fd3c9b10764c953d4e5190a2dbced3cbc33122ca55",
+"q": 45
+},
+"Exercise_Ball_Crunch": {
+"bytes": {
+"anim": 39416,
+"mini": 1482,
+"poster": 8716
+},
+"hash": "fc568558988da7c0d2e2ec489dbd5afde49a88afa7cdefae74ceaa2b4281071c",
+"q": 45
+},
+"Exercise_Ball_Pull-In": {
+"bytes": {
+"anim": 27298,
+"mini": 960,
+"poster": 6118
+},
+"hash": "7779874b79df69292f02adafa4bc0dfc1168d8e759a2db4c9f577112cbace456",
+"q": 45
+},
+"Extended_Range_One-Arm_Kettlebell_Floor_Press": {
+"bytes": {
+"anim": 23220,
+"mini": 922,
+"poster": 5176
+},
+"hash": "ada6999b036f97a0690b6a845d97ab6fc65f05b08446a1417c6ad21bfb2a5b42",
+"q": 45
+},
+"External_Rotation": {
+"bytes": {
+"anim": 42024,
+"mini": 1572,
+"poster": 9182
+},
+"hash": "9a73f3e8e8026bbbbae473228c3e348b5e897fb4a92d1abd31a6f877fc973bd9",
+"q": 45
+},
+"External_Rotation_with_Band": {
+"bytes": {
+"anim": 50188,
+"mini": 1528,
+"poster": 11558
+},
+"hash": "414228ec453e348c33d88da84e987c2d83212443762a659625ef7dcc98201987",
+"q": 45
+},
+"External_Rotation_with_Cable": {
+"bytes": {
+"anim": 58610,
+"mini": 1744,
+"poster": 13580
+},
+"hash": "7b4028f7a2d2d997a7129974f796ac673614e254b7b7c73bd40a418cbe135e13",
+"q": 40
+},
+"Face_Pull": {
+"bytes": {
+"anim": 39416,
+"mini": 1422,
+"poster": 7416
+},
+"hash": "2e01511811371d77877bf8ab454c249f0c0c8ad96fb84463f6805599cd8f7c94",
+"q": 45
+},
+"Farmers_Walk": {
+"bytes": {
+"anim": 40632,
+"mini": 1096,
+"poster": 9776
+},
+"hash": "c6fb17f6ed81c8859fa1deafbad93a8e42df2c8f15cb9c38843912edc0212d1f",
+"q": 45
+},
+"Fast_Skipping": {
+"bytes": {
+"anim": 9828,
+"mini": 818,
+"poster": 4684
+},
+"hash": "633a1cea15a7ba4962721e7a33e5301b6a71e9e48912310468e1ef2e8233d43b",
+"q": 45
+},
+"Finger_Curls": {
+"bytes": {
+"anim": 31212,
+"mini": 1158,
+"poster": 7906
+},
+"hash": "bce705191838b1e22a28a596ef4f59c22aec5005175336f631959fd7ed96f877",
+"q": 45
+},
+"Flat_Bench_Cable_Flyes": {
+"bytes": {
+"anim": 35962,
+"mini": 994,
+"poster": 7988
+},
+"hash": "469fab946446d911586176a560f065b703dd7bb08a0ffb0151c6c30262620563",
+"q": 45
+},
+"Flat_Bench_Leg_Pull-In": {
+"bytes": {
+"anim": 30558,
+"mini": 1178,
+"poster": 7276
+},
+"hash": "ffdc5c151ede1d745ee5c0ad4b17c3fe72b7c430ec345692dd556cb5de5dfa96",
+"q": 45
+},
+"Flat_Bench_Lying_Leg_Raise": {
+"bytes": {
+"anim": 35020,
+"mini": 1252,
+"poster": 7806
+},
+"hash": "a586e171999952dc53cb089b2026191bd483bd16fee6d5ed8d2629b491f5a486",
+"q": 45
+},
+"Flexor_Incline_Dumbbell_Curls": {
+"bytes": {
+"anim": 29072,
+"mini": 1104,
+"poster": 6628
+},
+"hash": "cfe2f5d90ff474b2b7a53b1fd83e783aa4d10de006f7a1d3c1e46afdcfdc9a0b",
+"q": 45
+},
+"Floor_Glute-Ham_Raise": {
+"bytes": {
+"anim": 50364,
+"mini": 1556,
+"poster": 11392
+},
+"hash": "4d7c0db13a865862cd0a25245c2acbabac1aa6b62a249da269802feefe230c2c",
+"q": 45
+},
+"Floor_Press": {
+"bytes": {
+"anim": 31908,
+"mini": 1152,
+"poster": 6786
+},
+"hash": "3411c879202fcc479a98f22e9e4fc1e8f1c04df9bb333dda18633846620a480b",
+"q": 45
+},
+"Floor_Press_with_Chains": {
+"bytes": {
+"anim": 35548,
+"mini": 1216,
+"poster": 7468
+},
+"hash": "d11df89ac7ceb001ebfd1107f429523f29c2b6d166372e65368beba01c0739e1",
+"q": 45
+},
+"Flutter_Kicks": {
+"bytes": {
+"anim": 30428,
+"mini": 1236,
+"poster": 6924
+},
+"hash": "18daa7a7053adeb316d4ee5ea39c90d666ed72c0e847936542cff728e7b5cafb",
+"q": 45
+},
+"Foot-SMR": {
+"bytes": {
+"anim": 27218,
+"mini": 1220,
+"poster": 5890
+},
+"hash": "20cf0448c8ec91af215e3711ed958a2f90f272e27db4c00cb6433a2c9e04c4e7",
+"q": 45
+},
+"Forward_Drag_with_Press": {
+"bytes": {
+"anim": 28810,
+"mini": 1042,
+"poster": 5782
+},
+"hash": "e643ae73d99514abb957c4b6222572eaade04f6eab9666266c8d07cc3e61b188",
+"q": 45
+},
+"Frankenstein_Squat": {
+"bytes": {
+"anim": 27660,
+"mini": 1042,
+"poster": 6148
+},
+"hash": "6807c368a4ea244c5425d8d0588a7a4953ad3bf0014a6b5e15c85bdaf93fb733",
+"q": 45
+},
+"Freehand_Jump_Squat": {
+"bytes": {
+"anim": 42420,
+"mini": 1538,
+"poster": 8964
+},
+"hash": "ebe98587b471c65b03ed8f98716f024bf79ffcf8e1a1ebbb852bc1f87e5833b0",
+"q": 45
+},
+"Frog_Hops": {
+"bytes": {
+"anim": 23316,
+"mini": 966,
+"poster": 4426
+},
+"hash": "8724598e4d676a8bf044ac07c7af2efdbf6b119008f2c1fccd22b5ed285807f1",
+"q": 45
+},
+"Frog_Sit-Ups": {
+"bytes": {
+"anim": 26184,
+"mini": 964,
+"poster": 6362
+},
+"hash": "3d3405f24601dbfeca3f3dd5e6a3f46226636faba31ed433773c303826fa4983",
+"q": 45
+},
+"Front_Barbell_Squat": {
+"bytes": {
+"anim": 44690,
+"mini": 1600,
+"poster": 9714
+},
+"hash": "3ec08c35cc9c82b8ce4fa1ccb59ff49315a06cac350c3a5595c9acd2c4ec3f8d",
+"q": 45
+},
+"Front_Barbell_Squat_To_A_Bench": {
+"bytes": {
+"anim": 46664,
+"mini": 1626,
+"poster": 10140
+},
+"hash": "fa2b056b4c98cffecbbf357976636023f3ad60b62df5c3e4e4e21e9db7aeea55",
+"q": 45
+},
+"Front_Box_Jump": {
+"bytes": {
+"anim": 40482,
+"mini": 1434,
+"poster": 8988
+},
+"hash": "f2966deff5012d64b87906b4f4f3cc8a9fde4486a74fcc6b08f7d36d1bad97b3",
+"q": 45
+},
+"Front_Cable_Raise": {
+"bytes": {
+"anim": 43656,
+"mini": 1406,
+"poster": 9706
+},
+"hash": "652ffd38dd752519d2d2e78030bf85fd73f940be090d7b4780de9033c4a6bced",
+"q": 45
+},
+"Front_Cone_Hops_or_hurdle_hops": {
+"bytes": {
+"anim": 15332,
+"mini": 524,
+"poster": 3168
+},
+"hash": "5ca6d482b9c2bba791f4b5503298b8fe0f4bdbacbc824827a7e43beb20818d6d",
+"q": 45
+},
+"Front_Dumbbell_Raise": {
+"bytes": {
+"anim": 26868,
+"mini": 1066,
+"poster": 5958
+},
+"hash": "db2cac31402c05d975140d6297dedd0f5cb3c1db61555d59c8865c184cb77fa1",
+"q": 45
+},
+"Front_Incline_Dumbbell_Raise": {
+"bytes": {
+"anim": 30956,
+"mini": 1020,
+"poster": 6550
+},
+"hash": "ea6061130231a216e196d0f3a9600efb4d74ef915ee618c865973bcf438677c4",
+"q": 45
+},
+"Front_Leg_Raises": {
+"bytes": {
+"anim": 23428,
+"mini": 1056,
+"poster": 4680
+},
+"hash": "c9d6a8c475b61a3e74e594248e294d9b32939ebd20ebc2f88555e701c1f9fc6a",
+"q": 45
+},
+"Front_Plate_Raise": {
+"bytes": {
+"anim": 28572,
+"mini": 1116,
+"poster": 6716
+},
+"hash": "bc0821bf52fc6b882ecf4414486ad9ca5fc6f535ab9126a1abdbdbd207c95bfc",
+"q": 45
+},
+"Front_Raise_And_Pullover": {
+"bytes": {
+"anim": 38828,
+"mini": 1364,
+"poster": 8320
+},
+"hash": "bd8981cda876a50603aa1d96cfd6dd7ec9800bc43f7bdde4111cce0de7a0fefd",
+"q": 45
+},
+"Front_Squat_Clean_Grip": {
+"bytes": {
+"anim": 27142,
+"mini": 1018,
+"poster": 5932
+},
+"hash": "98f58da4f01081379ddddb8bb834875fafb4ef3f80aa6507532cb1288eea1371",
+"q": 45
+},
+"Front_Squats_With_Two_Kettlebells": {
+"bytes": {
+"anim": 25142,
+"mini": 898,
+"poster": 5510
+},
+"hash": "2d3a1c7377b8066d6fc0d9a5da1f9344ac7af5ac53856bfa05856d4f4f5e9f5a",
+"q": 45
+},
+"Front_Two-Dumbbell_Raise": {
+"bytes": {
+"anim": 28000,
+"mini": 1060,
+"poster": 6082
+},
+"hash": "0f46ff2438bc1bf56d793b94f1f2616704bf054b62b2a96be5d642f883598f11",
+"q": 45
+},
+"Full_Range-Of-Motion_Lat_Pulldown": {
+"bytes": {
+"anim": 56160,
+"mini": 1816,
+"poster": 12372
+},
+"hash": "58b5171041929c8aa02800587cd9486c0b0affe435d3a1464aee2f5370b1f794",
+"q": 45
+},
+"Gironda_Sternum_Chins": {
+"bytes": {
+"anim": 23044,
+"mini": 992,
+"poster": 5058
+},
+"hash": "1219a228a629a1c127c2efd828c5cdaeb259e9ea32bedbd46f94ce399823332c",
+"q": 45
+},
+"Glute_Ham_Raise": {
+"bytes": {
+"anim": 38904,
+"mini": 1552,
+"poster": 8248
+},
+"hash": "7ec4cf86d5ff64685a478289b0f61df5a36c8564ea5358a34dc25ee94e5b19b5",
+"q": 45
+},
+"Glute_Kickback": {
+"bytes": {
+"anim": 36690,
+"mini": 1530,
+"poster": 8814
+},
+"hash": "0ea45b23cda5f77d949e6955cacfb921c2f03b342b7d234ce460db07b718cc18",
+"q": 45
+},
+"Goblet_Squat": {
+"bytes": {
+"anim": 24020,
+"mini": 878,
+"poster": 5216
+},
+"hash": "7deb2c91edf8453bceb60b82bd73ce2bc39030e0f250296961d38139df477b99",
+"q": 45
+},
+"Good_Morning": {
+"bytes": {
+"anim": 39180,
+"mini": 1340,
+"poster": 7860
+},
+"hash": "98cd612c04d1a077ff2be073e8e7a3d0a6db42db3681cc95f12cd3e110939be5",
+"q": 45
+},
+"Good_Morning_off_Pins": {
+"bytes": {
+"anim": 35966,
+"mini": 1268,
+"poster": 7378
+},
+"hash": "b0d07d76d04afe5779f677d17d2b550168e5aa6d1ffc862707cd75419ae70cc9",
+"q": 45
+},
+"Gorilla_Chin_Crunch": {
+"bytes": {
+"anim": 21848,
+"mini": 964,
+"poster": 4982
+},
+"hash": "e17bf194e79e0f4805c45b7bb888b029685a82b41e037f3cb9ae0a5886151c8c",
+"q": 45
+},
+"Groin_and_Back_Stretch": {
+"bytes": {
+"anim": 22558,
+"mini": 1040,
+"poster": 4920
+},
+"hash": "8bec25a6df960b96481664bd024ed2060cf053d3ace08538add4e14b1445b28c",
+"q": 45
+},
+"Groiners": {
+"bytes": {
+"anim": 24934,
+"mini": 1010,
+"poster": 4690
+},
+"hash": "28e2c740a47bdf19d43c9a456c2d19e2fdc3c78dcc6b25c4f1612c5c7dc5b9b4",
+"q": 45
+},
+"Hack_Squat": {
+"bytes": {
+"anim": 55262,
+"mini": 1762,
+"poster": 11662
+},
+"hash": "dab04c04917ee5703d75bbc9d320ace2522cc0f475b1cdae59a85c74eff8bb6b",
+"q": 45
+},
+"Hammer_Curls": {
+"bytes": {
+"anim": 26544,
+"mini": 1006,
+"poster": 5860
+},
+"hash": "a34852611a11283cc80eda477a0bfe7e21580ab268a0d3d4f6dc79610445a628",
+"q": 45
+},
+"Hammer_Grip_Incline_DB_Bench_Press": {
+"bytes": {
+"anim": 32886,
+"mini": 1058,
+"poster": 6984
+},
+"hash": "46244b5246f759a85ee796a04f921b827a6d152e5569e8ae914a2ee86932e8e8",
+"q": 45
+},
+"Hamstring-SMR": {
+"bytes": {
+"anim": 28370,
+"mini": 1250,
+"poster": 5734
+},
+"hash": "bce6642a9ea43cf188594aca5e47d8f34067b2acdee99c164fc222d9cb276631",
+"q": 45
+},
+"Hamstring_Stretch": {
+"bytes": {
+"anim": 25916,
+"mini": 1110,
+"poster": 5308
+},
+"hash": "30281df0b13c1f5ad2eaa889b80b944700e3e4bc93efa90baed1f709c71457c4",
+"q": 45
+},
+"Handstand_Push-Ups": {
+"bytes": {
+"anim": 30058,
+"mini": 1176,
+"poster": 6488
+},
+"hash": "494b95b4d46ec991b53e7e21afb870ffa67113ee33d0e5ecd1f584e3c9da0459",
+"q": 45
+},
+"Hang_Clean": {
+"bytes": {
+"anim": 28732,
+"mini": 1096,
+"poster": 6538
+},
+"hash": "0e4ea69d85f2d3ea162c81f19151a392f8988a97beed9321b280ce15f0bf110f",
+"q": 45
+},
+"Hang_Clean_-_Below_the_Knees": {
+"bytes": {
+"anim": 28192,
+"mini": 1094,
+"poster": 6278
+},
+"hash": "a969a654e83fd09e40c1a9cfaedd54680820356c145f1cc34ababc7e7804c8e8",
+"q": 45
+},
+"Hang_Snatch": {
+"bytes": {
+"anim": 30614,
+"mini": 1088,
+"poster": 6412
+},
+"hash": "39829e238a396f8f8c736d8915def338ec16f3be3d46a4c8912764204ba260de",
+"q": 45
+},
+"Hang_Snatch_-_Below_Knees": {
+"bytes": {
+"anim": 28604,
+"mini": 1052,
+"poster": 6210
+},
+"hash": "a294dda7a33f5ff4cbb7c57ef850de3d6eb7db9d3f2ae60de3c9c29f1f44e110",
+"q": 45
+},
+"Hanging_Bar_Good_Morning": {
+"bytes": {
+"anim": 38384,
+"mini": 1386,
+"poster": 8140
+},
+"hash": "ab14fda83939edb306f4efc05f223141dcfefed6cfc76e9e246ef710e3780596",
+"q": 45
+},
+"Hanging_Leg_Raise": {
+"bytes": {
+"anim": 32338,
+"mini": 1096,
+"poster": 6464
+},
+"hash": "b11db5e063f576b63dd1a458fb663c0479dc5ea98a89b905f7f02b04110b3042",
+"q": 45
+},
+"Hanging_Pike": {
+"bytes": {
+"anim": 20816,
+"mini": 926,
+"poster": 4894
+},
+"hash": "d73200b95ee76be83007ab1801d4ce898a843fd5488b126330a600c1943629c8",
+"q": 45
+},
+"Heaving_Snatch_Balance": {
+"bytes": {
+"anim": 24360,
+"mini": 928,
+"poster": 5378
+},
+"hash": "6ad26b9c797b7fc652349b160f98ec6cf44e65dae24695dea97bd71fd80781b8",
+"q": 45
+},
+"Heavy_Bag_Thrust": {
+"bytes": {
+"anim": 39672,
+"mini": 1346,
+"poster": 7868
+},
+"hash": "f35c27946a3359085d7fe2da72d5cf84e7ed645cb141b76f0b7e3bc8157250cc",
+"q": 45
+},
+"High_Cable_Curls": {
+"bytes": {
+"anim": 48796,
+"mini": 1552,
+"poster": 11912
+},
+"hash": "d66f21c781f40f34164eb30a317ebc9b931e048f5299dd9ca1339af73995df78",
+"q": 45
+},
+"Hip_Circles_prone": {
+"bytes": {
+"anim": 20232,
+"mini": 654,
+"poster": 4834
+},
+"hash": "f8460e6b4d5ca522df4633b9dce90bbe3b30b93837cffdfd6f68b2202deed665",
+"q": 45
+},
+"Hip_Extension_with_Bands": {
+"bytes": {
+"anim": 18634,
+"mini": 576,
+"poster": 3830
+},
+"hash": "7b63f6f7d713d4d31695f0059376c628fbcbd9e1ccfee8dfa9176955a358c153",
+"q": 45
+},
+"Hip_Flexion_with_Band": {
+"bytes": {
+"anim": 25298,
+"mini": 850,
+"poster": 5592
+},
+"hash": "2e34c59005e28b9effb5e49635c22bb11bbf7f443f179415b24d1c798b364220",
+"q": 45
+},
+"Hip_Lift_with_Band": {
+"bytes": {
+"anim": 29484,
+"mini": 1132,
+"poster": 6532
+},
+"hash": "d954df93cc50b0bf9dc8207a1eded6f17b5fed4a8cc13ff488e018c3d4f34acc",
+"q": 45
+},
+"Hug_A_Ball": {
+"bytes": {
+"anim": 26948,
+"mini": 1134,
+"poster": 5622
+},
+"hash": "8cb3399c800fa7aebb4e623fc217524e01b36b45ae286d1060a8ef1ab4d5c44d",
+"q": 45
+},
+"Hug_Knees_To_Chest": {
+"bytes": {
+"anim": 25664,
+"mini": 994,
+"poster": 4618
+},
+"hash": "aa9ee0664e0750cf4a777ad7e4e9268abefb00e8fe747949d4a2510a653d011d",
+"q": 45
+},
+"Hurdle_Hops": {
+"bytes": {
+"anim": 15914,
+"mini": 554,
+"poster": 3100
+},
+"hash": "cdc17e153265d59f3508e4d15543fd2ab3551bfb89c716af78b0c889746c2c9e",
+"q": 45
+},
+"Hyperextensions_Back_Extensions": {
+"bytes": {
+"anim": 37666,
+"mini": 994,
+"poster": 8490
+},
+"hash": "812d88b6298fe4a96c63d67b23855806da6f467aa54938b0c3a2800cda45dd7a",
+"q": 45
+},
+"Hyperextensions_With_No_Hyperextension_Bench": {
+"bytes": {
+"anim": 26880,
+"mini": 876,
+"poster": 5792
+},
+"hash": "e077cd81ee4fb1f7ea3e08f488d6fd94795a17b7cf9c12b9cd70a60d95293424",
+"q": 45
+},
+"IT_Band_and_Glute_Stretch": {
+"bytes": {
+"anim": 26640,
+"mini": 998,
+"poster": 4960
+},
+"hash": "41dc7c61baca8c761dea11e601b7fa2b0c323fd05f3dbf4ea5623c627b7c7366",
+"q": 45
+},
+"Iliotibial_Tract-SMR": {
+"bytes": {
+"anim": 26498,
+"mini": 1126,
+"poster": 5670
+},
+"hash": "61846e5f41a358a223ce4270252d6053d42eef94938c24a0ed8cc73990fbf35b",
+"q": 45
+},
+"Inchworm": {
+"bytes": {
+"anim": 14638,
+"mini": 710,
+"poster": 4284
+},
+"hash": "9ea80ce3b47b52c0ffc863d73438d2e1b89d502bd4150281892b294b4b4a0b3d",
+"q": 45
+},
+"Incline_Barbell_Triceps_Extension": {
+"bytes": {
+"anim": 32988,
+"mini": 1138,
+"poster": 6672
+},
+"hash": "5baaf09e3814e5ba74364d5df0108c3b0c34adb3022317e61a610cbe8773e0dd",
+"q": 45
+},
+"Incline_Bench_Pull": {
+"bytes": {
+"anim": 28818,
+"mini": 1072,
+"poster": 6608
+},
+"hash": "9f81392a554a3f17c50f9c1670f0ecb490fb240862692ae625bbdddcf2f8a4a5",
+"q": 45
+},
+"Incline_Cable_Chest_Press": {
+"bytes": {
+"anim": 27812,
+"mini": 938,
+"poster": 6504
+},
+"hash": "9533f4d4e3958543f07caaf1616ae33ad4c22ba2f2d4d5f589c02b19e61dad04",
+"q": 45
+},
+"Incline_Cable_Flye": {
+"bytes": {
+"anim": 29712,
+"mini": 900,
+"poster": 6598
+},
+"hash": "9535c4af4177d0de946dad2fe7f5c48e39da8fb0f7891509343bdeb162a9af78",
+"q": 45
+},
+"Incline_Dumbbell_Bench_With_Palms_Facing_In": {
+"bytes": {
+"anim": 30350,
+"mini": 1098,
+"poster": 6898
+},
+"hash": "30937ae25d5916023fc84d1b57b006b387a18fb13cc89cf8aa54f00ccb4d105f",
+"q": 45
+},
+"Incline_Dumbbell_Curl": {
+"bytes": {
+"anim": 26698,
+"mini": 1044,
+"poster": 6064
+},
+"hash": "5731d8ed6dc9195362dd8f467b545443db5ba98df9032376decc4fddc392fe2a",
+"q": 45
+},
+"Incline_Dumbbell_Flyes": {
+"bytes": {
+"anim": 31856,
+"mini": 1100,
+"poster": 7168
+},
+"hash": "2f76f2c0f13ad3f3981de1c9ce7eeededbf9a5c0fdfd6cae3ca2abab796b6b0e",
+"q": 45
+},
+"Incline_Dumbbell_Flyes_-_With_A_Twist": {
+"bytes": {
+"anim": 33104,
+"mini": 1066,
+"poster": 7256
+},
+"hash": "b082fbee54c64788969e2e2e3ab205b1c7f07aa55da20daf64153b319c1d4b30",
+"q": 45
+},
+"Incline_Dumbbell_Press": {
+"bytes": {
+"anim": 32638,
+"mini": 1084,
+"poster": 7244
+},
+"hash": "61930c4e6283f15f73be26ce3c97034640746ded030802cb1a5519687100f259",
+"q": 45
+},
+"Incline_Hammer_Curls": {
+"bytes": {
+"anim": 54900,
+"mini": 1542,
+"poster": 13366
+},
+"hash": "abc12697d025913e5b9216f552e4f66f9fbcadb8cbcf8e1e95739c1f834c1e4f",
+"q": 45
+},
+"Incline_Inner_Biceps_Curl": {
+"bytes": {
+"anim": 28806,
+"mini": 1104,
+"poster": 6580
+},
+"hash": "600a7935545aa91f66c37eaa047738319733e0169fa58722db97f7de11ece295",
+"q": 45
+},
+"Incline_Push-Up": {
+"bytes": {
+"anim": 40648,
+"mini": 1350,
+"poster": 9172
+},
+"hash": "7f423ffb08b54489f4ace8be5c777a8b174e11eb845b64e75fe1a6c76f298c15",
+"q": 45
+},
+"Incline_Push-Up_Close-Grip": {
+"bytes": {
+"anim": 32694,
+"mini": 1156,
+"poster": 7478
+},
+"hash": "5c0c7ff7b5992815d50b00cfef6412dfacd9ae0b19907a718c43861278cfe610",
+"q": 45
+},
+"Incline_Push-Up_Depth_Jump": {
+"bytes": {
+"anim": 36392,
+"mini": 1264,
+"poster": 7310
+},
+"hash": "e8cb5994c987f9288f432a88f2d20c927c1861a0957f2e69f3b5aeaf4109148b",
+"q": 45
+},
+"Incline_Push-Up_Medium": {
+"bytes": {
+"anim": 28380,
+"mini": 1054,
+"poster": 6708
+},
+"hash": "a385e2ce33c6078269af03f553b73e340f7987d925bc9abe475dfcd852ad16d3",
+"q": 45
+},
+"Incline_Push-Up_Reverse_Grip": {
+"bytes": {
+"anim": 29744,
+"mini": 1034,
+"poster": 6728
+},
+"hash": "c82729d455fe828f9f13e351a9bc424c9b62da8eff2f81cd94a23e5ac9d068f1",
+"q": 45
+},
+"Incline_Push-Up_Wide": {
+"bytes": {
+"anim": 27762,
+"mini": 996,
+"poster": 6614
+},
+"hash": "f97315abbe85402816bdb338850545f7f9bc8d9a993bdb7203cb0ab8c0cf702d",
+"q": 45
+},
+"Intermediate_Groin_Stretch": {
+"bytes": {
+"anim": 28814,
+"mini": 1138,
+"poster": 6030
+},
+"hash": "5d2f958961e702864f02e84629ef20bb87ce48e0813ae69a4151d44b171b5842",
+"q": 45
+},
+"Intermediate_Hip_Flexor_and_Quad_Stretch": {
+"bytes": {
+"anim": 26270,
+"mini": 998,
+"poster": 4960
+},
+"hash": "4f411756d8b0d7bb545eaf8676284f9c6d7e3b4fbad9d20ee77b580c71ba5a0f",
+"q": 45
+},
+"Internal_Rotation_with_Band": {
+"bytes": {
+"anim": 50688,
+"mini": 1460,
+"poster": 10444
+},
+"hash": "42e3063b1f819d90c91a6bc55a4953dd95d4c27f15f838e6b41dbf83b69be8f4",
+"q": 45
+},
+"Inverted_Row": {
+"bytes": {
+"anim": 36742,
+"mini": 1162,
+"poster": 7842
+},
+"hash": "34fa67d9edc82b3a10a0954bb66cfee38209e9fe493f17ba9e9c3f7e20ea640f",
+"q": 45
+},
+"Inverted_Row_with_Straps": {
+"bytes": {
+"anim": 40458,
+"mini": 1318,
+"poster": 8574
+},
+"hash": "2baa35a49a36b486ab7579656e948ccde155429e529bf1d975886c308885dd74",
+"q": 45
+},
+"Iron_Cross": {
+"bytes": {
+"anim": 35762,
+"mini": 1348,
+"poster": 7920
+},
+"hash": "c4468b987fedcd22e31d1f87bcb6fd094c86e7399c79e46a80a7ca2adcde03ab",
+"q": 45
+},
+"Iron_Crosses_stretch": {
+"bytes": {
+"anim": 24732,
+"mini": 998,
+"poster": 5528
+},
+"hash": "3c2938fc902c2985f2082d2834037734351937d4e5ad8b56d179b925eb000dc7",
+"q": 45
+},
+"Isometric_Chest_Squeezes": {
+"bytes": {
+"anim": 22600,
+"mini": 990,
+"poster": 4722
+},
+"hash": "3c15dd001dfcc3ee17d4a1f79e84b8d0e921889baa02d9675c03ad793c8a7af8",
+"q": 45
+},
+"Isometric_Neck_Exercise_-_Front_And_Back": {
+"bytes": {
+"anim": 43626,
+"mini": 1582,
+"poster": 9516
+},
+"hash": "f37d3bc695fd5cb97b5916552352a761576547ea83d063969643becf26672b16",
+"q": 45
+},
+"Isometric_Neck_Exercise_-_Sides": {
+"bytes": {
+"anim": 27660,
+"mini": 1092,
+"poster": 5964
+},
+"hash": "1002bdf558e0eb0dd561e5e3b3710b2ba822f0c5255c9b854d8feebc16937c98",
+"q": 45
+},
+"Isometric_Wipers": {
+"bytes": {
+"anim": 17284,
+"mini": 796,
+"poster": 4132
+},
+"hash": "e36e55a5b256dffbe6ce56dac977b39d01a3c49e8919e9e385ace9daf14328e0",
+"q": 45
+},
+"JM_Press": {
+"bytes": {
+"anim": 35888,
+"mini": 1488,
+"poster": 9414
+},
+"hash": "16768d404141e125c82b41d400bfa41f8bd0247234aee3b7f5d0ca4ed9dc2232",
+"q": 45
+},
+"Jackknife_Sit-Up": {
+"bytes": {
+"anim": 24528,
+"mini": 926,
+"poster": 5938
+},
+"hash": "dc733784d6ccf3c66a9981d6aad40184d56c9967439eca3ecd51cd9d6441b4c7",
+"q": 45
+},
+"Janda_Sit-Up": {
+"bytes": {
+"anim": 21968,
+"mini": 844,
+"poster": 4714
+},
+"hash": "60d190fbb23838cf3e5e7aa1a40cc187afa0c77ee9af9c4f97b57e6efd07e04a",
+"q": 45
+},
+"Jefferson_Squats": {
+"bytes": {
+"anim": 31736,
+"mini": 1094,
+"poster": 6844
+},
+"hash": "dacbb966f7b4bac078b56c29c14dc46c1d2bd217b1ef30bfb50f1cf9742adc8d",
+"q": 45
+},
+"Jerk_Balance": {
+"bytes": {
+"anim": 23620,
+"mini": 878,
+"poster": 5046
+},
+"hash": "614fb9d9e351df2aa5fed0774d61bbdac3c8ea9d35260babd20623a3151579c2",
+"q": 45
+},
+"Jerk_Dip_Squat": {
+"bytes": {
+"anim": 26042,
+"mini": 1044,
+"poster": 5918
+},
+"hash": "50780d34fc1844913136360a9e0169748dcca87d1c1878d86925f20ff78ae3e1",
+"q": 45
+},
+"Jogging_Treadmill": {
+"bytes": {
+"anim": 33974,
+"mini": 1266,
+"poster": 7676
+},
+"hash": "df38441a53a97c5949ba4a7bfcbb13af8a8a7e327e492bd2d8e29992cbc6c8be",
+"q": 45
+},
+"Keg_Load": {
+"bytes": {
+"anim": 38180,
+"mini": 1080,
+"poster": 9356
+},
+"hash": "3172d6a4128519c65270270e4736707f89fce36f5b9d93cd1ad02f6bfa1e1da8",
+"q": 45
+},
+"Kettlebell_Arnold_Press": {
+"bytes": {
+"anim": 25204,
+"mini": 890,
+"poster": 5326
+},
+"hash": "af2d8d8db6b21ffd41ef4169acdd86fd5b1c1fdc8f3c48c81ce60caae19c322a",
+"q": 45
+},
+"Kettlebell_Dead_Clean": {
+"bytes": {
+"anim": 23924,
+"mini": 940,
+"poster": 5374
+},
+"hash": "e5f778077d9651ed8eff59e9162e8d7b34ff1ffa104a9ac6dce9877d81e29ff9",
+"q": 45
+},
+"Kettlebell_Figure_8": {
+"bytes": {
+"anim": 22984,
+"mini": 926,
+"poster": 4936
+},
+"hash": "0fba1e4c4a659cd65629b37c95e522a112f6be50ce13b8e29e390f8e4e5dd1d4",
+"q": 45
+},
+"Kettlebell_Hang_Clean": {
+"bytes": {
+"anim": 23898,
+"mini": 884,
+"poster": 5096
+},
+"hash": "f22e78aca4851fa2657c5d4d681cbbe08cc438bd4fbc4aa0dd909f4a733d8a28",
+"q": 45
+},
+"Kettlebell_One-Legged_Deadlift": {
+"bytes": {
+"anim": 29028,
+"mini": 1020,
+"poster": 5902
+},
+"hash": "395931da33d1de87ea4457874cde79ea9d9d5e56bc9b9047df8b3efa4df2c47d",
+"q": 45
+},
+"Kettlebell_Pass_Between_The_Legs": {
+"bytes": {
+"anim": 25294,
+"mini": 982,
+"poster": 5808
+},
+"hash": "9af3d3bccc84ba930354fdc4cd014be28d62a796e765951af0802c50adcab7b1",
+"q": 45
+},
+"Kettlebell_Pirate_Ships": {
+"bytes": {
+"anim": 36888,
+"mini": 1314,
+"poster": 8708
+},
+"hash": "0f5140ae615f6abb4deb540d97a82f899f1cf3aac22769e679a492a7339a2412",
+"q": 45
+},
+"Kettlebell_Pistol_Squat": {
+"bytes": {
+"anim": 24832,
+"mini": 880,
+"poster": 5332
+},
+"hash": "4606f153a169cc1fda3dd7fc7b439b340b3dfb0e8bd7bdc35b4398c7b3e307f8",
+"q": 45
+},
+"Kettlebell_Seated_Press": {
+"bytes": {
+"anim": 26984,
+"mini": 1046,
+"poster": 5700
+},
+"hash": "c2db99b9a3644844672e0d2c318cb7859d62e1784af95a0dff726d0e1a6d0d03",
+"q": 45
+},
+"Kettlebell_Seesaw_Press": {
+"bytes": {
+"anim": 25426,
+"mini": 948,
+"poster": 5558
+},
+"hash": "04075e8ef530ffd03a8a1c603bff6bd3a50befdf721508af7b3227cb0b4dd1f1",
+"q": 45
+},
+"Kettlebell_Sumo_High_Pull": {
+"bytes": {
+"anim": 24914,
+"mini": 1008,
+"poster": 5406
+},
+"hash": "8aae536f770df4981269633408ba5a758ab415874ee1dc5b84266142e6fa01e8",
+"q": 45
+},
+"Kettlebell_Thruster": {
+"bytes": {
+"anim": 26148,
+"mini": 886,
+"poster": 5406
+},
+"hash": "66130d05e0eaa5c992c00a38e91b28a8c9ba60d2c8f84f19568e186617ae2060",
+"q": 45
+},
+"Kettlebell_Turkish_Get-Up_Lunge_style": {
+"bytes": {
+"anim": 25732,
+"mini": 996,
+"poster": 5602
+},
+"hash": "d9ccf3390799e6732433b2a470e5f219a428591ab4ee6481fb4327c1fe27855b",
+"q": 45
+},
+"Kettlebell_Turkish_Get-Up_Squat_style": {
+"bytes": {
+"anim": 25312,
+"mini": 962,
+"poster": 5368
+},
+"hash": "73dc72fe1c7b053b604b6b797b3bfb7c465c2733eae4ba9d60e21a597c383622",
+"q": 45
+},
+"Kettlebell_Windmill": {
+"bytes": {
+"anim": 25562,
+"mini": 880,
+"poster": 5234
+},
+"hash": "57a0a61e966d574ef07f68a39d7610a142e3aceb58704f374b2da3dc82b325fc",
+"q": 45
+},
+"Kipping_Muscle_Up": {
+"bytes": {
+"anim": 37172,
+"mini": 1300,
+"poster": 7940
+},
+"hash": "61db0aec8c80751c83a3e845eb081d5be96760bfeea49a662a46cb464072925c",
+"q": 45
+},
+"Knee_Across_The_Body": {
+"bytes": {
+"anim": 24790,
+"mini": 990,
+"poster": 5134
+},
+"hash": "7a3df3812929e0d9db5d943d47741d6f4ed8eef61630f5b49580b2822c0ba638",
+"q": 45
+},
+"Knee_Circles": {
+"bytes": {
+"anim": 27660,
+"mini": 964,
+"poster": 6108
+},
+"hash": "04ef44430e149cd593641cf5cb9ecc8017512fd3e93df55af654e5174e113644",
+"q": 45
+},
+"Knee_Hip_Raise_On_Parallel_Bars": {
+"bytes": {
+"anim": 28162,
+"mini": 1404,
+"poster": 10368
+},
+"hash": "7a34838dbeb76ec9453411a1e2ad11fd4e396a62c577f0893c1d071140e6430c",
+"q": 45
+},
+"Knee_Tuck_Jump": {
+"bytes": {
+"anim": 13994,
+"mini": 542,
+"poster": 3060
+},
+"hash": "a206fa90e05cc428403b2181f0d4a853e43c9fc242dab50cbb24db9248aac9aa",
+"q": 45
+},
+"Kneeling_Arm_Drill": {
+"bytes": {
+"anim": 20606,
+"mini": 662,
+"poster": 4802
+},
+"hash": "1df58ee1999bc4f74e1c003292d791e24f080529cf05b7c01570c6a511f4cd0a",
+"q": 45
+},
+"Kneeling_Cable_Crunch_With_Alternating_Oblique_Twists": {
+"bytes": {
+"anim": 47004,
+"mini": 1598,
+"poster": 10008
+},
+"hash": "86cb6c0694915cd245ac363a2f19dfff775d230e1b7e4c71b7e30bca91c26e1c",
+"q": 45
+},
+"Kneeling_Cable_Triceps_Extension": {
+"bytes": {
+"anim": 34532,
+"mini": 1062,
+"poster": 7548
+},
+"hash": "05bcebf72da7325f6d043a24649fea7c065c5242a383bd064d344e54578beb66",
+"q": 45
+},
+"Kneeling_Forearm_Stretch": {
+"bytes": {
+"anim": 23672,
+"mini": 1002,
+"poster": 4840
+},
+"hash": "b5ba398fb3d9bf6fbd46ec05bed738624c84784e4c113e172849d2822e052036",
+"q": 45
+},
+"Kneeling_High_Pulley_Row": {
+"bytes": {
+"anim": 19402,
+"mini": 768,
+"poster": 4960
+},
+"hash": "344a89ef5cb63011bf501ff8f5441d2a9d06b9667205f3ed705cb723836fedfe",
+"q": 45
+},
+"Kneeling_Hip_Flexor": {
+"bytes": {
+"anim": 18378,
+"mini": 1022,
+"poster": 4668
+},
+"hash": "7a3f5b9d53a1a4aac0cecd7483a172e091573f8ffd85906f33374bea389f9573",
+"q": 45
+},
+"Kneeling_Jump_Squat": {
+"bytes": {
+"anim": 28760,
+"mini": 1126,
+"poster": 6614
+},
+"hash": "98ef16ba2f0151407e6e2b549f45b5b7a24ffd8a626dd2c3bd8f0cc867600235",
+"q": 45
+},
+"Kneeling_Single-Arm_High_Pulley_Row": {
+"bytes": {
+"anim": 31454,
+"mini": 1142,
+"poster": 7010
+},
+"hash": "b27f60c80396e1fc8a551adfcfb79abcb03fcf225afe9960e2c2988eac24b01c",
+"q": 45
+},
+"Kneeling_Squat": {
+"bytes": {
+"anim": 35566,
+"mini": 1194,
+"poster": 7074
+},
+"hash": "62156e1699cbe5ef1e8ffe8a75f214a52f8d01c9c393cfc0d4502c599d1ef617",
+"q": 45
+},
+"Landmine_180s": {
+"bytes": {
+"anim": 36716,
+"mini": 1282,
+"poster": 9062
+},
+"hash": "81276e2d4e9b0c3f1f29d6d0b5fdc7e653e83020034c0a56e2c49839d50f64b1",
+"q": 45
+},
+"Landmine_Linear_Jammer": {
+"bytes": {
+"anim": 51424,
+"mini": 1466,
+"poster": 11296
+},
+"hash": "e6340754870784982acdcf6bc0dc4c294a79e15d00f1e4f1c39ba6b12ee77af0",
+"q": 45
+},
+"Lateral_Bound": {
+"bytes": {
+"anim": 17294,
+"mini": 592,
+"poster": 3336
+},
+"hash": "51c37cd6bcf8b0be4bca98eafc63ca64c1c42f5b1997094c1f4fa23305a882f1",
+"q": 45
+},
+"Lateral_Box_Jump": {
+"bytes": {
+"anim": 20084,
+"mini": 672,
+"poster": 4120
+},
+"hash": "af40fc19a1ce0e75fb2489b54bc96bf5073c063e83385c09452f34c5285c10bb",
+"q": 45
+},
+"Lateral_Cone_Hops": {
+"bytes": {
+"anim": 24818,
+"mini": 928,
+"poster": 5348
+},
+"hash": "eb8211397295d4e40a349056f191ab39a560d3bf67804fe2eb42fa16613acecc",
+"q": 45
+},
+"Lateral_Raise_-_With_Bands": {
+"bytes": {
+"anim": 29300,
+"mini": 964,
+"poster": 6090
+},
+"hash": "aaf88a62cb83cbfddc575d1ec00662a943bdb062ecadbcaa58cf7027d63b4aa0",
+"q": 45
+},
+"Latissimus_Dorsi-SMR": {
+"bytes": {
+"anim": 27506,
+"mini": 1084,
+"poster": 5452
+},
+"hash": "88c1cba6277b04a8db30dd450f7bbbb048a089356bd46af7d30ecb8fc2b36c9e",
+"q": 45
+},
+"Leg-Over_Floor_Press": {
+"bytes": {
+"anim": 22102,
+"mini": 900,
+"poster": 4938
+},
+"hash": "9a315733e38d88f86b64396c18519b20b1b5d375c42d300a3ceb986487fba5e0",
+"q": 45
+},
+"Leg-Up_Hamstring_Stretch": {
+"bytes": {
+"anim": 28088,
+"mini": 1154,
+"poster": 5762
+},
+"hash": "e3042997d44245c6dbfc094cfd7f44a8abbb867604095f8dcd2caa808eaa18eb",
+"q": 45
+},
+"Leg_Extensions": {
+"bytes": {
+"anim": 47512,
+"mini": 1526,
+"poster": 10404
+},
+"hash": "6e61836c4e00b32bb2aa3f8a94512a42121edbaa6a4e470c65514735a9d50094",
+"q": 45
+},
+"Leg_Lift": {
+"bytes": {
+"anim": 34516,
+"mini": 1146,
+"poster": 7574
+},
+"hash": "afaf0f56f1b582e19a63d982994868ce8354c6d1e3de6774328a9c2b6dc11cb8",
+"q": 45
+},
+"Leg_Press": {
+"bytes": {
+"anim": 45754,
+"mini": 1304,
+"poster": 10562
+},
+"hash": "a7ec48e113388c6f5f58188a4ae6c6fe7a0c189ec7a1d6b3b2f9e852b08db826",
+"q": 45
+},
+"Leg_Pull-In": {
+"bytes": {
+"anim": 35454,
+"mini": 1410,
+"poster": 8374
+},
+"hash": "2230c27deb0c62a9690c37bf9f281e48f16e4c05f1c6f3912d7e88fa43531342",
+"q": 45
+},
+"Leverage_Chest_Press": {
+"bytes": {
+"anim": 21326,
+"mini": 798,
+"poster": 4524
+},
+"hash": "e44381ebba8f523d29bb3774afa8231705a481bf780ea94e75d13fc1e8a99149",
+"q": 45
+},
+"Leverage_Deadlift": {
+"bytes": {
+"anim": 21224,
+"mini": 702,
+"poster": 4604
+},
+"hash": "b3fd08f9807e4cde7183f8d75fe82a2a29dd0c772b34278d487319f33ecd5471",
+"q": 45
+},
+"Leverage_Decline_Chest_Press": {
+"bytes": {
+"anim": 34604,
+"mini": 1132,
+"poster": 7188
+},
+"hash": "139d13e935262068c4b0fb5456278eb4f9f26e242aece368dc6bf5c3f3709100",
+"q": 45
+},
+"Leverage_High_Row": {
+"bytes": {
+"anim": 42804,
+"mini": 1360,
+"poster": 9062
+},
+"hash": "56f5d1861e9a67c1b0a72590231ba2d73f94ddd68e48de0b85860cb7c052a7ec",
+"q": 45
+},
+"Leverage_Incline_Chest_Press": {
+"bytes": {
+"anim": 39182,
+"mini": 1264,
+"poster": 8570
+},
+"hash": "edcaa05e9fc69c9eb4040b82a86790f0143db85fa0c39c277d435e26187111ac",
+"q": 45
+},
+"Leverage_Iso_Row": {
+"bytes": {
+"anim": 39010,
+"mini": 1284,
+"poster": 8486
+},
+"hash": "16632d2143a77960ba02e8bc7043c0ba8ae2b0c7ae9834317fea493c68cb5304",
+"q": 45
+},
+"Leverage_Shoulder_Press": {
+"bytes": {
+"anim": 33226,
+"mini": 1156,
+"poster": 7262
+},
+"hash": "f6752a1a57d9e7f470cd0e7060bee7040b0a9e130336780a81bed774571656d8",
+"q": 45
+},
+"Leverage_Shrug": {
+"bytes": {
+"anim": 19774,
+"mini": 724,
+"poster": 4406
+},
+"hash": "de8839da057525dd13e59ab9df5a188480c0f886c2b44cb3d5ef30c4f97357ba",
+"q": 45
+},
+"Linear_3-Part_Start_Technique": {
+"bytes": {
+"anim": 17526,
+"mini": 558,
+"poster": 4338
+},
+"hash": "d619748b3d2a39d8d3b672c6b04347e782f96cae42a82912363970c705f95d71",
+"q": 45
+},
+"Linear_Acceleration_Wall_Drill": {
+"bytes": {
+"anim": 22134,
+"mini": 786,
+"poster": 4864
+},
+"hash": "4253ddd84a6610efdd35d42f4d89e01b36c54f265fe3078a3e5aea6ef3b05c75",
+"q": 45
+},
+"Linear_Depth_Jump": {
+"bytes": {
+"anim": 53576,
+"mini": 1534,
+"poster": 11806
+},
+"hash": "e9293956365887e9ef5e876804d9d85f9a08a93ca1da583b82da1f4f1c2c624a",
+"q": 45
+},
+"Log_Lift": {
+"bytes": {
+"anim": 29236,
+"mini": 946,
+"poster": 6356
+},
+"hash": "1810299f5ccf69c79abb645a8109ea052046ea83fc51b38e60582e2ec3524eeb",
+"q": 45
+},
+"London_Bridges": {
+"bytes": {
+"anim": 30688,
+"mini": 1458,
+"poster": 8182
+},
+"hash": "b72ed203d6d7f30dd1c6bd0b1239153aae4478b607b5db95fab05cdfc9b6e796",
+"q": 45
+},
+"Looking_At_Ceiling": {
+"bytes": {
+"anim": 25000,
+"mini": 1116,
+"poster": 5184
+},
+"hash": "701d3a97a228bf0accce6d7798e545c2896117e2733b5aea3c5621d92948f905",
+"q": 45
+},
+"Low_Cable_Crossover": {
+"bytes": {
+"anim": 20342,
+"mini": 974,
+"poster": 6300
+},
+"hash": "6454367a6da5abb928a36e3db59a6226b91e609ad6b5883eb2f5b02545513746",
+"q": 45
+},
+"Low_Cable_Triceps_Extension": {
+"bytes": {
+"anim": 50976,
+"mini": 1452,
+"poster": 11790
+},
+"hash": "59a1d079f9c6310e5c6dfa891d522ed9e3e178cff762e275cc5844a00e9f930e",
+"q": 45
+},
+"Low_Pulley_Row_To_Neck": {
+"bytes": {
+"anim": 39080,
+"mini": 1306,
+"poster": 8526
+},
+"hash": "ae68a05c2e2774e1e16055221977c03e8d84dec62f52c80e405f3981005ee25e",
+"q": 45
+},
+"Lower_Back-SMR": {
+"bytes": {
+"anim": 24880,
+"mini": 1084,
+"poster": 5452
+},
+"hash": "ec411a11226aa6413dd8621579f9d8253a5cb4d29ef6a210c4c1fac62ae782bf",
+"q": 45
+},
+"Lower_Back_Curl": {
+"bytes": {
+"anim": 24772,
+"mini": 962,
+"poster": 4980
+},
+"hash": "21008b78f66f8f0e6e65477a7a04c2246f348ca20e340a304deb1046c0980a60",
+"q": 45
+},
+"Lunge_Pass_Through": {
+"bytes": {
+"anim": 35464,
+"mini": 1312,
+"poster": 7408
+},
+"hash": "c2876f142255dd361ab22ed27b808749b99c41b8549360e0569c5e426ac93ec7",
+"q": 45
+},
+"Lunge_Sprint": {
+"bytes": {
+"anim": 32946,
+"mini": 1150,
+"poster": 6930
+},
+"hash": "1372bff2964f6f30ea135b2d2992f52aad1977878eacb74caaa9a199f84695ef",
+"q": 45
+},
+"Lying_Bent_Leg_Groin": {
+"bytes": {
+"anim": 24400,
+"mini": 1086,
+"poster": 5182
+},
+"hash": "a48d8eed1659c756edcea7fab2daaa5a4f79c6b849d458f9d5e395259f3e1da6",
+"q": 45
+},
+"Lying_Cable_Curl": {
+"bytes": {
+"anim": 28608,
+"mini": 864,
+"poster": 6300
+},
+"hash": "ce15eec7d09acbddce5a7586f91d2716869047d6bac2a89be1793514941c442b",
+"q": 45
+},
+"Lying_Cambered_Barbell_Row": {
+"bytes": {
+"anim": 36616,
+"mini": 1456,
+"poster": 8174
+},
+"hash": "96c133451b814d2704b4df3caff6cbf8aa5e3e74336ca53ba55ddab4bf096932",
+"q": 45
+},
+"Lying_Close-Grip_Bar_Curl_On_High_Pulley": {
+"bytes": {
+"anim": 34316,
+"mini": 1064,
+"poster": 7556
+},
+"hash": "1ee7d050603058f89395ada76c7e0650af3739be54daa53a953801a39f62d483",
+"q": 45
+},
+"Lying_Close-Grip_Barbell_Triceps_Extension_Behind_The_Head": {
+"bytes": {
+"anim": 40494,
+"mini": 1550,
+"poster": 9076
+},
+"hash": "bfbe0075a7b12dfb7d06df9a6c4162a4504d1a9d38b27f75a4d46980e4aa1777",
+"q": 45
+},
+"Lying_Close-Grip_Barbell_Triceps_Press_To_Chin": {
+"bytes": {
+"anim": 37770,
+"mini": 1368,
+"poster": 8332
+},
+"hash": "d4b4d0ffe623b2bccd33baf831db5ab4902e6263ac7d1fa90700c66b0e2d6d69",
+"q": 45
+},
+"Lying_Crossover": {
+"bytes": {
+"anim": 31274,
+"mini": 1250,
+"poster": 6420
+},
+"hash": "fadc5518a32ce9f6243001701aba3fb1a44c32f82f1e6a1280d687752af1ee1b",
+"q": 45
+},
+"Lying_Dumbbell_Tricep_Extension": {
+"bytes": {
+"anim": 42674,
+"mini": 1478,
+"poster": 8796
+},
+"hash": "2eb866ddd871adc51804f21b6a2f8e181542e9a078638c7782fccddf5013b6bd",
+"q": 45
+},
+"Lying_Face_Down_Plate_Neck_Resistance": {
+"bytes": {
+"anim": 39412,
+"mini": 1452,
+"poster": 8376
+},
+"hash": "9c46b006442503e0672e7170402f318fb6d1e1f75d9b654c4cc1b0d77ff09a41",
+"q": 45
+},
+"Lying_Face_Up_Plate_Neck_Resistance": {
+"bytes": {
+"anim": 34454,
+"mini": 1310,
+"poster": 7702
+},
+"hash": "c0712ff419d11fa287534df91c4fe123921fc530e076a01ce8ab9095df15e5ea",
+"q": 45
+},
+"Lying_Glute": {
+"bytes": {
+"anim": 28318,
+"mini": 1244,
+"poster": 5994
+},
+"hash": "c215ab9c058d3cb2dff562d993a1a9af4c373ba5a50d087765b8e1962dc47ff6",
+"q": 45
+},
+"Lying_Hamstring": {
+"bytes": {
+"anim": 24238,
+"mini": 1082,
+"poster": 5216
+},
+"hash": "14691d4bd4f7f7bdcad78f4cc6b1ec1c3a9b7c2bba13097b294cd1b9c118e5e0",
+"q": 45
+},
+"Lying_High_Bench_Barbell_Curl": {
+"bytes": {
+"anim": 32670,
+"mini": 1240,
+"poster": 7002
+},
+"hash": "7cac26e191e16be021fb24b8cee3335db89749bbcf986609fdb79e605f116ebb",
+"q": 45
+},
+"Lying_Leg_Curls": {
+"bytes": {
+"anim": 48868,
+"mini": 1370,
+"poster": 9850
+},
+"hash": "6ef4224a2496b2eeb1fe196521756a7a751dad10ff5308fd57b5977b3eaf9188",
+"q": 45
+},
+"Lying_Machine_Squat": {
+"bytes": {
+"anim": 47998,
+"mini": 1634,
+"poster": 10394
+},
+"hash": "462050bc948b4c202846ebd19d9dff0230c91e407ac4838e1639968c4cba6a45",
+"q": 45
+},
+"Lying_One-Arm_Lateral_Raise": {
+"bytes": {
+"anim": 36264,
+"mini": 1528,
+"poster": 9326
+},
+"hash": "dbac6342edeae4fbe03eb1fb8a6f747c84ca002410b993f79242490975b7e260",
+"q": 45
+},
+"Lying_Prone_Quadriceps": {
+"bytes": {
+"anim": 27988,
+"mini": 1164,
+"poster": 5902
+},
+"hash": "76883f9bf128ff9e93c153c3fc9c4398cb134755f654de4a9dd099da9a04c194",
+"q": 45
+},
+"Lying_Rear_Delt_Raise": {
+"bytes": {
+"anim": 35446,
+"mini": 1398,
+"poster": 7690
+},
+"hash": "a167a2c7dbc6345e95c59817e148a10d12b6654384043543753cfd5e9e972c47",
+"q": 45
+},
+"Lying_Supine_Dumbbell_Curl": {
+"bytes": {
+"anim": 34330,
+"mini": 1360,
+"poster": 7794
+},
+"hash": "d10ce8ee69879f9757f69c0098065ca23aaed887e1b3e4b861ce144626f9e1c3",
+"q": 45
+},
+"Lying_T-Bar_Row": {
+"bytes": {
+"anim": 56690,
+"mini": 1682,
+"poster": 13584
+},
+"hash": "e424855ec8fb86dfd61de4243f4235625ff457d96e173438853cb29f4f4e073e",
+"q": 40
+},
+"Lying_Triceps_Press": {
+"bytes": {
+"anim": 27356,
+"mini": 988,
+"poster": 5998
+},
+"hash": "020bb7c04638946e73a6166f24d4adcb779541748491db453b233c1eb7015833",
+"q": 45
+},
+"Machine_Bench_Press": {
+"bytes": {
+"anim": 35640,
+"mini": 1086,
+"poster": 8096
+},
+"hash": "780c201d8b6406b9ec9c0ba2fd37711d806c92450e4aa54c69db0fdf8329a88f",
+"q": 45
+},
+"Machine_Bicep_Curl": {
+"bytes": {
+"anim": 58892,
+"mini": 1896,
+"poster": 15474
+},
+"hash": "7cf489ce169675d39c3cfb961082db14771ec0116646741377ac9c6c5c3c8c5a",
+"q": 35
+},
+"Machine_Preacher_Curls": {
+"bytes": {
+"anim": 55142,
+"mini": 1622,
+"poster": 12544
+},
+"hash": "efdfb0c5bebdb03fe3fd6431ae3f12c57822f5c218b5b89e50eaef2df5c87d61",
+"q": 45
+},
+"Machine_Shoulder_Military_Press": {
+"bytes": {
+"anim": 37876,
+"mini": 1176,
+"poster": 8908
+},
+"hash": "eedb6b62d97c609a698d70dfa9a37701f5e7509d3507f7d785e96cbc5912c04c",
+"q": 45
+},
+"Machine_Triceps_Extension": {
+"bytes": {
+"anim": 58658,
+"mini": 1904,
+"poster": 13270
+},
+"hash": "42f23e2ae742c805e7c9553be3d95b265f70b3fd8cbf5805b483b67927ff618b",
+"q": 40
+},
+"Medicine_Ball_Chest_Pass": {
+"bytes": {
+"anim": 28366,
+"mini": 1020,
+"poster": 6080
+},
+"hash": "5b59d195626d8da71deceba7d13e341e29336c04aafbcf9db092825ee299651c",
+"q": 45
+},
+"Medicine_Ball_Full_Twist": {
+"bytes": {
+"anim": 29324,
+"mini": 1090,
+"poster": 6646
+},
+"hash": "656cb7eafe3abe5725326cec0716dc9af844e26e423a7092001950f3563bc063",
+"q": 45
+},
+"Medicine_Ball_Scoop_Throw": {
+"bytes": {
+"anim": 49652,
+"mini": 1504,
+"poster": 10500
+},
+"hash": "cc213583d33ac46629c393606b4b109ab1356ea5b7482c0c7d94c6f493558ab7",
+"q": 45
+},
+"Middle_Back_Shrug": {
+"bytes": {
+"anim": 27752,
+"mini": 988,
+"poster": 6256
+},
+"hash": "f27b8ac0ce7b7ee43984e178497ac49e49189830440134e52b1bbe716e3b1e7d",
+"q": 45
+},
+"Middle_Back_Stretch": {
+"bytes": {
+"anim": 18576,
+"mini": 826,
+"poster": 3838
+},
+"hash": "63a36b521ff0982000dfc96fb98fad1d68fb293e3e0f6cc66eee28f566cce2b8",
+"q": 45
+},
+"Mixed_Grip_Chin": {
+"bytes": {
+"anim": 21398,
+"mini": 928,
+"poster": 4680
+},
+"hash": "95808895dc867a14e96c9cf5093c518bdb021b3e2ef2da5b36b48df96ad70ea4",
+"q": 45
+},
+"Monster_Walk": {
+"bytes": {
+"anim": 16956,
+"mini": 560,
+"poster": 4064
+},
+"hash": "968f8f5c29821bd1be31b65540337805473f2859d1ba959a66ce3013e80af2de",
+"q": 45
+},
+"Mountain_Climbers": {
+"bytes": {
+"anim": 22500,
+"mini": 1072,
+"poster": 4740
+},
+"hash": "aeaaf619a3c14646d3b7f50fe1e037556da1482ef9619907f17ea8490dfce14f",
+"q": 45
+},
+"Moving_Claw_Series": {
+"bytes": {
+"anim": 16792,
+"mini": 536,
+"poster": 4272
+},
+"hash": "57468827227eaf4c00f2cc5e6be83d7864ed41c053552a666bb2f4aff740f790",
+"q": 45
+},
+"Muscle_Snatch": {
+"bytes": {
+"anim": 26916,
+"mini": 1026,
+"poster": 5952
+},
+"hash": "035508652ce6e08b66606fdedbbaf9d8274633cfe38dc4d8fb44ffd7f5988cc2",
+"q": 45
+},
+"Muscle_Up": {
+"bytes": {
+"anim": 42372,
+"mini": 1538,
+"poster": 8888
+},
+"hash": "d02444aa8776e7eb7ee0cb1f1dd90c4bf491961371866953de40ac24f2b6979a",
+"q": 45
+},
+"Narrow_Stance_Hack_Squats": {
+"bytes": {
+"anim": 43424,
+"mini": 1408,
+"poster": 9882
+},
+"hash": "6780b0865d97d4d9b9c61def69424527444fd06930e9e38cca7c19a4550517d7",
+"q": 45
+},
+"Narrow_Stance_Leg_Press": {
+"bytes": {
+"anim": 47482,
+"mini": 1372,
+"poster": 10728
+},
+"hash": "08005d2493e108be73127f336c168275892ada8dee0bc2e4d20b35584ed1a93a",
+"q": 45
+},
+"Narrow_Stance_Squats": {
+"bytes": {
+"anim": 45054,
+"mini": 1572,
+"poster": 9548
+},
+"hash": "02d4e9000512cd28b2c3e9d53e5e43d18e234a434806dec9a5929e576a0ad214",
+"q": 45
+},
+"Natural_Glute_Ham_Raise": {
+"bytes": {
+"anim": 40414,
+"mini": 1246,
+"poster": 8670
+},
+"hash": "7b1d14b402fbc33d1b1a658faba90269bc684d29815a1f0065caf5dc3dd86257",
+"q": 45
+},
+"Neck-SMR": {
+"bytes": {
+"anim": 26948,
+"mini": 1154,
+"poster": 5478
+},
+"hash": "eedc6c6bcacf54445846ba739f1400040ac074d236f0d170fd0bd0c7ddac1a1d",
+"q": 45
+},
+"Neck_Press": {
+"bytes": {
+"anim": 38034,
+"mini": 1262,
+"poster": 8616
+},
+"hash": "9943bb7d3d9a065c15a3fa330eae76e37ebe2e4cbc021518f7681d30fcfc7ad2",
+"q": 45
+},
+"Oblique_Crunches": {
+"bytes": {
+"anim": 39948,
+"mini": 1518,
+"poster": 9078
+},
+"hash": "5ae31553b1fc7de0a957b1786d4fe7bb9538ae04c773678ce09a06c9ed97a251",
+"q": 45
+},
+"Oblique_Crunches_-_On_The_Floor": {
+"bytes": {
+"anim": 29252,
+"mini": 1006,
+"poster": 6296
+},
+"hash": "2258015e5b96c7b487e45d658230b1440ec9f37d1286230f702c329e034d6ec5",
+"q": 45
+},
+"Olympic_Squat": {
+"bytes": {
+"anim": 25126,
+"mini": 916,
+"poster": 5138
+},
+"hash": "f7e75e80493129d819e9d6b3011011311e77cb9ba4d91c371514724e1487c5ca",
+"q": 45
+},
+"On-Your-Back_Quad_Stretch": {
+"bytes": {
+"anim": 53450,
+"mini": 1466,
+"poster": 11682
+},
+"hash": "744f90efab73d16fdd024611662eb2c548fc0efa5252b133f9ccc94cbde11110",
+"q": 45
+},
+"On_Your_Side_Quad_Stretch": {
+"bytes": {
+"anim": 25666,
+"mini": 1010,
+"poster": 5062
+},
+"hash": "b76f24affa0a4a88465407c06b59e75c44cc2dc431284ceef44db752f2025f77",
+"q": 45
+},
+"One-Arm_Dumbbell_Row": {
+"bytes": {
+"anim": 41988,
+"mini": 1610,
+"poster": 9566
+},
+"hash": "2f630d186276195084a95281311c6a0de78da62ea0261aa543fe189827c87e89",
+"q": 45
+},
+"One-Arm_Flat_Bench_Dumbbell_Flye": {
+"bytes": {
+"anim": 29164,
+"mini": 918,
+"poster": 6222
+},
+"hash": "c3450fcf2e0904067f15306919456492bbf54fc73353ef3cb0e2a8dc9d881eba",
+"q": 45
+},
+"One-Arm_High-Pulley_Cable_Side_Bends": {
+"bytes": {
+"anim": 41166,
+"mini": 1466,
+"poster": 8730
+},
+"hash": "e67427ce22ff8e0cbddcfa497d4bf9a46e0d2b6a50f0ad5eb6d013984f3ddaba",
+"q": 45
+},
+"One-Arm_Incline_Lateral_Raise": {
+"bytes": {
+"anim": 30574,
+"mini": 1034,
+"poster": 6806
+},
+"hash": "227e7ff5a7b445ae7882f0c2d014bb71b9d4f94d85e0af35ae497ed647a3e5e5",
+"q": 45
+},
+"One-Arm_Kettlebell_Clean": {
+"bytes": {
+"anim": 23870,
+"mini": 882,
+"poster": 5036
+},
+"hash": "1944db62637c822e1aceaf1090572aeb69bf8595ef15682ce676a01c268ec08c",
+"q": 45
+},
+"One-Arm_Kettlebell_Clean_and_Jerk": {
+"bytes": {
+"anim": 25924,
+"mini": 970,
+"poster": 5684
+},
+"hash": "af579289da543fe7751138f8813b32371d47c4845514f66494f99aa1be8ecd15",
+"q": 45
+},
+"One-Arm_Kettlebell_Floor_Press": {
+"bytes": {
+"anim": 27468,
+"mini": 1068,
+"poster": 5804
+},
+"hash": "f3df6642b4bac1c01362813bcc795afaa2b86d477ba64473068377c0c3239c9b",
+"q": 45
+},
+"One-Arm_Kettlebell_Jerk": {
+"bytes": {
+"anim": 25492,
+"mini": 964,
+"poster": 5686
+},
+"hash": "782827a4263e61bab838895fb058a96a1e292c3cf97e11af90da94496200f56a",
+"q": 45
+},
+"One-Arm_Kettlebell_Military_Press_To_The_Side": {
+"bytes": {
+"anim": 25658,
+"mini": 852,
+"poster": 5274
+},
+"hash": "abf7b5eee8e5bcbea05f7203b70c20068612621ddc1eb86acafc44a2996951c8",
+"q": 45
+},
+"One-Arm_Kettlebell_Para_Press": {
+"bytes": {
+"anim": 25776,
+"mini": 918,
+"poster": 5480
+},
+"hash": "254fd7bd869ea8f8e893c71c713310670a5916e9f6c0d1b40220abb7c955480f",
+"q": 45
+},
+"One-Arm_Kettlebell_Push_Press": {
+"bytes": {
+"anim": 26634,
+"mini": 898,
+"poster": 5412
+},
+"hash": "573cacbb6450ec491b72432843e6044f03ecfb7b2c5dcbe41b5ac53f8fc21030",
+"q": 45
+},
+"One-Arm_Kettlebell_Row": {
+"bytes": {
+"anim": 37354,
+"mini": 1334,
+"poster": 8526
+},
+"hash": "9807c3014d9b0704b3b6ebb966415fbffce9770f64060c1498170fc7434813d8",
+"q": 45
+},
+"One-Arm_Kettlebell_Snatch": {
+"bytes": {
+"anim": 25178,
+"mini": 950,
+"poster": 5458
+},
+"hash": "02bfcb155a09ac7541aed57146a2d3ccf6794acac7321f5644afba98fe1bc36c",
+"q": 45
+},
+"One-Arm_Kettlebell_Split_Jerk": {
+"bytes": {
+"anim": 26114,
+"mini": 912,
+"poster": 5652
+},
+"hash": "9da35fe5ad83a1dc496fcf95417c8d1d97cfa185ec1a7bcd09c6a890cd446ead",
+"q": 45
+},
+"One-Arm_Kettlebell_Split_Snatch": {
+"bytes": {
+"anim": 24776,
+"mini": 872,
+"poster": 5142
+},
+"hash": "6d7ec0cb5794033abe895a6c1c43958eefcdf83ce4db006fe5dfd4cd0603a2c1",
+"q": 45
+},
+"One-Arm_Kettlebell_Swings": {
+"bytes": {
+"anim": 25582,
+"mini": 944,
+"poster": 5654
+},
+"hash": "77870aa85d9729288d67becc6eb336fd9ec085e46cc9492bf2f882f554de4257",
+"q": 45
+},
+"One-Arm_Long_Bar_Row": {
+"bytes": {
+"anim": 23904,
+"mini": 996,
+"poster": 7064
+},
+"hash": "6fdc64950b3ecd85ddb824fb81702b0a8a9e8b006a4955c354a122f80f6ce738",
+"q": 45
+},
+"One-Arm_Medicine_Ball_Slam": {
+"bytes": {
+"anim": 32950,
+"mini": 1086,
+"poster": 7548
+},
+"hash": "86f654a90051889267f5796b7ed7fbd8cc76ec04c74ab60e238200ae501be1bb",
+"q": 45
+},
+"One-Arm_Open_Palm_Kettlebell_Clean": {
+"bytes": {
+"anim": 25160,
+"mini": 920,
+"poster": 5380
+},
+"hash": "ec2bebf2a9bfc589eecf85944cd626f2ab2c244bb786d671d67ed344ffa08512",
+"q": 45
+},
+"One-Arm_Overhead_Kettlebell_Squats": {
+"bytes": {
+"anim": 26018,
+"mini": 930,
+"poster": 5608
+},
+"hash": "9af0753f6083916cd55372fcdd9605344bc348f5ba9722099c5534bac19a3522",
+"q": 45
+},
+"One-Arm_Side_Deadlift": {
+"bytes": {
+"anim": 27562,
+"mini": 1038,
+"poster": 6130
+},
+"hash": "b2ece506c23dca4ab841e338c388630bbc4e140711c4d6d4a24567edf09c7502",
+"q": 45
+},
+"One-Arm_Side_Laterals": {
+"bytes": {
+"anim": 35088,
+"mini": 1152,
+"poster": 7452
+},
+"hash": "cc809dd4ff1d2535b692d5a3d2b7fe470f38515544ed60aaa2429b8b3f569477",
+"q": 45
+},
+"One-Legged_Cable_Kickback": {
+"bytes": {
+"anim": 41394,
+"mini": 1288,
+"poster": 8950
+},
+"hash": "9ae56655a6f3867153cff90224e812bc067465f7cc7e16c12f0418dca8f71a8b",
+"q": 45
+},
+"One_Arm_Against_Wall": {
+"bytes": {
+"anim": 3644,
+"mini": 926,
+"poster": 4302
+},
+"hash": "3efeb51dce5292630084c0f2f4c0a0ec4893d7fb14b31140ed96d5fe5ec951f8",
+"q": 45
+},
+"One_Arm_Chin-Up": {
+"bytes": {
+"anim": 29488,
+"mini": 1170,
+"poster": 6190
+},
+"hash": "81bca99ae1039bb14e2fa9d56edb501de9e59ee9d204bd6c90768d2562b03a5b",
+"q": 45
+},
+"One_Arm_Dumbbell_Bench_Press": {
+"bytes": {
+"anim": 39560,
+"mini": 1482,
+"poster": 8716
+},
+"hash": "e194e100b2d2e32683c18d9e51997aa4856b6d56e51995f58976b71edb8296a0",
+"q": 45
+},
+"One_Arm_Dumbbell_Preacher_Curl": {
+"bytes": {
+"anim": 29958,
+"mini": 1172,
+"poster": 6372
+},
+"hash": "6f853821a01df318f9d15a8ae007933ce17b1ba7cc55c64659453e8630f945a1",
+"q": 45
+},
+"One_Arm_Floor_Press": {
+"bytes": {
+"anim": 36872,
+"mini": 1318,
+"poster": 7414
+},
+"hash": "08364a6444db8c603e55e5a9e8d3f56eff5c1284ef3a6aae889733da1838d8d1",
+"q": 45
+},
+"One_Arm_Lat_Pulldown": {
+"bytes": {
+"anim": 37558,
+"mini": 1250,
+"poster": 7842
+},
+"hash": "4c16cc5c763ad7ea914ad1fed88744a45a84fc7a69c30c78c6a91678f1c33f52",
+"q": 45
+},
+"One_Arm_Pronated_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 39530,
+"mini": 1546,
+"poster": 9260
+},
+"hash": "6ae28ed2c93b02a2a3b383d0f6e319e7156adb6c600070f42f0c29e5b8babab6",
+"q": 45
+},
+"One_Arm_Supinated_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 36098,
+"mini": 1392,
+"poster": 8246
+},
+"hash": "78ad5f161a151dada85b177875cf975783e8a16174d1433ea4634a456647b52b",
+"q": 45
+},
+"One_Half_Locust": {
+"bytes": {
+"anim": 25780,
+"mini": 1098,
+"poster": 5408
+},
+"hash": "553c8530b07ba9fcd99c5f46fb6e893ab3c7960ef22b3c255b18ff388748041a",
+"q": 45
+},
+"One_Handed_Hang": {
+"bytes": {
+"anim": 58990,
+"mini": 1718,
+"poster": 14728
+},
+"hash": "1598c7b834b85c0ef6f1e1f67fcab5239e577fd16dbbced5d3a9ffbcc888520f",
+"q": 35
+},
+"One_Knee_To_Chest": {
+"bytes": {
+"anim": 25268,
+"mini": 1160,
+"poster": 5290
+},
+"hash": "35c9e6abd5706e7696fda59c74ce2e62eca5ce7056e24ab9b952832c2c749684",
+"q": 45
+},
+"One_Leg_Barbell_Squat": {
+"bytes": {
+"anim": 46340,
+"mini": 1586,
+"poster": 9774
+},
+"hash": "7cb7120a2fd3c98f355c224f602d490b25f091ab98e68cdf4e9c007e9f34d49c",
+"q": 45
+},
+"Open_Palm_Kettlebell_Clean": {
+"bytes": {
+"anim": 25564,
+"mini": 950,
+"poster": 5538
+},
+"hash": "5b408eb9fef3095176a80152f87530a26dc4824ea7a711b86f0f6aeb3138b053",
+"q": 45
+},
+"Otis-Up": {
+"bytes": {
+"anim": 23576,
+"mini": 964,
+"poster": 6220
+},
+"hash": "07d1eb19e44ba9e8172057a23d8bdd471da3dc93610a566be2b4b4dfe66c1823",
+"q": 45
+},
+"Overhead_Cable_Curl": {
+"bytes": {
+"anim": 38276,
+"mini": 1160,
+"poster": 8380
+},
+"hash": "1e8f4a286a8bbcc6c426d9ce0b94365dd22037910c3a2e4024fc0b6500132cea",
+"q": 45
+},
+"Overhead_Lat": {
+"bytes": {
+"anim": 26690,
+"mini": 1148,
+"poster": 5680
+},
+"hash": "be4d2026c3bdcc18cd13c3b9c1e34ccf06e2b4ed92c6036d03eb941103a1cd67",
+"q": 45
+},
+"Overhead_Slam": {
+"bytes": {
+"anim": 18202,
+"mini": 660,
+"poster": 3770
+},
+"hash": "94d6ca577722a73f5e2d6577e8893ccc8e3d6da43bfc891af5ecd845fb9d4d2e",
+"q": 45
+},
+"Overhead_Squat": {
+"bytes": {
+"anim": 23872,
+"mini": 904,
+"poster": 5316
+},
+"hash": "4e06ae757944d6ed5888b96c6f714298a960590f970e6942c8e1b77ea35bade1",
+"q": 45
+},
+"Overhead_Stretch": {
+"bytes": {
+"anim": 19466,
+"mini": 826,
+"poster": 3838
+},
+"hash": "834072ab132ef2f0c29455fde50bc8a66d74e85352f0118f49b244ae46701d1b",
+"q": 45
+},
+"Overhead_Triceps": {
+"bytes": {
+"anim": 24776,
+"mini": 1106,
+"poster": 5494
+},
+"hash": "f695a54f4d1a904a99055a72b21e86af077e85c7e85ef9f8dd3a8f19e6c010f2",
+"q": 45
+},
+"Pallof_Press": {
+"bytes": {
+"anim": 13850,
+"mini": 552,
+"poster": 3126
+},
+"hash": "4ee6633a1995ae63aa7a985d502dce04331bcb2e18e13eed2ab1e97f404c7610",
+"q": 45
+},
+"Pallof_Press_With_Rotation": {
+"bytes": {
+"anim": 36654,
+"mini": 1458,
+"poster": 7838
+},
+"hash": "511e2b5f6b83c3639a5b24f430011bccab090abcb214c94aaee8394684e58a13",
+"q": 45
+},
+"Palms-Down_Dumbbell_Wrist_Curl_Over_A_Bench": {
+"bytes": {
+"anim": 27900,
+"mini": 948,
+"poster": 6430
+},
+"hash": "65e10a8f2d00c5c5d932f03c30b65b72d9d78edced959b34334cd6213c52b75e",
+"q": 45
+},
+"Palms-Down_Wrist_Curl_Over_A_Bench": {
+"bytes": {
+"anim": 37676,
+"mini": 1554,
+"poster": 9122
+},
+"hash": "257bf708ce9639808603028a77dcb259c46b681c115f72913305ff32ffb84a05",
+"q": 45
+},
+"Palms-Up_Barbell_Wrist_Curl_Over_A_Bench": {
+"bytes": {
+"anim": 42018,
+"mini": 1518,
+"poster": 8878
+},
+"hash": "a8ee605fad35027ddf144adc2acd469b22ee085ddfe660e434ec9183435a6faa",
+"q": 45
+},
+"Palms-Up_Dumbbell_Wrist_Curl_Over_A_Bench": {
+"bytes": {
+"anim": 29418,
+"mini": 998,
+"poster": 6692
+},
+"hash": "766dcdb257d9ab62c3bdb9dd6c6fd4ad7d7a34d234a56d836609ec046eae5c6d",
+"q": 45
+},
+"Parallel_Bar_Dip": {
+"bytes": {
+"anim": 33496,
+"mini": 1216,
+"poster": 7178
+},
+"hash": "5ca0cbe23dd35675b5f64d7002e87a96fa8638dd4656df8898ccb0a156f6cade",
+"q": 45
+},
+"Pelvic_Tilt_Into_Bridge": {
+"bytes": {
+"anim": 23332,
+"mini": 1082,
+"poster": 4858
+},
+"hash": "6218be687585247f277b3ad292dc0974193b473f660282b60a56ca91bf27747e",
+"q": 45
+},
+"Peroneals-SMR": {
+"bytes": {
+"anim": 28334,
+"mini": 1098,
+"poster": 5302
+},
+"hash": "6a2b7c6a60fc839d1c1d59ec76762cb016ba2a8f4c9002041e7d7b8431605905",
+"q": 45
+},
+"Peroneals_Stretch": {
+"bytes": {
+"anim": 28108,
+"mini": 1206,
+"poster": 5952
+},
+"hash": "a4138bfed35e847d763dea2fc7871f45797eba690bb9fb9b1a54ee82abcad271",
+"q": 45
+},
+"Physioball_Hip_Bridge": {
+"bytes": {
+"anim": 55674,
+"mini": 1730,
+"poster": 13026
+},
+"hash": "6caf93dd9f42ae6f182f5bd17c8850018e7ea1e5143d95fb5e8da944c7eeffc8",
+"q": 45
+},
+"Pin_Presses": {
+"bytes": {
+"anim": 31804,
+"mini": 1126,
+"poster": 6550
+},
+"hash": "5293a18622f05d6c91c985fc235fe6f89b4e4e4f91a3c6a6906c782a3dc7d96e",
+"q": 45
+},
+"Piriformis-SMR": {
+"bytes": {
+"anim": 28560,
+"mini": 1260,
+"poster": 6152
+},
+"hash": "5e0ac5c59db1ad85afff9e42d031ebba9126da84686da6ea5a5a19b65da62f27",
+"q": 45
+},
+"Plank": {
+"bytes": {
+"anim": 16818,
+"mini": 608,
+"poster": 3932
+},
+"hash": "f0e8c5ccc9e149eb000b42239f02c5de4ea96119f3cf79328dd658bc557fb706",
+"q": 45
+},
+"Plate_Pinch": {
+"bytes": {
+"anim": 31444,
+"mini": 1130,
+"poster": 6544
+},
+"hash": "8bb07c5c0ce24d4510c2af989679980c27edb3b54e98d56c7d431e2114b44fc2",
+"q": 45
+},
+"Plate_Twist": {
+"bytes": {
+"anim": 24226,
+"mini": 926,
+"poster": 5388
+},
+"hash": "48b79d67f42bf5afb66f7c1313a74cd3e7287c9998647cabd3df8992309174a5",
+"q": 45
+},
+"Platform_Hamstring_Slides": {
+"bytes": {
+"anim": 53842,
+"mini": 1598,
+"poster": 12004
+},
+"hash": "f035b48b0d5905d97c9528b434f1927f08b20db9e2a2509c0c80afbb93f3f806",
+"q": 45
+},
+"Plie_Dumbbell_Squat": {
+"bytes": {
+"anim": 28758,
+"mini": 1112,
+"poster": 6298
+},
+"hash": "87e966c15784265c2ff2359013202e4cdd11ceefc3c6ce093c88233be2f652d1",
+"q": 45
+},
+"Plyo_Kettlebell_Pushups": {
+"bytes": {
+"anim": 21906,
+"mini": 870,
+"poster": 4894
+},
+"hash": "64cc239710bdc15ebc7041f72ddbba4dca3cdf2601c141af771088512527650e",
+"q": 45
+},
+"Plyo_Push-up": {
+"bytes": {
+"anim": 17068,
+"mini": 568,
+"poster": 4526
+},
+"hash": "7de4fa5127b0c2680350748eb05e1776116ce4a78c9a6f51ef8f29d67ef19276",
+"q": 45
+},
+"Posterior_Tibialis_Stretch": {
+"bytes": {
+"anim": 29704,
+"mini": 1324,
+"poster": 6586
+},
+"hash": "2716f2127a58124f6e37a4074fd54e78ccca3e5009604919b3ffc89c84f502ea",
+"q": 45
+},
+"Power_Clean": {
+"bytes": {
+"anim": 43978,
+"mini": 1566,
+"poster": 9752
+},
+"hash": "5ed9f1b29bec7c9cc09bea3998b37e24987153c277cc439e7e061d884d024214",
+"q": 45
+},
+"Power_Clean_from_Blocks": {
+"bytes": {
+"anim": 31798,
+"mini": 1168,
+"poster": 6972
+},
+"hash": "0efd2a94a596238fd93143d8b921aa5934e2c0b927e1ef14ab7b5e25fa139a17",
+"q": 45
+},
+"Power_Jerk": {
+"bytes": {
+"anim": 24698,
+"mini": 1064,
+"poster": 5916
+},
+"hash": "6b6db8c4789ae53fd1f1d0e1b281ea87d8f39e6b5751ed1458f3c20826c5113f",
+"q": 45
+},
+"Power_Partials": {
+"bytes": {
+"anim": 26726,
+"mini": 980,
+"poster": 5520
+},
+"hash": "83b6476926d546a38214314b309330c15727472bae687bfacfa5e23949319ac8",
+"q": 45
+},
+"Power_Snatch": {
+"bytes": {
+"anim": 30468,
+"mini": 1092,
+"poster": 6374
+},
+"hash": "17bba820f38e62b4952407dc657501ae0a7bc2d28614e6b78c5395f4167e0d33",
+"q": 45
+},
+"Power_Snatch_from_Blocks": {
+"bytes": {
+"anim": 32472,
+"mini": 1166,
+"poster": 7056
+},
+"hash": "405ed33adc908c67ef36e8d19a141f9702d514e281db3cd085bb4557ad766bbf",
+"q": 45
+},
+"Power_Stairs": {
+"bytes": {
+"anim": 24954,
+"mini": 866,
+"poster": 5444
+},
+"hash": "7e2ddd9d83be97085dbe208494d4d92783166cbcfa243d9dd88a6397e36f0f1f",
+"q": 45
+},
+"Preacher_Curl": {
+"bytes": {
+"anim": 37446,
+"mini": 1264,
+"poster": 7854
+},
+"hash": "fd1b645dd6a95dd42e3b794b54aea03d74b3fa8e23f86fd486fedc90fc870227",
+"q": 45
+},
+"Preacher_Hammer_Dumbbell_Curl": {
+"bytes": {
+"anim": 32310,
+"mini": 1074,
+"poster": 6880
+},
+"hash": "9404d86293b9ffa3f6dc90b0f9e832d170d57079a952040b213fa6d0d2985443",
+"q": 45
+},
+"Press_Sit-Up": {
+"bytes": {
+"anim": 36708,
+"mini": 1162,
+"poster": 7640
+},
+"hash": "dce8cd0fc54ae388a49fb2af1446fc25de6f295a4ff95f82b5c79400d0321744",
+"q": 45
+},
+"Prone_Manual_Hamstring": {
+"bytes": {
+"anim": 54426,
+"mini": 1572,
+"poster": 11934
+},
+"hash": "22f009801c947c0524fad09fb3c538cdf5b85e5ac4b79fbb9a10b6eb8a747de9",
+"q": 45
+},
+"Prowler_Sprint": {
+"bytes": {
+"anim": 15012,
+"mini": 492,
+"poster": 4000
+},
+"hash": "e393b0c1e1cd77ceb6aebbca632ac65762c8cf3bfabb5cac343efc2dbadf0a76",
+"q": 45
+},
+"Pull_Through": {
+"bytes": {
+"anim": 31144,
+"mini": 1186,
+"poster": 6716
+},
+"hash": "97c66172e34d13e10c9983e92776847636153beca32231b4f0a25de65e37efe7",
+"q": 45
+},
+"Pullups": {
+"bytes": {
+"anim": 23102,
+"mini": 954,
+"poster": 5042
+},
+"hash": "f8d304fa1a717b90041a1dcb27e3d748f7bac0e78084c6327474834ec5663c6c",
+"q": 45
+},
+"Push-Up_Wide": {
+"bytes": {
+"anim": 25276,
+"mini": 1002,
+"poster": 5974
+},
+"hash": "de5d0a3ce074478315ee4ebf501673e3e673c1b1369ec93cf740b8d90dbda3da",
+"q": 45
+},
+"Push-Ups_-_Close_Triceps_Position": {
+"bytes": {
+"anim": 35444,
+"mini": 1360,
+"poster": 8132
+},
+"hash": "064e7ba1e05f8fe2e9af88c25e3fc8aa0923bd72e2b08d439d034165f1e9271f",
+"q": 45
+},
+"Push-Ups_With_Feet_Elevated": {
+"bytes": {
+"anim": 33520,
+"mini": 1230,
+"poster": 7426
+},
+"hash": "04c0c5698497cfcd258dac65f90802adf1f16ee07ad7764b3113c7bf1a9c623e",
+"q": 45
+},
+"Push-Ups_With_Feet_On_An_Exercise_Ball": {
+"bytes": {
+"anim": 18336,
+"mini": 978,
+"poster": 6400
+},
+"hash": "b562bc96aee81fedd87414df24c8b7abd80ec7de02b9baa08a23e8698774c5ba",
+"q": 45
+},
+"Push_Press": {
+"bytes": {
+"anim": 23370,
+"mini": 882,
+"poster": 5080
+},
+"hash": "1a475afc894141dff324a4c594c62c47d890d656581179b2229abaed4ce60e69",
+"q": 45
+},
+"Push_Press_-_Behind_the_Neck": {
+"bytes": {
+"anim": 26932,
+"mini": 1098,
+"poster": 6420
+},
+"hash": "2848089ea44b7c2d27e75d0fb1ab78a40d5cd0debf8d9996481e2e1a0440d027",
+"q": 45
+},
+"Push_Up_to_Side_Plank": {
+"bytes": {
+"anim": 13786,
+"mini": 566,
+"poster": 3690
+},
+"hash": "1cb3d8a4918520c2bf0d46e423563964a784232a79f9aaadcd694125ab2ee418",
+"q": 45
+},
+"Pushups": {
+"bytes": {
+"anim": 26572,
+"mini": 892,
+"poster": 6472
+},
+"hash": "8bfc8d1c82b7b15f58e4e977a187d8ad66b9601003bc00accffcecb4bf44770b",
+"q": 45
+},
+"Pushups_Close_and_Wide_Hand_Positions": {
+"bytes": {
+"anim": 37448,
+"mini": 1392,
+"poster": 8378
+},
+"hash": "29ec5ea09b99764f57cecd3149e870ce74aee03ad035266c575517e28beb0dc7",
+"q": 45
+},
+"Pyramid": {
+"bytes": {
+"anim": 22978,
+"mini": 1068,
+"poster": 5418
+},
+"hash": "694b4f800b8a3b5f1535016f767d83081dbc6f18737aa9f91d2aa5392e10de01",
+"q": 45
+},
+"Quad_Stretch": {
+"bytes": {
+"anim": 25650,
+"mini": 1110,
+"poster": 5308
+},
+"hash": "5fc354acaf53859d7e4ffef253b19f49ca50d4bceda663f1e5e72562488a8f20",
+"q": 45
+},
+"Quadriceps-SMR": {
+"bytes": {
+"anim": 27048,
+"mini": 1070,
+"poster": 5434
+},
+"hash": "1fa03e2f7285eebafe2c9c7f483caa2639ad3d23b8ad2e2b7eb07a11a0448ff5",
+"q": 45
+},
+"Quick_Leap": {
+"bytes": {
+"anim": 16494,
+"mini": 608,
+"poster": 3572
+},
+"hash": "40a2e5a4f5caf22572b8f5572c1c710919bc0667b1623c47075323386d121edd",
+"q": 45
+},
+"Rack_Delivery": {
+"bytes": {
+"anim": 20534,
+"mini": 860,
+"poster": 4552
+},
+"hash": "89380683ca86e520453a1632dda00c4e7d23f7aa697f84f64a9c948554f93a3b",
+"q": 45
+},
+"Rack_Pull_with_Bands": {
+"bytes": {
+"anim": 37548,
+"mini": 1370,
+"poster": 7830
+},
+"hash": "0dcdf0f1c0cba9661fca9e5b9af458fd5f340f5a564ee4cb66c657b8c912ef64",
+"q": 45
+},
+"Rack_Pulls": {
+"bytes": {
+"anim": 37438,
+"mini": 1290,
+"poster": 7360
+},
+"hash": "d765d4023d5f2db7fee8c3de54cec7541bd585370dc373053a9495a1e593102a",
+"q": 45
+},
+"Rear_Leg_Raises": {
+"bytes": {
+"anim": 26424,
+"mini": 1098,
+"poster": 5408
+},
+"hash": "00c771681b56dbb51eaf716bdea1403c13781b15c7e1fca344c9564382e797d0",
+"q": 45
+},
+"Recumbent_Bike": {
+"bytes": {
+"anim": 25924,
+"mini": 1084,
+"poster": 6188
+},
+"hash": "9db090aca42f0b6f9e6ff76ac78a0604af7b1cc1f859dd9dc5381c6917f3fdd6",
+"q": 45
+},
+"Return_Push_from_Stance": {
+"bytes": {
+"anim": 24228,
+"mini": 778,
+"poster": 4708
+},
+"hash": "9c4706af4e51fe1ccdd9dfb999d1f6fd4b11e9aa77160e95b7a549cdcb10f362",
+"q": 45
+},
+"Reverse_Band_Bench_Press": {
+"bytes": {
+"anim": 29008,
+"mini": 1014,
+"poster": 5992
+},
+"hash": "8bd7b33e8b9182bd64a20fa50177079f7c7247d4b4fb59affc459d91589e63b5",
+"q": 45
+},
+"Reverse_Band_Box_Squat": {
+"bytes": {
+"anim": 36116,
+"mini": 1228,
+"poster": 7938
+},
+"hash": "dff64740f3684dd0c25909a8a802b37375d95c9886a4aa9e8c25decc4b3b488a",
+"q": 45
+},
+"Reverse_Band_Deadlift": {
+"bytes": {
+"anim": 35640,
+"mini": 1196,
+"poster": 8196
+},
+"hash": "594584b149f1dc4664ac19ec57193af531530b0d89c5a76f8e19df9625ca49b7",
+"q": 45
+},
+"Reverse_Band_Power_Squat": {
+"bytes": {
+"anim": 35066,
+"mini": 1144,
+"poster": 7962
+},
+"hash": "94cfac91e43f9045180b600cde233ad7b893954683b2f49553143928dc22f0db",
+"q": 45
+},
+"Reverse_Band_Sumo_Deadlift": {
+"bytes": {
+"anim": 35374,
+"mini": 1198,
+"poster": 8096
+},
+"hash": "271342b099876510cac9eefc0bc638f088d2bfc259dffa2f38fa4d398b53ea1b",
+"q": 45
+},
+"Reverse_Barbell_Curl": {
+"bytes": {
+"anim": 31444,
+"mini": 1082,
+"poster": 6562
+},
+"hash": "827fec2670b97296c2714f180c25c17f670b48e2585a517e98b185c74ecdb922",
+"q": 45
+},
+"Reverse_Barbell_Preacher_Curls": {
+"bytes": {
+"anim": 50070,
+"mini": 1616,
+"poster": 12566
+},
+"hash": "99d18659ff005c634f8847743e1f8c255c2d25d565cc83698958589fbaaad3c8",
+"q": 45
+},
+"Reverse_Cable_Curl": {
+"bytes": {
+"anim": 43178,
+"mini": 1164,
+"poster": 9818
+},
+"hash": "2d5237596be1275c674dc49e667129d04ea866a95db640c52be5f6a2e61537c7",
+"q": 45
+},
+"Reverse_Crunch": {
+"bytes": {
+"anim": 26736,
+"mini": 890,
+"poster": 5692
+},
+"hash": "3b23e2b14a2f8c4b5524082568fce00bfb90bcd93d0b769954e68cf01b0421d0",
+"q": 45
+},
+"Reverse_Flyes": {
+"bytes": {
+"anim": 30714,
+"mini": 1050,
+"poster": 6850
+},
+"hash": "ebe39e719cfe9e5205739ec667777384d17c64b2a6e0cb6ac71b9b18a17db149",
+"q": 45
+},
+"Reverse_Flyes_With_External_Rotation": {
+"bytes": {
+"anim": 29780,
+"mini": 1028,
+"poster": 6630
+},
+"hash": "c5b54f854473cbe80de165a505d72e7848b8159ca99ffa58d6aa8af0aab4074d",
+"q": 45
+},
+"Reverse_Grip_Bent-Over_Rows": {
+"bytes": {
+"anim": 5908,
+"mini": 1156,
+"poster": 6952
+},
+"hash": "d46ad1e31014c6e244fbbb7734ec314147af4b747aa1f1c818de93e28fb06dee",
+"q": 45
+},
+"Reverse_Grip_Triceps_Pushdown": {
+"bytes": {
+"anim": 38932,
+"mini": 1108,
+"poster": 8754
+},
+"hash": "36ff3ac0cfa8a00ee40273ce179271d8846dad2418dc853e7c2dc45a65b3d042",
+"q": 45
+},
+"Reverse_Hyperextension": {
+"bytes": {
+"anim": 45686,
+"mini": 1498,
+"poster": 10124
+},
+"hash": "c624851853738769183023b3e7b9d046af0135e7dbf33715c8640fe2e8c7b8b5",
+"q": 45
+},
+"Reverse_Machine_Flyes": {
+"bytes": {
+"anim": 51246,
+"mini": 1524,
+"poster": 11688
+},
+"hash": "92d4d16045574d13b0af13b550346c3f225177c2b8e29da0d4d8afaeb69f49ce",
+"q": 45
+},
+"Reverse_Plate_Curls": {
+"bytes": {
+"anim": 27526,
+"mini": 1052,
+"poster": 6198
+},
+"hash": "9c0e6022a4b52a757500516b4f63b7866d33ba2038fc7ced1f38029cad33d9d0",
+"q": 45
+},
+"Reverse_Triceps_Bench_Press": {
+"bytes": {
+"anim": 38506,
+"mini": 1186,
+"poster": 8308
+},
+"hash": "a91de5857c434aa6e959e775a12c160a38c244a9f4bdda2fc73ecc2b84661a62",
+"q": 45
+},
+"Rhomboids-SMR": {
+"bytes": {
+"anim": 26446,
+"mini": 1028,
+"poster": 5162
+},
+"hash": "c12d8d2c6e9371c0fdda290f0c628cea922fd5c5c40fddfe6ae119ae6039d738",
+"q": 45
+},
+"Rickshaw_Carry": {
+"bytes": {
+"anim": 43888,
+"mini": 1360,
+"poster": 11024
+},
+"hash": "e1e81cb0062a0952fa8106c76730e29b65063f325c61e50d9c4e54af70451d89",
+"q": 45
+},
+"Rickshaw_Deadlift": {
+"bytes": {
+"anim": 38908,
+"mini": 1204,
+"poster": 8410
+},
+"hash": "ce10e2ec485f2dfc94b9e81eb1a55253d456bd319d303bf9827d7c60271e4a7d",
+"q": 45
+},
+"Ring_Dips": {
+"bytes": {
+"anim": 53916,
+"mini": 1644,
+"poster": 10922
+},
+"hash": "64badbd5c62f01e69d2e5dbdc17072e4bdc0a7e135b9cd8f1d51714aa2a351f8",
+"q": 45
+},
+"Rocket_Jump": {
+"bytes": {
+"anim": 15304,
+"mini": 532,
+"poster": 3000
+},
+"hash": "5997f319382145b83d7fdc8e73baec5e8549964061bf87ac03a6c7142cdaa62d",
+"q": 45
+},
+"Rocking_Standing_Calf_Raise": {
+"bytes": {
+"anim": 39346,
+"mini": 1432,
+"poster": 8786
+},
+"hash": "0272303045e9753f288b6f9488eea12b7d26e2f61d935c2a6db5e779deb12fe2",
+"q": 45
+},
+"Rocky_Pull-Ups_Pulldowns": {
+"bytes": {
+"anim": 28646,
+"mini": 1124,
+"poster": 5952
+},
+"hash": "7dd4df69c398edf37b9a65414f2823452f1ced93d7da9d9c03b9844a036d18ad",
+"q": 45
+},
+"Romanian_Deadlift": {
+"bytes": {
+"anim": 32264,
+"mini": 1170,
+"poster": 7220
+},
+"hash": "2a2b95fc25c70d2d8afc14e44ece6a5f5641e609016db0c32e77c7691dcf9490",
+"q": 45
+},
+"Romanian_Deadlift_from_Deficit": {
+"bytes": {
+"anim": 30146,
+"mini": 1150,
+"poster": 6620
+},
+"hash": "eab5f0ac821a057ba402a17f1e8513c84e157a0d2c8fd72d417428e6252a0fc4",
+"q": 45
+},
+"Rope_Climb": {
+"bytes": {
+"anim": 46184,
+"mini": 1292,
+"poster": 8636
+},
+"hash": "6f3bfc512e0f34b308f88a1939d4fedcc1f4fdec81e7e8457a7eaa6275b7e8b7",
+"q": 45
+},
+"Rope_Crunch": {
+"bytes": {
+"anim": 38208,
+"mini": 1176,
+"poster": 8234
+},
+"hash": "68d40ea6e1a989f733145a61add9765c715618253672ac6973dfb1ee9615a5e8",
+"q": 45
+},
+"Rope_Jumping": {
+"bytes": {
+"anim": 42296,
+"mini": 1354,
+"poster": 8930
+},
+"hash": "640d64fa4fe802fa21128d52e40b8ca40f02ec77f12b31556c23210b1ca4f3de",
+"q": 45
+},
+"Rope_Straight-Arm_Pulldown": {
+"bytes": {
+"anim": 35438,
+"mini": 1302,
+"poster": 7846
+},
+"hash": "b5f858f7915dd32b708a593fe988d8ce0b30a5be51fa614987b9a5a3e175a941",
+"q": 45
+},
+"Round_The_World_Shoulder_Stretch": {
+"bytes": {
+"anim": 22938,
+"mini": 954,
+"poster": 4604
+},
+"hash": "8b4c150441c3ecb8f960d9851592742395c328eacc725848f1dfbb7daf72ee4e",
+"q": 45
+},
+"Rowing_Stationary": {
+"bytes": {
+"anim": 41354,
+"mini": 1530,
+"poster": 8954
+},
+"hash": "4133a7dc4fee80b5f60604493795f7a3eec85c66358936d8c9818b534becdba6",
+"q": 45
+},
+"Runners_Stretch": {
+"bytes": {
+"anim": 22678,
+"mini": 890,
+"poster": 4018
+},
+"hash": "6c27e7c50d0a547ed866a2a54120f94843592f9bfe610f23fd5935ba69ac4422",
+"q": 45
+},
+"Running_Treadmill": {
+"bytes": {
+"anim": 44822,
+"mini": 1572,
+"poster": 10848
+},
+"hash": "361f4639c9da1783b831849de8b6bda3167b96a143099a164306b5fcc386dfb6",
+"q": 45
+},
+"Russian_Twist": {
+"bytes": {
+"anim": 30270,
+"mini": 1042,
+"poster": 7014
+},
+"hash": "05fdeb5fac6bae6d0c585d94ee5385b337f41a39bced8bf28d0d2e419aa55aed",
+"q": 45
+},
+"Sandbag_Load": {
+"bytes": {
+"anim": 34876,
+"mini": 1010,
+"poster": 7466
+},
+"hash": "49d6d6756ac29c535905e76b1ae1020bb448421922688d04ba22189d74fa50e8",
+"q": 45
+},
+"Scapular_Pull-Up": {
+"bytes": {
+"anim": 50146,
+"mini": 1562,
+"poster": 10736
+},
+"hash": "061b811289380a27c8b6f215cbcbc45c303203da9a0c7b68b978dcf26f93d822",
+"q": 45
+},
+"Scissor_Kick": {
+"bytes": {
+"anim": 25486,
+"mini": 944,
+"poster": 6202
+},
+"hash": "ec5aa4abe0f4763b9d6da2bb55e07426697f6565c50b61506db7ae066ca0443e",
+"q": 45
+},
+"Scissors_Jump": {
+"bytes": {
+"anim": 13624,
+"mini": 594,
+"poster": 3698
+},
+"hash": "678cea90d1177ac4bf6bf2a9593bd3d7652cfbca72c618138c7de409df48c671",
+"q": 45
+},
+"Seated_Band_Hamstring_Curl": {
+"bytes": {
+"anim": 52544,
+"mini": 1532,
+"poster": 12170
+},
+"hash": "bec48abe8cca08f3a01989ea3931ea103131d96eec99935e1080135de9914c35",
+"q": 45
+},
+"Seated_Barbell_Military_Press": {
+"bytes": {
+"anim": 59412,
+"mini": 1526,
+"poster": 12554
+},
+"hash": "f83361f84951d37e982152be47ce521c5f4935a356aac3059aafe5120914aa09",
+"q": 45
+},
+"Seated_Barbell_Twist": {
+"bytes": {
+"anim": 37662,
+"mini": 1262,
+"poster": 8104
+},
+"hash": "d5d97d88ed533326b7b97887744fed3b85a5ef938534e073175014cd48648834",
+"q": 45
+},
+"Seated_Bent-Over_One-Arm_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 24626,
+"mini": 856,
+"poster": 5246
+},
+"hash": "6782210b4ee077836a84d44004613437b6b219313615b5ba7a51fd007ca3a612",
+"q": 45
+},
+"Seated_Bent-Over_Rear_Delt_Raise": {
+"bytes": {
+"anim": 35920,
+"mini": 1366,
+"poster": 8036
+},
+"hash": "b62d4300b9bab4a159b609f8b4f96157647fc8d5b1e62b08ed2c35ab39c2a5f7",
+"q": 45
+},
+"Seated_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 43244,
+"mini": 1636,
+"poster": 9870
+},
+"hash": "77c8a0a4c23248020c2e2ce530aefcca9835edf827d2fbc8eff494b183aec6c2",
+"q": 45
+},
+"Seated_Biceps": {
+"bytes": {
+"anim": 31194,
+"mini": 1302,
+"poster": 6378
+},
+"hash": "2d4409ec7f248a493f8cfe8751430969e2bd11dc88fae00a045d62184cb5f5bc",
+"q": 45
+},
+"Seated_Cable_Rows": {
+"bytes": {
+"anim": 33666,
+"mini": 1154,
+"poster": 7578
+},
+"hash": "a5f7cb7bc0edd4699ce5790b2486c662f2aed31285897c5495876e3a04c9842a",
+"q": 45
+},
+"Seated_Cable_Shoulder_Press": {
+"bytes": {
+"anim": 42950,
+"mini": 1486,
+"poster": 9504
+},
+"hash": "9f442263b99698dee823f9efc338e0743c18b7e438899f64a673ea3477fb5b66",
+"q": 45
+},
+"Seated_Calf_Raise": {
+"bytes": {
+"anim": 28622,
+"mini": 944,
+"poster": 6330
+},
+"hash": "ab5a672e305c8c0e340f64e3ff85e5ebe5db32d207bcf61d139108bf6cb9f41f",
+"q": 45
+},
+"Seated_Calf_Stretch": {
+"bytes": {
+"anim": 27194,
+"mini": 1086,
+"poster": 5108
+},
+"hash": "36eaa4cdbc3d8647dd74818460059b8527efd98c9710620f84cb0cf1355ce5db",
+"q": 45
+},
+"Seated_Close-Grip_Concentration_Barbell_Curl": {
+"bytes": {
+"anim": 39372,
+"mini": 1454,
+"poster": 8582
+},
+"hash": "a88296fa83cdd34bcd3b6a9e6af634ab6b6785f645d449abc71fb95d3e2faba1",
+"q": 45
+},
+"Seated_Dumbbell_Curl": {
+"bytes": {
+"anim": 31038,
+"mini": 1082,
+"poster": 6714
+},
+"hash": "9ffbbc34cd81f334b01d07092bb1e35d4a68b1c84d270f92225e1863129e97d1",
+"q": 45
+},
+"Seated_Dumbbell_Inner_Biceps_Curl": {
+"bytes": {
+"anim": 32164,
+"mini": 1010,
+"poster": 7024
+},
+"hash": "cca13f3ef760c80a104acbc1a58227e970f2ffa95fb79b15ed461ed5348deb23",
+"q": 45
+},
+"Seated_Dumbbell_Palms-Down_Wrist_Curl": {
+"bytes": {
+"anim": 30128,
+"mini": 1076,
+"poster": 6838
+},
+"hash": "be49bf090333167759d94c360a0ce94cb932035a08703b57500b08444a764788",
+"q": 45
+},
+"Seated_Dumbbell_Palms-Up_Wrist_Curl": {
+"bytes": {
+"anim": 30126,
+"mini": 1074,
+"poster": 6646
+},
+"hash": "ddc63c968d86c99ce7b74c4a940c649d1eec2709b3be43a65bbafced0dbdb79d",
+"q": 45
+},
+"Seated_Dumbbell_Press": {
+"bytes": {
+"anim": 35734,
+"mini": 1140,
+"poster": 7900
+},
+"hash": "4e21043733bcfe63612eb588215ceaefd64a5f3dadec9de1b4d20e9937a2d3c3",
+"q": 45
+},
+"Seated_Flat_Bench_Leg_Pull-In": {
+"bytes": {
+"anim": 28896,
+"mini": 1216,
+"poster": 7164
+},
+"hash": "98b3d3fab2623024e0952e6ddf1f63061009528f77ac731d86ae81a211e016ff",
+"q": 45
+},
+"Seated_Floor_Hamstring_Stretch": {
+"bytes": {
+"anim": 4666,
+"mini": 1014,
+"poster": 5528
+},
+"hash": "58b857940c65a94dae0152e38ea9ec8d51e072393e6eaa2c94bf30ff4c399013",
+"q": 45
+},
+"Seated_Front_Deltoid": {
+"bytes": {
+"anim": 30270,
+"mini": 1352,
+"poster": 6392
+},
+"hash": "e8b30251cc6c25f7216bd57a277104f4da736dad0fc4a9240d3d54adb62493c6",
+"q": 45
+},
+"Seated_Glute": {
+"bytes": {
+"anim": 32670,
+"mini": 1340,
+"poster": 6596
+},
+"hash": "f4cb6fdb3f455fb35b58e8cba9e99a158fe9bfd6eafb130c07ea04f2838ded2c",
+"q": 45
+},
+"Seated_Good_Mornings": {
+"bytes": {
+"anim": 35934,
+"mini": 1356,
+"poster": 7646
+},
+"hash": "9a844475a1fe3691fae71a552d4de6432fe7ac7cb2695dd4c7e87db6f8246ff0",
+"q": 45
+},
+"Seated_Hamstring": {
+"bytes": {
+"anim": 31740,
+"mini": 1406,
+"poster": 6476
+},
+"hash": "e66e7dfab386edf559fdd38c8a80dabed6fd3c1860ee39aa8e24cdc63f407c4d",
+"q": 45
+},
+"Seated_Hamstring_and_Calf_Stretch": {
+"bytes": {
+"anim": 29284,
+"mini": 1136,
+"poster": 5716
+},
+"hash": "64cf6e012c717d99e9fea9695106502ee7f31829260b628ffebe68c429bb29d2",
+"q": 45
+},
+"Seated_Head_Harness_Neck_Resistance": {
+"bytes": {
+"anim": 31550,
+"mini": 1064,
+"poster": 7314
+},
+"hash": "e6a356727023ed6f6411fb821417b8f3a393f60627f0ca0387166ca89820d993",
+"q": 45
+},
+"Seated_Leg_Curl": {
+"bytes": {
+"anim": 54206,
+"mini": 1546,
+"poster": 12218
+},
+"hash": "f2f2c02c6b139e0e87fb77d375db19caed55023a07f6a89e8944a1596d714819",
+"q": 45
+},
+"Seated_Leg_Tucks": {
+"bytes": {
+"anim": 41066,
+"mini": 1474,
+"poster": 8874
+},
+"hash": "ab4b943572f50ac0d1a1afd265dcf13bd1ca577143331f97af6bb39d31644414",
+"q": 45
+},
+"Seated_One-Arm_Dumbbell_Palms-Down_Wrist_Curl": {
+"bytes": {
+"anim": 29146,
+"mini": 1024,
+"poster": 6682
+},
+"hash": "a01fe39b721caa17dee3526b3f6386f261364f5e6aa425d85c56f9e46c9cb61b",
+"q": 45
+},
+"Seated_One-Arm_Dumbbell_Palms-Up_Wrist_Curl": {
+"bytes": {
+"anim": 26634,
+"mini": 1068,
+"poster": 6716
+},
+"hash": "af73bb8cbd83e161364c3f691dac9d7ec6ab9e1e9b4b0264993120239b10611c",
+"q": 45
+},
+"Seated_One-arm_Cable_Pulley_Rows": {
+"bytes": {
+"anim": 29508,
+"mini": 1090,
+"poster": 6612
+},
+"hash": "cb8424b0a86c6c3ec15d25cbf6445ac0a4790f176e4bf0b9133125c2516ee30d",
+"q": 45
+},
+"Seated_Overhead_Stretch": {
+"bytes": {
+"anim": 24980,
+"mini": 1140,
+"poster": 5948
+},
+"hash": "e1f3d86174a4ca82303492d8e4461486e409a7d654515a01cefef1fc8c4accc2",
+"q": 45
+},
+"Seated_Palm-Up_Barbell_Wrist_Curl": {
+"bytes": {
+"anim": 27588,
+"mini": 1024,
+"poster": 6224
+},
+"hash": "41a8a8ccc318d91bd1e3b8c564a1722dfab11dcee605a29687741ae3f51612ca",
+"q": 45
+},
+"Seated_Palms-Down_Barbell_Wrist_Curl": {
+"bytes": {
+"anim": 29320,
+"mini": 1054,
+"poster": 6722
+},
+"hash": "a99a7a0e964fff4f10952bbb7a82b41eef9cd852c44f0c94d3387717026272a6",
+"q": 45
+},
+"Seated_Side_Lateral_Raise": {
+"bytes": {
+"anim": 32660,
+"mini": 1076,
+"poster": 6966
+},
+"hash": "2ec7190f61bdbbc13c97112313ef8817807b2727caa2d3cd84a4dbe61dde9560",
+"q": 45
+},
+"Seated_Triceps_Press": {
+"bytes": {
+"anim": 35220,
+"mini": 1102,
+"poster": 7644
+},
+"hash": "d860ebb8c9e8ce8cee821a27befaf007d29b97f8f9a342b866df124f1ffc7b84",
+"q": 45
+},
+"Seated_Two-Arm_Palms-Up_Low-Pulley_Wrist_Curl": {
+"bytes": {
+"anim": 33798,
+"mini": 1052,
+"poster": 7672
+},
+"hash": "bea684b6d4047c7e4ff980c715838e1e3272ffe76828154483555266434889f1",
+"q": 45
+},
+"See-Saw_Press_Alternating_Side_Press": {
+"bytes": {
+"anim": 28866,
+"mini": 1074,
+"poster": 6372
+},
+"hash": "eb7c36464775f596282642de3537c6091afa857d6b70d15160b8564b38649504",
+"q": 45
+},
+"Shotgun_Row": {
+"bytes": {
+"anim": 24078,
+"mini": 954,
+"poster": 5338
+},
+"hash": "8cede5183af35469ab323a059d80b0b5af780fde176b0f42b4a679d630ac2135",
+"q": 45
+},
+"Shoulder_Circles": {
+"bytes": {
+"anim": 17464,
+"mini": 800,
+"poster": 3600
+},
+"hash": "bac0c99b19225312feb87bfebf874adf21a235b17804a9b95a3c3569bbc4529b",
+"q": 45
+},
+"Shoulder_Press_-_With_Bands": {
+"bytes": {
+"anim": 30950,
+"mini": 1120,
+"poster": 7010
+},
+"hash": "9b482d56ce25fd7794398f677932ada0bd8d96f6405f29fc92f5f2b4e5095249",
+"q": 45
+},
+"Shoulder_Raise": {
+"bytes": {
+"anim": 17688,
+"mini": 814,
+"poster": 3588
+},
+"hash": "1e8ad3f23b271263b389af1c1309a21527dff9617aaa59d2f27fc0395870811e",
+"q": 45
+},
+"Shoulder_Stretch": {
+"bytes": {
+"anim": 17680,
+"mini": 838,
+"poster": 3596
+},
+"hash": "8ae620a7597d3c638f3a9f5440a9f1e2793e23bc7683e8072a522fe2a0410948",
+"q": 45
+},
+"Side-Lying_Floor_Stretch": {
+"bytes": {
+"anim": 25578,
+"mini": 1102,
+"poster": 5592
+},
+"hash": "cfafc5c559533b49f32b260b208227dcc745c57187bee8e1d1a20b524d64b6b9",
+"q": 45
+},
+"Side_Bridge": {
+"bytes": {
+"anim": 28564,
+"mini": 1050,
+"poster": 6830
+},
+"hash": "a0cf02eb327c6625fa3e877b65c3670bb1f5da2c5ccd5553aa50b77583c053c1",
+"q": 45
+},
+"Side_Hop-Sprint": {
+"bytes": {
+"anim": 13634,
+"mini": 490,
+"poster": 2632
+},
+"hash": "4e2c23e3caf3fcba4e1d812c414afe7eddd616f0745e56f181cf1965d511b3f5",
+"q": 45
+},
+"Side_Jackknife": {
+"bytes": {
+"anim": 39202,
+"mini": 1426,
+"poster": 8658
+},
+"hash": "ba6212208161d2f7ef8ed7ae9e62c5c0d2d83de90b30c6b515c38a854896355d",
+"q": 45
+},
+"Side_Lateral_Raise": {
+"bytes": {
+"anim": 29940,
+"mini": 1056,
+"poster": 6358
+},
+"hash": "f7e1716f3f6efb19fc952355dbc726c7ff6fcfefc34df77633ea8863e4dc669d",
+"q": 45
+},
+"Side_Laterals_to_Front_Raise": {
+"bytes": {
+"anim": 30646,
+"mini": 1026,
+"poster": 7016
+},
+"hash": "cd3f70f8c91fc3f92ce672df7bc215a76f20d74aa00dc426de076fb8e4533a10",
+"q": 45
+},
+"Side_Leg_Raises": {
+"bytes": {
+"anim": 24660,
+"mini": 1046,
+"poster": 4798
+},
+"hash": "0a5cee3ad4b148bcbd37b382fef68cd492a3294d32358685db3694c18e353d6b",
+"q": 45
+},
+"Side_Lying_Groin_Stretch": {
+"bytes": {
+"anim": 25478,
+"mini": 968,
+"poster": 5154
+},
+"hash": "9267c729a831d12c5b42fc5cf788895c8322347b0cd2a631841a2d37203a067a",
+"q": 45
+},
+"Side_Neck_Stretch": {
+"bytes": {
+"anim": 20754,
+"mini": 892,
+"poster": 4080
+},
+"hash": "031df779c3b964ab446712daf0ad837cdf7af142088f2d30959237b7c890b053",
+"q": 45
+},
+"Side_Standing_Long_Jump": {
+"bytes": {
+"anim": 14356,
+"mini": 484,
+"poster": 3442
+},
+"hash": "4adee3aba27fd03ec24a391a18c9ef23279fc8c21b7d177a5f488eb5c6838d38",
+"q": 45
+},
+"Side_To_Side_Chins": {
+"bytes": {
+"anim": 27854,
+"mini": 1092,
+"poster": 6036
+},
+"hash": "e740e1572051aeb80a53d7086c4f45e4617006d727052f0b5c950743b1f99f0a",
+"q": 45
+},
+"Side_Wrist_Pull": {
+"bytes": {
+"anim": 17876,
+"mini": 876,
+"poster": 3628
+},
+"hash": "2fd440170f108c51f0ebdfc342dc95bbc0136aa96831455e593aba2fb6e590f6",
+"q": 45
+},
+"Side_to_Side_Box_Shuffle": {
+"bytes": {
+"anim": 19164,
+"mini": 672,
+"poster": 3652
+},
+"hash": "f45c2bb5dda66465e2798dac8c7e57986978719c2b175d9053b4bf6e2b14eea1",
+"q": 45
+},
+"Single-Arm_Cable_Crossover": {
+"bytes": {
+"anim": 21468,
+"mini": 812,
+"poster": 4816
+},
+"hash": "6d8095f480f66345603a714f61eab311ee6b11895425f9e59d53e04a4fba87d2",
+"q": 45
+},
+"Single-Arm_Linear_Jammer": {
+"bytes": {
+"anim": 29742,
+"mini": 1194,
+"poster": 9488
+},
+"hash": "254c35cfd1c1fc44f1229b7261e26b0e84a39e0cf1f3f95266d805c9e387599d",
+"q": 45
+},
+"Single-Arm_Push-Up": {
+"bytes": {
+"anim": 32744,
+"mini": 1040,
+"poster": 7096
+},
+"hash": "4077be19ea61bc0746d82cb6bc020d4373226fa81f001633dc874ae7555268ae",
+"q": 45
+},
+"Single-Cone_Sprint_Drill": {
+"bytes": {
+"anim": 13674,
+"mini": 548,
+"poster": 3758
+},
+"hash": "c2193687c0cca9be537be8e68a50b77446acaf4d411746d3d52d06f2021c8df7",
+"q": 45
+},
+"Single-Leg_High_Box_Squat": {
+"bytes": {
+"anim": 45698,
+"mini": 1394,
+"poster": 10572
+},
+"hash": "655f202e4bd3c178201bfa7bbb46d20a184dd02e0049afd398b672fced4aabed",
+"q": 45
+},
+"Single-Leg_Hop_Progression": {
+"bytes": {
+"anim": 49714,
+"mini": 1646,
+"poster": 11214
+},
+"hash": "3600eb313c0983b0d9a09a5b460af148513ee29b44e195ab4b70fe5f6695d4af",
+"q": 45
+},
+"Single-Leg_Lateral_Hop": {
+"bytes": {
+"anim": 46170,
+"mini": 1654,
+"poster": 10264
+},
+"hash": "a2263faa7a404cb335beb318870e858d9760647b977b4dc9e3f62f330d711db4",
+"q": 45
+},
+"Single-Leg_Leg_Extension": {
+"bytes": {
+"anim": 56222,
+"mini": 1566,
+"poster": 12352
+},
+"hash": "92b9920deb88e01fbed2588fc829a3e6731c9317470c99aa687074023fc579a3",
+"q": 45
+},
+"Single-Leg_Stride_Jump": {
+"bytes": {
+"anim": 31698,
+"mini": 1148,
+"poster": 6686
+},
+"hash": "e1b9cb7f85b48fe346c55d03512384fa26d72ccb270326ff6da5bffc4796ac98",
+"q": 45
+},
+"Single_Dumbbell_Raise": {
+"bytes": {
+"anim": 16586,
+"mini": 926,
+"poster": 5660
+},
+"hash": "686d3f7d8112ccb5e9ccf7c983b6ef6715d43cbede45b52f37970951ab1f14bc",
+"q": 45
+},
+"Single_Leg_Butt_Kick": {
+"bytes": {
+"anim": 16130,
+"mini": 594,
+"poster": 3346
+},
+"hash": "d4bb8b1417725d21e7c1f3e8229e2fa2027f7cac5d40cf34643d07c1fa5dd8d8",
+"q": 45
+},
+"Single_Leg_Glute_Bridge": {
+"bytes": {
+"anim": 26186,
+"mini": 862,
+"poster": 5934
+},
+"hash": "c6ead4e74f7ddd7e70e0b5fb9b19b5ac0476564b7bddd5ce486453781d7f2a99",
+"q": 45
+},
+"Single_Leg_Push-off": {
+"bytes": {
+"anim": 21116,
+"mini": 750,
+"poster": 4422
+},
+"hash": "1d9c4cfa03049422860ca4667e6b7900b581e38e244dcd93ffd8ff231cc0c1b6",
+"q": 45
+},
+"Sit-Up": {
+"bytes": {
+"anim": 36842,
+"mini": 1378,
+"poster": 8192
+},
+"hash": "3de14e3582617a2338ba16089c2dae3b86ba3c5b5bcceca8aea0db0097130fd8",
+"q": 45
+},
+"Sit_Squats": {
+"bytes": {
+"anim": 21814,
+"mini": 892,
+"poster": 4018
+},
+"hash": "6dcb7cf53cfb1fb81d8a5ab311783f36182cbdb726984a544bb3ded64a3a62ea",
+"q": 45
+},
+"Skating": {
+"bytes": {
+"anim": 46302,
+"mini": 1198,
+"poster": 6678
+},
+"hash": "3d3193b515d5341b3613521b2b4030ac6c7971011be841b77e50e9ae6e04b2d9",
+"q": 45
+},
+"Sled_Drag_-_Harness": {
+"bytes": {
+"anim": 26294,
+"mini": 1002,
+"poster": 5216
+},
+"hash": "62bf18f50f2698c7ced9f38580ca81357d4cb1cd1e2aac5d801905c645736ada",
+"q": 45
+},
+"Sled_Overhead_Backward_Walk": {
+"bytes": {
+"anim": 22344,
+"mini": 716,
+"poster": 5362
+},
+"hash": "ccec4dd793e3d88d0ada2f11b01ba13cdb972894c5b0574a8f6a7bd83b0312e6",
+"q": 45
+},
+"Sled_Overhead_Triceps_Extension": {
+"bytes": {
+"anim": 20096,
+"mini": 632,
+"poster": 4294
+},
+"hash": "d8d1d95c5018c4f51b15bba345b10eca34746c7a51599b7d77c068ce55dbf1a4",
+"q": 45
+},
+"Sled_Push": {
+"bytes": {
+"anim": 28682,
+"mini": 1070,
+"poster": 5708
+},
+"hash": "0b60b4ab99c2d7e894f1cc2bee883b7dfc3e594ba7986822ff056f6c121ef07e",
+"q": 45
+},
+"Sled_Reverse_Flye": {
+"bytes": {
+"anim": 22400,
+"mini": 616,
+"poster": 4646
+},
+"hash": "8c0a6b57c4ec48af236021f6832af8d334822e9de043453e2ffa63029a1e4c09",
+"q": 45
+},
+"Sled_Row": {
+"bytes": {
+"anim": 17436,
+"mini": 544,
+"poster": 4358
+},
+"hash": "f005a4cf8558605acc0c90271c25a4632d0467fad6a521ad422f343cc73a44a9",
+"q": 45
+},
+"Sledgehammer_Swings": {
+"bytes": {
+"anim": 49826,
+"mini": 1582,
+"poster": 10562
+},
+"hash": "80aa8b70020590665c533c7af37a138e41f95e9680342c2348539cdba6717b90",
+"q": 45
+},
+"Smith_Incline_Shoulder_Raise": {
+"bytes": {
+"anim": 40032,
+"mini": 1178,
+"poster": 8904
+},
+"hash": "e85a6dbf43e80503ec4b64f1637bdcf7e51f48555b95006dc78e1430a0c6eb88",
+"q": 45
+},
+"Smith_Machine_Behind_the_Back_Shrug": {
+"bytes": {
+"anim": 45468,
+"mini": 1624,
+"poster": 9896
+},
+"hash": "4d893b690fdfd1b5e73589a025c45de158208223f9f43443221cc7b5b35ee3ad",
+"q": 45
+},
+"Smith_Machine_Bench_Press": {
+"bytes": {
+"anim": 36734,
+"mini": 1144,
+"poster": 8510
+},
+"hash": "9067721669ab1bc0fe80685146ec6ba3e1ad171684957c2022a554fd4029a0b4",
+"q": 45
+},
+"Smith_Machine_Bent_Over_Row": {
+"bytes": {
+"anim": 42246,
+"mini": 1186,
+"poster": 9600
+},
+"hash": "7b2cc723be1611d33962bdd2f370b15874c7e0541a7795aaefa9c1c6b66cb422",
+"q": 45
+},
+"Smith_Machine_Calf_Raise": {
+"bytes": {
+"anim": 29120,
+"mini": 1342,
+"poster": 8270
+},
+"hash": "d096f5dc35139b332df1700916e247c2faa24829184dba2c4e51909ce8344925",
+"q": 45
+},
+"Smith_Machine_Close-Grip_Bench_Press": {
+"bytes": {
+"anim": 50084,
+"mini": 1508,
+"poster": 10524
+},
+"hash": "431a1d0a66e2ca84b1d88c38a3417c89c2c16676e0f3fbf991e6005a948c50b7",
+"q": 45
+},
+"Smith_Machine_Decline_Press": {
+"bytes": {
+"anim": 31852,
+"mini": 1340,
+"poster": 6504
+},
+"hash": "23cbf3e14c59c33658a3f34ce4aa29a8303a7e57a426e48c2f352f87e3598472",
+"q": 45
+},
+"Smith_Machine_Hang_Power_Clean": {
+"bytes": {
+"anim": 46776,
+"mini": 1342,
+"poster": 10418
+},
+"hash": "a0795a535fa93ef5d628362feaa495b229ed82673456cca362ffc1436724cf04",
+"q": 45
+},
+"Smith_Machine_Hip_Raise": {
+"bytes": {
+"anim": 41576,
+"mini": 1538,
+"poster": 8988
+},
+"hash": "69a09fadd48940c3c927bd7dea9755bd9d0f77a5ec780471dc2183adb63080fd",
+"q": 45
+},
+"Smith_Machine_Incline_Bench_Press": {
+"bytes": {
+"anim": 41286,
+"mini": 1196,
+"poster": 9332
+},
+"hash": "34ff8b5ed3df809a8894189b5fffd6f115fa26cbffadb030572a085e27ad81f1",
+"q": 45
+},
+"Smith_Machine_Leg_Press": {
+"bytes": {
+"anim": 34092,
+"mini": 1196,
+"poster": 8106
+},
+"hash": "ebefbd27564c554485f7ab291be38a786283cbb37c0c73aecd1f0d8ed2ab1ee8",
+"q": 45
+},
+"Smith_Machine_One-Arm_Upright_Row": {
+"bytes": {
+"anim": 36018,
+"mini": 1488,
+"poster": 8024
+},
+"hash": "283558dda34a0a99b6a301993673361a98a1264b2614b538beed263549ef6ae1",
+"q": 45
+},
+"Smith_Machine_Overhead_Shoulder_Press": {
+"bytes": {
+"anim": 50190,
+"mini": 1432,
+"poster": 11390
+},
+"hash": "036cda487eae60a878b74b16c1ad18bb734f8c4bfe342214ca68e898bb89b5a8",
+"q": 45
+},
+"Smith_Machine_Pistol_Squat": {
+"bytes": {
+"anim": 36742,
+"mini": 1228,
+"poster": 7996
+},
+"hash": "1bbaeb5a6184311126333ad5ccb9f840b911ca3b2bd80e41373385dd77a4936e",
+"q": 45
+},
+"Smith_Machine_Reverse_Calf_Raises": {
+"bytes": {
+"anim": 52950,
+"mini": 1558,
+"poster": 11904
+},
+"hash": "bcc1c7abefda189ff27d2caf8eb5cb5a98ef48bdf50e767be6747655470c05ca",
+"q": 45
+},
+"Smith_Machine_Squat": {
+"bytes": {
+"anim": 51834,
+"mini": 1566,
+"poster": 11200
+},
+"hash": "d1d73fdfc315f59c8e3b274e036900d249d783cd5b7f321da0bba6cc4eb2d22f",
+"q": 45
+},
+"Smith_Machine_Stiff-Legged_Deadlift": {
+"bytes": {
+"anim": 51020,
+"mini": 1404,
+"poster": 11006
+},
+"hash": "ff1e7489ba4a0e596aaadfb8a2c31c69485a55b7a642b84e56f8d33ee1355550",
+"q": 45
+},
+"Smith_Machine_Upright_Row": {
+"bytes": {
+"anim": 46706,
+"mini": 1378,
+"poster": 10466
+},
+"hash": "154b6cf6fb364a335ce0e206bf047f3e9c8c288ab4736285c70243663e6e12e9",
+"q": 45
+},
+"Smith_Single-Leg_Split_Squat": {
+"bytes": {
+"anim": 52678,
+"mini": 1602,
+"poster": 12026
+},
+"hash": "270e20f9351e7ec6118f44af81c603d60e1eee7326ec5a19c7d94ead41595735",
+"q": 45
+},
+"Snatch": {
+"bytes": {
+"anim": 30140,
+"mini": 1090,
+"poster": 6346
+},
+"hash": "37a61eabd8c6cd0cfc9ba3c773bc554b5cf1caeea15e7c148e0a54051704daf8",
+"q": 45
+},
+"Snatch_Balance": {
+"bytes": {
+"anim": 24468,
+"mini": 922,
+"poster": 5552
+},
+"hash": "c0d7b0cec7c9cfb66919ef8c148be8e1af9275bfd2c3b8115b7abc6dce69abbc",
+"q": 45
+},
+"Snatch_Deadlift": {
+"bytes": {
+"anim": 23372,
+"mini": 870,
+"poster": 4916
+},
+"hash": "3f788e70e2e470b03c62ae4c27f0c07fa9a86874f3ff4fa904b073d395e836f6",
+"q": 45
+},
+"Snatch_Pull": {
+"bytes": {
+"anim": 26092,
+"mini": 982,
+"poster": 5954
+},
+"hash": "7fcb4fd7feb5236a06e978764ec5ce24265dfa6ca46f266ff0d4e0363473e069",
+"q": 45
+},
+"Snatch_Shrug": {
+"bytes": {
+"anim": 26656,
+"mini": 946,
+"poster": 5660
+},
+"hash": "ca4edc43626cf8ab6c3298a21eac0808fa8e042d173021f73b5e3bac62b8c89b",
+"q": 45
+},
+"Snatch_from_Blocks": {
+"bytes": {
+"anim": 33770,
+"mini": 1232,
+"poster": 7246
+},
+"hash": "e2dd3f995245cf09f0025d3fc05c370d298a86a7c299e6f3c72f1f67921f05e4",
+"q": 45
+},
+"Speed_Band_Overhead_Triceps": {
+"bytes": {
+"anim": 47402,
+"mini": 1432,
+"poster": 10792
+},
+"hash": "df0c0bd050bebb0c55200e0c8899d2b5f7c5eef9a07e5442a6ba29462b648f4e",
+"q": 45
+},
+"Speed_Box_Squat": {
+"bytes": {
+"anim": 48580,
+"mini": 1464,
+"poster": 10666
+},
+"hash": "1043c1d93a4bda25a6c60c973f80657fc15e51ba21b257303f4b9103e344caa7",
+"q": 45
+},
+"Speed_Squats": {
+"bytes": {
+"anim": 42776,
+"mini": 1524,
+"poster": 9290
+},
+"hash": "ff2c2f10a7547d7273950f0f234fc4154a6cd6e9ec5f3ca2a2c384631dc778c7",
+"q": 45
+},
+"Spell_Caster": {
+"bytes": {
+"anim": 26056,
+"mini": 974,
+"poster": 6288
+},
+"hash": "9750888fa60d187bbe38577cd1b7a1a85b2df3f3fdb26a77423cedaac62f83b2",
+"q": 45
+},
+"Spider_Crawl": {
+"bytes": {
+"anim": 26690,
+"mini": 956,
+"poster": 6304
+},
+"hash": "1343c4a37bb68891e3416cb8c83e2afb476a4745e9962331fd7ef04faf2d6dd1",
+"q": 45
+},
+"Spider_Curl": {
+"bytes": {
+"anim": 29688,
+"mini": 1124,
+"poster": 6350
+},
+"hash": "50003b3985b4f807d53e25c032e3bc5f591989c3da228871b8745bf78854ac38",
+"q": 45
+},
+"Spinal_Stretch": {
+"bytes": {
+"anim": 24866,
+"mini": 1010,
+"poster": 4974
+},
+"hash": "1b70b4a7b5143732c0e42d3410caf61160ff1645a774ee42318e276fe50a55d2",
+"q": 45
+},
+"Split_Clean": {
+"bytes": {
+"anim": 28124,
+"mini": 1088,
+"poster": 6456
+},
+"hash": "416e12a2fcddc388821a0367ba86461117fee471c82d099b1454b1b8ade95c45",
+"q": 45
+},
+"Split_Jerk": {
+"bytes": {
+"anim": 25800,
+"mini": 1054,
+"poster": 6114
+},
+"hash": "31a24564f2ee2b0eacb6120921aefdc7da8b48d6a2c927fef06eb74281170d49",
+"q": 45
+},
+"Split_Jump": {
+"bytes": {
+"anim": 15784,
+"mini": 592,
+"poster": 3606
+},
+"hash": "a12b0ba8059cf8aec57f97b560f3e913c0d63b1a6cc8df9b7d9cf14f716517b0",
+"q": 45
+},
+"Split_Snatch": {
+"bytes": {
+"anim": 30692,
+"mini": 1064,
+"poster": 6494
+},
+"hash": "f6250571922f979cedefe09e4c43215da4fd753d8e3e74f8b8b1aaf682e5876d",
+"q": 45
+},
+"Split_Squat_with_Dumbbells": {
+"bytes": {
+"anim": 51110,
+"mini": 1482,
+"poster": 10804
+},
+"hash": "0374ce50c6f9c43718d65f3ee1e37e6f25971ac9766f5c5a2ae9f4d577a957fe",
+"q": 45
+},
+"Split_Squats": {
+"bytes": {
+"anim": 24076,
+"mini": 1084,
+"poster": 4800
+},
+"hash": "3c087c132c19e5a0e4e0724c6bea39170536093a3bce5cdd3592c36e84971ac5",
+"q": 45
+},
+"Squat_Jerk": {
+"bytes": {
+"anim": 25404,
+"mini": 1054,
+"poster": 5960
+},
+"hash": "90c819c09e40a37c7075dbb3bb0ed2bd0ee31a1484839d5f42246170dc05c0c9",
+"q": 45
+},
+"Squat_with_Bands": {
+"bytes": {
+"anim": 35550,
+"mini": 1302,
+"poster": 7120
+},
+"hash": "5e842eb43c0b3e64bf11683405a0577ea848a856347debbebf2db6d676480bb4",
+"q": 45
+},
+"Squat_with_Chains": {
+"bytes": {
+"anim": 39740,
+"mini": 1378,
+"poster": 8022
+},
+"hash": "d3bb2dafdf553675589b5691d7777581494c2c225f1900974d8f81ea67a0e253",
+"q": 45
+},
+"Squat_with_Plate_Movers": {
+"bytes": {
+"anim": 28058,
+"mini": 944,
+"poster": 6436
+},
+"hash": "92a08e9e1840f9d13f73cb38574fd1e4d38a430ea7053d61d7a838d7906478d9",
+"q": 45
+},
+"Squats_-_With_Bands": {
+"bytes": {
+"anim": 33944,
+"mini": 1264,
+"poster": 7432
+},
+"hash": "2d71539d2163342a67c5c39311c1c7d722d2f28ab9629cced01b12128f4c92e8",
+"q": 45
+},
+"Stairmaster": {
+"bytes": {
+"anim": 57096,
+"mini": 1470,
+"poster": 12318
+},
+"hash": "5f8d631692f24147b9e1af21c5d02c32194e97b8c4bd392ad5aa492c6c30014a",
+"q": 45
+},
+"Standing_Alternating_Dumbbell_Press": {
+"bytes": {
+"anim": 49450,
+"mini": 1424,
+"poster": 10720
+},
+"hash": "63f5c1fc4fb6b4572018490d8efc42a863854fe0130400817e6c243c39c975df",
+"q": 45
+},
+"Standing_Barbell_Calf_Raise": {
+"bytes": {
+"anim": 28366,
+"mini": 1064,
+"poster": 6222
+},
+"hash": "234dd75e51e9d63aa7c0cc0db1b80fac46cda02f8738c35763191ca0f53e983c",
+"q": 45
+},
+"Standing_Barbell_Press_Behind_Neck": {
+"bytes": {
+"anim": 32552,
+"mini": 1166,
+"poster": 6962
+},
+"hash": "241d972c2735095f487ec9037c55bcf5aabc1b1013d19e5631f3f873137196bb",
+"q": 45
+},
+"Standing_Bent-Over_One-Arm_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 31054,
+"mini": 1078,
+"poster": 6632
+},
+"hash": "9d23c41fe47435e4e89383a5de7a8174e4d30e8d6b11200aaea860e8422a360a",
+"q": 45
+},
+"Standing_Bent-Over_Two-Arm_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 28616,
+"mini": 1082,
+"poster": 6544
+},
+"hash": "ac939e3fe1cfd1648d44c98c7970781a010a6e402ed0ffc0a2b8c2ae7515f781",
+"q": 45
+},
+"Standing_Biceps_Cable_Curl": {
+"bytes": {
+"anim": 30578,
+"mini": 1076,
+"poster": 7584
+},
+"hash": "0b2d48f53e81d9265cc23ed251e453fbe671e82fe56069dcc3a4890faa3faa16",
+"q": 45
+},
+"Standing_Biceps_Stretch": {
+"bytes": {
+"anim": 18004,
+"mini": 818,
+"poster": 3600
+},
+"hash": "13361280a5e799a9bdfd49397445dce0b242b91f846d5779c9b4f02a004c58d1",
+"q": 45
+},
+"Standing_Bradford_Press": {
+"bytes": {
+"anim": 36058,
+"mini": 1254,
+"poster": 7772
+},
+"hash": "f816c68f01f0fe2529c82e45fa53693254a4ea05a2c158766462e2e49e78d2d6",
+"q": 45
+},
+"Standing_Cable_Chest_Press": {
+"bytes": {
+"anim": 39682,
+"mini": 1324,
+"poster": 8482
+},
+"hash": "a9e1334c3dc093a41211b4d5314c3089de50e5a0d7eeb25069cc9f7237732b54",
+"q": 45
+},
+"Standing_Cable_Lift": {
+"bytes": {
+"anim": 38364,
+"mini": 1308,
+"poster": 8114
+},
+"hash": "a1253a90cb2f6e6d53edd3234f3d64cde701b9bcd962c2a96d23e47463c0c576",
+"q": 45
+},
+"Standing_Cable_Wood_Chop": {
+"bytes": {
+"anim": 36730,
+"mini": 1222,
+"poster": 7444
+},
+"hash": "6177751edd8539d4e1cb9deee2c3b344e05e3433e2675459887cf9834b8a6235",
+"q": 45
+},
+"Standing_Calf_Raises": {
+"bytes": {
+"anim": 30414,
+"mini": 1042,
+"poster": 6816
+},
+"hash": "a7c4e4fbc0502c163428cefed265e2fa88ce70ee277f6eb3c7927139624dcab6",
+"q": 45
+},
+"Standing_Concentration_Curl": {
+"bytes": {
+"anim": 25798,
+"mini": 930,
+"poster": 5882
+},
+"hash": "7b50e6042bcfe5a0820ab55c6a84dc3a60ad9237a5b5960523b68532bfd3861e",
+"q": 45
+},
+"Standing_Dumbbell_Calf_Raise": {
+"bytes": {
+"anim": 28306,
+"mini": 1052,
+"poster": 6378
+},
+"hash": "68ba40c18639f890580aeb8ceb59ec71604f0fddaa7c0ffa6b9a076f8c0cfb1f",
+"q": 45
+},
+"Standing_Dumbbell_Press": {
+"bytes": {
+"anim": 32102,
+"mini": 1020,
+"poster": 6884
+},
+"hash": "5766185c58ee71614bcbe44ad20786dce9ca0b18612f960a227371d68dc1aeb9",
+"q": 45
+},
+"Standing_Dumbbell_Reverse_Curl": {
+"bytes": {
+"anim": 28640,
+"mini": 1048,
+"poster": 6216
+},
+"hash": "466a9e946c8b0e9a95d67e747b012e35c86c7313cdeb7bc34b9f0d9b0f1d02e2",
+"q": 45
+},
+"Standing_Dumbbell_Straight-Arm_Front_Delt_Raise_Above_Head": {
+"bytes": {
+"anim": 27770,
+"mini": 1042,
+"poster": 6390
+},
+"hash": "59b131a07197c3887fa8605c857028de4f3fa374e6a3a67076bf163fa9f6fd5e",
+"q": 45
+},
+"Standing_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 28972,
+"mini": 1090,
+"poster": 6418
+},
+"hash": "9d8a76fd46d221ff9e5b9868afdf9e45aa6fc36777269c6b76b7048615ce7836",
+"q": 45
+},
+"Standing_Dumbbell_Upright_Row": {
+"bytes": {
+"anim": 24332,
+"mini": 1014,
+"poster": 5706
+},
+"hash": "fb5d1911bf3ca7cfd2b04c9c3d2d2c4ba1c9ed668aedf723366b0775ecd49c5e",
+"q": 45
+},
+"Standing_Elevated_Quad_Stretch": {
+"bytes": {
+"anim": 20840,
+"mini": 946,
+"poster": 4524
+},
+"hash": "4a8fa9d0e6db6016f67d630d6c737f2ed5090f37f8724f4b5220378073f35081",
+"q": 45
+},
+"Standing_Front_Barbell_Raise_Over_Head": {
+"bytes": {
+"anim": 30210,
+"mini": 1060,
+"poster": 6378
+},
+"hash": "82768241fcc16f96ce952ca01c8645f132e08dde465bf8b1fdd3473d2cf62d2e",
+"q": 45
+},
+"Standing_Gastrocnemius_Calf_Stretch": {
+"bytes": {
+"anim": 29418,
+"mini": 1174,
+"poster": 6174
+},
+"hash": "6b6904980e90bc2b4d471e16b85de2ced540b24e7d626a93999b9178552814b3",
+"q": 45
+},
+"Standing_Hamstring_and_Calf_Stretch": {
+"bytes": {
+"anim": 4276,
+"mini": 1076,
+"poster": 5074
+},
+"hash": "0eef5016b8dbd18d0506ea5cfa615aa6b442b4bfd657bbf365dd216ce72333a8",
+"q": 45
+},
+"Standing_Hip_Circles": {
+"bytes": {
+"anim": 21616,
+"mini": 832,
+"poster": 4824
+},
+"hash": "f23c41a7b011384aa8a248d1c1ff184ea2c2260f7a78d2ee6720d1df3334cd27",
+"q": 45
+},
+"Standing_Hip_Flexors": {
+"bytes": {
+"anim": 25516,
+"mini": 1002,
+"poster": 4704
+},
+"hash": "bbdcc4776e5487e1920e9facb0efed4064c83f57d1f337b0c75f9da0edffcdfb",
+"q": 45
+},
+"Standing_Inner-Biceps_Curl": {
+"bytes": {
+"anim": 25928,
+"mini": 980,
+"poster": 5794
+},
+"hash": "814c165b455c0396577c0b8002f1dfb7be7d9a3e90b9fabd06e194cc03e3003c",
+"q": 45
+},
+"Standing_Lateral_Stretch": {
+"bytes": {
+"anim": 18666,
+"mini": 824,
+"poster": 3684
+},
+"hash": "cf96c64df0a4c33ff25f3595e0bffb5654a66740d40f7477a13c35ef3ded8d7b",
+"q": 45
+},
+"Standing_Leg_Curl": {
+"bytes": {
+"anim": 48606,
+"mini": 1398,
+"poster": 11442
+},
+"hash": "4553964705086a2b1657db3268b21724e6e57845ae237cd942b95b2657e178ff",
+"q": 45
+},
+"Standing_Long_Jump": {
+"bytes": {
+"anim": 14922,
+"mini": 670,
+"poster": 3680
+},
+"hash": "6fb1dae0999f3cf1cd416ba7cff850bf0465f706c9717616c06b3401447b45ee",
+"q": 45
+},
+"Standing_Low-Pulley_Deltoid_Raise": {
+"bytes": {
+"anim": 41730,
+"mini": 1264,
+"poster": 9182
+},
+"hash": "83d147ac9812c5a64917e50fd872f096d7091d9fb7f9934b92de638e4b833204",
+"q": 45
+},
+"Standing_Low-Pulley_One-Arm_Triceps_Extension": {
+"bytes": {
+"anim": 49790,
+"mini": 1688,
+"poster": 11172
+},
+"hash": "6609f08a24b357a55f95c03b53261974a39d21fbf04f0fc8615b108aa9a655c4",
+"q": 45
+},
+"Standing_Military_Press": {
+"bytes": {
+"anim": 30452,
+"mini": 1016,
+"poster": 6266
+},
+"hash": "b2d2eb5c0e922bbb9f19ee43da022d73dd4a4e46d8aa1a8f305878e5b49b045f",
+"q": 45
+},
+"Standing_Olympic_Plate_Hand_Squeeze": {
+"bytes": {
+"anim": 26116,
+"mini": 1030,
+"poster": 6266
+},
+"hash": "729b37e77efa5d1d60a2c79a07df84fffaa90f83941fe924e6af72223e1cd187",
+"q": 45
+},
+"Standing_One-Arm_Cable_Curl": {
+"bytes": {
+"anim": 39658,
+"mini": 1354,
+"poster": 9022
+},
+"hash": "ea6299b150d73e09f7492e09e94ceef425520edc40d62eca9834d05c4ccb07e9",
+"q": 45
+},
+"Standing_One-Arm_Dumbbell_Curl_Over_Incline_Bench": {
+"bytes": {
+"anim": 30214,
+"mini": 1076,
+"poster": 6612
+},
+"hash": "c3a15bd596524f3ffb475cb919caff8da3b93fa5ff5bb3ac2f25282853d57fdd",
+"q": 45
+},
+"Standing_One-Arm_Dumbbell_Triceps_Extension": {
+"bytes": {
+"anim": 27658,
+"mini": 1116,
+"poster": 6346
+},
+"hash": "f8c3499e3e0b4d9cf460628c0289411b067dddfc05552f9c1ff01b35dacfbb61",
+"q": 45
+},
+"Standing_Overhead_Barbell_Triceps_Extension": {
+"bytes": {
+"anim": 28558,
+"mini": 1018,
+"poster": 6128
+},
+"hash": "f366d85bcf125f128eb5f0926b4c558fa51fa77be0b7f7688573bc985229693e",
+"q": 45
+},
+"Standing_Palm-In_One-Arm_Dumbbell_Press": {
+"bytes": {
+"anim": 28794,
+"mini": 1050,
+"poster": 6286
+},
+"hash": "2fd2c37e75fe77460b1bca73bdde884a1f034e736115dacde1d8587b7aa1aef1",
+"q": 45
+},
+"Standing_Palms-In_Dumbbell_Press": {
+"bytes": {
+"anim": 25974,
+"mini": 984,
+"poster": 5850
+},
+"hash": "9e5bf768544e7717cf5cc2d77d7cfedbba344bd86e0c92080e0752ae40aa0194",
+"q": 45
+},
+"Standing_Palms-Up_Barbell_Behind_The_Back_Wrist_Curl": {
+"bytes": {
+"anim": 28364,
+"mini": 1072,
+"poster": 6276
+},
+"hash": "78c7c3778b84316a5833423cd9534f53c906447b96ca3f9a1cb4e29d89d09962",
+"q": 45
+},
+"Standing_Pelvic_Tilt": {
+"bytes": {
+"anim": 20466,
+"mini": 894,
+"poster": 3906
+},
+"hash": "0616b0863f8e34c00b6dafc3b91dc5074cd3f8e295e7062ec80d9638010e4208",
+"q": 45
+},
+"Standing_Rope_Crunch": {
+"bytes": {
+"anim": 27596,
+"mini": 950,
+"poster": 6314
+},
+"hash": "9fb95d822dc5b01268d440cabb5d78c5b4dcb88e8a854b8fa0bdfd5104cb3c0f",
+"q": 45
+},
+"Standing_Soleus_And_Achilles_Stretch": {
+"bytes": {
+"anim": 22136,
+"mini": 1002,
+"poster": 4704
+},
+"hash": "c8d53ec3c811b22aa2d5002c95ae5d945b993c6a2ec06f72f9e8baa0480b91e7",
+"q": 45
+},
+"Standing_Toe_Touches": {
+"bytes": {
+"anim": 22206,
+"mini": 890,
+"poster": 3976
+},
+"hash": "e5a6fecbaff8a49e3f781ecd551409475e1be6b35dd1877dcb42fd1f50fb0af5",
+"q": 45
+},
+"Standing_Towel_Triceps_Extension": {
+"bytes": {
+"anim": 26022,
+"mini": 1064,
+"poster": 6260
+},
+"hash": "8c9c0db4192736933f1e56ef60de0d4071f47ed9fb750d2376941e371a1aa76c",
+"q": 45
+},
+"Standing_Two-Arm_Overhead_Throw": {
+"bytes": {
+"anim": 40730,
+"mini": 1242,
+"poster": 7784
+},
+"hash": "54a2c63ba6c3f96aed2dada396a39580a76c47487ca1e99d26f68278c9326273",
+"q": 45
+},
+"Star_Jump": {
+"bytes": {
+"anim": 15394,
+"mini": 524,
+"poster": 3052
+},
+"hash": "132a29b6b194fa150d4fd0709e34c8a251210716fbe806f3c48f6a8df236dd0c",
+"q": 45
+},
+"Step-up_with_Knee_Raise": {
+"bytes": {
+"anim": 39568,
+"mini": 1154,
+"poster": 8316
+},
+"hash": "d35d11c69aa9edaa4cc7191cbc945ef444f7cf691c91bdbc1f28b28ea1085490",
+"q": 45
+},
+"Step_Mill": {
+"bytes": {
+"anim": 47844,
+"mini": 1608,
+"poster": 10668
+},
+"hash": "ad80d83213cb3c58b58f0e5801f2332c0c68bd5df4d1ff86483ff1ca350784b2",
+"q": 45
+},
+"Stiff-Legged_Barbell_Deadlift": {
+"bytes": {
+"anim": 42560,
+"mini": 1472,
+"poster": 9060
+},
+"hash": "b289fad5b4a54210e443bbc457e5e4e6d792fc5febcd77cafa283f66f819ca5e",
+"q": 45
+},
+"Stiff-Legged_Dumbbell_Deadlift": {
+"bytes": {
+"anim": 44036,
+"mini": 1394,
+"poster": 8930
+},
+"hash": "db85515748489b31d17e9b6aba97737827e5ee2b01d5b16d984cce8f92d7cd61",
+"q": 45
+},
+"Stiff_Leg_Barbell_Good_Morning": {
+"bytes": {
+"anim": 45548,
+"mini": 1646,
+"poster": 9920
+},
+"hash": "4c619d2a54c1cd57b9f2794f8a807583689d656651d92d7afadabd25b94e874e",
+"q": 45
+},
+"Stomach_Vacuum": {
+"bytes": {
+"anim": 25588,
+"mini": 1092,
+"poster": 6672
+},
+"hash": "74fff5ad2f85a0c61d3c06300456041b6be266e51c2b5389e59b4f60e0e72623",
+"q": 45
+},
+"Straight-Arm_Dumbbell_Pullover": {
+"bytes": {
+"anim": 37136,
+"mini": 1428,
+"poster": 8720
+},
+"hash": "33ad61e7172140ea677264f3efab6d49adf540df77b5176b38f0f9773df42485",
+"q": 45
+},
+"Straight-Arm_Pulldown": {
+"bytes": {
+"anim": 35602,
+"mini": 1100,
+"poster": 7838
+},
+"hash": "61406df63e4ac1fd93443e8bc49356ab78cd2668dbac388c9bac544c7a74a145",
+"q": 45
+},
+"Straight_Bar_Bench_Mid_Rows": {
+"bytes": {
+"anim": 19106,
+"mini": 1018,
+"poster": 7288
+},
+"hash": "c75e3a8e1e4b483a58e429a0bc63feb46adbbff78b98750ed8299f2952ff2855",
+"q": 45
+},
+"Straight_Raises_on_Incline_Bench": {
+"bytes": {
+"anim": 29624,
+"mini": 1006,
+"poster": 6906
+},
+"hash": "b860057df223429e0b72176bf7d3dc5cbebe5f2b42620d3d03010dc2f1bb81f9",
+"q": 45
+},
+"Stride_Jump_Crossover": {
+"bytes": {
+"anim": 48364,
+"mini": 1644,
+"poster": 10868
+},
+"hash": "2ab207c384f9f947810b8e27784c1a4b4e3c1d26f2b7b64f836b74552329453f",
+"q": 45
+},
+"Sumo_Deadlift": {
+"bytes": {
+"anim": 34946,
+"mini": 1220,
+"poster": 7468
+},
+"hash": "a23932d046cc62f59d79c7dda7593bb96f08fb7cf2a609bfbf74fd290ee3013b",
+"q": 45
+},
+"Sumo_Deadlift_with_Bands": {
+"bytes": {
+"anim": 48024,
+"mini": 1480,
+"poster": 9570
+},
+"hash": "e63bb6903b45bb4c9f8e2d00a9d6573728eabc163791188dd2d7e40baa48295d",
+"q": 45
+},
+"Sumo_Deadlift_with_Chains": {
+"bytes": {
+"anim": 44594,
+"mini": 1434,
+"poster": 9170
+},
+"hash": "901e38aeea58d90a3279eadae8f211951d508ff83d086fce688e4425189e04e1",
+"q": 45
+},
+"Superman": {
+"bytes": {
+"anim": 22784,
+"mini": 806,
+"poster": 5198
+},
+"hash": "d834bbf5a084cc7284019618b6024fa0c79f4d37138cfaea222c1def56606570",
+"q": 45
+},
+"Supine_Chest_Throw": {
+"bytes": {
+"anim": 32736,
+"mini": 1138,
+"poster": 7132
+},
+"hash": "0269bdba962999ed526d71bfdea497a9f6b845253be7e7cc0b6493fc1182383c",
+"q": 45
+},
+"Supine_One-Arm_Overhead_Throw": {
+"bytes": {
+"anim": 28392,
+"mini": 980,
+"poster": 6010
+},
+"hash": "2728faa0fdc54429cd37aa42cc6bd9acef75111ba8344bbcb06b43cc684d3856",
+"q": 45
+},
+"Supine_Two-Arm_Overhead_Throw": {
+"bytes": {
+"anim": 29694,
+"mini": 992,
+"poster": 5998
+},
+"hash": "0bc8d758b08f7ec322d1f89c1eb7b1602f08d09731c2f482ff3433d1c17ed29e",
+"q": 45
+},
+"Suspended_Fallout": {
+"bytes": {
+"anim": 15582,
+"mini": 544,
+"poster": 3146
+},
+"hash": "8c504a54bb1fdafd37fb8f6cb6b65978574c89c35a4908cc6c18f67617a65784",
+"q": 45
+},
+"Suspended_Push-Up": {
+"bytes": {
+"anim": 41300,
+"mini": 1272,
+"poster": 8422
+},
+"hash": "2713c49b614303bb4242bca8e8cd0a189bc6fc4de0a77274f3ce5b49a3ac3345",
+"q": 45
+},
+"Suspended_Reverse_Crunch": {
+"bytes": {
+"anim": 41922,
+"mini": 1356,
+"poster": 8484
+},
+"hash": "c7b9c31f1d84b83525edfc3a70c89b55a3d0da35f0d5833496f10dc51973d344",
+"q": 45
+},
+"Suspended_Row": {
+"bytes": {
+"anim": 48762,
+"mini": 1676,
+"poster": 10026
+},
+"hash": "1c5bead40f5028897cbe4a478ddc7c82cc3496a1b37695621f819aaa03d22f64",
+"q": 45
+},
+"Suspended_Split_Squat": {
+"bytes": {
+"anim": 47348,
+"mini": 1832,
+"poster": 10394
+},
+"hash": "56d787c8b6ad8b16070a584c171bc6ec7e859c01afeaba2329187d167f26db70",
+"q": 45
+},
+"Svend_Press": {
+"bytes": {
+"anim": 33848,
+"mini": 1148,
+"poster": 7618
+},
+"hash": "4daf42f3291b17486a49d1fadf028d351059b00ce5bee716cfcae7ee2eef4728",
+"q": 45
+},
+"T-Bar_Row_with_Handle": {
+"bytes": {
+"anim": 32198,
+"mini": 1284,
+"poster": 7410
+},
+"hash": "c4ce6a7e70c8725589bdb3364732bbd79909da5f816f324f9718373a07b98d43",
+"q": 45
+},
+"Tate_Press": {
+"bytes": {
+"anim": 28442,
+"mini": 1116,
+"poster": 6280
+},
+"hash": "934d66cc74ef9adec925fc1b703ec6990b38f84a1f589cf9d0108b87cd6cd894",
+"q": 45
+},
+"The_Straddle": {
+"bytes": {
+"anim": 4092,
+"mini": 844,
+"poster": 4980
+},
+"hash": "8d43427e866b900098dfb5de6e1f8aca3cd79c21d63fea49f124d78a408c713d",
+"q": 45
+},
+"Thigh_Abductor": {
+"bytes": {
+"anim": 54920,
+"mini": 1608,
+"poster": 11662
+},
+"hash": "99287cf0f024433b271fdca0cabfbcdb0bb5a9b51b8d4e997b6a67040bb1ad7e",
+"q": 45
+},
+"Thigh_Adductor": {
+"bytes": {
+"anim": 48724,
+"mini": 1602,
+"poster": 10636
+},
+"hash": "1eac2937042129673ff65f108590e8c1736c5ddc72466fb7aa6aa1bf6f446bb9",
+"q": 45
+},
+"Tire_Flip": {
+"bytes": {
+"anim": 27852,
+"mini": 1040,
+"poster": 6350
+},
+"hash": "cb561b0eb88743eeeed2a88f12dda86fe0951d92b1686f00de1b60497e4ed421",
+"q": 45
+},
+"Toe_Touchers": {
+"bytes": {
+"anim": 39628,
+"mini": 1502,
+"poster": 9008
+},
+"hash": "f1588effebdb7d240961332d893a0888dce2cc31f2b4da30c18edb19b5d4793e",
+"q": 45
+},
+"Torso_Rotation": {
+"bytes": {
+"anim": 18054,
+"mini": 760,
+"poster": 3328
+},
+"hash": "d336aecd16e5e0466af98423d26001a5896ce82aff0a316bc1456d65dd7b442f",
+"q": 45
+},
+"Trail_Running_Walking": {
+"bytes": {
+"anim": 57296,
+"mini": 1096,
+"poster": 10698
+},
+"hash": "6ab5547cf3cf50acb9a5547f5bb4b9dc492c4d64a326c7c3a747b11763b59923",
+"q": 45
+},
+"Trap_Bar_Deadlift": {
+"bytes": {
+"anim": 31040,
+"mini": 1136,
+"poster": 7442
+},
+"hash": "7bd1b72239de86e97f31486767802d6a1099d918dd5487e852ce3db35bc5ae73",
+"q": 45
+},
+"Tricep_Dumbbell_Kickback": {
+"bytes": {
+"anim": 28534,
+"mini": 936,
+"poster": 6124
+},
+"hash": "8ec75bf5dcc5894f18d68a0aa5bc06122d9a2464aec4e919e2a9f44aec2fa3a2",
+"q": 45
+},
+"Tricep_Side_Stretch": {
+"bytes": {
+"anim": 17844,
+"mini": 838,
+"poster": 3596
+},
+"hash": "159c569baef48eba0d4e4ceb95e91044d3d120c346c98d73a255078923b15eba",
+"q": 45
+},
+"Triceps_Overhead_Extension_with_Rope": {
+"bytes": {
+"anim": 42580,
+"mini": 1378,
+"poster": 9348
+},
+"hash": "69d8514d8ffe156b02b4be7f868cc13405ed8d97a1994dced4bec2e9d2633392",
+"q": 45
+},
+"Triceps_Pushdown": {
+"bytes": {
+"anim": 40716,
+"mini": 1104,
+"poster": 9460
+},
+"hash": "5e8636ba2c5d5f48fcb9cab55213be0559b3adf7c6e0b9c0811ba29ab7bf6552",
+"q": 45
+},
+"Triceps_Pushdown_-_Rope_Attachment": {
+"bytes": {
+"anim": 42240,
+"mini": 1310,
+"poster": 10802
+},
+"hash": "a0e7391a666bed8d78c117ead645c382d1e3ae78113e98d9197faeac48115e6c",
+"q": 45
+},
+"Triceps_Pushdown_-_V-Bar_Attachment": {
+"bytes": {
+"anim": 38688,
+"mini": 1096,
+"poster": 8584
+},
+"hash": "7d3eae90eeec25903180df3022fcf952a51c23d23d1e6527540bcd571b00aa95",
+"q": 45
+},
+"Triceps_Stretch": {
+"bytes": {
+"anim": 18254,
+"mini": 838,
+"poster": 3596
+},
+"hash": "a5913daa6a9d6664b30d0de1720931e7dca68c52257403db167a71ede09260af",
+"q": 45
+},
+"Tuck_Crunch": {
+"bytes": {
+"anim": 27732,
+"mini": 1062,
+"poster": 6328
+},
+"hash": "4b6c7c402eee41caf88411ba2a413ab1a3af060172bb38458ec386eca7fabf88",
+"q": 45
+},
+"Two-Arm_Dumbbell_Preacher_Curl": {
+"bytes": {
+"anim": 32384,
+"mini": 1090,
+"poster": 7142
+},
+"hash": "995e4648b771a76b67be5346cf1c032ab9b33b90caec16900ea67dafabfaa625",
+"q": 45
+},
+"Two-Arm_Kettlebell_Clean": {
+"bytes": {
+"anim": 26280,
+"mini": 948,
+"poster": 5750
+},
+"hash": "50b1d3fdfe8fe9ac2d03c3164b0f488868a9caaf863eb146f4651340fafe7cd9",
+"q": 45
+},
+"Two-Arm_Kettlebell_Jerk": {
+"bytes": {
+"anim": 26134,
+"mini": 978,
+"poster": 5790
+},
+"hash": "e7efe58d0e6be8a57d6dba37d6234b787f527ce1b44df1a3fd3abc1619b97aba",
+"q": 45
+},
+"Two-Arm_Kettlebell_Military_Press": {
+"bytes": {
+"anim": 26282,
+"mini": 938,
+"poster": 5622
+},
+"hash": "7145989c82de3db44e3abfc4a5496979f0ec879e2238931b24d2070771c1e3a0",
+"q": 45
+},
+"Two-Arm_Kettlebell_Row": {
+"bytes": {
+"anim": 23098,
+"mini": 970,
+"poster": 5200
+},
+"hash": "b14de1489046d9f6c2d4d00514773a6457150f44516a2e89c8a7f493872d8a88",
+"q": 45
+},
+"Underhand_Cable_Pulldowns": {
+"bytes": {
+"anim": 32414,
+"mini": 968,
+"poster": 7290
+},
+"hash": "81fc43f50bce5c6259a6fd4570e0d1d9504095b323c16ba153fe989d343b554b",
+"q": 45
+},
+"Upper_Back-Leg_Grab": {
+"bytes": {
+"anim": 24236,
+"mini": 1086,
+"poster": 5108
+},
+"hash": "14a9e1168102480b15ebde04718bdb76fec071bb3e478fcea94f6f5afa03b031",
+"q": 45
+},
+"Upper_Back_Stretch": {
+"bytes": {
+"anim": 19044,
+"mini": 894,
+"poster": 3906
+},
+"hash": "85e1cac610bb6ae8ec503acc71098325a1a556a344e5bfba11ebea972179f5b2",
+"q": 45
+},
+"Upright_Barbell_Row": {
+"bytes": {
+"anim": 29480,
+"mini": 1120,
+"poster": 6240
+},
+"hash": "5cad12cc4ef1c583a4373446fceae2c34189fcd50f4df717167c90093f5b0171",
+"q": 45
+},
+"Upright_Cable_Row": {
+"bytes": {
+"anim": 41838,
+"mini": 1136,
+"poster": 9506
+},
+"hash": "575f85f16b801ea0ab97382937471f71e52a6bf558d0146f3cb2fb07e7ff33b2",
+"q": 45
+},
+"Upright_Row_-_With_Bands": {
+"bytes": {
+"anim": 33106,
+"mini": 1134,
+"poster": 7254
+},
+"hash": "2c734c446c9136bb70da32f625ba77d1cfdb6924324e4ffa8c9f1cbd5c596644",
+"q": 45
+},
+"Upward_Stretch": {
+"bytes": {
+"anim": 18744,
+"mini": 846,
+"poster": 3838
+},
+"hash": "25601cdfa5b111e4b484be06adcf5f2a84b0d084a8dfc5df2ad70776318d5f78",
+"q": 45
+},
+"V-Bar_Pulldown": {
+"bytes": {
+"anim": 33420,
+"mini": 1080,
+"poster": 7346
+},
+"hash": "6fbeb843f44f749c45645da7d6542c47243ca13112e47f795d8769f24d72fe69",
+"q": 45
+},
+"V-Bar_Pullup": {
+"bytes": {
+"anim": 46854,
+"mini": 1404,
+"poster": 10368
+},
+"hash": "8f1f0632a104801f3522562169ea06cf087e5b24e632267e0cce235ea30a62e9",
+"q": 45
+},
+"Vertical_Swing": {
+"bytes": {
+"anim": 51382,
+"mini": 1540,
+"poster": 10536
+},
+"hash": "9de41835d0163b34423ebeaade4db76e757ec4ddfef2c052cb2afa8e4dc8a07a",
+"q": 45
+},
+"Walking_Treadmill": {
+"bytes": {
+"anim": 33986,
+"mini": 1300,
+"poster": 8114
+},
+"hash": "cb3ebdd6fab5dc711750d0f152bc55ab236e5b3b5ed74a51756af9bd95189349",
+"q": 45
+},
+"Weighted_Ball_Hyperextension": {
+"bytes": {
+"anim": 27004,
+"mini": 872,
+"poster": 5244
+},
+"hash": "beb82322d904c6fc65088d3c0aeba5682b63809f07e15eb10a687dfd4bcdb191",
+"q": 45
+},
+"Weighted_Ball_Side_Bend": {
+"bytes": {
+"anim": 36148,
+"mini": 1500,
+"poster": 8378
+},
+"hash": "5053a7c45b84770efbf0b33d6aefc240973f7741e640633c34f6080946cb0e93",
+"q": 45
+},
+"Weighted_Bench_Dip": {
+"bytes": {
+"anim": 29014,
+"mini": 1062,
+"poster": 6288
+},
+"hash": "e0f931c3bae94c99010af09fef3257cf236b377435d69f1f42c5991a01b1a0d4",
+"q": 45
+},
+"Weighted_Crunches": {
+"bytes": {
+"anim": 23702,
+"mini": 744,
+"poster": 5882
+},
+"hash": "b5ae3179523feeb7f1662b03dd4ba03b7dd4fa7c9e9dc4d016d45985aa6f3512",
+"q": 45
+},
+"Weighted_Jump_Squat": {
+"bytes": {
+"anim": 46414,
+"mini": 1604,
+"poster": 10394
+},
+"hash": "0d22877438360366d9b46210bd9eab90d01a95be2489e64507bf4a49fecd6658",
+"q": 45
+},
+"Weighted_Pull_Ups": {
+"bytes": {
+"anim": 32478,
+"mini": 1062,
+"poster": 7114
+},
+"hash": "30d7805622b89ba5fd422d170151dbe4334e61e3ad5ab9271ef59085547f734f",
+"q": 45
+},
+"Weighted_Sissy_Squat": {
+"bytes": {
+"anim": 31294,
+"mini": 1194,
+"poster": 6852
+},
+"hash": "60a18c6f980c0c8f10122846b9c1dafd2d0eea61ab36ea9f3e47a04d6ac945df",
+"q": 45
+},
+"Weighted_Sit-Ups_-_With_Bands": {
+"bytes": {
+"anim": 34230,
+"mini": 1118,
+"poster": 6942
+},
+"hash": "ff72d855f09da43b6d53094dd2d3336541b044dd704c4f1a0d775dcdfd907585",
+"q": 45
+},
+"Weighted_Squat": {
+"bytes": {
+"anim": 33832,
+"mini": 964,
+"poster": 7892
+},
+"hash": "e3118379dc8328051021bcc7928e72b28a9464813223d0f8ed3f312366e15a12",
+"q": 45
+},
+"Wide-Grip_Barbell_Bench_Press": {
+"bytes": {
+"anim": 36504,
+"mini": 1288,
+"poster": 8146
+},
+"hash": "6387e00b809dfdc8f9d8a7416fa07518f2a14399f53c384733c696bf0226ae88",
+"q": 45
+},
+"Wide-Grip_Decline_Barbell_Bench_Press": {
+"bytes": {
+"anim": 52950,
+"mini": 1508,
+"poster": 11922
+},
+"hash": "b58ba45c0e3307a2e7be3cc57a0837ce809e6a1ae698dcd5f717b0cee4e18098",
+"q": 45
+},
+"Wide-Grip_Decline_Barbell_Pullover": {
+"bytes": {
+"anim": 33228,
+"mini": 1204,
+"poster": 7140
+},
+"hash": "56dd3679f5e20200872679cf9c350411799bc49326473d6aac806093b52f491c",
+"q": 45
+},
+"Wide-Grip_Lat_Pulldown": {
+"bytes": {
+"anim": 36930,
+"mini": 1140,
+"poster": 8514
+},
+"hash": "950043988105fc70768427a76024a75b53c726402471461de21fd1e552557bfa",
+"q": 45
+},
+"Wide-Grip_Pulldown_Behind_The_Neck": {
+"bytes": {
+"anim": 36506,
+"mini": 1090,
+"poster": 8084
+},
+"hash": "989de3eaadc35c3d6a0f9087eb1bcd07e30f2af16fdad2b2399162853792cd2a",
+"q": 45
+},
+"Wide-Grip_Rear_Pull-Up": {
+"bytes": {
+"anim": 22412,
+"mini": 938,
+"poster": 4912
+},
+"hash": "a3be7b56428c4c6b1a4c486b4d20c54166973c2fd379f9aedbd9c345eee1a52b",
+"q": 45
+},
+"Wide-Grip_Standing_Barbell_Curl": {
+"bytes": {
+"anim": 28998,
+"mini": 1104,
+"poster": 6276
+},
+"hash": "5d46401d3839f7792ad9e16521d3b8d3475336d0defa0d643e6d6bc5f268126e",
+"q": 45
+},
+"Wide_Stance_Barbell_Squat": {
+"bytes": {
+"anim": 39660,
+"mini": 1568,
+"poster": 9116
+},
+"hash": "9e267a81ef97001731551816b9428975d553fa375003263ca3bf4e6ba59e5f54",
+"q": 45
+},
+"Wide_Stance_Stiff_Legs": {
+"bytes": {
+"anim": 42504,
+"mini": 1474,
+"poster": 9006
+},
+"hash": "50ea738286e9fcdde69094dd75223e2fea9d6b3ec107eeaa618addadc46c9fc5",
+"q": 45
+},
+"Wind_Sprints": {
+"bytes": {
+"anim": 25170,
+"mini": 1008,
+"poster": 6128
+},
+"hash": "3425bb3b62a94f7bc3c794d757806f948314f60ef3426e37e71124221b8a5b74",
+"q": 45
+},
+"Windmills": {
+"bytes": {
+"anim": 26626,
+"mini": 968,
+"poster": 5154
+},
+"hash": "b4e3f4181988968766747c85500f29bc73f6d30dc18f4fcb113c1709f49e9e79",
+"q": 45
+},
+"Worlds_Greatest_Stretch": {
+"bytes": {
+"anim": 27034,
+"mini": 1106,
+"poster": 5268
+},
+"hash": "662e059cf6600785fa086f9df7394e012fc4f5755e0a81f8c2805b8672fcb86c",
+"q": 45
+},
+"Wrist_Circles": {
+"bytes": {
+"anim": 31912,
+"mini": 1142,
+"poster": 7090
+},
+"hash": "d3a51ca9d3a90dbf81b2b54701ce45658f80fb0e297e31728323eadca8cfc5f4",
+"q": 45
+},
+"Wrist_Roller": {
+"bytes": {
+"anim": 34716,
+"mini": 1300,
+"poster": 7858
+},
+"hash": "8b14ad0ffb929a2d3fb5db5802b7c366a86725752defd62c275dd69fced2afd8",
+"q": 45
+},
+"Wrist_Rotations_with_Straight_Bar": {
+"bytes": {
+"anim": 43120,
+"mini": 1446,
+"poster": 9476
+},
+"hash": "ee05bd3fda05d785c9d79922cb32391b4cba9a9e39d4b8782e7919384258c912",
+"q": 45
+},
+"Yoke_Walk": {
+"bytes": {
+"anim": 34432,
+"mini": 1106,
+"poster": 7672
+},
+"hash": "d92aceb4c6c1973a4e947a91a4645a96021fddf73fcc0e2ca9ae120a59e99437",
+"q": 45
+},
+"Zercher_Squats": {
+"bytes": {
+"anim": 43460,
+"mini": 1532,
+"poster": 9128
+},
+"hash": "fbb6c983c3cdb2247f143695c65b18e9220cf434c340711ce189bbd22cff570d",
+"q": 45
+},
+"Zottman_Curl": {
+"bytes": {
+"anim": 36446,
+"mini": 1312,
+"poster": 8070
+},
+"hash": "375415fadd56368664cf2ddcdbf5458618a13095c9232f0ab06a983f9d8263b2",
+"q": 45
+},
+"Zottman_Preacher_Curl": {
+"bytes": {
+"anim": 29606,
+"mini": 1178,
+"poster": 6770
+},
+"hash": "54dcfb239cf589ae6c2aae2de58d985d5bc86949eeca73d7616292f5306894c1",
+"q": 45
+}
+}
