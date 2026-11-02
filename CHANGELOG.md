@@ -12,6 +12,8 @@ Login por convite e painel de administração. Liga quando o Supabase estiver co
 ### Segurança
 - A chave secreta do Supabase fica só no servidor. A sessão fica no Keychain/Keystore no celular e na sessão da aba na web.
 - O painel não usa CDN e tem política de conteúdo restrita.
+- Permissões do banco fechadas: o Supabase libera por padrão TRUNCATE, DELETE e toda função nova para qualquer pessoa. Agora só fica liberado o que o app usa logado.
+- Conta criada fora do convite (por exemplo, com o cadastro público ligado por engano) nasce bloqueada.
 ### Observação
 - Os treinos continuam guardados no aparelho. A sincronização com o servidor vem na próxima versão.
 
