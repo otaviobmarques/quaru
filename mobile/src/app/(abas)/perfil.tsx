@@ -10,6 +10,7 @@ import { marca } from '@/config/marca';
 import { RodapeMarca } from '@/componentes/rodape-marca';
 import { lerNumero } from '@/dominio/metricas';
 import { imcSeAplica } from '@/dominio/tour';
+import { useCoresBase } from '@/tema/tema';
 import { ALTURA_MAX_CM, ALTURA_MIN_CM, AVISO_IMC, calcularImc, faixaImc, formatarImc, ROTULO_FAIXA } from '@/dominio/imc';
 
 const TEXTO_MODO = {
@@ -39,18 +40,27 @@ export default function Perfil() {
   };
   const ultimoPeso = estado.pesos.filter((p) => !p.excluidoEm).toSorted((a, b) => (a.medidoEm < b.medidoEm ? -1 : 1)).at(-1);
   const imc = calcularImc(ultimoPeso?.pesoKg, estado.perfil?.alturaCm);
+  const b = useCoresBase();
   return (
     <Tela logo titulo="Perfil">
       <Cartao>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-          <FotoPerfil avatar={estado.perfil?.avatar} tamanho={72} />
-          <View style={{ flex: 1, gap: 4 }}>
-            <Texto v="titulo-3">{estado.perfil?.nome ? `Olá, ${estado.perfil.nome}` : 'Seu perfil'}</Texto>
-            <Botao v="secundario" titulo={estado.perfil?.avatar ? 'Trocar foto ou avatar' : 'Escolher foto ou avatar'} onPress={() => router.push('/foto-perfil')} testID="abrir-foto-perfil" />
-          </View>
+        <View style={{ alignItems: 'center', gap: 8 }}>
+          <View style={{ borderWidth: 2, borderColor: b.tinta, borderRadius: 60, padding: 3, backgroundColor: b['primaria-suave'] }}><FotoPerfil avatar={estado.perfil?.avatar} tamanho={96} /></View>
+          <Texto v="titulo-2" style={{ textAlign: 'center' }}>{estado.perfil?.nome || 'Seu perfil'}</Texto>
+          <Botao v="secundario" titulo={estado.perfil?.avatar ? 'Trocar foto ou avatar' : 'Escolher foto ou avatar'} onPress={() => router.push('/foto-perfil')} testID="abrir-foto-perfil" />
         </View>
         <Campo rotulo="Como quer ser chamado (opcional)" value={nome} maxLength={40} onChangeText={setNome} onBlur={() => aplicar((e) => acoes.definirNome(e, nome))} onSubmitEditing={() => aplicar((e) => acoes.definirNome(e, nome))} autoComplete="off" ajuda="Fica só neste aparelho." testID="campo-nome" />
       </Cartao>
+      <View style={{ flexDirection: 'row', gap: 10 }} testID="numeros-perfil">
+        {[
+          ['Altura', estado.perfil?.alturaCm ? `${(estado.perfil.alturaCm / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} m` : '–'],
+          ['Peso', ultimoPeso ? `${ultimoPeso.pesoKg.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} kg` : '–'],
+          ['IMC', imc != null ? formatarImc(imc) : '–'],
+        ].map(([r, v]) => (
+          <View key={r} style={{ flex: 1 }}><Cartao><Texto v="legenda" suave>{r}</Texto><Texto v="titulo-3">{v}</Texto></Cartao></View>
+        ))}
+      </View>
+      {temExemplo(estado) && <Texto v="rotulo">Valores de exemplo.</Texto>}
       <Cartao>
         <Texto v="corpo-forte">Altura e IMC</Texto>
         <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-end' }}>

@@ -18,7 +18,7 @@ describe('exportação (L3)', () => {
   });
   it('pacote tem dados.json versão 1, CSVs e LEIA-ME', () => {
     const a = arquivosExportacao(d);
-    expect(Object.keys(a).sort()).toEqual(['LEIA-ME.txt', 'agua.csv', 'dados.json', 'peso_corporal.csv', 'treinos.csv']); // v0.4.1: + agua.csv
+    expect(Object.keys(a).sort()).toEqual(['LEIA-ME.txt', 'agua.csv', 'dados.json', 'diario_alimentar.csv', 'peso_corporal.csv', 'treinos.csv']); // v0.4.1: + agua.csv; v0.5: + diário
     expect(JSON.parse(a['dados.json']).versao_formato).toBe(1);
   });
 });

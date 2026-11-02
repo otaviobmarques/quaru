@@ -8,6 +8,8 @@ import { enfileirar, type ItemFila } from '@/dominio/sincronizacao';
 import { ativo, conceder, revogar, type Finalidade, type RegistroConsentimento } from '@/dominio/consentimento';
 import { novoId } from '@/servicos/id';
 import { AGUA_MAX_ML, AGUA_MIN_ML, META_MAX_ML, META_MIN_ML, type RegistroAgua } from '@/dominio/agua';
+import { marcar, type Avaliacao, type RegistroDiario } from '@/dominio/diario';
+import type { Momento } from '@/dominio/refeicoes';
 import { DIAS_MAX, DIAS_MIN, type PerfilTreino } from '@/dominio/objetivo';
 import { LIMITE_TEXTO_LOCAL, validarHora, type DadosTour } from '@/dominio/tour';
 import type { Exercicio, PesoCorporal, Rotina, Serie, SessaoTreino } from '@/dominio/tipos';
@@ -27,6 +29,8 @@ export interface Estado {
   perfil?: PerfilCompleto;
   /** v0.4.1: copos de água (dado de saúde, cifrado com o resto do estado). */
   agua?: RegistroAgua[];
+  /** v0.5: diário alimentar simples (como foi cada refeição; dado de saúde). */
+  diario?: RegistroDiario[];
   exercicios: Exercicio[]; // próprios do usuário (a biblioteca Domma vem de BIBLIOTECA)
   rotinas: Rotina[];
   sessoes: SessaoTreino[];
@@ -91,6 +95,11 @@ export const acoes = {
     if (!temSaude(e)) throw new Error('sem_consentimento');
     if (!(Number.isInteger(r.ml) && r.ml >= AGUA_MIN_ML && r.ml <= AGUA_MAX_ML)) throw new Error('valor_invalido');
     return { ...e, agua: [...(e.agua ?? []), r] };
+  },
+  /** Diário alimentar (v0.5): exige consentimento de saúde. `avaliacao` null desmarca. */
+  marcarRefeicao: (e: Estado, dia: string, momento: Momento, avaliacao: Avaliacao | null): Estado => {
+    if (!temSaude(e)) throw new Error('sem_consentimento');
+    return { ...e, diario: marcar(e.diario ?? [], dia, momento, avaliacao, agora()) };
   },
   /** Desfazer: remove o registro (é o último toque da pessoa; não há sincronização de água). */
   desfazerAgua: (e: Estado, id: string): Estado => ({ ...e, agua: (e.agua ?? []).filter((r) => r.id !== id) }),

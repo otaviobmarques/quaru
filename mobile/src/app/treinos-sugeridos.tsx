@@ -2,7 +2,10 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 
 import { CartaoModelo } from '@/componentes/cartao-modelo';
-import { Aviso, FaixaFichas, Ficha, Segmentado, Tela, Texto, Toast, EstadoVazio } from '@/componentes/ui';
+import { View } from 'react-native';
+
+import { MapaMuscular } from '@/componentes/mapa-muscular';
+import { Aviso, Cartao, FaixaFichas, Ficha, Segmentado, Tela, Texto, Toast, EstadoVazio } from '@/componentes/ui';
 import { AREAS, AVISO_TREINO, MODELOS, modeloDaArea, rotinaDoModelo, type Area, type Modelo, type Nivel } from '@/dominio/treinos-sugeridos';
 import { equipamentosDoPerfil, itensCompativeis, modeloAdaptado } from '@/dominio/equipamentos';
 import { acoes, useEstado } from '@/estado/armazem';
@@ -33,10 +36,15 @@ export function ConteudoSugeridos({ area0 }: { area0?: string }) {
   return (
     <>
       {adicionado && <Toast fixo texto={`“${adicionado.nome}” foi para o seu plano.`} acao="Editar" onAcao={() => router.push(`/rotina/${adicionado.id}`)} onFim={() => setAdicionado(null)} />}
+      <Texto v="titulo-1">Escolha o foco de hoje</Texto>
       <FaixaFichas>
         <Ficha texto="Todas" ativa={!area} onPress={() => setArea(null)} />
         {AREAS.map((a) => <Ficha key={a.id} texto={a.nome} ativa={area === a.id} onPress={() => setArea(area === a.id ? null : a.id)} />)}
       </FaixaFichas>
+      <Cartao>
+        <Texto v="legenda" suave>Frente e costas · {area ? `${AREAS.find((a) => a.id === area)?.nome} em destaque` : 'escolha uma área para destacar'}</Texto>
+        <View style={{ alignItems: 'center' }}><MapaMuscular regioes={area ? AREAS.find((a) => a.id === area)!.regioes : []} altura={200} /></View>
+      </Cartao>
       <Aviso tom="alerta" titulo="Antes de começar" texto={AVISO_TREINO} />
       <Segmentado opcoes={[{ valor: 'iniciante', rotulo: 'Iniciante' }, { valor: 'intermediario', rotulo: 'Intermediário' }]} valor={nivel} onChange={setNivel} />
       {lista.length === 0 && <EstadoVazio titulo="Nenhum treino nesta área" texto="Troque o nível ou escolha outra área." />}

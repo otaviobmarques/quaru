@@ -45,3 +45,33 @@ export function treinosUltimos7Dias(sessoes: SessaoTreino[], agora: string): num
   const t = +new Date(agora);
   return ativos(sessoes).filter((s) => s.finalizadaEm && t - +new Date(s.finalizadaEm) < 7 * 86400000 && +new Date(s.finalizadaEm) <= t).length;
 }
+
+/** Dias (YYYY-MM-DD, fuso local) com pelo menos um treino finalizado. */
+export function diasTreinados(sessoes: SessaoTreino[]): Set<string> {
+  return new Set(ativos(sessoes).filter((s) => s.finalizadaEm).map((s) => diaLocal(s.finalizadaEm!)));
+}
+
+const diaAnterior = (dia: string) => { const d = new Date(`${dia}T12:00:00Z`); d.setUTCDate(d.getUTCDate() - 1); return d.toISOString().slice(0, 10); };
+
+/**
+ * Sequência de dias seguidos com treino. Conta até hoje; se hoje ainda não teve treino, conta até ontem
+ * (a sequência só "quebra" depois de um dia inteiro sem treino). `hoje` diz se o dia de hoje já entrou.
+ */
+export function sequenciaDias(sessoes: SessaoTreino[], agora: string): { dias: number; hoje: boolean } {
+  const feitos = diasTreinados(sessoes);
+  const hojeDia = diaLocal(agora);
+  const hoje = feitos.has(hojeDia);
+  let dia = hoje ? hojeDia : diaAnterior(hojeDia);
+  let dias = 0;
+  while (feitos.has(dia)) { dias++; dia = diaAnterior(dia); }
+  return { dias, hoje };
+}
+
+/** Os 7 dias terminando hoje, do mais antigo ao mais novo, marcando os que tiveram treino. */
+export function semanaTreinos(sessoes: SessaoTreino[], agora: string): { dia: string; feito: boolean; hoje: boolean }[] {
+  const feitos = diasTreinados(sessoes);
+  const hojeDia = diaLocal(agora);
+  const lista: string[] = [hojeDia];
+  for (let i = 0; i < 6; i++) lista.unshift(diaAnterior(lista[0]));
+  return lista.map((d) => ({ dia: d, feito: feitos.has(d), hoje: d === hojeDia }));
+}

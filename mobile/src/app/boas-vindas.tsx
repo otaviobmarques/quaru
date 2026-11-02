@@ -7,10 +7,10 @@ import { Ilustracao } from '@/componentes/ilustracoes';
 import { IlustracaoTour, type NomeIlustracaoTour } from '@/componentes/ilustracao-tour';
 import { Logo } from '@/componentes/logo';
 import { MENSAGEM_ERRO, PerguntaTour, rascunhoDe, salvarPasso, type Rascunho } from '@/componentes/pergunta-tour';
-import { Aviso, Botao, Selo, Tela, Texto } from '@/componentes/ui';
+import { Adesivo, Aviso, BlocoTinta, Botao, Selo, Tela, Texto } from '@/componentes/ui';
 import { PASSOS_TOUR, type IdPassoTour } from '@/dominio/apresentacao';
 import { acoes, temSaude, useEstado } from '@/estado/armazem';
-import { raio, useCores } from '@/tema/tema';
+import { raio, useCoresBase } from '@/tema/tema';
 
 /**
  * Tour guiado do primeiro acesso (v0.4.1). Explica Início, Treinos, Alimentação, Água e Perfil e, no caminho,
@@ -25,7 +25,7 @@ export const ILUSTRACAO_DO_PASSO: Partial<Record<IdPassoTour, NomeIlustracaoTour
 
 export default function BoasVindas() {
   const { estado, aplicar } = useEstado();
-  const c = useCores();
+  const b = useCoresBase();
   const { rever, passo: p0 } = useLocalSearchParams<{ rever?: string; passo?: string }>();
   const TOTAL = PASSOS_TOUR.length;
   const [passo, setPasso] = useState(() => Math.min(TOTAL - 1, Math.max(0, (Number(p0) || 1) - 1)));
@@ -47,26 +47,33 @@ export default function BoasVindas() {
     router.replace('/inicio');
   };
   return (
-    <Tela acaoTopo={<View style={{ flex: 1, alignItems: 'flex-end' }}><View style={{ width: 140 }}><Botao v="texto" titulo="Sair do tour" onPress={sair} testID="pular-apresentacao" /></View></View>}
+    <Tela titulo="Tour" acaoTopo={<View style={{ width: 130 }}><Botao v="texto" titulo="Sair do tour" onPress={sair} testID="pular-apresentacao" /></View>}
       voltar={passo > 0 ? () => ir(passo - 1) : undefined} rotuloVoltar="Passo anterior"
       rodape={<View style={{ gap: 8 }}>
         <Botao grande titulo={ultimo ? (rever === '1' ? 'Fechar' : 'Começar a usar') : 'Próximo'} onPress={avancar} testID="proximo-passo" />
         {atual.pergunta && <Botao v="texto" titulo="Pular esta pergunta" onPress={() => ir(passo + 1)} testID="pular-pergunta" />}
       </View>}>
-      <View style={{ gap: 16, marginTop: 8 }}>
-        {passo === 0 && <View style={{ alignSelf: 'center' }}><Logo largura={200} /></View>}
-        {ILUSTRACAO_DO_PASSO[atual.id] ? <IlustracaoTour nome={ILUSTRACAO_DO_PASSO[atual.id]!} largura={300} />
-          : atual.ilustracao && <Ilustracao nome={atual.ilustracao} descricao={atual.descricao ?? atual.titulo} largura={passo === 0 ? 220 : 240} />}
-        <View accessible accessibilityLabel={`Passo ${passo + 1} de ${TOTAL}`} style={{ height: 6, backgroundColor: c['superficie-2'], borderRadius: raio.pilula, overflow: 'hidden' }}>
-          <View style={{ width: `${((passo + 1) / TOTAL) * 100}%`, height: 6, backgroundColor: c.primaria }} />
+      <View style={{ gap: 14, marginTop: 4 }}>
+        <View style={{ gap: 6 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <Texto v="rotulo" style={{ fontWeight: '700' }}>{`Etapa ${passo + 1} de ${TOTAL}`}</Texto>
+            <Animacao nome="tour-progresso" tamanho={24} />
+            {atual.area && <Selo texto={`Área: ${atual.area}`} />}
+          </View>
+          <View accessible accessibilityLabel={`Passo ${passo + 1} de ${TOTAL}`} style={{ height: 12, backgroundColor: b.superficie, borderRadius: raio.pilula, overflow: 'hidden', borderWidth: 1.5, borderColor: b.tinta }}>
+            <View style={{ width: `${((passo + 1) / TOTAL) * 100}%`, height: '100%', backgroundColor: b.primaria }} />
+          </View>
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 8, alignItems: 'center' }}>
-          <Animacao nome="tour-progresso" tamanho={32} />
-          <Texto v="legenda" suave>{`PASSO ${passo + 1} DE ${TOTAL}`}</Texto>
-          {atual.area && <Selo texto={`Área: ${atual.area}`} />}
-        </View>
-        <Texto v="titulo-1" style={{ textAlign: 'center' }}>{atual.titulo}</Texto>
-        <Texto suave style={{ textAlign: 'center' }}>{atual.texto}</Texto>
+        {passo === 0 ? <Adesivo texto="Leva 2 minutos" /> : null}
+        <Texto v="titulo-1">{atual.titulo}</Texto>
+        <BlocoTinta>
+          <View style={{ alignItems: 'center', backgroundColor: b['primaria-suave'], paddingVertical: 4 }}>
+            {passo === 0 && <View style={{ paddingTop: 12 }}><Logo largura={180} /></View>}
+            {ILUSTRACAO_DO_PASSO[atual.id] ? <IlustracaoTour nome={ILUSTRACAO_DO_PASSO[atual.id]!} largura={280} />
+              : atual.ilustracao && <Ilustracao nome={atual.ilustracao} descricao={atual.descricao ?? atual.titulo} largura={220} />}
+          </View>
+        </BlocoTinta>
+        <Texto suave>{atual.texto}</Texto>
         {atual.pergunta && <PerguntaTour id={atual.id} r={r} set={setR} saude={temSaude(estado)} />}
         {erro && <Aviso tom="erro" titulo="Não salvamos" texto={erro} />}
       </View>
