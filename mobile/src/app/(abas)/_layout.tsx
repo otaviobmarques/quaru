@@ -44,6 +44,7 @@ function BarraAbas({ state, navigateToTab }: BottomTabBarProps) {
   const b = useCoresBase();
   const { bottom } = useSafeAreaInsets();
   return (
+    <View style={{ backgroundColor: b.fundo }}>
     <View style={{ width: '100%', maxWidth: LARGURA_COLUNA, alignSelf: 'center', flexDirection: 'row', backgroundColor: b.superficie, borderWidth: 2, borderBottomWidth: 0, borderColor: b.tinta,
       borderTopLeftRadius: 20, borderTopRightRadius: 20, paddingHorizontal: 6, paddingTop: 6, paddingBottom: 8 + bottom }} accessibilityRole="tablist">
       {state.routes.map((r, i) => {
@@ -61,6 +62,7 @@ function BarraAbas({ state, navigateToTab }: BottomTabBarProps) {
           </Pressable>
         );
       })}
+    </View>
     </View>
   );
 }

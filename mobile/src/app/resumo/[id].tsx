@@ -1,12 +1,14 @@
 import { Animacao } from '@/componentes/animacao';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { Platform, Share, View } from 'react-native';
 
 import { Botao, Campo, Cartao, ItemLista, Tela, Texto } from '@/componentes/ui';
 import { dataLonga, metricasPorSessao, seriesDaSessao } from '@/dominio/consultas';
 import { ehRecorde, formatarKg } from '@/dominio/metricas';
 import { acoes, todosExercicios, useEstado } from '@/estado/armazem';
+import { textoCompartilharTreino } from '@/dominio/compartilhar';
+import { sequenciaDias } from '@/dominio/treino-de-hoje';
 
 /** Tela 7 – Resumo do treino (volume, recordes, anotação). */
 export default function Resumo() {
@@ -14,6 +16,7 @@ export default function Resumo() {
   const { estado, aplicar } = useEstado();
   const sessao = estado.sessoes.find((s) => s.id === id);
   const [notas, setNotas] = useState(sessao?.notas ?? '');
+  const [copiado, setCopiado] = useState(false);
   if (!sessao) return <Tela voltar={router.back}><Texto suave>Treino não encontrado.</Texto></Tela>;
   const m = metricasPorSessao(estado, sessao.id);
   const exs = new Map(todosExercicios(estado).map((e) => [e.id, e.nome]));
@@ -23,6 +26,16 @@ export default function Resumo() {
   const recs = [...new Map(minhas.filter((s) => ehRecorde(s, anteriores)).toSorted((a, b) => (a.cargaKg ?? 0) - (b.cargaKg ?? 0)).map((s) => [s.exercicioId, s])).values()];
   const dur = sessao.finalizadaEm ? Math.round((+new Date(sessao.finalizadaEm) - +new Date(sessao.iniciadaEm)) / 60000) : null;
   const porEx = [...new Set(minhas.map((s) => s.exercicioId))];
+  const compartilhar = async () => {
+    const texto = textoCompartilharTreino({ nome: estado.rotinas.find((r) => r.id === sessao.rotinaId)?.nome ?? 'Treino livre', series: m.series, volumeKg: formatarKg(m.volume), duracaoMin: dur,
+      recordes: recs.map((s) => `${exs.get(s.exercicioId)} ${formatarKg(s.cargaKg)} kg × ${s.reps}`), sequencia: sequenciaDias(estado.sessoes, new Date().toISOString()).dias });
+    try {
+      if (Platform.OS === 'web') {
+        const nav = navigator as Navigator & { share?: (d: { text: string }) => Promise<void> };
+        if (nav.share) await nav.share({ text: texto }); else { await navigator.clipboard.writeText(texto); setCopiado(true); }
+      } else await Share.share({ message: texto });
+    } catch { /* a pessoa cancelou */ }
+  };
   return (
     <Tela titulo="Resumo do treino" voltar={() => router.replace('/inicio')}
       rodape={<Botao grande titulo="Concluir" onPress={() => { aplicar((e) => acoes.salvarSessao(e, { ...sessao, notas: notas.slice(0, 2000) || null })); router.replace('/inicio'); }} />}>
@@ -38,6 +51,7 @@ export default function Resumo() {
         {recs.length === 0 ? <Texto v="rotulo" suave>Nenhum recorde neste treino.</Texto> : recs.map((s, i) => <ItemLista key={s.id} ultimo={i === recs.length - 1} titulo={`Recorde · ${exs.get(s.exercicioId)}`} valor={`${formatarKg(s.cargaKg)} kg × ${s.reps}`} />)}
       </Cartao>
       <Cartao>{porEx.map((e, i) => <ItemLista key={e} ultimo={i === porEx.length - 1} titulo={exs.get(e) ?? ''} sub={minhas.filter((s) => s.exercicioId === e).map((s) => `${formatarKg(s.cargaKg)}×${s.reps}`).join(' · ')} onPress={() => router.push(`/exercicio/${e}`)} />)}</Cartao>
+      {sessao.finalizadaEm && <Botao v="secundario" titulo={copiado ? 'Texto copiado ✓' : 'Compartilhar treino'} onPress={compartilhar} testID="compartilhar-treino" />}
       <Campo rotulo="Anotação (opcional)" value={notas} onChangeText={setNotas} maxLength={2000} placeholder="Como foi o treino?" multilinha />
     </Tela>
   );

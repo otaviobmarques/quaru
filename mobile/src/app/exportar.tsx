@@ -7,13 +7,13 @@ import * as Sharing from 'expo-sharing';
 
 import { Botao, Cartao, ItemLista, Tela, Texto } from '@/componentes/ui';
 import { arquivosExportacao, dadosParaExportar, fotoPerfilBytes } from '@/dominio/exportacao';
-import { useEstado } from '@/estado/armazem';
+import { acoes, useEstado } from '@/estado/armazem';
 
 /** Tela 12c – Exportar (.zip gerado no aparelho, regra L3). */
 export default function Exportar() {
-  const { estado } = useEstado();
+  const { estado, aplicar } = useEstado();
   const [gerando, setGerando] = useState(false);
-  const gerar = async () => { setGerando(true); try { await gerarZip(); } finally { setGerando(false); } };
+  const gerar = async () => { setGerando(true); try { await gerarZip(); aplicar(acoes.registrarExportacao); } finally { setGerando(false); } };
   const gerarZip = async () => {
     const arqs = arquivosExportacao(dadosParaExportar(estado));
     const entradas: Record<string, Uint8Array> = Object.fromEntries(Object.entries(arqs).map(([n, t]) => [n, strToU8(t)]));
@@ -38,10 +38,11 @@ export default function Exportar() {
         <ItemLista titulo="treinos.csv" sub="Uma linha por série · separador ; · vírgula decimal" />
         <ItemLista titulo="peso_corporal.csv" sub="Data e peso em kg" />
         <ItemLista titulo="agua.csv" sub="Data e mililitros de água" />
+        <ItemLista titulo="diario_alimentar.csv" sub="Como foi cada refeição, por dia" />
         <ItemLista titulo="foto-perfil.jpg" sub="Só se você escolheu uma foto" />
         <ItemLista ultimo titulo="LEIA-ME.txt" sub="Explica as colunas" />
       </Cartao>
-      <Texto v="legenda" suave>refeicoes.csv entra quando o diário alimentar for integrado.</Texto>
+      {estado.ultimaExportacaoEm && <Texto v="legenda" suave>Última exportação: {new Date(estado.ultimaExportacaoEm).toLocaleDateString('pt-BR')}.</Texto>}
     </Tela>
   );
 }

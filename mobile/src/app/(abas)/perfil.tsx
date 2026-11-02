@@ -10,7 +10,7 @@ import { marca } from '@/config/marca';
 import { RodapeMarca } from '@/componentes/rodape-marca';
 import { lerNumero } from '@/dominio/metricas';
 import { imcSeAplica } from '@/dominio/tour';
-import { useCoresBase } from '@/tema/tema';
+import { useContornoInterno, useCoresBase } from '@/tema/tema';
 import { ALTURA_MAX_CM, ALTURA_MIN_CM, AVISO_IMC, calcularImc, faixaImc, formatarImc, ROTULO_FAIXA } from '@/dominio/imc';
 
 const TEXTO_MODO = {
@@ -23,7 +23,7 @@ const TEXTO_MODO = {
 
 /** Tela 12 – Perfil/privacidade, com 12b (confirmar exclusão digitando EXCLUIR). */
 export default function Perfil() {
-  const { estado, aplicar, modoArmazenamento } = useEstado();
+  const { estado, aplicar, modoArmazenamento, persistente } = useEstado();
   const { excluir: pedirExcluir } = useLocalSearchParams<{ excluir?: string }>();
   // Compatibilidade: /perfil?excluir=1 (link de Consentimentos) abre direto a folha de apagar na tela Sair.
   useEffect(() => { if (pedirExcluir === '1') router.replace('/sair?apagar=1'); }, [pedirExcluir]);
@@ -41,11 +41,12 @@ export default function Perfil() {
   const ultimoPeso = estado.pesos.filter((p) => !p.excluidoEm).toSorted((a, b) => (a.medidoEm < b.medidoEm ? -1 : 1)).at(-1);
   const imc = calcularImc(ultimoPeso?.pesoKg, estado.perfil?.alturaCm);
   const b = useCoresBase();
+  const contorno = useContornoInterno();
   return (
     <Tela logo titulo="Perfil">
       <Cartao>
         <View style={{ alignItems: 'center', gap: 8 }}>
-          <View style={{ borderWidth: 2, borderColor: b.tinta, borderRadius: 60, padding: 3, backgroundColor: b['primaria-suave'] }}><FotoPerfil avatar={estado.perfil?.avatar} tamanho={96} /></View>
+          <View style={{ borderWidth: 2, borderColor: contorno, borderRadius: 60, padding: 3, backgroundColor: b['primaria-suave'] }}><FotoPerfil avatar={estado.perfil?.avatar} tamanho={96} /></View>
           <Texto v="titulo-2" style={{ textAlign: 'center' }}>{estado.perfil?.nome || 'Seu perfil'}</Texto>
           <Botao v="secundario" titulo={estado.perfil?.avatar ? 'Trocar foto ou avatar' : 'Escolher foto ou avatar'} onPress={() => router.push('/foto-perfil')} testID="abrir-foto-perfil" />
         </View>
@@ -80,6 +81,7 @@ export default function Perfil() {
       <Texto suave>{Platform.OS === 'web' ? 'Modo local · sem cadastro · dados só neste navegador' : 'Modo local · sem cadastro · dados só neste aparelho'}</Texto>
       <Texto v="rotulo" suave>{TEXTO_MODO[modoArmazenamento]}</Texto>
       {modoArmazenamento === 'web' && <Aviso tom="alerta" titulo="Versão web" texto="Dados salvos neste navegador, sem criptografia do aparelho. Quem usar este navegador ou computador pode vê-los. Limpar os dados do site apaga tudo; exporte seus dados com frequência." />}
+      {modoArmazenamento === 'web' && persistente != null && <Texto v="legenda" suave>{persistente ? 'O navegador aceitou guardar os dados de forma persistente (ele não apaga sozinho por falta de espaço).' : 'O navegador não garantiu guardar os dados de forma persistente. Instalar o app na tela inicial ajuda.'}</Texto>}
       {modoArmazenamento === 'bloqueado' && <Aviso tom="erro" titulo="Armazenamento seguro indisponível" texto="Este aparelho não abriu o banco cifrado. Nada é gravado até isso ser resolvido; exporte seus dados se puder." />}
       {Platform.OS !== 'web' && estado.permissaoNotificacao === 'negada' && <Aviso tom="alerta" titulo="Avisos de descanso desativados" texto="Ative as notificações nos ajustes do aparelho para ser avisado quando o descanso terminar." />}
       <Cartao>

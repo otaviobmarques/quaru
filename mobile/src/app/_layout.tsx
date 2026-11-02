@@ -5,8 +5,27 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AvisoAtualizacao } from '@/componentes/aviso-atualizacao';
 import { acoes, ProvedorEstado, useEstado } from '@/estado/armazem';
+import { planoLembretes } from '@/dominio/lembretes';
+import { diaLocal } from '@/dominio/treino-de-hoje';
+import { agendarLembretes } from '@/servicos/notificacoes';
+import { ARQUIVOS_FONTES } from '@/tema/fontes';
+import { useFonts } from 'expo-font';
 
 /** Só em desenvolvimento (ou build local de capturas com EXPO_PUBLIC_CAPTURAS=1) na web: ?exemplo=1 entra no modo local com dados de EXEMPLO (para capturas). */
+/** v0.5: mantém os lembretes agendados iguais às preferências (tour / Meus dados). O de treino pula se já treinou hoje. */
+function Lembretes() {
+  const { estado, pronto } = useEstado();
+  const l = estado.perfil?.lembretes;
+  const chave = `${l?.treinoHora ?? ''}|${l?.agua ? 1 : 0}`;
+  const treinouHoje = estado.sessoes.some((s) => !s.excluidoEm && s.finalizadaEm && diaLocal(s.finalizadaEm) === diaLocal(new Date().toISOString()));
+  useEffect(() => {
+    if (!pronto) return;
+    agendarLembretes(planoLembretes(l), (x) => !(x.tipo === 'treino' && treinouHoje)).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chave, pronto, treinouHoje]);
+  return null;
+}
+
 function SementeDev() {
   const { aplicar, pronto } = useEstado();
   useEffect(() => {
@@ -34,10 +53,12 @@ function SementeDev() {
 }
 
 export default function Layout() {
+  useFonts(ARQUIVOS_FONTES); // começa a carregar a fonte de títulos já na abertura
   return (
     <SafeAreaProvider>
       <ProvedorEstado>
         <SementeDev />
+        <Lembretes />
         <Stack screenOptions={{ headerShown: false }} />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>

@@ -7,7 +7,7 @@ import { AVALIACOES, doDia, type Avaliacao } from '@/dominio/diario';
 import { MOMENTOS } from '@/dominio/refeicoes';
 import { diaLocal } from '@/dominio/treino-de-hoje';
 import { acoes, temSaude, useEstado } from '@/estado/armazem';
-import { useCoresBase } from '@/tema/tema';
+import { useContornoInterno, useCoresBase } from '@/tema/tema';
 
 /**
  * "Como foi hoje?" (v0.5): para cada refeição, três opções (comi bem, mais ou menos, pulei). Tocar de novo desmarca.
@@ -16,6 +16,7 @@ import { useCoresBase } from '@/tema/tema';
 export function DiarioDoDia() {
   const { estado, aplicar } = useEstado();
   const b = useCoresBase();
+  const contorno = useContornoInterno();
   const [agora] = useState(() => new Date().toISOString());
   const dia = diaLocal(agora);
   const hoje = doDia(estado.diario ?? [], dia);
@@ -52,7 +53,7 @@ export function DiarioDoDia() {
                     <Pressable key={a.id} testID={`diario-${m.id}-${a.id}`} accessibilityRole="radio" accessibilityState={{ checked: sel }} accessibilityLabel={`${m.nome}: ${a.nome}`}
                       onPress={() => marcar(m.id, a.id)}
                       style={{ width: 52, minHeight: 44, alignItems: 'center', justifyContent: 'center', borderRadius: 999,
-                        borderWidth: 1.5, borderColor: b.tinta, backgroundColor: sel ? b['acao-sobre-fundo'] : b.superficie }}>
+                        borderWidth: 1.5, borderColor: contorno, backgroundColor: sel ? b['acao-sobre-fundo'] : b.superficie }}>
                       <Text aria-hidden style={{ fontSize: 20 }}>{a.emoji}</Text>
                     </Pressable>
                   );

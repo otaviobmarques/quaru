@@ -7,7 +7,7 @@ import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
 import { Simbolo } from '@/componentes/logo';
 import { useEstado, temExemplo } from '@/estado/armazem';
-import { Bloco, espaco, ProvedorSobreFundo, raio, tipografia, toque, useCores, useCoresBase, useSobreFundo } from '@/tema/tema';
+import { Bloco, espaco, ProvedorSobreFundo, raio, tipografia, toque, useContornoInterno, useCores, useCoresBase, useSobreFundo } from '@/tema/tema';
 import { apoio } from '@/tema/tokens';
 import { useFonteTitulo } from '@/tema/fontes';
 
@@ -350,27 +350,6 @@ export function Toast({ texto, acao, onAcao, onFim, fixo }: { texto: string; aca
   );
 }
 
-/** Gráfico de barras simples (sem biblioteca externa). Mostra o valor atual em texto acima. */
-export function GraficoBarras({ pontos, unidade }: { pontos: { rotulo: string; valor: number }[]; unidade: string }) {
-  const c = useCores();
-  if (pontos.length < 2) return <Texto suave>Registre pelo menos 2 vezes para ver o gráfico.</Texto>;
-  const max = Math.max(...pontos.map((p) => p.valor));
-  const min = Math.min(...pontos.map((p) => p.valor)) * 0.9;
-  return (
-    <View accessible accessibilityLabel={`Gráfico: último valor ${pontos.at(-1)!.valor} ${unidade}`} style={{ gap: espaco[2] }}>
-      <Texto v="numero-grande">{pontos.at(-1)!.valor.toLocaleString('pt-BR')} <Texto v="corpo" suave>{unidade}</Texto></Texto>
-      <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 120, gap: 6 }}>
-        {pontos.map((p, i) => (
-          <View key={i} style={{ flex: 1, alignItems: 'center', gap: 4 }}>
-            <View style={{ width: '100%', height: Math.max(6, ((p.valor - min) / (max - min || 1)) * 100), backgroundColor: i === pontos.length - 1 ? c.primaria : c.secundaria, borderRadius: 4 }} />
-            <Text style={[t('legenda'), { color: c['texto-suave'] }]}>{p.rotulo}</Text>
-          </View>
-        ))}
-      </View>
-    </View>
-  );
-}
-
 export const s = StyleSheet.create({
   coluna: { width: '100%', maxWidth: LARGURA_COLUNA, alignSelf: 'center' },
   barra: { height: 56, flexDirection: 'row', alignItems: 'center', gap: espaco[2], paddingHorizontal: espaco[2] },
@@ -397,10 +376,11 @@ export function Adesivo({ texto, girar = '-3deg' }: { texto: string; girar?: str
 /** Barra de progresso (trilho + preenchimento) com papel de progressbar para o leitor de tela. */
 export function Trilho({ valor, rotulo, cor }: { valor: number; rotulo: string; cor?: string }) {
   const b = useCoresBase();
+  const contorno = useContornoInterno();
   const v = Math.max(0, Math.min(1, valor));
   return (
     <View accessibilityRole="progressbar" accessibilityLabel={rotulo} accessibilityValue={{ min: 0, max: 100, now: Math.round(v * 100) }}
-      style={{ height: 14, borderRadius: 7, borderWidth: 1.5, borderColor: b.tinta, backgroundColor: b['superficie-2'], overflow: 'hidden' }}>
+      style={{ height: 14, borderRadius: 7, borderWidth: 1.5, borderColor: contorno, backgroundColor: b['superficie-2'], overflow: 'hidden' }}>
       <View style={{ width: `${v * 100}%`, height: '100%', backgroundColor: cor ?? b.secundaria }} />
     </View>
   );
