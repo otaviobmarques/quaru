@@ -45,9 +45,9 @@ export default function Biblioteca() {
   return (
     <Tela semRolagem titulo="Biblioteca de exercícios" voltar={router.back} rodape={rotina ? <Botao grande titulo={`Adicionar ${sel.length || ''} à rotina`} desabilitado={!sel.length} onPress={adicionar} /> : undefined}>
       <Campo testID="busca-biblioteca" rotulo="Buscar" value={busca} onChangeText={setBusca} placeholder="Ex.: supino, agachamento, rosca" />
-      <FaixaFichas>{AREAS.map((a) => <Ficha key={a.id} texto={a.nome} ativa={area === a.id} onPress={() => setArea(area === a.id ? null : a.id)} />)}</FaixaFichas>
-      <FaixaFichas>{GRUPOS.map((g) => <Ficha key={g} texto={g} ativa={grupo === g} onPress={() => setGrupo(grupo === g ? null : g)} />)}</FaixaFichas>
-      <FaixaFichas>{EQUIPAMENTOS.map((g) => <Ficha key={g} texto={g} ativa={equip === g} onPress={() => setEquip(equip === g ? null : g)} />)}</FaixaFichas>
+      <FaixaFichas rolar>{AREAS.map((a) => <Ficha key={a.id} texto={a.nome} ativa={area === a.id} onPress={() => setArea(area === a.id ? null : a.id)} />)}</FaixaFichas>
+      <FaixaFichas rolar>{GRUPOS.map((g) => <Ficha key={g} texto={g} ativa={grupo === g} onPress={() => setGrupo(grupo === g ? null : g)} />)}</FaixaFichas>
+      <FaixaFichas rolar>{EQUIPAMENTOS.map((g) => <Ficha key={g} texto={g} ativa={equip === g} onPress={() => setEquip(equip === g ? null : g)} />)}</FaixaFichas>
       <Texto v="legenda" suave>{lista.length} {lista.length === 1 ? 'exercício' : 'exercícios'} · nomes em revisão por profissional (CREF)</Texto>
       <FlatList testID="lista-biblioteca" style={{ flex: 1 }} data={lista} keyExtractor={(e) => e.id} renderItem={item}
         getItemLayout={(_, i) => ({ length: ALTURA_ITEM, offset: ALTURA_ITEM * i, index: i })}
