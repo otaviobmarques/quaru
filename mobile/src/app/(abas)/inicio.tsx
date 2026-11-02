@@ -4,6 +4,7 @@ import { Platform, Pressable, View } from 'react-native';
 
 import { Adesivo, Aviso, Botao, BotaoIcone, Cartao, Ficha, Selo, Tela, Texto, SeloEnergia, Trilho } from '@/componentes/ui';
 import { CreditoDomma } from '@/componentes/rodape-marca';
+import { InstalarApp } from '@/componentes/instalar-app';
 import { FotoPerfil } from '@/componentes/avatares';
 import { IlustracaoTour } from '@/componentes/ilustracao-tour';
 import { COMECE_AQUI } from '@/dominio/apresentacao';
@@ -162,6 +163,7 @@ export default function Inicio() {
           <Texto v="rotulo" suave>{metaAgua ? `de ${formatarMl(metaAgua)}` : 'Registrar ›'}</Texto></Cartao></View>
       </View>
       {estado.fila.length > 0 && <Texto v="legenda" suave>{estado.fila.length} registros guardados no aparelho, aguardando sincronização (servidor ainda não configurado).</Texto>}
+      <InstalarApp compacto />
       <CreditoDomma />
     </Tela>
   );

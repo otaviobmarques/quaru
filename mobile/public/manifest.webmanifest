@@ -1,7 +1,7 @@
 {
   "name": "Quaru",
   "short_name": "Quaru",
-  "description": "Quaru: registro de treinos. Versão web: dados salvos neste navegador.",
+  "description": "Seu treino, no seu ritmo: treinos, evolução, água e alimentação num lugar só.",
   "lang": "pt-BR",
   "id": "./",
   "start_url": "./",
@@ -11,8 +11,84 @@
   "background_color": "#F2A0B0",
   "theme_color": "#F2A0B0",
   "icons": [
-    { "src": "icones/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icones/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icones/icone-mascaravel-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icones/icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icones/icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icones/icone-mascaravel-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": [
+    "health",
+    "fitness",
+    "lifestyle"
+  ],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "screenshots": [
+    {
+      "src": "loja/tela-inicio.webp",
+      "sizes": "780x1688",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Início com o treino de hoje"
+    },
+    {
+      "src": "loja/tela-treinos.webp",
+      "sizes": "780x1688",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Escolha o foco do treino"
+    },
+    {
+      "src": "loja/tela-agua.webp",
+      "sizes": "780x1688",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Meta de água do dia"
+    },
+    {
+      "src": "loja/tela-alimentacao.webp",
+      "sizes": "780x1688",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Comer bem, sem complicar"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Treinos",
+      "url": "./treinos",
+      "icons": [
+        {
+          "src": "icones/icone-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Água",
+      "url": "./agua",
+      "icons": [
+        {
+          "src": "icones/icone-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

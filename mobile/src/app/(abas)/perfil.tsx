@@ -9,6 +9,7 @@ import { OBJETIVOS } from '@/dominio/objetivo';
 import { FotoPerfil } from '@/componentes/avatares';
 import { marca } from '@/config/marca';
 import { RodapeMarca } from '@/componentes/rodape-marca';
+import { InstalarApp } from '@/componentes/instalar-app';
 import { lerNumero } from '@/dominio/metricas';
 import { imcSeAplica } from '@/dominio/tour';
 import { useContornoInterno, useCoresBase } from '@/tema/tema';
@@ -109,6 +110,7 @@ export default function Perfil() {
       </Cartao>
       {/* v0.4.3: "Sair" é o botão principal comum; a tela Sair (05b) traz também "Sair e apagar". */}
       <Botao titulo="Sair" testID="ir-sair" onPress={() => router.push('/sair')} />
+      <InstalarApp />
       <RodapeMarca />
     </Tela>
   );

@@ -1,16 +1,11 @@
 // GERADO por scripts/gerar-novidades.mjs a partir do CHANGELOG.md. Não edite à mão.
-export const VERSAO_NOVIDADES = "0.6.0";
+export const VERSAO_NOVIDADES = "0.6.1";
 export const NOVIDADES: string[] = [
-  "Login por convite e painel de administração. Liga quando o Supabase estiver configurado (docs/supabase-passo-a-passo.md).",
   "### Adicionado",
-  "- Login com e-mail e senha: só entra quem foi convidado pelo administrador. Sem \"Continuar sem conta\", \"Criar conta\" nem Google.",
-  "- Esqueci minha senha e a tela Crie sua senha, que abre pelo link do convite ou do e-mail de nova senha.",
-  "- Painel de administração em site separado (/quaru/admin/): cadastrar por convite, reenviar convite, redefinir senha, bloquear e desbloquear, tornar ou tirar admin, remover.",
-  "- Conta bloqueada pelo administrador é desconectada e vê o aviso.",
-  "- No primeiro login, os dados que já estavam no aparelho passam a ser da conta. Dados de outra conta no mesmo aparelho nunca se misturam.",
-  "### Segurança",
-  "- A chave secreta do Supabase fica só no servidor. A sessão fica no Keychain/Keystore no celular e na sessão da aba na web.",
-  "- O painel não usa CDN e tem política de conteúdo restrita.",
-  "### Observação",
-  "- Os treinos continuam guardados no aparelho. A sincronização com o servidor vem na próxima versão."
+  "- Painel: criar usuário com senha, além do convite por e-mail. O painel gera uma senha fácil de ler e mostra os dados de acesso para copiar e enviar.",
+  "- Painel: Definir senha em cada usuário.",
+  "- Troca no primeiro acesso: quem recebeu a senha do administrador cria a própria logo ao entrar.",
+  "- Pré-visualização do link: ao compartilhar o endereço do Quaru no WhatsApp, Instagram, Facebook, X ou Telegram, aparece o banner com o título e a descrição.",
+  "- Favicon nítido do símbolo do Quaru.",
+  "- Instalar o app: no Android, o botão \"Instalar o app\" coloca o Quaru na tela inicial, abrindo em tela cheia. No iPhone, o app explica como adicionar à Tela de Início. O instalador mostra telas do app e atalhos para Treinos e Água."
 ];
