@@ -1,4 +1,6 @@
 // v0.4.1 – telas: apresentação, Início vazio, logo, foto/avatar, altura/IMC, água, dietas, treinos sugeridos, objetivo.
+import { hoje } from '@/dominio/agenda';
+import { proximasDatas } from '@/componentes/treinos/depois-de-adicionar';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -215,9 +217,18 @@ describe('treinos sugeridos', () => {
     expect(screen.getByTestId('adicionar-inferiores-i')).toBeTruthy();
     await fireEvent.press(screen.getByTestId('adicionar-inferiores-i'));
     expect(ultimo.rotinas[0].nome).toBe('Inferiores (iniciante)');
-    expect(screen.getByText(/foi para Meus treinos/)).toBeTruthy(); // v0.7: o aviso leva ao plano (Meus treinos)
-    await fireEvent.press(screen.getByText('Ver'));
-    expect(router.navigate).toHaveBeenCalledWith('/treinos?secao=meus');
+    // v0.8.1: o cartão pergunta "Começar agora" ou "Agendar"; agendar põe o treino na agenda na data escolhida.
+    const id = ultimo.rotinas[0].id;
+    expect(screen.getByText(/está em Meus treinos\. E agora\?/)).toBeTruthy();
+    expect(screen.getByTestId(`comecar-agora-${id}`)).toBeTruthy();
+    await fireEvent.press(screen.getByTestId(`agendar-botao-${id}`));
+    await fireEvent.press(screen.getByText('Amanhã'));
+    await fireEvent.press(screen.getByTestId(`confirmar-agenda-${id}`));
+    const dia = proximasDatas(hoje(), 2)[1];
+    expect(ultimo.agenda?.dias[dia]).toBe(id);
+    expect(screen.getByText(/agendado: amanhã/)).toBeTruthy();
+    await fireEvent.press(screen.getByTestId(`ver-agenda-${id}`));
+    expect(router.navigate).toHaveBeenCalledWith('/treinos?secao=agenda');
   });
 });
 

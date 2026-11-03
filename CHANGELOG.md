@@ -1,6 +1,10 @@
 # Changelog
 Formato Keep a Changelog.
 
+## [0.8.1] – 2026-11-03
+### Mudado
+- **Treino sugerido: começar agora ou agendar.** Depois de adicionar um treino sugerido (na aba Treinos ou no Início), o próprio cartão pergunta o que fazer: **Começar agora** abre o treino na hora; **Agendar** deixa escolher o dia (próximas duas semanas), com opção de repetir toda semana, e o treino entra na agenda. Se o dia já tinha outro treino, o app avisa que vai trocar.
+
 ## [0.8.0] – 2026-11-03
 ### Adicionado
 - **Área do treinador** (`/quaru/treinador/`): o treinador cadastra os alunos, manda um link para cada um e monta os treinos de cada aluno (exercícios do catálogo, séries, repetições, descanso calculado pelo objetivo, recado e dias da semana).

@@ -19,6 +19,7 @@ import { tempoEstimadoTreino } from '@/dominio/descanso';
 import { planejadoPara } from '@/dominio/agenda';
 import { useContornoInterno, useCores, useCoresBase } from '@/tema/tema';
 import { CartaoModelo } from '@/componentes/cartao-modelo';
+import { DepoisDeAdicionar } from '@/componentes/treinos/depois-de-adicionar';
 import { DICA_EMAGRECER, OBJETIVOS, } from '@/dominio/objetivo';
 import { recomendarPara } from '@/dominio/tour';
 import { equipamentosDoPerfil, modeloAdaptado } from '@/dominio/equipamentos';
@@ -51,7 +52,7 @@ export default function Inicio() {
   const perfilTreino = estado.perfil?.treino;
   const rec = perfilTreino ? recomendarPara(perfilTreino, estado.perfil ?? {}) : null;
   const recomendados = rec?.modelos ?? [];
-  const [adicionados, setAdicionados] = useState<string[]>([]);
+  const [adicionados, setAdicionados] = useState<Record<string, { id: string; nome: string }>>({});
 
   let principal = null;
   let conteudo = null;
@@ -176,13 +177,17 @@ export default function Inicio() {
           <Texto v="rotulo" suave>{OBJETIVOS.find((o) => o.id === perfilTreino.objetivo)?.nome} · {perfilTreino.dias} dias por semana · mude em Perfil → Objetivo e foco.</Texto>
           {rec?.avisos.map((a) => <Aviso key={a} tom="alerta" titulo="Atenção" texto={a} />)}
           {perfilTreino.objetivo === 'emagrecer' && <Cartao><Texto v="corpo-forte">Dica</Texto><Texto v="rotulo" suave>{DICA_EMAGRECER}</Texto></Cartao>}
-          {recomendados.map((m) => adicionados.includes(m.id)
-            ? <Cartao key={m.id} rotulo={`${m.nome} adicionado. Ver em Meus treinos`} onPress={() => router.navigate('/treinos?secao=meus' as never)}><Texto v="corpo-forte">{m.nome}: está em Meus treinos ✓</Texto><Texto v="rotulo" cor={b['primaria-texto']}>Ver meus treinos ›</Texto></Cartao>
-            : <CartaoModelo key={m.id} m={m} tem={equipamentosDoPerfil(estado.perfil)} onAdicionar={() => {
-              const ordem = Math.max(0, ...rotinas.map((r) => r.ordem)) + 1;
-              aplicar((e) => acoes.salvarRotina(e, rotinaDoModelo(equipamentosDoPerfil(estado.perfil) ? modeloAdaptado(m, equipamentosDoPerfil(estado.perfil)!) : m, ordem, novoId, new Date().toISOString())));
-              setAdicionados((l) => [...l, m.id]);
-            }} />)}
+          {recomendados.map((m) => {
+            const feito = adicionados[m.id];
+            return <CartaoModelo key={m.id} m={m} tem={equipamentosDoPerfil(estado.perfil)}
+              depois={feito && <DepoisDeAdicionar rotinaId={feito.id} nome={feito.nome} />}
+              onAdicionar={() => {
+                const ordem = Math.max(0, ...rotinas.map((r) => r.ordem)) + 1;
+                const r = rotinaDoModelo(equipamentosDoPerfil(estado.perfil) ? modeloAdaptado(m, equipamentosDoPerfil(estado.perfil)!) : m, ordem, novoId, new Date().toISOString());
+                aplicar((e) => acoes.salvarRotina(e, r));
+                setAdicionados((a) => ({ ...a, [m.id]: { id: r.id, nome: r.nome } }));
+              }} />;
+          })}
         </View>
       )}
       <View style={{ flexDirection: 'row', gap: 12 }}>

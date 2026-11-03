@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { DemonstracaoExercicio } from '@/componentes/demonstracao-exercicio';
@@ -8,8 +9,9 @@ import { adaptarModelo, equipamentosDoExercicio, AVISO_SEM_ALTERNATIVA, type Equ
 import { Aviso, Botao, Cartao, Selo, Texto } from '@/componentes/ui';
 import { equipamentosDoModelo, regioesDoModelo, tempoEstimadoMin, type Modelo } from '@/dominio/treinos-sugeridos';
 
-/** Cartão de treino sugerido: nome, tempo estimado, nº de exercícios, equipamento e mapa muscular (v0.4.1). */
-export function CartaoModelo({ m, onAdicionar, tem }: { m: Modelo; onAdicionar: () => void; tem?: Equipamento[] | null }) {
+/** Cartão de treino sugerido: nome, tempo estimado, nº de exercícios, equipamento e mapa muscular (v0.4.1).
+ * Depois de adicionado, `depois` toma o lugar do botão (v0.8.1: começar agora ou agendar). */
+export function CartaoModelo({ m, onAdicionar, tem, depois }: { m: Modelo; onAdicionar: () => void; tem?: Equipamento[] | null; depois?: ReactNode }) {
   const equip = equipamentosDoModelo(m);
   const ad = tem ? adaptarModelo(m, tem) : null;
   const semOpcao = ad?.some((a) => a.troca && !a.usar);
@@ -46,7 +48,7 @@ export function CartaoModelo({ m, onAdicionar, tem }: { m: Modelo; onAdicionar: 
         );
       })}
       {semOpcao && <Aviso tom="secundaria" titulo="Falta equipamento" texto={AVISO_SEM_ALTERNATIVA} />}
-      <Botao titulo={ad && ad.every((a) => !a.usar) ? 'Adicionar o treino original' : 'Adicionar aos meus treinos'} onPress={onAdicionar} testID={`adicionar-${m.id}`} />
+      {depois ?? <Botao titulo={ad && ad.every((a) => !a.usar) ? 'Adicionar o treino original' : 'Adicionar aos meus treinos'} onPress={onAdicionar} testID={`adicionar-${m.id}`} />}
     </Cartao>
   );
 }

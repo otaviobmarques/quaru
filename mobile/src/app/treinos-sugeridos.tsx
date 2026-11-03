@@ -2,10 +2,11 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 
 import { CartaoModelo } from '@/componentes/cartao-modelo';
+import { DepoisDeAdicionar } from '@/componentes/treinos/depois-de-adicionar';
 import { View } from 'react-native';
 
 import { MapaMuscular } from '@/componentes/mapa-muscular';
-import { Aviso, Cartao, FaixaFichas, Ficha, Segmentado, Tela, Texto, Toast, EstadoVazio } from '@/componentes/ui';
+import { Aviso, Cartao, FaixaFichas, Ficha, Segmentado, Tela, Texto, EstadoVazio } from '@/componentes/ui';
 import { AREAS, AVISO_TREINO, MODELOS, modeloDaArea, rotinaDoModelo, type Area, type Modelo, type Nivel } from '@/dominio/treinos-sugeridos';
 import { equipamentosDoPerfil, itensCompativeis, modeloAdaptado } from '@/dominio/equipamentos';
 import { acoes, useEstado } from '@/estado/armazem';
@@ -26,16 +27,16 @@ export function ConteudoSugeridos({ area0 }: { area0?: string }) {
   // v0.4.3: com equipamento conhecido, quem dá para fazer sem trocas vem antes (nada é escondido).
   const lista = MODELOS.filter((m) => m.nivel === nivel && (!area || modeloDaArea(m, area)))
     .map((m, i) => ({ m, i })).sort((a, b) => (tem ? itensCompativeis(b.m, tem) - itensCompativeis(a.m, tem) : 0) || a.i - b.i).map((x) => x.m);
-  const [adicionado, setAdicionado] = useState<{ id: string; nome: string } | null>(null);
+  // modelo → treino criado; o cartão passa a perguntar "Começar agora" ou "Agendar".
+  const [adicionados, setAdicionados] = useState<Record<string, { id: string; nome: string }>>({});
   const adicionar = (m: Modelo) => {
     const ordem = Math.max(0, ...estado.rotinas.filter((r) => !r.excluidoEm).map((r) => r.ordem)) + 1;
     const r = rotinaDoModelo(tem ? modeloAdaptado(m, tem) : m, ordem, novoId, new Date().toISOString());
     aplicar((e) => acoes.salvarRotina(e, r));
-    setAdicionado({ id: r.id, nome: r.nome });
+    setAdicionados((a) => ({ ...a, [m.id]: { id: r.id, nome: r.nome } }));
   };
   return (
     <>
-      {adicionado && <Toast fixo texto={`“${adicionado.nome}” foi para Meus treinos.`} acao="Ver" onAcao={() => router.navigate('/treinos?secao=meus' as never)} onFim={() => setAdicionado(null)} />}
       <Texto v="titulo-1">Escolha o foco de hoje</Texto>
       <FaixaFichas>
         <Ficha texto="Todas" ativa={!area} onPress={() => setArea(null)} />
@@ -48,7 +49,8 @@ export function ConteudoSugeridos({ area0 }: { area0?: string }) {
       <Aviso tom="alerta" titulo="Antes de começar" texto={AVISO_TREINO} />
       <Segmentado opcoes={[{ valor: 'iniciante', rotulo: 'Iniciante' }, { valor: 'intermediario', rotulo: 'Intermediário' }]} valor={nivel} onChange={setNivel} />
       {lista.length === 0 && <EstadoVazio titulo="Nenhum treino nesta área" texto="Troque o nível ou escolha outra área." />}
-      {lista.map((m) => <CartaoModelo key={m.id} m={m} tem={tem} onAdicionar={() => adicionar(m)} />)}
+      {lista.map((m) => <CartaoModelo key={m.id} m={m} tem={tem} onAdicionar={() => adicionar(m)}
+        depois={adicionados[m.id] && <DepoisDeAdicionar rotinaId={adicionados[m.id].id} nome={adicionados[m.id].nome} />} />)}
       <Texto v="legenda" suave>Tempo estimado: séries × (repetições × 3 s) + descanso entre séries + 1 min de troca por exercício. Referência geral: recomendações do ACSM para treino de força.</Texto>
     </>
   );
