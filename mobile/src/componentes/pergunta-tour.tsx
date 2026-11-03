@@ -13,14 +13,16 @@ import {
 } from '@/dominio/tour';
 import { acoes, type Estado } from '@/estado/armazem';
 import { novoId } from '@/servicos/id';
+import { formatarAniversario, lerAniversario, mascararAniversario } from '@/dominio/aniversario';
+import { hoje } from '@/dominio/agenda';
 
 /** Respostas em edição (tour e Meus dados). Texto de altura/peso fica como string até salvar. */
-export interface Rascunho extends DadosTour { nome: string; treino: PerfilTreino; alturaTxt: string; pesoTxt: string }
+export interface Rascunho extends DadosTour { nome: string; treino: PerfilTreino; alturaTxt: string; pesoTxt: string; aniversarioTxt: string }
 
 export function rascunhoDe(e: Estado): Rascunho {
   const p = e.perfil;
   return {
-    nome: p?.nome ?? '', treino: p?.treino ?? PADRAO_TREINO, alturaTxt: p?.alturaCm ? String(p.alturaCm) : '', pesoTxt: '',
+    nome: p?.nome ?? '', treino: p?.treino ?? PADRAO_TREINO, alturaTxt: p?.alturaCm ? String(p.alturaCm) : '', pesoTxt: '', aniversarioTxt: formatarAniversario(p?.aniversario),
     faixaIdade: p?.faixaIdade ?? null, experiencia: p?.experiencia ?? null, tempoTreinoMin: p?.tempoTreinoMin ?? null, local: p?.local ?? null,
     restricoes: p?.restricoes ?? [], prefAlimentar: p?.prefAlimentar ?? null, lembretes: p?.lembretes ?? { treinoHora: null, agua: false },
     cidade: p?.cidade ?? '', bairro: p?.bairro ?? '', equipamentos: p?.equipamentos ?? null,
@@ -31,7 +33,11 @@ export function rascunhoDe(e: Estado): Rascunho {
 export function salvarPasso(e: Estado, id: IdPassoTour, r: Rascunho): Estado {
   switch (id) {
     case 'nome': return acoes.definirNome(e, r.nome);
-    case 'idade': return acoes.atualizarPerfil(e, { faixaIdade: r.faixaIdade });
+    case 'idade': {
+      const a = lerAniversario(r.aniversarioTxt ?? '', hoje());
+      if (a === 'invalido') throw new Error('data_invalida');
+      return acoes.atualizarPerfil(e, { faixaIdade: r.faixaIdade, aniversario: a });
+    }
     case 'objetivo': return acoes.definirObjetivo(e, { ...r.treino, areas: e.perfil?.treino?.areas ?? r.treino.areas ?? [] });
     case 'experiencia': {
       const x = acoes.atualizarPerfil(e, { experiencia: r.experiencia });
@@ -65,6 +71,8 @@ export function PerguntaTour({ id, r, set, saude }: { id: IdPassoTour; r: Rascun
   switch (id) {
     case 'nome': return <Campo rotulo="Nome ou apelido" value={r.nome} onChangeText={(nome) => set({ ...r, nome })} maxLength={40} autoComplete="off" testID="campo-nome-tour" />;
     case 'idade': return <View style={{ gap: 12 }}>
+      <Campo rotulo="Aniversário (dia/mês, ano opcional)" placeholder="05/11 ou 05/11/1990" value={r.aniversarioTxt} onChangeText={(t) => set({ ...r, aniversarioTxt: mascararAniversario(t) })}
+        keyboardType="number-pad" maxLength={10} autoComplete="off" testID="campo-aniversario" />
       <EscolhaUnica rotulo="Faixa de idade" opcoes={FAIXAS_IDADE} valor={r.faixaIdade} onChange={(faixaIdade) => set({ ...r, faixaIdade })} />
       {r.faixaIdade === 'menos-18' && <Aviso tom="alerta" titulo="Menores de 18" texto={AVISO_MENOR} />}
     </View>;
@@ -97,4 +105,5 @@ export function PerguntaTour({ id, r, set, saude }: { id: IdPassoTour; r: Rascun
 export const MENSAGEM_ERRO: Record<string, string> = {
   valor_invalido: 'Confira o valor: altura entre 100 e 250 cm, peso entre 20 e 400 kg, horário como 07:30.',
   sem_consentimento: 'Ative dados de saúde em Perfil → Consentimentos para guardar esta resposta.',
+  data_invalida: 'Confira o aniversário: dia e mês (05/11) ou com o ano (05/11/1990).',
 };

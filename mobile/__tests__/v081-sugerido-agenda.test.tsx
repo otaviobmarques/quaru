@@ -48,6 +48,7 @@ describe('depois de adicionar', () => {
     const e2 = acoes.planejarDia(e, hoje(), outro.id);
     await montar(<DepoisDeAdicionar rotinaId={r.id} nome={r.nome} />, e2);
     await fireEvent.press(screen.getByTestId(`agendar-botao-${r.id}`));
+    await fireEvent.press(screen.getByText('Hoje'));
     expect(screen.getByText(`Nesse dia estava marcado: ${outro.nome}. Vai trocar por ${r.nome}.`)).toBeTruthy();
     await fireEvent.press(screen.getByTestId(`confirmar-agenda-${r.id}`));
     expect(ultimo.agenda?.dias[hoje()]).toBe(r.id);

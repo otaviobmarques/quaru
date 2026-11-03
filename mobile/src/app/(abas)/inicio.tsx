@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { Platform, Pressable, View } from 'react-native';
 
-import { Adesivo, Aviso, Botao, BotaoIcone, Cartao, Ficha, Selo, Tela, Texto, SeloEnergia, Trilho } from '@/componentes/ui';
+import { Adesivo, Aviso, Botao, BotaoIcone, Cartao, Ficha, Selo, Tela, Texto, SeloEnergia, Trilho, Toast } from '@/componentes/ui';
 import { CreditoDomma } from '@/componentes/rodape-marca';
 import { InstalarApp } from '@/componentes/instalar-app';
 import { FotoPerfil } from '@/componentes/avatares';
@@ -16,10 +16,12 @@ import { cartaoTreinoDeHoje, diaLocal, semanaTreinos, sequenciaDias, treinosUlti
 import { agoraIso } from '@/servicos/relogio';
 import { acoes, temExemplo as temExemploLocal, todosExercicios, useEstado } from '@/estado/armazem';
 import { tempoEstimadoTreino } from '@/dominio/descanso';
-import { planejadoPara } from '@/dominio/agenda';
+import { amanhaDe, hoje, planejadoPara, rotuloData } from '@/dominio/agenda';
 import { useContornoInterno, useCores, useCoresBase } from '@/tema/tema';
 import { CartaoModelo } from '@/componentes/cartao-modelo';
 import { DepoisDeAdicionar } from '@/componentes/treinos/depois-de-adicionar';
+import { SeletorDia } from '@/componentes/treinos/seletor-dia';
+import { CartaoMascote } from '@/componentes/cartao-mascote';
 import { DICA_EMAGRECER, OBJETIVOS, } from '@/dominio/objetivo';
 import { recomendarPara } from '@/dominio/tour';
 import { equipamentosDoPerfil, modeloAdaptado } from '@/dominio/equipamentos';
@@ -53,6 +55,10 @@ export default function Inicio() {
   const rec = perfilTreino ? recomendarPara(perfilTreino, estado.perfil ?? {}) : null;
   const recomendados = rec?.modelos ?? [];
   const [adicionados, setAdicionados] = useState<Record<string, { id: string; nome: string }>>({});
+  const [reagendando, setReagendando] = useState(false);
+  const [diaNovo, setDiaNovo] = useState<string | null>(null);
+  const [reagendado, setReagendado] = useState<string | null>(null);
+  const hojeDia = hoje();
 
   let principal = null;
   let conteudo = null;
@@ -76,7 +82,22 @@ export default function Inicio() {
       {nomesEx.length > 0 && <Texto suave numberOfLines={3}>{nomesEx.slice(0, 4).join(', ')}{nomesEx.length > 4 ? ` e mais ${nomesEx.length - 4}` : ''}</Texto>}
       <Botao v="texto" titulo={escolher ? 'Fechar' : 'Escolher outro treino'} onPress={() => setEscolher(!escolher)} />
       {escolher && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{rotinas.map((r) => <Ficha key={r.id} texto={r.nome} onPress={() => iniciarTreino(aplicar, estado, r.id)} />)}<Ficha texto="Treino livre" onPress={() => iniciarTreino(aplicar, estado, null)} /></View>}</>;
-    principal = <Botao grande titulo="Iniciar treino" onPress={() => iniciarTreino(aplicar, estado, cartao.rotina.id)} testID="iniciar-treino" />;
+    const rotinaHoje = cartao.rotina;
+    principal = <>
+      <Botao grande titulo="Iniciar treino" onPress={() => iniciarTreino(aplicar, estado, rotinaHoje.id)} testID="iniciar-treino" />
+      {/* v0.9: treino marcado na agenda pode ir para outro dia. */}
+      {cartao.daAgenda && !reagendando && <Botao v="texto" titulo="Reagendar para outro dia" onPress={() => { setDiaNovo(null); setReagendando(true); }} testID="reagendar-hoje" />}
+      {cartao.daAgenda && reagendando && (
+        <View style={{ gap: 10 }} testID="reagendar-hoje-painel">
+          <Texto v="corpo-forte">{`Para qual dia mudar ${rotinaHoje.nome}?`}</Texto>
+          <SeletorDia hojeDia={hojeDia} desde={amanhaDe(hojeDia)} valor={diaNovo} onChange={setDiaNovo} />
+          <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+            <Botao titulo="Reagendar" desabilitado={!diaNovo} onPress={() => { if (!diaNovo) return; aplicar((e) => acoes.reagendarDia(e, hojeDia, diaNovo, rotinaHoje.id)); setReagendado(diaNovo); setReagendando(false); }} testID="confirmar-reagendar-hoje" />
+            <Botao v="texto" titulo="Cancelar" onPress={() => setReagendando(false)} />
+          </View>
+        </View>
+      )}
+    </>;
   } else if (cartao.estado === 'descanso') {
     conteudo = <><Selo texto="Descanso" tom="secundaria" /><Texto v="titulo-2">Hoje é dia de descanso</Texto>
       <Texto suave>Está marcado na sua agenda. Descansar também faz parte do treino: é quando o músculo se recupera.</Texto></>;
@@ -113,9 +134,13 @@ export default function Inicio() {
           </View>
         </Aviso>
       )}
-      <Adesivo texto={cartao.estado === 'feito' ? 'Mandou bem hoje!' : 'Bora treinar hoje?'} />
+      {/* v0.9: mascote com boas-vindas e parabéns no aniversário; fechado, volta o adesivo. */}
+      {estado.mascote?.desligado || estado.mascote?.fechadoEm === hojeDia
+        ? <Adesivo texto={cartao.estado === 'feito' ? 'Mandou bem hoje!' : 'Bora treinar hoje?'} />
+        : <CartaoMascote recado={cartao.estado === 'feito' ? 'Mandou bem hoje! Descansar também faz parte do treino.' : cartao.estado === 'descanso' ? 'Hoje é dia de descanso. Uma caminhada leve e bastante água já ajudam.' : 'Bora treinar hoje? Cada treino conta.'} />}
 
       {/* v0.7: com treino para hoje, o card Hoje vem primeiro. */}
+      {reagendado && <Toast texto={`Treino reagendado: ${rotuloData(reagendado, hojeDia).toLowerCase()}.`} acao="Ver agenda" onAcao={() => router.navigate('/treinos?secao=agenda' as never)} onFim={() => setReagendado(null)} />}
       {cartao.estado !== 'sem_rotina' && <Cartao destaque>{conteudo}{principal}</Cartao>}
       {cartao.estado !== 'feito' && cartao.estado !== 'continuar' && (
         <Cartao rotulo="Treino do dia: o Quaru monta um treino para você hoje" onPress={() => router.push('/treino-do-dia')}>

@@ -45,7 +45,7 @@ dados.json: todos os dados (versao_formato 1), datas ISO 8601 com fuso, pesos em
 treinos.csv: uma linha por série (data; rotina; exercicio; ordem; tipo; carga_kg; reps; duracao_s; rpe).
 peso_corporal.csv: medido_em; peso_kg.
 agua.csv: registrado_em; ml.
-perfil (em dados.json): nome, altura_cm, meta de água, avatar, objetivo e os dados do tour guiado (faixa de idade, experiência, tempo e local de treino, áreas, restrições ou lesões, preferência alimentar, lembretes, cidade e bairro); a foto de perfil, se houver, vai também como foto-perfil.jpg.
+perfil (em dados.json): nome, altura_cm, meta de água, avatar, objetivo e os dados do tour guiado (aniversário, faixa de idade, experiência, tempo e local de treino, áreas, restrições ou lesões, preferência alimentar, lembretes, cidade e bairro); a foto de perfil, se houver, vai também como foto-perfil.jpg.
 CSV em UTF-8, separador ';' e vírgula decimal.
 diario_alimentar.csv: dia; refeicao; como_foi (bem, mais-ou-menos ou pulei).
 `;

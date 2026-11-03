@@ -18,8 +18,8 @@ export default function MeusDados() {
     try { salvarPasso(estado, id, rr); aplicar((e) => salvarPasso(e, id, rr)); setMsg('Salvo neste aparelho'); } catch (x) { setErro(MENSAGEM_ERRO[(x as Error).message] ?? 'Não deu para salvar.'); }
   };
   const limpar = (id: (typeof PASSOS_TOUR)[number]['id']) => {
-    const vazio: Partial<Rascunho> = { nome: '', faixaIdade: null, experiencia: null, tempoTreinoMin: null, local: null, restricoes: [], prefAlimentar: null, lembretes: { treinoHora: null, agua: false }, cidade: '', bairro: '', equipamentos: null };
-    const campos: Record<string, (keyof Rascunho)[]> = { nome: ['nome'], idade: ['faixaIdade'], experiencia: ['experiencia'], 'tempo-local': ['tempoTreinoMin', 'local'], restricoes: ['restricoes'], alimentacao: ['prefAlimentar'], agua: ['lembretes'], cidade: ['cidade', 'bairro'], equipamentos: ['equipamentos'] };
+    const vazio: Partial<Rascunho> = { nome: '', aniversarioTxt: '', faixaIdade: null, experiencia: null, tempoTreinoMin: null, local: null, restricoes: [], prefAlimentar: null, lembretes: { treinoHora: null, agua: false }, cidade: '', bairro: '', equipamentos: null };
+    const campos: Record<string, (keyof Rascunho)[]> = { nome: ['nome'], idade: ['faixaIdade', 'aniversarioTxt'], experiencia: ['experiencia'], 'tempo-local': ['tempoTreinoMin', 'local'], restricoes: ['restricoes'], alimentacao: ['prefAlimentar'], agua: ['lembretes'], cidade: ['cidade', 'bairro'], equipamentos: ['equipamentos'] };
     const rr = { ...r }; for (const k of campos[id] ?? []) (rr as Record<string, unknown>)[k] = vazio[k];
     setR(rr); salvar(id, rr);
   };

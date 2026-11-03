@@ -16,7 +16,7 @@ export interface PassoTour { id: IdPassoTour; titulo: string; texto: string; per
 export const PASSOS_TOUR: readonly PassoTour[] = [
   { id: 'ola', titulo: 'Bem-vindo ao Quaru', texto: 'Vamos conhecer o app em poucos passos. No caminho, algumas perguntas ajudam a sugerir treinos para você. Todas podem ser puladas.', pergunta: false, ilustracao: 'boas-vindas', descricao: PASSOS[0].descricao },
   { id: 'nome', titulo: 'Como podemos te chamar?', texto: 'Nome ou apelido, só para o "Olá" do Início.', pergunta: true },
-  { id: 'idade', titulo: 'Sua faixa de idade', texto: 'Não pedimos data de nascimento. A faixa ajusta avisos, como o do IMC, que não vale para menores de 18.', pergunta: true },
+  { id: 'idade', titulo: 'Aniversário e faixa de idade', texto: 'Conta quando é o seu aniversário para o Quaru te dar parabéns no dia. O ano é opcional. A faixa de idade ajusta avisos, como o do IMC, que não vale para menores de 18.', pergunta: true },
   { id: 'inicio', area: 'Início', titulo: 'Início: o seu dia', texto: 'Aqui aparecem o próximo treino, os treinos recomendados para você e a água do dia.', pergunta: false, ilustracao: 'comece', descricao: 'Ilustração de uma lista com três passos numerados' },
   { id: 'objetivo', titulo: 'Seu objetivo', texto: 'Com isso, o Quaru ajusta repetições e descanso dos treinos sugeridos.', pergunta: true },
   { id: 'experiencia', titulo: 'Há quanto tempo você treina?', texto: 'Ajuda a começar no ritmo certo.', pergunta: true },

@@ -10,7 +10,7 @@ import { novoId } from '@/servicos/id';
 import { pedirArmazenamentoPersistente } from '@/servicos/protecao-dados';
 import { AGUA_MAX_ML, AGUA_MIN_ML, META_MAX_ML, META_MIN_ML, type RegistroAgua } from '@/dominio/agua';
 import { marcar, type Avaliacao, type RegistroDiario } from '@/dominio/diario';
-import { definirDia, type Agenda, type Planejado } from '@/dominio/agenda';
+import { definirDia, reagendar, type Agenda, type Planejado } from '@/dominio/agenda';
 import { aplicarTreinosDoTreinador, type TreinoAtribuido, type Vinculo } from '@/dominio/treinador';
 import type { Momento } from '@/dominio/refeicoes';
 import { DIAS_MAX, DIAS_MIN, type PerfilTreino } from '@/dominio/objetivo';
@@ -41,6 +41,10 @@ export interface Estado {
   /** v0.8: treinadores a que a conta está vinculada (vem do servidor) e link de vínculo esperando o login. */
   vinculos?: Vinculo[];
   vinculoPendente?: string | null;
+  /** v0.9: o aniversário que já foi para o servidor (chaveAniversario). */
+  aniversarioEnviado?: string | null;
+  /** v0.9: mascote do Início: fechado naquele dia (AAAA-MM-DD) ou desligado em Perfil. */
+  mascote?: { fechadoEm?: string | null; desligado?: boolean } | null;
   /** v0.5: quando a pessoa exportou os dados pela última vez e quando adiou o lembrete de cópia. */
   ultimaExportacaoEm?: string | null;
   lembreteBackupAdiadoEm?: string | null;
@@ -147,8 +151,13 @@ export const acoes = {
     return { ...e, rotinas: r.rotinas, agenda: r.agenda, vinculos: r.vinculos };
   },
   guardarVinculoPendente: (e: Estado, codigo: string | null): Estado => ({ ...e, vinculoPendente: codigo }),
+  marcarAniversarioEnviado: (e: Estado, chave: string): Estado => ({ ...e, aniversarioEnviado: chave }),
+  fecharMascote: (e: Estado, dia: string): Estado => ({ ...e, mascote: { ...(e.mascote ?? {}), fechadoEm: dia } }),
+  ligarMascote: (e: Estado, ligado: boolean): Estado => ({ ...e, mascote: { ...(e.mascote ?? {}), desligado: !ligado, fechadoEm: null } }),
   /** v0.7: agenda. `repetir` grava como padrão do dia da semana. */
   planejarDia: (e: Estado, dia: string, valor: Planejado | null, repetir = false): Estado => ({ ...e, agenda: definirDia(e.agenda, dia, valor, repetir) }),
+  /** v0.9: muda o treino de uma data para outra (só aquela data; o padrão da semana continua nas outras). */
+  reagendarDia: (e: Estado, de: string, para: string, id: string): Estado => ({ ...e, agenda: reagendar(e.agenda, de, para, id) }),
   /** v0.7: grava o treino do dia gerado pelo app. Só existe um: o anterior é trocado (ou excluído, se já foi usado num treino). */
   salvarTreinoDoDia: (e: Estado, r: Rotina): Estado => {
     let x = e;
