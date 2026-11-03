@@ -7,7 +7,11 @@ import { diaLocal } from './treino-de-hoje';
  * Treino que foi excluído some da agenda sozinho (a consulta ignora ids que não existem mais).
  */
 export type Planejado = string | 'descanso';
-export interface Agenda { semana: Partial<Record<number, Planejado>>; dias: Record<string, Planejado | null> }
+export interface Agenda {
+  semana: Partial<Record<number, Planejado>>; dias: Record<string, Planejado | null>;
+  /** v0.10: datas que o treinador colocou (data → id do treino), para saber o que tirar quando ele desmarcar. */
+  treinador?: Record<string, string>;
+}
 export const agendaVazia = (): Agenda => ({ semana: {}, dias: {} });
 
 export const diaDaSemana = (dia: string) => new Date(`${dia}T12:00:00Z`).getUTCDay();

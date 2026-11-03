@@ -32,3 +32,26 @@ textarea { width: 100%; border: 1.5px solid var(--contorno); border-radius: 12px
 .resultados li button { width: 100%; display: flex; gap: 10px; align-items: center; text-align: left; background: var(--superficie); color: var(--texto); border: 1px solid var(--superficie-2); border-radius: 10px; padding: 6px 10px; min-height: 48px; cursor: pointer; font: inherit; }
 .resultados li button:hover { border-color: var(--primaria); }
 .resultados .meta { color: var(--suave); font-size: .8rem; }
+
+/* v0.10: convite pelo ID, agenda e evolução */
+.linha-convite { display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 10px; align-items: end; }
+.linha-agendar { display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px; align-items: end; }
+@media (max-width: 640px) { .linha-convite, .linha-agendar { grid-template-columns: 1fr; } }
+#cv-id { text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+h3 { margin: 8px 0 0; font-size: 1rem; }
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.numeros div { border: 1.5px solid var(--contorno); border-radius: 14px; padding: 10px 12px; }
+.numeros b { display: block; font-size: 1.4rem; }
+.numeros span { color: var(--suave); font-size: .8rem; }
+.grafico svg { width: 100%; height: 180px; display: block; }
+.grafico .linha { fill: none; stroke: var(--primaria); stroke-width: 3; }
+.grafico .ponto { fill: var(--primaria); }
+.grafico .eixo { stroke: var(--superficie-2); stroke-width: 1; }
+.grafico text { fill: var(--suave); font-size: 11px; }
+.agenda li { padding: 8px 0; }
+.agenda .data { font-weight: 700; min-width: 92px; }
+.agenda .hoje .data { color: var(--primaria); }
+.agenda .itens-dia { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+.chip { border-radius: 999px; padding: 4px 10px; font-size: .85rem; border: 1.5px solid var(--contorno); display: inline-flex; gap: 6px; align-items: center; }
+.chip.meu { background: var(--primaria); color: var(--sobre-primaria); border-color: var(--primaria); }
+.chip.meu button { background: none; border: 0; color: inherit; cursor: pointer; font: inherit; min-height: 24px; padding: 0 2px; }

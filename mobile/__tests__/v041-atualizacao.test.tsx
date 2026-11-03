@@ -60,7 +60,7 @@ it('faixa "Nova versão disponível" com botão de 44 px ou mais', async () => {
 
 it('tela de atualizações (nativo): versão, aviso da loja e O que há de novo do CHANGELOG', async () => {
   await montar(<Atualizacao />);
-  expect(screen.getAllByText(/0\.9\.0/).length).toBeGreaterThan(0);
+  expect(screen.getAllByText(/0\.10\.0/).length).toBeGreaterThan(0);
   expect(screen.getByText(/chegam pela loja/)).toBeTruthy();
   expect(VERSAO_NOVIDADES).toBe(JSON.parse(readFileSync('package.json', 'utf8')).version);
   const log = readFileSync('../CHANGELOG.md', 'utf8');

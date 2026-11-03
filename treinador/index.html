@@ -39,7 +39,17 @@
     <!-- Alunos -->
     <section id="tela-alunos" hidden>
       <div class="bloco cartao">
-        <h2>Novo aluno</h2>
+        <h2>Convidar pelo ID do aluno</h2>
+        <p class="suave">O aluno encontra o ID dele no app, em Perfil (ex.: K7M-2PQ9). Ele recebe o convite no app e aceita ou recusa.</p>
+        <form id="form-convite" class="linha-convite" novalidate>
+          <div><label for="cv-id">ID do aluno</label><input id="cv-id" type="text" maxlength="9" autocomplete="off" autocapitalize="characters" placeholder="K7M-2PQ9" required></div>
+          <div><label for="cv-nome">Como você chama o aluno</label><input id="cv-nome" type="text" maxlength="80" autocomplete="off" required></div>
+          <button class="botao" type="submit">Enviar convite</button>
+        </form>
+        <p id="msg-convite" class="msg" role="status" aria-live="polite"></p>
+      </div>
+      <div class="bloco cartao">
+        <h2>Novo aluno (por link)</h2>
         <p class="suave">Cadastre o aluno e mande o link: ao abrir no app do Quaru, a conta dele fica ligada a você e ele recebe os treinos que você montar.</p>
         <form id="form-aluno" class="linha-aluno" novalidate>
           <div><label for="a-nome">Nome do aluno</label><input id="a-nome" type="text" maxlength="80" autocomplete="off" required></div>
@@ -76,6 +86,28 @@
           <p id="msg-conta" class="msg" role="status" aria-live="polite"></p>
           <div id="dados-conta" class="dados-acesso" hidden><pre id="dados-conta-texto"></pre><button type="button" class="botao peq secundario" id="copiar-conta">Copiar</button></div>
         </details>
+      </div>
+      <div class="bloco cartao" id="bloco-evolucao">
+        <h2>Evolução</h2>
+        <p id="msg-evolucao" class="msg" role="status" aria-live="polite"></p>
+        <div id="evolucao" hidden>
+          <div class="numeros" id="ev-numeros"></div>
+          <h3>Peso</h3>
+          <div id="ev-grafico" class="grafico" role="img"></div>
+          <h3>Últimos treinos</h3>
+          <ul id="ev-treinos" class="lista"></ul>
+        </div>
+      </div>
+      <div class="bloco cartao" id="bloco-agenda">
+        <h2>Agenda do aluno <span class="suave peq">próximas 4 semanas</span></h2>
+        <form id="form-agendar" class="linha-agendar" novalidate>
+          <div><label for="ag-treino">Treino</label><select id="ag-treino"></select></div>
+          <div><label for="ag-data">Dia</label><input id="ag-data" type="date"></div>
+          <button class="botao" type="submit">Agendar</button>
+        </form>
+        <p id="msg-agenda" class="msg" role="status" aria-live="polite"></p>
+        <ul id="lista-agenda" class="lista agenda"></ul>
+        <p class="suave peq" id="ag-legenda">Em vermelho, o que você agendou. O resto é o que o aluno planejou (aparece se ele compartilha a evolução).</p>
       </div>
       <div class="bloco cartao">
         <div class="cabeca-lista"><h2>Treinos do aluno</h2><button type="button" class="botao" id="novo-treino">+ Novo treino</button></div>

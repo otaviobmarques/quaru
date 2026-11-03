@@ -11,7 +11,7 @@ import { pedirArmazenamentoPersistente } from '@/servicos/protecao-dados';
 import { AGUA_MAX_ML, AGUA_MIN_ML, META_MAX_ML, META_MIN_ML, type RegistroAgua } from '@/dominio/agua';
 import { marcar, type Avaliacao, type RegistroDiario } from '@/dominio/diario';
 import { definirDia, reagendar, type Agenda, type Planejado } from '@/dominio/agenda';
-import { aplicarTreinosDoTreinador, type TreinoAtribuido, type Vinculo } from '@/dominio/treinador';
+import { type Convite, aplicarTreinosDoTreinador, type TreinoAtribuido, type Vinculo } from '@/dominio/treinador';
 import type { Momento } from '@/dominio/refeicoes';
 import { DIAS_MAX, DIAS_MIN, type PerfilTreino } from '@/dominio/objetivo';
 import { LIMITE_TEXTO_LOCAL, validarHora, type DadosTour } from '@/dominio/tour';
@@ -40,6 +40,10 @@ export interface Estado {
   agenda?: Agenda;
   /** v0.8: treinadores a que a conta está vinculada (vem do servidor) e link de vínculo esperando o login. */
   vinculos?: Vinculo[];
+  /** v0.10: convites de treinador esperando resposta; ID de aluno da conta; o resumo já publicado. */
+  convites?: Convite[];
+  idAluno?: string | null;
+  evolucaoEnviada?: string | null;
   vinculoPendente?: string | null;
   /** v0.9: o aniversário que já foi para o servidor (chaveAniversario). */
   aniversarioEnviado?: string | null;
@@ -145,6 +149,9 @@ export const acoes = {
     return { ...e, rotinas: [...e.rotinas.filter((x) => x.id !== r.id), reg], fila: enfileirar(e.fila, { tabela: 'rotinas', registro: reg as never }) };
   },
   /** v0.8: treinos do treinador vindos do servidor (troca o conjunto inteiro; não entra na fila de envio). */
+  receberConvites: (e: Estado, convites: Convite[]): Estado => ({ ...e, convites }),
+  guardarIdAluno: (e: Estado, id: string | null): Estado => ({ ...e, idAluno: id }),
+  marcarEvolucaoEnviada: (e: Estado, ass: string | null): Estado => ({ ...e, evolucaoEnviada: ass }),
   receberTreinosDoTreinador: (e: Estado, vinculos: Vinculo[], treinos: TreinoAtribuido[]): Estado => {
     const ids = new Set(todosExercicios(e).map((x) => x.id));
     const r = aplicarTreinosDoTreinador(e, vinculos, treinos, (id) => ids.has(id), agora());

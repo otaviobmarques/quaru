@@ -9,9 +9,13 @@ import type { Rotina } from './tipos';
  */
 export interface TreinoAtribuido {
   id: string; aluno_ref: string; nome: string; observacoes?: string | null; dias?: number[] | null; atualizado_em?: string;
+  /** v0.10: datas (AAAA-MM-DD) em que o treinador agendou este treino. */
+  datas?: string[] | null;
   itens: { exercicioId: string; series: number; reps: number | null; descansoS: number; obs?: string }[];
 }
-export interface Vinculo { aluno_ref: string; treinador: string; vinculado_em?: string | null }
+export interface Vinculo { aluno_ref: string; treinador: string; vinculado_em?: string | null; /** v0.10: o aluno compartilha a evolução com ele */ compartilha?: boolean }
+/** v0.10: convite de um treinador pelo ID do aluno, esperando resposta. */
+export interface Convite { aluno_ref: string; treinador: string; convidado_em?: string | null }
 
 /** Monta os treinos locais e a agenda a partir do que veio do servidor. `existe` diz se o exercício está no catálogo. */
 export function aplicarTreinosDoTreinador(
@@ -45,8 +49,27 @@ export function aplicarTreinosDoTreinador(
       if (!atual || doTreinador.has(atual)) agenda = { ...agenda, semana: { ...agenda.semana, [d]: t.id } };
     }
   }
+  // v0.10: datas agendadas pelo treinador. Entram em dias livres (ou que já eram dele); um dia que a pessoa mudou
+  // fica como ela deixou. Data que o treinador tirou sai da agenda, se ainda estava com o treino dele.
+  const antes = e.agenda?.treinador ?? {};
+  const colocadas: Record<string, string> = {};
+  const dias = { ...agenda.dias };
+  for (const t of recebidos) {
+    for (const d of t.datas ?? []) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) continue;
+      colocadas[d] = t.id;
+      const atual = dias[d];
+      const livre = !(d in dias) || (atual != null && atual !== 'descanso' && doTreinador.has(atual) && (antes[d] === undefined || antes[d] === atual));
+      if (livre) dias[d] = t.id;
+    }
+  }
+  for (const [d, id] of Object.entries(antes)) if (!colocadas[d] && dias[d] === id) delete dias[d];
+  agenda = { ...agenda, dias, treinador: colocadas };
   return { rotinas: [...proprias, ...saiu, ...novos], agenda, vinculos };
 }
 
 /** Código do link de vínculo: 32 caracteres hexadecimais. */
 export const codigoValido = (c: string | null | undefined) => !!c && /^[0-9a-f]{32}$/i.test(c.trim());
+
+/** v0.10: ID do aluno (7 caracteres). Mostra como K7M-2PQ9. */
+export const formatarIdAluno = (c: string | null | undefined) => (c ? `${c.slice(0, 3)}-${c.slice(3)}` : '');

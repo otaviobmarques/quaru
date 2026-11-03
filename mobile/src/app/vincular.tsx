@@ -5,7 +5,8 @@ import { Aviso, Botao, Cartao, Tela, Texto } from '@/componentes/ui';
 import { codigoValido } from '@/dominio/treinador';
 import { acoes, useEstado } from '@/estado/armazem';
 import { useSessao } from '@/estado/sessao';
-import { aceitarVinculo, buscarDoTreinador } from '@/servicos/treinador';
+import { aceitarVinculo, buscarDoTreinador, definirCompartilhamento } from '@/servicos/treinador';
+import { OQueOTreinadorVe } from '@/componentes/convite-treinador';
 
 const MENSAGENS: Record<string, string> = {
   codigo_invalido: 'Este link não vale mais. Peça um link novo ao seu treinador.',
@@ -33,9 +34,10 @@ export default function Vincular() {
     if (valido && !logado && estado.vinculoPendente !== codigo) aplicar((e) => acoes.guardarVinculoPendente(e, codigo));
   }, [valido, logado, codigo, estado.vinculoPendente, aplicar]);
 
-  const vincular = async () => {
+  const vincular = async (compartilhar: boolean) => {
     setEstadoTela('enviando');
     const r = await aceitarVinculo(codigo);
+    if (r.resultado === 'vinculado' && compartilhar && r.aluno_ref) await definirCompartilhamento(r.aluno_ref, true).catch(() => false);
     if (r.resultado === 'vinculado' || r.resultado === 'ja_vinculado') {
       aplicar((e) => acoes.guardarVinculoPendente(e, null));
       setTexto(r.resultado === 'vinculado' ? `Pronto! Agora você treina com ${r.treinador}.` : MENSAGENS.ja_vinculado);
@@ -72,13 +74,11 @@ export default function Vincular() {
           <Texto v="titulo-1">Vincular sua conta a um treinador?</Texto>
           <Cartao>
             <Texto v="corpo-forte">O que muda</Texto>
-            <Texto v="rotulo">• Os treinos que ele montar para você aparecem no seu app.</Texto>
-            <Texto v="rotulo">• Ele passa a ver o seu e-mail.</Texto>
-            <Texto v="rotulo">• Seus registros de treino, peso e água continuam só no seu aparelho.</Texto>
-            <Texto v="rotulo">• Você pode desvincular quando quiser, em Perfil.</Texto>
+            <OQueOTreinadorVe />
           </Cartao>
           {estadoTela === 'erro' && <Aviso tom="erro" titulo={texto} />}
-          <Botao grande titulo={estadoTela === 'enviando' ? 'Vinculando…' : 'Vincular'} carregando={estadoTela === 'enviando'} onPress={vincular} testID="confirmar-vinculo" />
+          <Botao grande titulo={estadoTela === 'enviando' ? 'Vinculando…' : 'Vincular e compartilhar minha evolução'} carregando={estadoTela === 'enviando'} onPress={() => vincular(true)} testID="confirmar-vinculo-compartilhar" />
+          <Botao v="secundario" titulo="Vincular sem compartilhar" desabilitado={estadoTela === 'enviando'} onPress={() => vincular(false)} testID="confirmar-vinculo" />
           <Botao v="texto" titulo="Agora não" onPress={() => { aplicar((e) => acoes.guardarVinculoPendente(e, null)); router.replace('/'); }} />
         </>
       )}
