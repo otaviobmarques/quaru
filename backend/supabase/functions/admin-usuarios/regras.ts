@@ -1,12 +1,13 @@
 // Regras puras do painel de administração (sem Deno nem rede), testadas em test/admin-regras.test.ts.
 
-export type Papel = 'admin' | 'usuario';
+export type Papel = 'admin' | 'treinador' | 'usuario';
+const PAPEIS: Papel[] = ['admin', 'treinador', 'usuario'];
 export interface PerfilResumo { usuario_id: string; papel: Papel; ativo: boolean }
 
 export type Pedido =
   | { acao: 'listar' }
   | { acao: 'convidar'; email: string; nome?: string; papel?: Papel }
-  | { acao: 'criar'; email: string; nome?: string; papel?: Papel; senha: string; trocar: boolean }
+  | { acao: 'criar'; email: string; nome?: string; papel?: Papel; senha: string; trocar: boolean; aluno_ref?: string }
   | { acao: 'senha'; usuario_id: string; senha: string; trocar: boolean }
   | { acao: 'bloquear' | 'desbloquear' | 'remover' | 'reenviar'; usuario_id: string }
   | { acao: 'papel'; usuario_id: string; papel: Papel };
@@ -35,7 +36,7 @@ export function lerPedido(corpo: unknown): Pedido | { erro: string } {
       const email = typeof c.email === 'string' ? c.email.trim().toLowerCase() : '';
       if (!EMAIL.test(email)) return { erro: 'Digite um e-mail válido.' };
       const nome = typeof c.nome === 'string' ? c.nome.trim().slice(0, 80) : '';
-      const papel = c.papel === 'admin' ? 'admin' : 'usuario';
+      const papel: Papel = PAPEIS.includes(c.papel as Papel) ? (c.papel as Papel) : 'usuario';
       return { acao: 'convidar', email, nome: nome || undefined, papel };
     }
     case 'criar': {
@@ -44,7 +45,8 @@ export function lerPedido(corpo: unknown): Pedido | { erro: string } {
       const erroSenha = problemaSenha(c.senha);
       if (erroSenha) return { erro: erroSenha };
       const nome = typeof c.nome === 'string' ? c.nome.trim().slice(0, 80) : '';
-      return { acao: 'criar', email, nome: nome || undefined, papel: c.papel === 'admin' ? 'admin' : 'usuario', senha: c.senha as string, trocar: c.trocar !== false };
+      if (c.aluno_ref !== undefined && (typeof c.aluno_ref !== 'string' || !UUID.test(c.aluno_ref))) return { erro: 'Aluno inválido.' };
+      return { acao: 'criar', email, nome: nome || undefined, papel: PAPEIS.includes(c.papel as Papel) ? (c.papel as Papel) : 'usuario', senha: c.senha as string, trocar: c.trocar !== false, aluno_ref: c.aluno_ref as string | undefined };
     }
     case 'senha': {
       if (typeof c.usuario_id !== 'string' || !UUID.test(c.usuario_id)) return { erro: 'Usuário inválido.' };
@@ -57,8 +59,8 @@ export function lerPedido(corpo: unknown): Pedido | { erro: string } {
       return { acao: c.acao, usuario_id: c.usuario_id };
     case 'papel':
       if (typeof c.usuario_id !== 'string' || !UUID.test(c.usuario_id)) return { erro: 'Usuário inválido.' };
-      if (c.papel !== 'admin' && c.papel !== 'usuario') return { erro: 'Papel inválido.' };
-      return { acao: 'papel', usuario_id: c.usuario_id, papel: c.papel };
+      if (!PAPEIS.includes(c.papel as Papel)) return { erro: 'Papel inválido.' };
+      return { acao: 'papel', usuario_id: c.usuario_id, papel: c.papel as Papel };
     default: return { erro: 'Ação desconhecida.' };
   }
 }
@@ -72,9 +74,20 @@ export function recusar(p: Pedido, quem: string, perfis: PerfilResumo[]): string
   if (p.acao === 'senha') return perfis.some((x) => x.usuario_id === p.usuario_id) ? null : 'Usuário não encontrado.';
   const alvo = perfis.find((x) => x.usuario_id === p.usuario_id);
   if (!alvo) return 'Usuário não encontrado.';
-  const tiraAdmin = (p.acao === 'papel' && p.papel === 'usuario') || p.acao === 'bloquear' || p.acao === 'remover';
+  const tiraAdmin = (p.acao === 'papel' && p.papel !== 'admin') || p.acao === 'bloquear' || p.acao === 'remover';
   if (p.usuario_id === quem && tiraAdmin) return 'Você não pode bloquear, remover nem tirar o seu próprio acesso de administrador.';
   const adminsAtivos = perfis.filter((x) => x.papel === 'admin' && x.ativo);
   if (tiraAdmin && alvo.papel === 'admin' && alvo.ativo && adminsAtivos.length <= 1) return 'Precisa haver pelo menos um administrador ativo.';
+  return null;
+}
+
+/**
+ * v0.8: o treinador (sem ser admin) só pode criar a conta de um aluno: papel usuário, ligada a um aluno dele.
+ * Retorna a mensagem de recusa ou null.
+ */
+export function recusarTreinador(p: Pedido): string | null {
+  if (p.acao !== 'criar') return 'Só administradores podem fazer isso.';
+  if (p.papel && p.papel !== 'usuario') return 'Treinador só cria contas de aluno.';
+  if (!p.aluno_ref) return 'Escolha o aluno.';
   return null;
 }

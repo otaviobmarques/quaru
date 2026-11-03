@@ -1,6 +1,6 @@
 import { router, Stack, usePathname } from 'expo-router';
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AvisoAtualizacao } from '@/componentes/aviso-atualizacao';
@@ -9,6 +9,7 @@ import { ProvedorSessao, useSessao } from '@/estado/sessao';
 import { planoLembretes } from '@/dominio/lembretes';
 import { diaLocal } from '@/dominio/treino-de-hoje';
 import { agendarLembretes } from '@/servicos/notificacoes';
+import { buscarDoTreinador } from '@/servicos/treinador';
 import { ARQUIVOS_FONTES } from '@/tema/fontes';
 import { useFonts } from 'expo-font';
 
@@ -28,7 +29,7 @@ function Lembretes() {
 }
 
 /** Rotas abertas sem login quando a conta é obrigatória (v0.6). */
-const ROTAS_ABERTAS = ['/', '/entrar', '/definir-senha', '/juridico'];
+const ROTAS_ABERTAS = ['/', '/entrar', '/definir-senha', '/juridico', '/vincular'];
 /** v0.6: com conta obrigatória, qualquer endereço do app sem sessão ativa volta para a tela de entrar. */
 function GuardaConta() {
   const s = useSessao();
@@ -38,6 +39,26 @@ function GuardaConta() {
   // v0.6.1: senha passada pelo admin com "trocar no 1º acesso": só sai da tela de criar senha depois de trocar.
   const forcaTroca = s.modo === 'conta' && s.pronta && logado && s.trocarSenha && caminho !== '/definir-senha' && caminho !== '/juridico';
   useEffect(() => { if (bloqueia) router.replace(s.link ? '/definir-senha' : '/entrar'); else if (forcaTroca) router.replace('/definir-senha'); }, [bloqueia, forcaTroca, s.link]);
+  return null;
+}
+
+/** v0.8: traz os treinos do treinador ao abrir o app e ao voltar para ele (no máximo 1 vez por minuto). */
+function SincronizarTreinador() {
+  const s = useSessao();
+  const { pronto, aplicar } = useEstado();
+  const logado = s.modo === 'conta' && !!s.usuario && !!s.acesso?.ativo;
+  useEffect(() => {
+    if (!logado || !pronto) return;
+    let ultimo = 0;
+    const sincronizar = () => {
+      if (Date.now() - ultimo < 60000) return;
+      ultimo = Date.now();
+      buscarDoTreinador().then((r) => { if (r) aplicar((e) => acoes.receberTreinosDoTreinador(e, r.vinculos, r.treinos)); }).catch(() => { /* sem rede: tenta na próxima */ });
+    };
+    sincronizar();
+    const sub = AppState.addEventListener('change', (st) => { if (st === 'active') sincronizar(); });
+    return () => sub.remove();
+  }, [logado, pronto, aplicar]);
   return null;
 }
 
@@ -76,6 +97,7 @@ export default function Layout() {
         <SementeDev />
         <Lembretes />
         <GuardaConta />
+        <SincronizarTreinador />
         <Stack screenOptions={{ headerShown: false }} />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>

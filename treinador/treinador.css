@@ -1,0 +1,34 @@
+/* Área do treinador: usa a base do painel (../admin/estilo.css) e acrescenta listas e o editor de treino. */
+[hidden] { display: none !important; }
+section { display: grid; gap: 20px; }
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.lista li { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--superficie-2); }
+.lista li:last-child { border-bottom: 0; }
+.lista .nome-aluno { font-weight: 700; }
+.lista .acoes { display: flex; gap: 6px; flex-wrap: wrap; }
+.linha-aluno { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
+.linha-form2 { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+@media (max-width: 640px) { .linha-aluno, .linha-form2 { grid-template-columns: 1fr; } }
+.acoes-linha { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+details summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+details[open] { display: grid; gap: 10px; }
+fieldset.dias { border: 0; padding: 0; margin: 0; }
+fieldset.dias legend { font-weight: 600; font-size: .9rem; margin-bottom: 6px; }
+#t-dias { display: flex; gap: 6px; flex-wrap: wrap; }
+#t-dias label { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--contorno); border-radius: 999px; padding: 6px 12px; min-height: 40px; margin: 0; cursor: pointer; }
+#t-dias input { width: 18px; min-height: 18px; height: 18px; accent-color: var(--primaria); }
+textarea { width: 100%; border: 1.5px solid var(--contorno); border-radius: 12px; background: var(--superficie); color: var(--texto); padding: 10px 14px; font: inherit; }
+.itens { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: item; }
+.itens li { border: 1.5px solid var(--contorno); border-radius: 14px; padding: 10px 12px; display: grid; gap: 8px; counter-increment: item; }
+.itens .cab { display: flex; gap: 10px; align-items: center; }
+.itens .cab::before { content: counter(item) "."; font-weight: 800; }
+.itens .cab .nome { flex: 1; font-weight: 700; }
+.itens .campos { display: grid; grid-template-columns: repeat(3, minmax(70px, 1fr)) 2fr; gap: 8px; }
+@media (max-width: 640px) { .itens .campos { grid-template-columns: repeat(3, 1fr); } .itens .campos .obs { grid-column: 1 / -1; } }
+.itens .campos label { font-size: .75rem; }
+.itens .campos input { min-height: 40px; padding: 6px 10px; }
+.mini { width: 48px; height: 32px; object-fit: cover; border-radius: 6px; background: var(--superficie-2); flex: none; }
+.resultados { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: 360px; overflow: auto; }
+.resultados li button { width: 100%; display: flex; gap: 10px; align-items: center; text-align: left; background: var(--superficie); color: var(--texto); border: 1px solid var(--superficie-2); border-radius: 10px; padding: 6px 10px; min-height: 48px; cursor: pointer; font: inherit; }
+.resultados li button:hover { border-color: var(--primaria); }
+.resultados .meta { color: var(--suave); font-size: .8rem; }

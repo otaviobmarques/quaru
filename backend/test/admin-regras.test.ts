@@ -61,3 +61,19 @@ describe('painel: criar com senha e definir senha', () => {
     expect(recusar({ acao: 'senha', usuario_id: '00000000-0000-4000-8000-0000000000ff', senha: 'Treino2026', trocar: true }, EU, perfis)).toBe('Usuário não encontrado.');
   });
 });
+
+import { recusarTreinador } from '../supabase/functions/admin-usuarios/regras';
+describe('painel: treinador (v0.8)', () => {
+  it('papel treinador é aceito; tirar admin para treinador conta como rebaixar', () => {
+    expect(lerPedido({ acao: 'papel', usuario_id: OUTRO, papel: 'treinador' })).toMatchObject({ papel: 'treinador' });
+    expect(recusar({ acao: 'papel', usuario_id: EU, papel: 'treinador' }, EU, perfis)).toMatch(/próprio/);
+  });
+  it('treinador só cria conta de aluno, papel usuário e com o aluno escolhido', () => {
+    const ok = lerPedido({ acao: 'criar', email: 'bia@ex.com', senha: 'Treino2026', aluno_ref: OUTRO });
+    expect(recusarTreinador(ok as never)).toBeNull();
+    expect(recusarTreinador(lerPedido({ acao: 'criar', email: 'bia@ex.com', senha: 'Treino2026', papel: 'admin', aluno_ref: OUTRO }) as never)).toMatch(/só cria contas de aluno/);
+    expect(recusarTreinador(lerPedido({ acao: 'criar', email: 'bia@ex.com', senha: 'Treino2026' }) as never)).toMatch(/Escolha o aluno/);
+    for (const acao of ['listar', 'bloquear', 'remover', 'senha', 'papel']) expect(recusarTreinador({ acao } as never)).toMatch(/administradores/);
+    expect(lerPedido({ acao: 'criar', email: 'bia@ex.com', senha: 'Treino2026', aluno_ref: 'x' })).toEqual({ erro: 'Aluno inválido.' });
+  });
+});

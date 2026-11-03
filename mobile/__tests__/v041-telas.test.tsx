@@ -20,7 +20,7 @@ import { acoes, estadoInicial, useEstado, type Estado } from '@/estado/armazem';
 import { ProvedorEstado } from '@/estado/armazem';
 
 let mockParams: Record<string, string> = {};
-jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), canGoBack: () => false }, useLocalSearchParams: () => mockParams }));
+jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), navigate: jest.fn(), canGoBack: () => false }, useLocalSearchParams: () => mockParams }));
 jest.mock('expo-image-picker', () => ({
   requestMediaLibraryPermissionsAsync: jest.fn(async () => ({ granted: false })),
   requestCameraPermissionsAsync: jest.fn(async () => ({ granted: false })),
@@ -90,7 +90,7 @@ describe('Início', () => {
   it('vazio: ilustração, "Comece aqui" 1-2-3, treinos sugeridos e logo', async () => {
     await montar(<Inicio />, base());
     expect(screen.getByLabelText(/alvo acertado/)).toBeTruthy(); // v0.4.2: ilustração do design v2.1
-    expect(screen.getByLabelText(/^Passo 1: Crie sua primeira rotina/)).toBeTruthy();
+    expect(screen.getByLabelText(/^Passo 1: Monte seu primeiro treino/)).toBeTruthy();
     expect(screen.getByLabelText(/^Passo 3: Registre cada série/)).toBeTruthy();
     expect(screen.getByText('Não sabe por onde começar?')).toBeTruthy();
     expect(screen.getByLabelText('Quaru')).toBeTruthy();
@@ -215,8 +215,9 @@ describe('treinos sugeridos', () => {
     expect(screen.getByTestId('adicionar-inferiores-i')).toBeTruthy();
     await fireEvent.press(screen.getByTestId('adicionar-inferiores-i'));
     expect(ultimo.rotinas[0].nome).toBe('Inferiores (iniciante)');
-    await fireEvent.press(screen.getByText('Editar'));
-    expect(router.push).toHaveBeenCalledWith(`/rotina/${ultimo.rotinas[0].id}`);
+    expect(screen.getByText(/foi para Meus treinos/)).toBeTruthy(); // v0.7: o aviso leva ao plano (Meus treinos)
+    await fireEvent.press(screen.getByText('Ver'));
+    expect(router.navigate).toHaveBeenCalledWith('/treinos?secao=meus');
   });
 });
 

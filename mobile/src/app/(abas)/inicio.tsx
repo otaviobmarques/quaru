@@ -12,9 +12,11 @@ import { precisaLembrarBackup } from '@/dominio/backup';
 import { formatarMl, metaPadraoMl, totalDoDia } from '@/dominio/agua';
 import { metricasPorSessao } from '@/dominio/consultas';
 import { formatarKg } from '@/dominio/metricas';
-import { cartaoTreinoDeHoje, semanaTreinos, sequenciaDias, treinosUltimos7Dias } from '@/dominio/treino-de-hoje';
+import { cartaoTreinoDeHoje, diaLocal, semanaTreinos, sequenciaDias, treinosUltimos7Dias } from '@/dominio/treino-de-hoje';
 import { agoraIso } from '@/servicos/relogio';
-import { acoes, temExemplo as temExemploLocal, useEstado } from '@/estado/armazem';
+import { acoes, temExemplo as temExemploLocal, todosExercicios, useEstado } from '@/estado/armazem';
+import { tempoEstimadoTreino } from '@/dominio/descanso';
+import { planejadoPara } from '@/dominio/agenda';
 import { useContornoInterno, useCores, useCoresBase } from '@/tema/tema';
 import { CartaoModelo } from '@/componentes/cartao-modelo';
 import { DICA_EMAGRECER, OBJETIVOS, } from '@/dominio/objetivo';
@@ -29,7 +31,10 @@ export default function Inicio() {
   const { estado, aplicar } = useEstado();
   const [escolher, setEscolher] = useState(false);
   const [agora] = useState(agoraIso);
-  const cartao = cartaoTreinoDeHoje(estado.rotinas, estado.sessoes, agora);
+  const vivas = new Set(estado.rotinas.filter((r) => !r.excluidoEm).map((r) => r.id));
+  const planejado = planejadoPara(estado.agenda, diaLocal(agora), (id) => vivas.has(id)).valor;
+  const cartao = cartaoTreinoDeHoje(estado.rotinas, estado.sessoes, agora, planejado);
+  const nomeExercicio = new Map(todosExercicios(estado).map((e) => [e.id, e.nome]));
   const rotinas = estado.rotinas.filter((r) => !r.excluidoEm).toSorted((a, b) => a.ordem - b.ordem);
   const nome = (id: string | null) => rotinas.find((r) => r.id === id)?.nome ?? 'Treino livre';
   const pesoAtual = estado.pesos.filter((p) => !p.excluidoEm).toSorted((a, b) => (a.medidoEm < b.medidoEm ? -1 : 1)).at(-1);
@@ -59,15 +64,26 @@ export default function Inicio() {
       {cartao.proxima && <Botao v="secundario" titulo="Treinar de novo" onPress={() => iniciarTreino(aplicar, estado, cartao.proxima!.id)} />}</>;
     principal = <Botao grande titulo="Ver resumo" onPress={() => router.push(`/resumo/${cartao.sessao.id}`)} />;
   } else if (cartao.estado === 'proxima') {
-    conteudo = <><View style={{ flexDirection: 'row', alignItems: 'flex-start' }}><View style={{ flex: 1, gap: 4 }}><Texto v="legenda" suave>TREINO DE HOJE · PRÓXIMO DA SEQUÊNCIA</Texto><Texto v="titulo-2">{cartao.rotina.nome}</Texto></View>
-      <BotaoIcone rotulo="Mais opções do treino de hoje" onPress={() => setEscolher(!escolher)}><Texto v="titulo-3">⋮</Texto></BotaoIcone></View><Texto suave>{cartao.rotina.itens.length} exercícios</Texto>
-      <Botao v="texto" titulo={escolher ? 'Fechar' : 'Escolher outra'} onPress={() => setEscolher(!escolher)} />
+    const nomesEx = cartao.rotina.itens.toSorted((a, b) => a.ordem - b.ordem).map((i) => nomeExercicio.get(i.exercicioId)).filter(Boolean) as string[];
+    const minHoje = tempoEstimadoTreino(cartao.rotina.itens);
+    conteudo = <><View style={{ flexDirection: 'row', alignItems: 'flex-start' }}><View style={{ flex: 1, gap: 4 }}><Texto v="legenda" suave>{cartao.daAgenda ? 'TREINO DE HOJE · DA SUA AGENDA' : 'TREINO DE HOJE'}</Texto><Texto v="titulo-2">{cartao.rotina.nome}</Texto></View>
+      <BotaoIcone rotulo="Mais opções do treino de hoje" onPress={() => setEscolher(!escolher)}><Texto v="titulo-3">⋮</Texto></BotaoIcone></View>
+      <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }} testID="resumo-hoje">
+        <Selo texto={`${cartao.rotina.itens.length} ${cartao.rotina.itens.length === 1 ? 'exercício' : 'exercícios'}`} tom="secundaria" />
+        {minHoje > 0 && <Selo texto={`⏱ Tempo estimado: ${minHoje} min`} tom="secundaria" />}
+      </View>
+      {nomesEx.length > 0 && <Texto suave numberOfLines={3}>{nomesEx.slice(0, 4).join(', ')}{nomesEx.length > 4 ? ` e mais ${nomesEx.length - 4}` : ''}</Texto>}
+      <Botao v="texto" titulo={escolher ? 'Fechar' : 'Escolher outro treino'} onPress={() => setEscolher(!escolher)} />
       {escolher && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{rotinas.map((r) => <Ficha key={r.id} texto={r.nome} onPress={() => iniciarTreino(aplicar, estado, r.id)} />)}<Ficha texto="Treino livre" onPress={() => iniciarTreino(aplicar, estado, null)} /></View>}</>;
     principal = <Botao grande titulo="Iniciar treino" onPress={() => iniciarTreino(aplicar, estado, cartao.rotina.id)} testID="iniciar-treino" />;
+  } else if (cartao.estado === 'descanso') {
+    conteudo = <><Selo texto="Descanso" tom="secundaria" /><Texto v="titulo-2">Hoje é dia de descanso</Texto>
+      <Texto suave>Está marcado na sua agenda. Descansar também faz parte do treino: é quando o músculo se recupera.</Texto></>;
+    principal = <Botao v="secundario" titulo="Treinar mesmo assim" onPress={() => (cartao.proxima ? iniciarTreino(aplicar, estado, cartao.proxima.id) : router.push('/treino-do-dia'))} testID="treinar-mesmo-assim" />;
   } else {
     // v0.4.1: estado vazio ilustrado com "Comece aqui" (1, 2, 3).
     conteudo = <><SeloEnergia texto="Comece aqui" /><IlustracaoTour nome="dias" largura={280} />
-      <Texto v="titulo-3">Você ainda não tem rotinas</Texto><Texto suave>Comece aqui, em três passos:</Texto>
+      <Texto v="titulo-3">Você ainda não tem treinos</Texto><Texto suave>Comece aqui, em três passos:</Texto>
       <View accessibilityRole="list" style={{ gap: 12 }}>
         {COMECE_AQUI.map((p, i) => (
           <View key={i} accessible accessibilityLabel={`Passo ${i + 1}: ${p.titulo}. ${p.texto}`} style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
@@ -77,7 +93,7 @@ export default function Inicio() {
         ))}
       </View>
       <Botao v="secundario" titulo="Treino livre" onPress={() => iniciarTreino(aplicar, estado, null)} /></>;
-    principal = <Botao grande titulo="Criar primeira rotina" onPress={() => router.push('/rotina/nova')} testID="criar-rotina" />;
+    principal = <Botao grande titulo="Montar meu primeiro treino" onPress={() => router.push('/rotina/nova')} testID="criar-rotina" />;
   }
 
   const temDados = estado.sessoes.some((x) => !x.excluidoEm && !x.exemplo && x.finalizadaEm) || estado.pesos.some((p) => !p.excluidoEm && !p.exemplo) || (estado.agua ?? []).length > 0;
@@ -98,11 +114,25 @@ export default function Inicio() {
       )}
       <Adesivo texto={cartao.estado === 'feito' ? 'Mandou bem hoje!' : 'Bora treinar hoje?'} />
 
+      {/* v0.7: com treino para hoje, o card Hoje vem primeiro. */}
+      {cartao.estado !== 'sem_rotina' && <Cartao destaque>{conteudo}{principal}</Cartao>}
+      {cartao.estado !== 'feito' && cartao.estado !== 'continuar' && (
+        <Cartao rotulo="Treino do dia: o Quaru monta um treino para você hoje" onPress={() => router.push('/treino-do-dia')}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }} testID="cartao-treino-do-dia">
+            <Texto v="titulo-2">✨</Texto>
+            <View style={{ flex: 1 }}>
+              <Texto v="corpo-forte">{cartao.estado === 'sem_rotina' ? 'Começando do zero? Treino do dia' : 'Não sabe o que treinar? Treino do dia'}</Texto>
+              <Texto v="rotulo" suave>O Quaru monta um treino para hoje com o seu nível, equipamento e tempo.</Texto>
+            </View>
+            <Texto v="titulo-3">›</Texto>
+          </View>
+        </Cartao>
+      )}
       {!perfilTreino && (
         <Cartao>
           <SeloEnergia texto="Comece aqui" />
           <Texto v="titulo-1">Seu treino sob medida em 2 minutos</Texto>
-          <Texto suave>Responda perguntas rápidas sobre objetivo, rotina e preferências. Todas podem ser puladas.</Texto>
+          <Texto suave>Responda perguntas rápidas sobre objetivo, dia a dia e preferências. Todas podem ser puladas.</Texto>
           <View style={{ alignItems: 'center', marginHorizontal: -16, backgroundColor: b['primaria-suave'] }}><IlustracaoTour nome="objetivo" largura={260} /></View>
           <Botao grande titulo="Começar o tour" onPress={() => router.push('/boas-vindas?rever=1')} testID="comecar-tour" />
         </Cartao>
@@ -132,11 +162,11 @@ export default function Inicio() {
         </View>
       </Cartao>
 
-      <Cartao destaque>{conteudo}{principal}</Cartao>
+      {cartao.estado === 'sem_rotina' && <Cartao destaque>{conteudo}{principal}</Cartao>}
       {vazio && (
         <Cartao onPress={() => router.push('/treinos-sugeridos')}>
           <Texto v="titulo-3">Não sabe por onde começar?</Texto>
-          <Texto suave>Escolha um treino sugerido (iniciante ou intermediário) e adicione ao seu plano com um toque.</Texto>
+          <Texto suave>Escolha um treino sugerido (iniciante ou intermediário) e adicione aos seus treinos com um toque.</Texto>
           <Texto v="corpo-forte" cor={b['primaria-texto']}>Ver treinos sugeridos ›</Texto>
         </Cartao>
       )}
@@ -147,7 +177,7 @@ export default function Inicio() {
           {rec?.avisos.map((a) => <Aviso key={a} tom="alerta" titulo="Atenção" texto={a} />)}
           {perfilTreino.objetivo === 'emagrecer' && <Cartao><Texto v="corpo-forte">Dica</Texto><Texto v="rotulo" suave>{DICA_EMAGRECER}</Texto></Cartao>}
           {recomendados.map((m) => adicionados.includes(m.id)
-            ? <Cartao key={m.id}><Texto v="corpo-forte">{m.nome}: adicionado ao seu plano ✓</Texto></Cartao>
+            ? <Cartao key={m.id} rotulo={`${m.nome} adicionado. Ver em Meus treinos`} onPress={() => router.navigate('/treinos?secao=meus' as never)}><Texto v="corpo-forte">{m.nome}: está em Meus treinos ✓</Texto><Texto v="rotulo" cor={b['primaria-texto']}>Ver meus treinos ›</Texto></Cartao>
             : <CartaoModelo key={m.id} m={m} tem={equipamentosDoPerfil(estado.perfil)} onAdicionar={() => {
               const ordem = Math.max(0, ...rotinas.map((r) => r.ordem)) + 1;
               aplicar((e) => acoes.salvarRotina(e, rotinaDoModelo(equipamentosDoPerfil(estado.perfil) ? modeloAdaptado(m, equipamentosDoPerfil(estado.perfil)!) : m, ordem, novoId, new Date().toISOString())));

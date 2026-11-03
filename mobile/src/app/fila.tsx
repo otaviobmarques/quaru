@@ -8,7 +8,7 @@ import { nomeVazio } from '@/dominio/validacao';
 import { acoes, useEstado } from '@/estado/armazem';
 
 const NOME_TABELA: Record<ItemFila['tabela'], string> = {
-  rotinas: 'Rotina', exercicios: 'Exercício', sessoes_treino: 'Treino', series: 'Série', pesos_corporais: 'Peso',
+  rotinas: 'Treino', exercicios: 'Exercício', sessoes_treino: 'Treino feito', series: 'Série', pesos_corporais: 'Peso',
 };
 
 /** Itens da fila de sincronização que o servidor recusou: corrigir (quando há nome) ou descartar. */

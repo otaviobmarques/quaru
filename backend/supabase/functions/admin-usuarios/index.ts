@@ -7,7 +7,7 @@
 //   URL_APP        (opcional) para onde o convite leva para criar a senha. Padrão: https://otaviobmarques.github.io/quaru/
 // SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY já vêm prontas no Supabase.
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4';
-import { lerPedido, recusar, type PerfilResumo } from './regras.ts';
+import { lerPedido, recusar, recusarTreinador, type PerfilResumo } from './regras.ts';
 
 const env = (k: string) => Deno.env.get(k) ?? '';
 // Padrões do site publicado (valores públicos); as variáveis, se existirem, têm prioridade.
@@ -45,13 +45,23 @@ Deno.serve(async (req) => {
   if (erroPerfis) return resposta(origem, 500, { erro: 'Não foi possível ler os perfis.' });
   const perfis = (perfisDb ?? []) as (PerfilResumo & { nome: string | null; criado_em: string })[];
   const eu = perfis.find((p) => p.usuario_id === quem.user.id);
-  if (!eu || eu.papel !== 'admin' || !eu.ativo) return resposta(origem, 403, { erro: 'Só administradores podem fazer isso.' });
+  if (!eu || !eu.ativo || (eu.papel !== 'admin' && eu.papel !== 'treinador')) return resposta(origem, 403, { erro: 'Só administradores podem fazer isso.' });
 
   // 3) O que foi pedido?
   let corpo: unknown = null;
   try { corpo = await req.json(); } catch { /* corpo vazio */ }
   const p = lerPedido(corpo);
   if ('erro' in p) return resposta(origem, 400, p);
+  // v0.8: treinador só cria conta de aluno dele (papel usuário), ligada ao cadastro do aluno.
+  if (eu.papel === 'treinador') {
+    const r = recusarTreinador(p);
+    if (r) return resposta(origem, 403, { erro: r });
+    if (p.acao === 'criar') {
+      const { data: aluno } = await admin.from('alunos_treinador').select('id, aluno_id').eq('id', p.aluno_ref!).eq('treinador_id', eu.usuario_id).is('excluido_em', null).maybeSingle();
+      if (!aluno) return resposta(origem, 404, { erro: 'Aluno não encontrado.' });
+      if (aluno.aluno_id) return resposta(origem, 409, { erro: 'Esse aluno já está vinculado a uma conta.' });
+    }
+  }
   const motivo = recusar(p, eu.usuario_id, perfis);
   if (motivo) return resposta(origem, 409, { erro: motivo });
 
@@ -84,6 +94,8 @@ Deno.serve(async (req) => {
         const { data, error } = await admin.auth.admin.createUser({ email: p.email, password: p.senha, email_confirm: true, user_metadata: { nome: p.nome ?? null, trocar_senha: p.trocar } });
         if (error) return resposta(origem, /registered|exists/i.test(error.message) ? 409 : 400, { erro: /registered|exists/i.test(error.message) ? 'Esse e-mail já tem conta.' : /password/i.test(error.message) ? 'Senha recusada pelo servidor: use uma senha mais forte.' : 'Não foi possível criar o usuário.' });
         await admin.from('perfis').upsert({ usuario_id: data.user.id, nome: p.nome ?? null, papel: p.papel ?? 'usuario', ativo: true, convidado_por: eu.usuario_id });
+        // v0.8: conta criada pelo treinador já sai vinculada ao cadastro do aluno.
+        if (p.aluno_ref) await admin.from('alunos_treinador').update({ aluno_id: data.user.id, vinculado_em: new Date().toISOString() }).eq('id', p.aluno_ref).eq('treinador_id', eu.usuario_id).is('aluno_id', null);
         return resposta(origem, 200, { ok: true, id: data.user.id });
       }
       case 'senha': {

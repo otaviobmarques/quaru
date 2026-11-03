@@ -60,14 +60,22 @@ if (!configurado) {
     if (!lista.length) { corpo.append(el('tr', {}, el('td', { colSpan: 5, textContent: q ? 'Ninguém encontrado.' : 'Nenhum usuário ainda.' }))); return; }
     for (const u of lista) {
       const quem = el('td', {}, el('div', { className: 'email', textContent: u.email }), ...(u.nome ? [el('div', { className: 'nome', textContent: u.nome })] : []));
-      const papel = el('td', {}, el('span', { className: u.papel === 'admin' ? 'selo' : 'selo cinza', textContent: u.papel === 'admin' ? 'ADMIN' : 'USUÁRIO' }));
+      const NOMES_PAPEL = { admin: 'Admin', treinador: 'Treinador', usuario: 'Usuário' };
+      let papel;
+      if (u.eu) papel = el('td', {}, el('span', { className: 'selo', textContent: NOMES_PAPEL[u.papel].toUpperCase() }));
+      else {
+        const sel = el('select', { className: 'papel' });
+        sel.setAttribute('aria-label', `Papel de ${u.email}`);
+        for (const [v, t] of Object.entries(NOMES_PAPEL)) sel.append(el('option', { value: v, textContent: t, selected: u.papel === v }));
+        sel.addEventListener('change', () => acao({ acao: 'papel', usuario_id: u.id, papel: sel.value }, `${u.email} agora é ${NOMES_PAPEL[sel.value].toLowerCase()}.`));
+        papel = el('td', {}, sel);
+      }
       const situacao = el('td', {}, el('span', { className: !u.ativo ? 'selo vermelho' : 'selo cinza', textContent: !u.ativo ? 'BLOQUEADO' : u.convite_pendente ? 'CONVITE ENVIADO' : 'ATIVO' }));
       const acesso = el('td', { textContent: fmtData(u.ultimo_acesso) });
       const acoes = el('td', { className: 'acoes' });
       acoes.append(botao('Definir senha', 'secundario', () => definirSenha(u), `Definir nova senha de ${u.email}`));
       acoes.append(botao(u.convite_pendente ? 'Reenviar convite' : 'E-mail de senha', 'secundario', () => acao({ acao: 'reenviar', usuario_id: u.id }, u.convite_pendente ? 'Convite reenviado.' : 'E-mail para redefinir a senha enviado.'), `${u.convite_pendente ? 'Reenviar convite' : 'Enviar e-mail para redefinir a senha'} de ${u.email}`));
       if (!u.eu) {
-        acoes.append(botao(u.papel === 'admin' ? 'Tirar admin' : 'Tornar admin', 'secundario', () => acao({ acao: 'papel', usuario_id: u.id, papel: u.papel === 'admin' ? 'usuario' : 'admin' }, 'Papel alterado.'), `${u.papel === 'admin' ? 'Tirar admin de' : 'Tornar admin'} ${u.email}`));
         acoes.append(botao(u.ativo ? 'Bloquear' : 'Desbloquear', 'secundario', () => acao({ acao: u.ativo ? 'bloquear' : 'desbloquear', usuario_id: u.id }, u.ativo ? 'Usuário bloqueado: não consegue mais entrar.' : 'Usuário desbloqueado.'), `${u.ativo ? 'Bloquear' : 'Desbloquear'} ${u.email}`));
         acoes.append(botao('Remover', 'perigo', () => confirmarRemocao(u), `Remover ${u.email}`));
       } else acoes.append(el('span', { className: 'nome', textContent: ' (você)' }));

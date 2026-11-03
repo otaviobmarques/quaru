@@ -35,7 +35,7 @@ export function ConteudoSugeridos({ area0 }: { area0?: string }) {
   };
   return (
     <>
-      {adicionado && <Toast fixo texto={`“${adicionado.nome}” foi para o seu plano.`} acao="Editar" onAcao={() => router.push(`/rotina/${adicionado.id}`)} onFim={() => setAdicionado(null)} />}
+      {adicionado && <Toast fixo texto={`“${adicionado.nome}” foi para Meus treinos.`} acao="Ver" onAcao={() => router.navigate('/treinos?secao=meus' as never)} onFim={() => setAdicionado(null)} />}
       <Texto v="titulo-1">Escolha o foco de hoje</Texto>
       <FaixaFichas>
         <Ficha texto="Todas" ativa={!area} onPress={() => setArea(null)} />

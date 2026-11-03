@@ -2,7 +2,7 @@
   "expo": {
     "name": "Quaru",
     "slug": "app-academia",
-    "version": "0.6.2",
+    "version": "0.8.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "app-academia",

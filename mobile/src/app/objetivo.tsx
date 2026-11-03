@@ -15,7 +15,7 @@ export default function ObjetivoTela() {
       rodape={<Botao grande titulo="Salvar" testID="salvar-objetivo" onPress={() => { aplicar((e) => acoes.definirObjetivo(e, v)); router.back(); }} />}>
       <SeletorObjetivo valor={v} onChange={setV} />
       <SeletorAreas valor={v.areas ?? []} onChange={(areas) => setV({ ...v, areas })} />
-      <Texto v="rotulo" suave>Mudar o objetivo atualiza as sugestões em “Recomendado para você”. Suas rotinas atuais não são apagadas.</Texto>
+      <Texto v="rotulo" suave>Mudar o objetivo atualiza as sugestões em “Recomendado para você”. Seus treinos atuais não são apagados.</Texto>
     </Tela>
   );
 }

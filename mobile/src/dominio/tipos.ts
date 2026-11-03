@@ -25,12 +25,19 @@ export interface ItemRotina {
   seriesAlvo: number;
   repsAlvo: number | null;
   descansoS: number;
+  /** v0.8: observação do treinador para o exercício. */
+  obs?: string;
 }
 
 export interface Rotina extends Sincronizavel {
   nome: string;
   ordem: number;
   itens: ItemRotina[];
+  /** v0.7: 'dia' = treino do dia gerado pelo app (fora da sequência A→B→C); 'treinador' = enviado por um treinador. */
+  origem?: 'dia' | 'treinador';
+  /** v0.8: nome de quem enviou (origem 'treinador') e observações gerais do treino. */
+  treinador?: string;
+  observacoes?: string | null;
 }
 
 export interface Serie extends Sincronizavel {
