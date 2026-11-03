@@ -1,9 +1,11 @@
 // GERADO por scripts/gerar-novidades.mjs a partir do CHANGELOG.md. Não edite à mão.
-export const VERSAO_NOVIDADES = "0.9.0";
+export const VERSAO_NOVIDADES = "0.10.0";
 export const NOVIDADES: string[] = [
   "### Adicionado",
-  "- Mascote do Quaru no Início: dá bom dia (ou boa tarde/boa noite) com um recado do dia e, no aniversário, aparece de chapéu de festa com \"Feliz aniversário!\". O ✕ fecha até o dia seguinte; Perfil → \"Mascote no Início\" desliga de vez.",
-  "- Aniversário: a pessoa informa dia e mês (o ano é opcional) no tour, em Meus dados, no Perfil ou direto no cartão do mascote. Vai também para o perfil no servidor, para no futuro o Quaru mandar a notificação de parabéns; o painel admin mostra o 🎂 de cada usuário.",
-  "- Ao adicionar um treino, o app pergunta o dia: Hoje, Amanhã ou Escolher o dia (próximos 30 dias, com \"repetir toda semana\"). Vale para treino sugerido, treino novo montado por você e o treino do dia salvo. O treino entra na agenda na data escolhida.",
-  "- Reagendar: na agenda, um treino marcado tem o botão Reagendar, que leva o treino para outro dia (se ele se repete toda semana, só aquela data muda). No Início, o treino de hoje que veio da agenda tem \"Reagendar para outro dia\". Logo depois de agendar, também dá para reagendar."
+  "- ID de aluno: toda conta tem um ID curto (ex.: K7M-2PQ9), em Perfil → Meu ID de aluno, com o botão Compartilhar.",
+  "- Convite do treinador pelo ID: na área do treinador, \"Convidar pelo ID do aluno\". O aluno recebe o convite no app (Início e Perfil) e escolhe: aceitar e compartilhar a evolução, aceitar sem compartilhar ou recusar. O link de vínculo continua valendo, agora também com a escolha de compartilhar.",
+  "- Compartilhar a evolução: em Perfil → Meu treinador, liga e desliga quando quiser. Ligado, o treinador vê o peso, os treinos feitos (data, séries, volume e tempo) e a agenda. Desligar ou desvincular apaga esse resumo do servidor. Alimentação, água, lesões e notas nunca são compartilhadas.",
+  "- Área do treinador: evolução e agenda do aluno: números da semana e do mês, gráfico do peso, últimos treinos e a agenda das próximas 4 semanas. O treinador agenda um treino num dia e ele entra na agenda do aluno; um dia que o aluno mudou fica como ele deixou.",
+  "### Mudado",
+  "- A lista de alunos do treinador mostra quem está com convite pendente, quem recusou e quem compartilha a evolução."
 ];

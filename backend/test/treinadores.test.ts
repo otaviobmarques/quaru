@@ -30,7 +30,7 @@ describe('treinadores (v0.8)', () => {
   });
   it('aluno aceita o link uma vez; vê o nome do treinador; o código não serve para outra pessoa', async () => {
     const a = await criarAluno(T, 'Bia');
-    expect(await aceitar(A, a.codigo)).toEqual({ resultado: 'vinculado', treinador: 'Coach Ana' });
+    expect(await aceitar(A, a.codigo)).toEqual({ resultado: 'vinculado', treinador: 'Coach Ana', aluno_ref: a.id });
     expect(await aceitar(A, a.codigo)).toMatchObject({ resultado: 'vinculado' }); // idempotente
     expect(await aceitar(B, a.codigo)).toEqual({ resultado: 'ja_usado' });
     expect(await aceitar(T, a.codigo)).toEqual({ resultado: 'proprio_treinador' });

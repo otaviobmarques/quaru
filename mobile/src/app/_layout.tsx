@@ -1,16 +1,17 @@
 import { router, Stack, usePathname } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { AppState, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AvisoAtualizacao } from '@/componentes/aviso-atualizacao';
-import { acoes, ProvedorEstado, useEstado } from '@/estado/armazem';
+import { acoes, ProvedorEstado, temSaude, useEstado } from '@/estado/armazem';
 import { ProvedorSessao, useSessao } from '@/estado/sessao';
 import { planoLembretes } from '@/dominio/lembretes';
 import { diaLocal } from '@/dominio/treino-de-hoje';
 import { agendarLembretes } from '@/servicos/notificacoes';
 import { chaveAniversario, enviarAniversario } from '@/servicos/aniversario';
-import { buscarDoTreinador } from '@/servicos/treinador';
+import { buscarDoTreinador, meuIdAluno, meusConvites, publicarEvolucao } from '@/servicos/treinador';
+import { assinatura, montarResumo } from '@/dominio/evolucao';
 import { ARQUIVOS_FONTES } from '@/tema/fontes';
 import { useFonts } from 'expo-font';
 
@@ -55,11 +56,36 @@ function SincronizarTreinador() {
       if (Date.now() - ultimo < 60000) return;
       ultimo = Date.now();
       buscarDoTreinador().then((r) => { if (r) aplicar((e) => acoes.receberTreinosDoTreinador(e, r.vinculos, r.treinos)); }).catch(() => { /* sem rede: tenta na próxima */ });
+      // v0.10: convites pelo ID e o próprio ID de aluno
+      meusConvites().then((c) => { if (c) aplicar((e) => acoes.receberConvites(e, c)); }).catch(() => { /* sem rede */ });
+      meuIdAluno().then((id) => { if (id) aplicar((e) => (e.idAluno === id ? e : acoes.guardarIdAluno(e, id))); }).catch(() => { /* sem rede */ });
     };
     sincronizar();
     const sub = AppState.addEventListener('change', (st) => { if (st === 'active') sincronizar(); });
     return () => sub.remove();
   }, [logado, pronto, aplicar]);
+  return null;
+}
+
+/**
+ * v0.10: com o compartilhamento ligado (e o consentimento de dados de saúde), publica o resumo da evolução
+ * para o treinador: peso, treinos feitos e agenda. Só quando muda. Desligado, nada sai do aparelho.
+ */
+function PublicarEvolucao() {
+  const s = useSessao();
+  const { estado, pronto, aplicar } = useEstado();
+  const logado = s.modo === 'conta' && !!s.usuario && !!s.acesso?.ativo;
+  const compartilha = (estado.vinculos ?? []).some((v) => v.compartilha) && temSaude(estado);
+  const resumo = useMemo(() => (compartilha ? montarResumo(estado) : null), [compartilha, estado.rotinas, estado.sessoes, estado.series, estado.pesos, estado.agenda]); // eslint-disable-line react-hooks/exhaustive-deps
+  const ass = resumo ? assinatura(resumo) : null;
+  useEffect(() => {
+    if (!logado || !pronto || !resumo || !ass || estado.evolucaoEnviada === ass) return;
+    const t = setTimeout(() => {
+      publicarEvolucao(resumo).then((ok) => { if (ok) aplicar((e) => acoes.marcarEvolucaoEnviada(e, ass)); }).catch(() => { /* sem rede */ });
+    }, 1500);
+    return () => clearTimeout(t);
+  }, [logado, pronto, ass]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (!compartilha && estado.evolucaoEnviada) aplicar((e) => acoes.marcarEvolucaoEnviada(e, null)); }, [compartilha]); // eslint-disable-line react-hooks/exhaustive-deps
   return null;
 }
 
@@ -115,6 +141,7 @@ export default function Layout() {
         <GuardaConta />
         <SincronizarTreinador />
         <SincronizarAniversario />
+        <PublicarEvolucao />
         <Stack screenOptions={{ headerShown: false }} />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>

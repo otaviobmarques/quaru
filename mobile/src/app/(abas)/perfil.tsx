@@ -1,12 +1,14 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Share, View } from 'react-native';
 
 import { Aviso, Botao, Campo, Cartao, Chave, ItemLista, Tela, Texto } from '@/componentes/ui';
 import { formatarAniversario } from '@/dominio/aniversario';
 import { acoes, temExemplo, temSaude, useEstado } from '@/estado/armazem';
 import { useSessao } from '@/estado/sessao';
-import { buscarDoTreinador, desvincularTreinador } from '@/servicos/treinador';
+import { buscarDoTreinador, definirCompartilhamento, desvincularTreinador } from '@/servicos/treinador';
+import { CartaoConvite } from '@/componentes/convite-treinador';
+import { formatarIdAluno } from '@/dominio/treinador';
 import { OBJETIVOS } from '@/dominio/objetivo';
 import { FotoPerfil } from '@/componentes/avatares';
 import { marca } from '@/config/marca';
@@ -67,11 +69,34 @@ export default function Perfil() {
         ))}
       </View>
       {temExemplo(estado) && <Texto v="rotulo">Valores de exemplo.</Texto>}
+      {(estado.convites ?? []).map((c) => <CartaoConvite key={c.aluno_ref} c={c} />)}
+      {/* v0.10: ID de aluno, para o treinador mandar o convite */}
+      {sessao.modo === 'conta' && estado.idAluno && (
+        <Cartao>
+          <Texto v="legenda" suave>MEU ID DE ALUNO</Texto>
+          <Texto v="titulo-2">{formatarIdAluno(estado.idAluno)}</Texto>
+          <Texto v="rotulo" suave>Passe este ID ao seu treinador. Ele manda um convite e você aceita aqui no app.</Texto>
+          <Botao v="secundario" titulo="Compartilhar meu ID" onPress={async () => {
+            const texto = `Meu ID de aluno no Quaru: ${formatarIdAluno(estado.idAluno)}`;
+            try {
+              if (Platform.OS !== 'web') await Share.share({ message: texto });
+              else { const nav = navigator as Navigator & { share?: (d: { text: string }) => Promise<void> }; if (nav.share) await nav.share({ text: texto }); else await navigator.clipboard.writeText(texto); }
+            } catch { /* cancelou */ }
+          }} testID="compartilhar-id" />
+        </Cartao>
+      )}
       {(estado.vinculos ?? []).map((v) => (
         <Cartao key={v.aluno_ref}>
           <Texto v="legenda" suave>MEU TREINADOR</Texto>
           <Texto v="titulo-3">{v.treinador}</Texto>
-          <Texto v="rotulo" suave>Os treinos dele aparecem em Meus treinos. Ele vê o seu e-mail; seus registros ficam no seu aparelho.</Texto>
+          <Texto v="rotulo" suave>{v.compartilha
+            ? 'Os treinos dele aparecem em Meus treinos e na agenda. Ele vê o seu e-mail, o seu peso, os treinos que você fez e a sua agenda.'
+            : 'Os treinos dele aparecem em Meus treinos e na agenda. Ele vê o seu e-mail; o resto fica só no seu aparelho.'}</Texto>
+          <Chave rotulo="Compartilhar minha evolução (peso, treinos feitos e agenda)" valor={!!v.compartilha} testID={`compartilhar-${v.aluno_ref}`} onChange={async (ligado) => {
+            if (ligado && !temSaude(estado)) { router.push('/consentimentos'); return; }
+            if (!(await definirCompartilhamento(v.aluno_ref, ligado))) return;
+            aplicar((e) => ({ ...e, vinculos: (e.vinculos ?? []).map((x) => (x.aluno_ref === v.aluno_ref ? { ...x, compartilha: ligado } : x)), evolucaoEnviada: null }));
+          }} />
           <Botao v="destrutivo" titulo="Desvincular" testID={`desvincular-${v.aluno_ref}`} onPress={async () => {
             if (!(await desvincularTreinador(v.aluno_ref))) return;
             const d = await buscarDoTreinador().catch(() => null); // o que continua valendo (outros treinadores)

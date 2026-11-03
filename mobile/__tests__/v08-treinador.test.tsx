@@ -82,7 +82,7 @@ describe('vincular: tela', () => {
     mockServ.aceitarVinculo.mockResolvedValue({ resultado: 'vinculado', treinador: 'Coach Ana' });
     mockServ.buscarDoTreinador.mockResolvedValue({ vinculos: vinc, treinos: [atr('t1')] });
     await montar(<Vincular />, acoes.guardarVinculoPendente(acoes.entrar(estadoInicial()), COD));
-    expect(screen.getByText('Ele passa a ver o seu e-mail.', { exact: false })).toBeTruthy();
+    expect(screen.getByText('Ele vê o seu e-mail.', { exact: false })).toBeTruthy();
     await fireEvent.press(screen.getByTestId('confirmar-vinculo'));
     expect(await screen.findByText('Pronto! Agora você treina com Coach Ana.')).toBeTruthy();
     expect(mockServ.aceitarVinculo).toHaveBeenCalledWith(COD);
