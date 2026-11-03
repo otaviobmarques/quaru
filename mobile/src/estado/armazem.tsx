@@ -173,6 +173,18 @@ export const acoes = {
     const reg = { ...s, atualizadoEm: agora() };
     return { ...e, sessoes: e.sessoes.map((x) => (x.id === s.id ? reg : x)), fila: enfileirar(e.fila, { tabela: 'sessoes_treino', registro: reg as never }) };
   },
+  /**
+   * v0.8.2: descartar o treino em andamento (começou o treino errado). Some do aparelho junto com as séries,
+   * para não contar no histórico, na sequência, nos recordes nem nos gráficos; a fila leva a exclusão ao servidor.
+   */
+  descartarSessao: (e: Estado, id: string): Estado => {
+    const s = e.sessoes.find((x) => x.id === id);
+    if (!s || s.finalizadaEm) return e;
+    const quando = agora();
+    let fila = enfileirar(e.fila, { tabela: 'sessoes_treino', registro: { ...s, excluidoEm: quando, atualizadoEm: quando } as never });
+    for (const x of e.series.filter((y) => y.sessaoId === id)) fila = enfileirar(fila, { tabela: 'series', registro: { ...x, excluidoEm: quando, atualizadoEm: quando } as never });
+    return { ...e, sessoes: e.sessoes.filter((x) => x.id !== id), series: e.series.filter((x) => x.sessaoId !== id), fila };
+  },
   salvarSerie: (e: Estado, s: Serie): Estado => {
     if (!temSaude(e)) throw new Error('sem_consentimento');
     // BUG-06: mesmos limites do servidor (carga 0–1000 kg, reps 0–1000, RPE 1–10).

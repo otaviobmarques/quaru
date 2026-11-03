@@ -37,6 +37,7 @@ export default function Treino() {
   const [extras, setExtras] = useState<string[]>([]);
   const [mais, setMais] = useState<Record<string, number>>({});
   const [confirmarFim, setConfirmarFim] = useState(false);
+  const [confirmarDescarte, setConfirmarDescarte] = useState(false);
   useEffect(() => { if (!descanso) return; const t = setInterval(() => setAgora(agoraMs()), 500); return () => clearInterval(t); }, [descanso]);
   // BUG-17: com o app em primeiro plano, vibra quando o descanso chega a zero.
   const zerou = !!descanso && agora >= descanso.fim;
@@ -94,6 +95,12 @@ export default function Treino() {
     router.replace(`/resumo/${sessao.id}`);
   };
 
+  const descartar = () => {
+    cancelarDescanso();
+    aplicar((e) => acoes.descartarSessao(e, sessao.id));
+    router.replace('/treinos?secao=meus' as never);
+  };
+
   // Próxima série pendente (para o botão principal "Concluir série N" no rodapé – P0-3).
   const planos = ids.map((exId) => {
     const alvo = rotina?.itens.find((i) => i.exercicioId === exId);
@@ -145,6 +152,18 @@ export default function Treino() {
   return (
     <Tela titulo={rotina?.nome ?? 'Treino livre'} voltar={() => router.replace('/inicio')} iconeVoltar="▾" rodape={rodape}>
       <Texto v="rotulo" suave>{concluidas} de {total} séries · {minutos} min{proxima ? ` · próxima: ${exs.get(proxima.p.exId)?.nome}, série ${proxima.ordem}` : ''}</Texto>
+      {confirmarDescarte ? (
+        <Cartao destaque>
+          <Texto v="corpo-forte">Descartar este treino?</Texto>
+          <Texto v="rotulo" suave>{concluidas === 1 ? 'A série registrada nele será apagada. ' : concluidas > 1 ? `As ${concluidas} séries registradas nele serão apagadas. ` : ''}Ele não entra no histórico nem na sequência. Depois é só começar o treino certo.</Texto>
+          <View style={{ flexDirection: 'row', gap: 12 }}>
+            <Botao flex v="secundario" titulo="Voltar ao treino" onPress={() => setConfirmarDescarte(false)} />
+            <Botao flex v="perigo" titulo="Descartar" onPress={descartar} testID="confirmar-descartar" />
+          </View>
+        </Cartao>
+      ) : (
+        <Botao v="texto" titulo="Começou o treino errado? Descartar" onPress={() => setConfirmarDescarte(true)} testID="descartar-treino" />
+      )}
       {erroSerie && <Aviso tom="erro" titulo="Série não registrada" texto={erroSerie} />}
       {recorde && <Aviso tom="sucesso" titulo="Novo recorde pessoal" texto={recorde} />}
       {pedirAviso && (
