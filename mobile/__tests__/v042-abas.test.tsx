@@ -45,7 +45,7 @@ describe('abas do design', () => {
 
 describe('aba Treinos', () => {
   it('três seções: Meus treinos, Sugeridos e Histórico', () => {
-    expect(SECOES_TREINOS.map((s) => s.rotulo)).toEqual(['Meus treinos', 'Sugeridos', 'Histórico']);
+    expect(SECOES_TREINOS.map((s) => s.rotulo)).toEqual(['Meus treinos', 'Agenda', 'Sugeridos', 'Histórico']); // v0.7: + Agenda
   });
   it('Meus treinos é o padrão, lista as rotinas e tem "Nova rotina"', async () => {
     await montar(<Treinos />);

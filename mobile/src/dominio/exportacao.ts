@@ -7,6 +7,8 @@ export interface DadosExportacao {
   agua?: { id: string; ml: number; registradoEm: string }[];
   /** v0.5: diário alimentar simples. */
   diario?: { dia: string; momento: string; avaliacao: string }[];
+  /** v0.7: agenda de treinos. */
+  agenda?: unknown;
 }
 
 /** Número com vírgula decimal (padrão do Excel no Brasil, L3). */
@@ -60,10 +62,10 @@ export function arquivosExportacao(d: DadosExportacao): Record<string, string> {
 }
 
 /** Monta os dados exportados a partir do estado (inclui perfil e água da v0.4.1). */
-export function dadosParaExportar(e: { rotinas: Rotina[]; sessoes: SessaoTreino[]; series: Serie[]; pesos: PesoCorporal[]; exercicios: Exercicio[]; perfil?: DadosExportacao['perfil']; agua?: DadosExportacao['agua']; diario?: DadosExportacao['diario'] }): DadosExportacao {
+export function dadosParaExportar(e: { rotinas: Rotina[]; sessoes: SessaoTreino[]; series: Serie[]; pesos: PesoCorporal[]; exercicios: Exercicio[]; perfil?: DadosExportacao['perfil']; agua?: DadosExportacao['agua']; diario?: DadosExportacao['diario']; agenda?: unknown }): DadosExportacao {
   return { rotinas: e.rotinas, sessoes: e.sessoes, series: e.series, pesos: e.pesos, exercicios: e.exercicios,
     perfil: e.perfil ?? { nome: null, avatar: null, alturaCm: null }, agua: (e.agua ?? []).map(({ id, ml, registradoEm }) => ({ id, ml, registradoEm })),
-    diario: (e.diario ?? []).map(({ dia, momento, avaliacao }) => ({ dia, momento, avaliacao })) };
+    diario: (e.diario ?? []).map(({ dia, momento, avaliacao }) => ({ dia, momento, avaliacao })), agenda: e.agenda ?? null };
 }
 
 /** Bytes da foto de perfil (data URI base64) para ir como arquivo separado no .zip. */

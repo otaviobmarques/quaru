@@ -20,6 +20,10 @@ export function MeusTreinos() {
   const lista = estado.rotinas.filter((r) => !r.excluidoEm).toSorted((a, b) => a.ordem - b.ordem);
   return (
     <>
+      <Cartao rotulo="Treino do dia: o Quaru monta um treino para hoje" onPress={() => router.push('/treino-do-dia')}>
+        <Texto v="corpo-forte">✨ Treino do dia</Texto>
+        <Texto v="rotulo" suave>O Quaru monta um treino para hoje com o seu nível, equipamento e tempo.</Texto>
+      </Cartao>
       {lista.length === 0 && <EstadoVazio titulo="Nenhum treino ainda" texto="Monte treinos como Treino A, B e C, ou adicione um sugerido. O Início sugere o próximo da sequência." />}
       {lista.map((r) => {
         const proximo = proximaRotina(estado.rotinas, estado.sessoes)?.id === r.id;
@@ -27,6 +31,7 @@ export function MeusTreinos() {
         return (
           <Cartao key={r.id} destaque={proximo}>
             {proximo && <Selo texto="Próximo da sequência" tom="primaria" />}
+            {r.origem === 'dia' && <Selo texto="Treino do dia" tom="secundaria" />}
             <Texto v="titulo-3">{r.nome}</Texto>
             <Texto v="rotulo" suave>{r.itens.length} {r.itens.length === 1 ? 'exercício' : 'exercícios'}{min ? ` · ~${min} min` : ''}</Texto>
             <Texto v="rotulo" suave numberOfLines={2}>{r.itens.toSorted((a, b) => a.ordem - b.ordem).map((i) => ex.get(i.exercicioId)).join(' · ') || 'Sem exercícios'}</Texto>
@@ -67,6 +72,10 @@ export function HistoricoTreinos() {
           </>
         );
       })()}
+      <Cartao rotulo="Treino do dia: o Quaru monta um treino para hoje" onPress={() => router.push('/treino-do-dia')}>
+        <Texto v="corpo-forte">✨ Treino do dia</Texto>
+        <Texto v="rotulo" suave>O Quaru monta um treino para hoje com o seu nível, equipamento e tempo.</Texto>
+      </Cartao>
       {lista.length === 0 && <EstadoVazio titulo="Nenhum treino ainda" texto="Quando você finalizar um treino, ele aparece aqui." acao={<Botao titulo="Ir para o Início" onPress={() => router.push('/inicio')} />} />}
       {lista.map((s) => {
         const m = metricasPorSessao(estado, s.id);

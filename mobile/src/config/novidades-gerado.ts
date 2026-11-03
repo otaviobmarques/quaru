@@ -6,6 +6,8 @@ export const NOVIDADES: string[] = [
   "- Card Hoje no Início, logo no topo: nome do treino, quantidade de exercícios, tempo estimado e os exercícios.",
   "- Descanso calculado: ao adicionar exercícios, o descanso entre séries é calculado pelo objetivo e pelo tipo de exercício (multiarticular descansa mais, isolado menos; alongamento e cardio, 30 s). Ao terminar um exercício, o cronômetro dá um descanso maior para a troca e mostra qual é o próximo.",
   "- Recalcular descansos no editor do treino, com o tempo estimado do treino.",
+  "- Agenda de treinos (Treinos → Agenda), na semana e no mês: escolha o treino de cada dia ou marque descanso, repita toda semana e monte um treino novo direto num dia. O card Hoje do Início segue a agenda.",
+  "- Treino do dia: o Quaru monta um treino para hoje com o seu nível, objetivo, equipamento, tempo e lesões, alternando o foco pelo último treino. Para quem começa do zero, sai um treino leve de corpo inteiro. Dá para pedir outra sugestão, começar na hora ou salvar em Meus treinos.",
   "### Mudado",
   "- \"Rotina\" agora se chama Treino em todo o app (Novo treino, Editar treino, Meus treinos).",
   "- Ao adicionar um treino sugerido, o aviso leva direto para Meus treinos, onde o plano fica. O botão agora se chama \"Adicionar aos meus treinos\"."

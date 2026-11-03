@@ -3,7 +3,8 @@ import type { Rotina, SessaoTreino } from './tipos';
 export type CartaoHoje =
   | { estado: 'continuar'; sessao: SessaoTreino }
   | { estado: 'feito'; sessao: SessaoTreino; proxima: Rotina | null }
-  | { estado: 'proxima'; rotina: Rotina }
+  | { estado: 'proxima'; rotina: Rotina; daAgenda?: boolean }
+  | { estado: 'descanso'; proxima: Rotina | null }
   | { estado: 'sem_rotina' };
 
 const ativos = <T extends { excluidoEm?: string | null }>(l: T[]) => l.filter((x) => !x.excluidoEm);
@@ -15,7 +16,7 @@ export function diaLocal(iso: string, fuso = 'America/Sao_Paulo'): string {
 
 /** Próxima rotina na sequência A → B → C → A, a partir da última sessão finalizada (regra L1). */
 export function proximaRotina(rotinas: Rotina[], sessoes: SessaoTreino[]): Rotina | null {
-  const lista = ativos(rotinas).toSorted((a, b) => a.ordem - b.ordem);
+  const lista = ativos(rotinas).filter((r) => r.origem !== 'dia').toSorted((a, b) => a.ordem - b.ordem); // o treino do dia fica fora da sequência
   if (lista.length === 0) return null;
   const ultima = ativos(sessoes)
     .filter((s) => s.finalizadaEm && s.rotinaId && lista.some((r) => r.id === s.rotinaId))
@@ -26,7 +27,7 @@ export function proximaRotina(rotinas: Rotina[], sessoes: SessaoTreino[]): Rotin
 }
 
 /** Cartão destaque do Início. Prioridade: em andamento > feito hoje > próxima da sequência (L1). */
-export function cartaoTreinoDeHoje(rotinas: Rotina[], sessoes: SessaoTreino[], agora: string): CartaoHoje {
+export function cartaoTreinoDeHoje(rotinas: Rotina[], sessoes: SessaoTreino[], agora: string, planejado?: string | 'descanso' | null): CartaoHoje {
   const vivas = ativos(sessoes);
   const andamento = vivas.find((s) => !s.finalizadaEm);
   if (andamento) return { estado: 'continuar', sessao: andamento };
@@ -36,6 +37,10 @@ export function cartaoTreinoDeHoje(rotinas: Rotina[], sessoes: SessaoTreino[], a
     .toSorted((a, b) => (b.finalizadaEm! < a.finalizadaEm! ? -1 : 1))[0];
   const proxima = proximaRotina(rotinas, sessoes);
   if (feitaHoje) return { estado: 'feito', sessao: feitaHoje, proxima };
+  // v0.7: a agenda vence a sequência (treino marcado para hoje ou dia de descanso).
+  if (planejado === 'descanso') return { estado: 'descanso', proxima };
+  const daAgenda = planejado ? ativos(rotinas).find((r) => r.id === planejado) : undefined;
+  if (daAgenda) return { estado: 'proxima', rotina: daAgenda, daAgenda: true };
   if (proxima) return { estado: 'proxima', rotina: proxima };
   return { estado: 'sem_rotina' };
 }
