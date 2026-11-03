@@ -32,6 +32,7 @@ export default function Entrada() {
       </Tela>
     );
     if (!estado.usuario || estado.conta?.id !== s.usuario?.id) return <Carregando />;
+    if (estado.vinculoPendente) return <Redirect href={`/vincular?codigo=${estado.vinculoPendente}` as never} />; // v0.8: link do treinador antes do login
   } else if (!estado.usuario) return <Redirect href="/entrar" />;
   if (!estado.consentimentosVistosEm) return <Redirect href="/consentimentos" />;
   if (precisaApresentacao(estado)) return <Redirect href="/boas-vindas" />;

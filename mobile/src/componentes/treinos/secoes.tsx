@@ -32,12 +32,13 @@ export function MeusTreinos() {
           <Cartao key={r.id} destaque={proximo}>
             {proximo && <Selo texto="Próximo da sequência" tom="primaria" />}
             {r.origem === 'dia' && <Selo texto="Treino do dia" tom="secundaria" />}
+            {r.origem === 'treinador' && <Selo texto={`Do seu treinador${r.treinador ? `: ${r.treinador}` : ''}`} tom="sucesso" />}
             <Texto v="titulo-3">{r.nome}</Texto>
             <Texto v="rotulo" suave>{r.itens.length} {r.itens.length === 1 ? 'exercício' : 'exercícios'}{min ? ` · ~${min} min` : ''}</Texto>
             <Texto v="rotulo" suave numberOfLines={2}>{r.itens.toSorted((a, b) => a.ordem - b.ordem).map((i) => ex.get(i.exercicioId)).join(' · ') || 'Sem exercícios'}</Texto>
             <View style={{ flexDirection: 'row', gap: 8, marginTop: 4 }}>
               <Botao flex titulo={ativa ? (ativa.rotinaId === r.id ? 'Continuar' : 'Treino em andamento') : 'Começar'} onPress={() => iniciarTreino(aplicar, estado, r.id)} desabilitado={r.itens.length === 0 || (!!ativa && ativa.rotinaId !== r.id)} testID={`comecar-${r.id}`} />
-              <Botao flex v="secundario" titulo="Editar" onPress={() => router.push(`/rotina/${r.id}`)} testID={`editar-${r.id}`} />
+              <Botao flex v="secundario" titulo={r.origem === 'treinador' ? 'Ver' : 'Editar'} onPress={() => router.push(`/rotina/${r.id}`)} testID={`editar-${r.id}`} />
             </View>
           </Cartao>
         );

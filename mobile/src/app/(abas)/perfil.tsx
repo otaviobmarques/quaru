@@ -5,6 +5,7 @@ import { Platform, View } from 'react-native';
 import { Aviso, Botao, Campo, Cartao, ItemLista, Tela, Texto } from '@/componentes/ui';
 import { acoes, temExemplo, temSaude, useEstado } from '@/estado/armazem';
 import { useSessao } from '@/estado/sessao';
+import { buscarDoTreinador, desvincularTreinador } from '@/servicos/treinador';
 import { OBJETIVOS } from '@/dominio/objetivo';
 import { FotoPerfil } from '@/componentes/avatares';
 import { marca } from '@/config/marca';
@@ -65,6 +66,18 @@ export default function Perfil() {
         ))}
       </View>
       {temExemplo(estado) && <Texto v="rotulo">Valores de exemplo.</Texto>}
+      {(estado.vinculos ?? []).map((v) => (
+        <Cartao key={v.aluno_ref}>
+          <Texto v="legenda" suave>MEU TREINADOR</Texto>
+          <Texto v="titulo-3">{v.treinador}</Texto>
+          <Texto v="rotulo" suave>Os treinos dele aparecem em Meus treinos. Ele vê o seu e-mail; seus registros ficam no seu aparelho.</Texto>
+          <Botao v="destrutivo" titulo="Desvincular" testID={`desvincular-${v.aluno_ref}`} onPress={async () => {
+            if (!(await desvincularTreinador(v.aluno_ref))) return;
+            const d = await buscarDoTreinador().catch(() => null); // o que continua valendo (outros treinadores)
+            if (d) aplicar((e) => acoes.receberTreinosDoTreinador(e, d.vinculos, d.treinos));
+          }} />
+        </Cartao>
+      ))}
       <Cartao>
         <Texto v="corpo-forte">Altura e IMC</Texto>
         <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-end' }}>

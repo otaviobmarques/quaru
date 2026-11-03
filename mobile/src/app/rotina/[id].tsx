@@ -40,6 +40,33 @@ function Editor({ rotina }: { rotina: Rotina }) {
   const recalcular = () => salvarItens(itens.map((i) => ({ ...i, descansoS: descansoEntreSeries(doCatalogo(i.exercicioId), estado.perfil?.treino) })));
   const min = tempoEstimadoTreino(itens);
   const ativa = estado.sessoes.find((x) => !x.finalizadaEm && !x.excluidoEm);
+  // v0.8: treino do treinador é só leitura (a próxima sincronização traria a versão dele de volta). Dá para copiar.
+  if (rotina.origem === 'treinador') {
+    const copiar = () => {
+      const c = { id: novoId(), nome: `${rotina.nome} (cópia)`.slice(0, 60), ordem: Math.max(0, ...estado.rotinas.map((r) => r.ordem)) + 1,
+        itens: itens.map((i) => ({ ...i, id: novoId() })), atualizadoEm: new Date().toISOString() };
+      aplicar((e) => acoes.salvarRotina(e, c));
+      router.replace(`/rotina/${c.id}`);
+    };
+    return (
+      <Tela titulo="Treino do seu treinador" voltar={router.back} rodape={
+        <Botao grande titulo={ativa ? 'Continuar treino' : 'Começar este treino'} onPress={() => iniciarTreino(aplicar, estado, rotina.id)} desabilitado={itens.length === 0 || (!!ativa && ativa.rotinaId !== rotina.id)} testID="comecar-treino" />}>
+        <Texto v="titulo-1">{rotina.nome}</Texto>
+        <Texto suave>Enviado por {rotina.treinador ?? 'seu treinador'} · {itens.length} exercícios · ~{min} min</Texto>
+        {rotina.observacoes ? <Cartao><Texto v="corpo-forte">Recado do treinador</Texto><Texto>{rotina.observacoes}</Texto></Cartao> : null}
+        {itens.map((it, k) => (
+          <Cartao key={it.id}>
+            <Texto v="corpo-forte">{k + 1}. {ex.get(it.exercicioId)?.nome ?? 'Exercício'}</Texto>
+            <Texto v="rotulo" suave>{it.seriesAlvo} séries × {it.repsAlvo ?? '–'} reps · descanso {it.descansoS}s</Texto>
+            {it.obs ? <Texto v="rotulo">📝 {it.obs}</Texto> : null}
+            <DemonstracaoExercicio exercicioId={it.exercicioId} nome={ex.get(it.exercicioId)?.nome ?? 'exercício'} />
+          </Cartao>
+        ))}
+        <Texto v="rotulo" suave>Só o treinador muda este treino. Quer ajustar do seu jeito? Faça uma cópia.</Texto>
+        <Botao v="secundario" titulo="Fazer uma cópia para editar" onPress={copiar} testID="copiar-treino" />
+      </Tela>
+    );
+  }
   return (
     <Tela titulo="Editar treino" voltar={router.back} rodape={
       <View style={{ flexDirection: 'row', gap: 12 }}>

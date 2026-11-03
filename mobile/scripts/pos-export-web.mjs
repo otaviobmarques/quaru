@@ -63,7 +63,7 @@ const andar = (d) => { for (const n of readdirSync(d)) { const p = join(d, n); i
 andar(dist);
 // v0.4.4 (ADR-0020): as mídias do catálogo (exercicios/*.webp, ~876 animações) NÃO entram no pré-cache;
 // são baixadas quando a pessoa abre o exercício e guardadas no cache de mídia (abaixo).
-const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].includes(f) && !f.endsWith('.map') && !f.startsWith('exercicios/') && !f.startsWith('admin/') && !f.startsWith('loja/') && f !== 'og-quaru.jpg' && !ROTAS_APP.some((r) => f === r + '.html')).sort();
+const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].includes(f) && !f.endsWith('.map') && !f.startsWith('exercicios/') && !f.startsWith('admin/') && !f.startsWith('treinador/') && !f.startsWith('loja/') && f !== 'og-quaru.jpg' && !ROTAS_APP.some((r) => f === r + '.html')).sort();
 const hash = createHash('sha256'); for (const f of lista) hash.update(f).update(readFileSync(join(dist, f)));
 const versao = hash.digest('hex').slice(0, 12);
 const sw = `// Service worker do Quaru web (gerado por scripts/pos-export-web.mjs). Só guarda os arquivos do app para uso offline;
@@ -80,7 +80,7 @@ self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) =
 self.addEventListener('fetch', (e) => {
   const r = e.request; const u = new URL(r.url);
   if (r.method !== 'GET' || u.origin !== location.origin || !u.pathname.startsWith(BASE)) return;
-  if (u.pathname.startsWith(BASE + 'admin/')) return; // v0.6: o painel de administração é outro site; nunca vai para o cache do app
+  if (u.pathname.startsWith(BASE + 'admin/') || u.pathname.startsWith(BASE + 'treinador/')) return; // v0.6/v0.8: painel e área do treinador são outros sites; fora do cache do app
   if (r.mode === 'navigate') { e.respondWith(fetch(r).catch(() => caches.match(BASE + 'index.html'))); return; }
   if (u.pathname.startsWith(BASE + 'exercicios/')) {
     e.respondWith(caches.open(MIDIA).then((c) => c.match(r).then((m) => m || fetch(r).then((res) => { if (res.ok) c.put(r, res.clone()); return res; }))));

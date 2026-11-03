@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self' https://*.supabase.co; img-src 'self' data:; style-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Quaru · Área do treinador</title>
+  <link rel="icon" type="image/svg+xml" href="../icones/quaru.svg">
+  <link rel="stylesheet" href="../admin/estilo.css">
+  <link rel="stylesheet" href="treinador.css">
+  <script src="config.js"></script>
+  <script type="module" src="treinador.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <span class="adesivo-logo bloco"><img src="../admin/logo.svg" alt="Quaru" width="120" height="45"></span>
+    <h1>Área do treinador</h1>
+    <button id="sair" class="link" type="button" hidden>Sair</button>
+  </header>
+
+  <main>
+    <p id="aviso-config" class="aviso erro" role="alert" hidden>A área do treinador ainda não está ligada ao servidor.</p>
+
+    <section id="tela-entrar" class="bloco cartao" hidden aria-labelledby="t-entrar">
+      <h2 id="t-entrar">Entrar</h2>
+      <p class="suave">Para treinadores do Quaru. Peça ao administrador para marcar a sua conta como treinador.</p>
+      <form id="form-entrar" novalidate>
+        <label for="email">E-mail</label>
+        <input id="email" type="email" autocomplete="username" required>
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" autocomplete="current-password" required>
+        <button class="botao" type="submit">Entrar</button>
+      </form>
+      <p id="msg-entrar" class="msg" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Alunos -->
+    <section id="tela-alunos" hidden>
+      <div class="bloco cartao">
+        <h2>Novo aluno</h2>
+        <p class="suave">Cadastre o aluno e mande o link: ao abrir no app do Quaru, a conta dele fica ligada a você e ele recebe os treinos que você montar.</p>
+        <form id="form-aluno" class="linha-aluno" novalidate>
+          <div><label for="a-nome">Nome do aluno</label><input id="a-nome" type="text" maxlength="80" autocomplete="off" required></div>
+          <button class="botao" type="submit">Cadastrar aluno</button>
+        </form>
+        <p id="msg-aluno" class="msg" role="status" aria-live="polite"></p>
+      </div>
+      <div class="bloco cartao">
+        <div class="cabeca-lista"><h2>Meus alunos <span id="contagem" class="selo"></span></h2></div>
+        <p id="msg-lista" class="msg" role="status" aria-live="polite"></p>
+        <ul id="lista-alunos" class="lista"></ul>
+      </div>
+    </section>
+
+    <!-- Treinos de um aluno -->
+    <section id="tela-aluno" hidden>
+      <button type="button" class="link" id="voltar-alunos">‹ Meus alunos</button>
+      <div class="bloco cartao">
+        <h2 id="aluno-titulo"></h2>
+        <p id="aluno-status" class="suave"></p>
+        <div id="bloco-link" class="dados-acesso">
+          <p><b>Link para o aluno</b> (abra no celular dele, com o Quaru):</p>
+          <pre id="link-texto"></pre>
+          <div class="acoes-linha"><button type="button" class="botao peq secundario" id="copiar-link">Copiar link</button></div>
+        </div>
+        <details id="criar-conta">
+          <summary>O aluno ainda não tem conta no Quaru? Criar a conta dele</summary>
+          <form id="form-conta" class="linha-senha" novalidate>
+            <div><label for="c-email">E-mail do aluno</label><input id="c-email" type="email" autocomplete="off"></div>
+            <div><label for="c-senha">Senha</label><div class="campo-senha"><input id="c-senha" type="text" autocomplete="off" maxlength="72"><button type="button" class="botao peq secundario" id="gerar-senha">Gerar</button></div></div>
+            <button class="botao" type="submit">Criar conta e vincular</button>
+          </form>
+          <p class="suave peq">A conta já sai ligada a você. No primeiro acesso, o app pede para o aluno criar a própria senha.</p>
+          <p id="msg-conta" class="msg" role="status" aria-live="polite"></p>
+          <div id="dados-conta" class="dados-acesso" hidden><pre id="dados-conta-texto"></pre><button type="button" class="botao peq secundario" id="copiar-conta">Copiar</button></div>
+        </details>
+      </div>
+      <div class="bloco cartao">
+        <div class="cabeca-lista"><h2>Treinos do aluno</h2><button type="button" class="botao" id="novo-treino">+ Novo treino</button></div>
+        <p id="msg-treinos" class="msg" role="status" aria-live="polite"></p>
+        <ul id="lista-treinos" class="lista"></ul>
+      </div>
+    </section>
+
+    <!-- Editor de treino -->
+    <section id="tela-treino" hidden>
+      <button type="button" class="link" id="voltar-aluno">‹ Treinos do aluno</button>
+      <div class="bloco cartao">
+        <h2 id="treino-titulo">Novo treino</h2>
+        <div class="linha-form2">
+          <div><label for="t-nome">Nome do treino</label><input id="t-nome" type="text" maxlength="60" placeholder="Treino A: peito e tríceps"></div>
+          <div><label for="t-obj">Objetivo (para calcular o descanso)</label>
+            <select id="t-obj"><option value="massa">Ganhar massa</option><option value="forca">Força</option><option value="saude">Saúde</option><option value="emagrecer">Emagrecer</option><option value="condicionamento">Condicionamento</option></select></div>
+        </div>
+        <fieldset class="dias"><legend>Dias da semana (entram na agenda do aluno)</legend><div id="t-dias"></div></fieldset>
+        <label for="t-obs">Observações para o aluno (opcional)</label>
+        <textarea id="t-obs" maxlength="1000" rows="2"></textarea>
+      </div>
+      <div class="bloco cartao">
+        <h2>Exercícios <span id="t-contagem" class="selo cinza"></span> <span id="t-tempo" class="suave peq"></span></h2>
+        <ol id="t-itens" class="itens"></ol>
+        <label for="busca-ex">Adicionar exercício</label>
+        <input id="busca-ex" type="search" placeholder="Busque por nome, músculo ou equipamento (ex.: supino, costas, halteres)" autocomplete="off">
+        <ul id="resultados" class="resultados" aria-live="polite"></ul>
+      </div>
+      <div class="acoes-linha">
+        <button type="button" class="botao" id="salvar-treino">Salvar e enviar ao aluno</button>
+        <button type="button" class="botao secundario" id="excluir-treino" hidden>Excluir treino</button>
+      </div>
+      <p id="msg-treino" class="msg" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+</body>
+</html>

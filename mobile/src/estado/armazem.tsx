@@ -11,6 +11,7 @@ import { pedirArmazenamentoPersistente } from '@/servicos/protecao-dados';
 import { AGUA_MAX_ML, AGUA_MIN_ML, META_MAX_ML, META_MIN_ML, type RegistroAgua } from '@/dominio/agua';
 import { marcar, type Avaliacao, type RegistroDiario } from '@/dominio/diario';
 import { definirDia, type Agenda, type Planejado } from '@/dominio/agenda';
+import { aplicarTreinosDoTreinador, type TreinoAtribuido, type Vinculo } from '@/dominio/treinador';
 import type { Momento } from '@/dominio/refeicoes';
 import { DIAS_MAX, DIAS_MIN, type PerfilTreino } from '@/dominio/objetivo';
 import { LIMITE_TEXTO_LOCAL, validarHora, type DadosTour } from '@/dominio/tour';
@@ -37,6 +38,9 @@ export interface Estado {
   diario?: RegistroDiario[];
   /** v0.7: agenda de treinos (padrão da semana e datas). */
   agenda?: Agenda;
+  /** v0.8: treinadores a que a conta está vinculada (vem do servidor) e link de vínculo esperando o login. */
+  vinculos?: Vinculo[];
+  vinculoPendente?: string | null;
   /** v0.5: quando a pessoa exportou os dados pela última vez e quando adiou o lembrete de cópia. */
   ultimaExportacaoEm?: string | null;
   lembreteBackupAdiadoEm?: string | null;
@@ -136,6 +140,13 @@ export const acoes = {
     const reg = { ...r, atualizadoEm: agora() };
     return { ...e, rotinas: [...e.rotinas.filter((x) => x.id !== r.id), reg], fila: enfileirar(e.fila, { tabela: 'rotinas', registro: reg as never }) };
   },
+  /** v0.8: treinos do treinador vindos do servidor (troca o conjunto inteiro; não entra na fila de envio). */
+  receberTreinosDoTreinador: (e: Estado, vinculos: Vinculo[], treinos: TreinoAtribuido[]): Estado => {
+    const ids = new Set(todosExercicios(e).map((x) => x.id));
+    const r = aplicarTreinosDoTreinador(e, vinculos, treinos, (id) => ids.has(id), agora());
+    return { ...e, rotinas: r.rotinas, agenda: r.agenda, vinculos: r.vinculos };
+  },
+  guardarVinculoPendente: (e: Estado, codigo: string | null): Estado => ({ ...e, vinculoPendente: codigo }),
   /** v0.7: agenda. `repetir` grava como padrão do dia da semana. */
   planejarDia: (e: Estado, dia: string, valor: Planejado | null, repetir = false): Estado => ({ ...e, agenda: definirDia(e.agenda, dia, valor, repetir) }),
   /** v0.7: grava o treino do dia gerado pelo app. Só existe um: o anterior é trocado (ou excluído, se já foi usado num treino). */

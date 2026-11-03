@@ -165,6 +165,7 @@ export default function Treino() {
         return (
           <Cartao key={exId}>
             <Pressable accessibilityRole="button" onPress={() => router.push(`/exercicio/${exId}`)}><Texto v="titulo-3">{ex?.nome}</Texto></Pressable>
+            {p.alvo?.obs ? <Texto v="rotulo">📝 {p.alvo.obs}</Texto> : null}
             <DemonstracaoExercicio exercicioId={exId} nome={ex?.nome ?? 'exercício'} />
             <Texto v="rotulo" suave>{ult.length ? `Última vez: ${ult.map((s) => `${formatarKg(s.cargaKg)} kg × ${s.reps}`).join(' · ')}` : 'Primeira vez neste exercício'}</Texto>
             {(() => {
