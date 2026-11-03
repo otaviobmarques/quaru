@@ -41,8 +41,8 @@ export function FolhaApagar({ aberta, onFechar, onConfirmar }: { aberta: boolean
           style={{ backgroundColor: c.superficie, padding: 16, gap: 12, borderTopLeftRadius: 16, borderTopRightRadius: 16, width: '100%', maxWidth: 720, alignSelf: 'center' }}>
           <Texto v="titulo-3">{TEXTOS_APAGAR.titulo}</Texto>
           <Texto suave>{Platform.OS === 'web'
-            ? 'Todos os seus treinos, rotinas, pesos, água, altura, foto de perfil e consentimentos salvos NESTE navegador serão apagados. Os dados web ficam sem criptografia do aparelho; outros navegadores e o app no celular não são afetados. Não dá para desfazer.'
-            : 'Todos os seus treinos, rotinas, pesos, água, altura, foto de perfil e consentimentos serão apagados. Não dá para desfazer.'}</Texto>
+            ? 'Todos os seus treinos, histórico, pesos, água, altura, foto de perfil e consentimentos salvos NESTE navegador serão apagados. Os dados web ficam sem criptografia do aparelho; outros navegadores e o app no celular não são afetados. Não dá para desfazer.'
+            : 'Todos os seus treinos, histórico, pesos, água, altura, foto de perfil e consentimentos serão apagados. Não dá para desfazer.'}</Texto>
           <Aviso tom="secundaria" titulo={TEXTOS_APAGAR.copia} />
           {estado === 'erro' && <Aviso tom="erro" titulo={TEXTOS_APAGAR.erro} />}
           <Campo rotulo={TEXTOS_APAGAR.rotulo} value={confirma} onChangeText={setConfirma} placeholder={TEXTOS_APAGAR.exemplo}

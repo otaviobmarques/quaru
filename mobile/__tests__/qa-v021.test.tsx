@@ -96,7 +96,7 @@ describe('tela "Itens com erro" (fila.tsx)', () => {
   });
   it('corrigir: nome só com espaço de largura zero/NBSP fica desabilitado; nome válido some da lista de erros', async () => {
     await quadro(<Fila />, comErros());
-    const campo = screen.getByLabelText(/^Nome corrigido, Rotina/);
+    const campo = screen.getByLabelText(/^Nome corrigido, Treino/);
     await fireEvent.changeText(campo, '\u200b\u00a0');
     expect(screen.getByText(/sem ser só espaços/)).toBeTruthy();
     await fireEvent.changeText(campo, 'Treino A');

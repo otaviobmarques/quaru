@@ -1,6 +1,16 @@
 # Changelog
 Formato Keep a Changelog.
 
+## [0.7.0] – 2026-11-03
+### Adicionado
+- **Começar o treino de qualquer lugar**: cada treino em Meus treinos tem os botões Começar e Editar, e o editor tem "Começar este treino".
+- **Card Hoje no Início**, logo no topo: nome do treino, quantidade de exercícios, tempo estimado e os exercícios.
+- **Descanso calculado**: ao adicionar exercícios, o descanso entre séries é calculado pelo objetivo e pelo tipo de exercício (multiarticular descansa mais, isolado menos; alongamento e cardio, 30 s). Ao terminar um exercício, o cronômetro dá um descanso maior para a troca e mostra qual é o próximo.
+- **Recalcular descansos** no editor do treino, com o tempo estimado do treino.
+### Mudado
+- "Rotina" agora se chama **Treino** em todo o app (Novo treino, Editar treino, Meus treinos).
+- Ao adicionar um treino sugerido, o aviso leva direto para Meus treinos, onde o plano fica. O botão agora se chama "Adicionar aos meus treinos".
+
 ## [0.6.2] – 2026-11-02
 ### Corrigido
 - **Pré-visualização do link aparecia só no endereço principal.** Endereços como /quaru/entrar respondiam como "página não encontrada" (o GitHub Pages mostrava o app pela página de erro), e WhatsApp, Instagram e Facebook não montam pré-visualização nesse caso. Agora cada tela tem a sua página.

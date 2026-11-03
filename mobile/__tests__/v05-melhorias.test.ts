@@ -126,3 +126,31 @@ describe('compartilhar treino', () => {
     expect(textoCompartilharTreino({ nome: 'X', series: 1, volumeKg: '0', duracaoMin: null, recordes: [], sequencia: 1 })).not.toMatch(/Sequência|Recorde/);
   });
 });
+
+import { descansoEntreExercicios, descansoEntreSeries, ehMultiarticular, tempoEstimadoTreino } from '@/dominio/descanso';
+describe('descanso calculado (v0.7)', () => {
+  const multi = { categoria: 'força', musculosSecundarios: ['ombros', 'tríceps'] };
+  const iso = { categoria: 'força', musculosSecundarios: [] };
+  it('multiarticular descansa mais que isolado; sem objetivo, base 90 s', () => {
+    expect(ehMultiarticular(multi)).toBe(true);
+    expect(descansoEntreSeries(multi)).toBe(120);
+    expect(descansoEntreSeries(iso)).toBe(60);
+  });
+  it('objetivo muda a base: força 2 min (multi 2,5), condicionamento 60 s (iso 45 mínimo)', () => {
+    expect(descansoEntreSeries(multi, { objetivo: 'forca', nivel: 'intermediario', dias: 3 })).toBe(150);
+    expect(descansoEntreSeries(iso, { objetivo: 'condicionamento', nivel: 'iniciante', dias: 3 })).toBe(45);
+    expect(descansoEntreSeries(multi, { objetivo: 'forca', nivel: 'avancado', dias: 4 })).toBe(180); // teto de 3 min
+  });
+  it('alongamento e cardio: 30 s; entre exercícios: séries + 30 s, de 90 s a 3 min', () => {
+    expect(descansoEntreSeries({ categoria: 'alongamento' })).toBe(30);
+    expect(descansoEntreExercicios(60)).toBe(90);
+    expect(descansoEntreExercicios(120)).toBe(150);
+    expect(descansoEntreExercicios(180)).toBe(180);
+  });
+  it('tempo estimado do treino em múltiplos de 5 min', () => {
+    const item = (k: number) => ({ id: `i${k}`, exercicioId: 'e', ordem: k, seriesAlvo: 3, repsAlvo: 10, descansoS: 90 });
+    // por exercício: 3×10×3 = 90 s + 2×90 = 180 s; 8 exercícios + 7 trocas de 120 s → 2160 + 840 = 3000 s = 50 min
+    expect(tempoEstimadoTreino(Array.from({ length: 8 }, (_, k) => item(k)))).toBe(50);
+    expect(tempoEstimadoTreino([])).toBe(0);
+  });
+});

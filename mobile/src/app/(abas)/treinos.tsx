@@ -19,7 +19,7 @@ export default function Treinos() {
 export function TelaTreinos({ secao }: { secao: SecaoTreinos }) {
   const { area } = useLocalSearchParams<{ area?: string }>();
   return (
-    <Tela logo titulo="Treinos" rodape={secao === 'meus' ? <Botao grande titulo="Nova rotina" onPress={() => router.push('/rotina/nova')} testID="nova-rotina" /> : undefined}>
+    <Tela logo titulo="Treinos" rodape={secao === 'meus' ? <Botao grande titulo="Novo treino" onPress={() => router.push('/rotina/nova')} testID="nova-rotina" /> : undefined}>
       <Segmentado<SecaoTreinos> opcoes={SECOES_TREINOS} valor={secao} onChange={(v) => router.navigate(`/treinos?secao=${v}` as never)} />
       {secao === 'meus' ? <MeusTreinos /> : secao === 'sugeridos' ? <ConteudoSugeridos area0={area} /> : <HistoricoTreinos />}
     </Tela>

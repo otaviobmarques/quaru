@@ -103,7 +103,7 @@ export default function Perfil() {
       </Cartao>
       <Cartao>
         <Texto v="corpo-forte">Dados de exemplo</Texto>
-        <Texto v="rotulo" suave>Carrega rotinas, treinos e pesos FICTÍCIOS, marcados como exemplo, para conhecer o app.</Texto>
+        <Texto v="rotulo" suave>Carrega treinos, histórico e pesos FICTÍCIOS, marcados como exemplo, para conhecer o app.</Texto>
         {temExemplo(estado)
           ? <Botao v="secundario" titulo="Remover dados de exemplo" onPress={() => aplicar(acoes.removerExemplo)} />
           : <Botao v="secundario" titulo="Carregar dados de exemplo" onPress={() => aplicar((e) => acoes.carregarExemplo(e))} />}

@@ -14,7 +14,7 @@ const comEstado = async (ui: React.ReactElement, e = estadoInicial()) =>
 describe('telas', () => {
   it('Início sem rotinas mostra estado vazio e leva a criar rotina', async () => {
     await comEstado(<Inicio />);
-    expect(await screen.findByText('Você ainda não tem rotinas')).toBeTruthy();
+    expect(await screen.findByText('Você ainda não tem treinos')).toBeTruthy();
     await fireEvent.press(screen.getByTestId('criar-rotina'));
     expect(router.push).toHaveBeenCalledWith('/rotina/nova');
   });

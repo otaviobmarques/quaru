@@ -46,7 +46,7 @@ export function CartaoModelo({ m, onAdicionar, tem }: { m: Modelo; onAdicionar: 
         );
       })}
       {semOpcao && <Aviso tom="secundaria" titulo="Falta equipamento" texto={AVISO_SEM_ALTERNATIVA} />}
-      <Botao titulo={ad && ad.every((a) => !a.usar) ? 'Adicionar o treino original' : 'Adicionar ao meu plano'} onPress={onAdicionar} testID={`adicionar-${m.id}`} />
+      <Botao titulo={ad && ad.every((a) => !a.usar) ? 'Adicionar o treino original' : 'Adicionar aos meus treinos'} onPress={onAdicionar} testID={`adicionar-${m.id}`} />
     </Cartao>
   );
 }

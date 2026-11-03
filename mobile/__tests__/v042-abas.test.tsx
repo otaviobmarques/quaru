@@ -49,7 +49,7 @@ describe('aba Treinos', () => {
   });
   it('Meus treinos é o padrão, lista as rotinas e tem "Nova rotina"', async () => {
     await montar(<Treinos />);
-    expect(await screen.findByText('Nova rotina')).toBeTruthy();
+    expect(await screen.findByText('Novo treino')).toBeTruthy();
     expect(screen.getAllByText(/Treino A/).length).toBeGreaterThan(0);
     await fireEvent.press(screen.getByTestId('nova-rotina'));
     expect(router.push).toHaveBeenCalledWith('/rotina/nova');
@@ -63,7 +63,7 @@ describe('aba Treinos', () => {
     mockParams = { secao: 'sugeridos' };
     await montar(<Treinos />);
     expect(await screen.findByText('Antes de começar')).toBeTruthy();
-    expect(screen.queryByText('Nova rotina')).toBeNull();
+    expect(screen.queryByText('Novo treino')).toBeNull();
   });
   it('Histórico lista treinos finalizados e abre o resumo', async () => {
     mockParams = { secao: 'historico' };

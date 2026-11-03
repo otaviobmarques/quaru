@@ -1,6 +1,11 @@
 import { router } from 'expo-router';
 
-import { Botao, Cartao, EstadoVazio, Texto } from '@/componentes/ui';
+import { View } from 'react-native';
+
+import { Botao, Cartao, EstadoVazio, Selo, Texto } from '@/componentes/ui';
+import { tempoEstimadoTreino } from '@/dominio/descanso';
+import { proximaRotina } from '@/dominio/treino-de-hoje';
+import { iniciarTreino } from '@/estado/treino';
 import { CalendarioTreinos } from '@/componentes/calendario';
 import { GraficoColunas } from '@/componentes/graficos';
 import { dataLonga, metricasPorSessao, volumePorSemana } from '@/dominio/consultas';
@@ -9,18 +14,29 @@ import { todosExercicios, useEstado } from '@/estado/armazem';
 
 /** Seção "Meus treinos" da aba Treinos (antes a aba Rotinas). */
 export function MeusTreinos() {
-  const { estado } = useEstado();
+  const { estado, aplicar } = useEstado();
   const ex = new Map(todosExercicios(estado).map((e) => [e.id, e.nome]));
+  const ativa = estado.sessoes.find((x) => !x.finalizadaEm && !x.excluidoEm);
   const lista = estado.rotinas.filter((r) => !r.excluidoEm).toSorted((a, b) => a.ordem - b.ordem);
   return (
     <>
-      {lista.length === 0 && <EstadoVazio titulo="Nenhuma rotina" texto="Monte rotinas como Treino A, B e C. O Início sugere a próxima da sequência." />}
-      {lista.map((r) => (
-        <Cartao key={r.id} onPress={() => router.push(`/rotina/${r.id}`)}>
-          <Texto v="titulo-3">{r.nome}</Texto>
-          <Texto v="rotulo" suave>{r.itens.map((i) => ex.get(i.exercicioId)).join(' · ') || 'Sem exercícios'}</Texto>
-        </Cartao>
-      ))}
+      {lista.length === 0 && <EstadoVazio titulo="Nenhum treino ainda" texto="Monte treinos como Treino A, B e C, ou adicione um sugerido. O Início sugere o próximo da sequência." />}
+      {lista.map((r) => {
+        const proximo = proximaRotina(estado.rotinas, estado.sessoes)?.id === r.id;
+        const min = tempoEstimadoTreino(r.itens);
+        return (
+          <Cartao key={r.id} destaque={proximo}>
+            {proximo && <Selo texto="Próximo da sequência" tom="primaria" />}
+            <Texto v="titulo-3">{r.nome}</Texto>
+            <Texto v="rotulo" suave>{r.itens.length} {r.itens.length === 1 ? 'exercício' : 'exercícios'}{min ? ` · ~${min} min` : ''}</Texto>
+            <Texto v="rotulo" suave numberOfLines={2}>{r.itens.toSorted((a, b) => a.ordem - b.ordem).map((i) => ex.get(i.exercicioId)).join(' · ') || 'Sem exercícios'}</Texto>
+            <View style={{ flexDirection: 'row', gap: 8, marginTop: 4 }}>
+              <Botao flex titulo={ativa ? (ativa.rotinaId === r.id ? 'Continuar' : 'Treino em andamento') : 'Começar'} onPress={() => iniciarTreino(aplicar, estado, r.id)} desabilitado={r.itens.length === 0 || (!!ativa && ativa.rotinaId !== r.id)} testID={`comecar-${r.id}`} />
+              <Botao flex v="secundario" titulo="Editar" onPress={() => router.push(`/rotina/${r.id}`)} testID={`editar-${r.id}`} />
+            </View>
+          </Cartao>
+        );
+      })}
       <Cartao onPress={() => router.push('/biblioteca')}>
         <Texto v="titulo-3">Biblioteca de exercícios</Texto>
         <Texto v="rotulo" suave>Veja todos os exercícios e como fazer cada um.</Texto>

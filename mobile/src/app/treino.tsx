@@ -8,6 +8,8 @@ import { Aviso, Botao, Cartao, Selo, Tela, Texto } from '@/componentes/ui';
 import { seriesDaSessao } from '@/dominio/consultas';
 import { ehRecorde, formatarKg, lerNumero, ultimaVez } from '@/dominio/metricas';
 import { AVISO_PROGRESSAO, sugerirProgressao } from '@/dominio/progressao';
+import { descansoEntreExercicios, descansoEntreSeries } from '@/dominio/descanso';
+import { doCatalogo } from '@/dominio/biblioteca';
 import type { Serie, TipoSerie } from '@/dominio/tipos';
 import { acoes, todosExercicios, useEstado } from '@/estado/armazem';
 import { novoId } from '@/servicos/id';
@@ -27,7 +29,7 @@ export default function Treino() {
   const contorno = useContornoInterno();
   const sessao = estado.sessoes.find((s) => !s.finalizadaEm && !s.excluidoEm);
   const [rascunho, setRascunho] = useState<Record<string, { kg: string; reps: string; tipo: TipoSerie }>>({});
-  const [descanso, setDescanso] = useState<{ fim: number; exercicio: string } | null>(null);
+  const [descanso, setDescanso] = useState<{ fim: number; exercicio: string; troca?: boolean } | null>(null);
   const [agora, setAgora] = useState(agoraMs);
   const [pedirAviso, setPedirAviso] = useState(false);
   const [erroSerie, setErroSerie] = useState<string | null>(null);
@@ -65,9 +67,16 @@ export default function Treino() {
     try { acoes.salvarSerie(estado, nova); } catch (err) { setErroSerie(mensagemRecusa((err as Error).message)); return; }
     setRecorde(ehRecorde(nova, estado.series) ? `${exs.get(exId)?.nome}: ${formatarKg(carga)} kg × ${reps}` : null);
     aplicar((e) => acoes.salvarSerie(e, nova));
-    const seg = rotina?.itens.find((i) => i.exercicioId === exId)?.descansoS ?? 90;
-    const nome = exs.get(exId)?.nome ?? 'exercício';
-    const t0 = agoraMs(); setDescanso({ fim: t0 + seg * 1000, exercicio: nome }); setAgora(t0);
+    // v0.7: descanso calculado. Terminou todas as séries do exercício? Descanso de troca e o nome do próximo.
+    const item = rotina?.itens.find((i) => i.exercicioId === exId);
+    const entreSeries = item?.descansoS ?? descansoEntreSeries(doCatalogo(exId), estado.perfil?.treino);
+    const totalSeries = Math.max(item?.seriesAlvo ?? 1, ...feitas.filter((x) => x.exercicioId === exId).map((x) => x.ordem)) + (mais[exId] ?? 0);
+    const feitasDoEx = new Set(feitas.filter((x) => x.exercicioId === exId && x.concluidaEm).map((x) => x.ordem)); feitasDoEx.add(ordem);
+    const proximoId = feitasDoEx.size >= totalSeries ? ids[ids.indexOf(exId) + 1] : undefined;
+    const troca = !!proximoId;
+    const seg = troca ? descansoEntreExercicios(entreSeries) : entreSeries;
+    const nome = exs.get(troca ? proximoId! : exId)?.nome ?? 'exercício';
+    const t0 = agoraMs(); setDescanso({ fim: t0 + seg * 1000, exercicio: nome, troca }); setAgora(t0);
     if (Platform.OS === 'web') { /* web: sem notificações; som + vibração com a página aberta (ADR-0013) */ }
     else if (estado.permissaoNotificacao === 'nao_pedida') setPedirAviso(true);
     else if (estado.permissaoNotificacao === 'concedida') await agendarFimDescanso(seg, nome);
@@ -108,10 +117,11 @@ export default function Treino() {
       {descanso && (
         <View accessibilityRole="timer" style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <Botao v="secundario" titulo="−15 s" onPress={() => ajustar(-15)} />
-          <View style={{ flex: 1, alignItems: 'center' }}><Texto v="legenda" suave>DESCANSO</Texto><Texto v="titulo-2">{restante === 0 ? 'Pronto!' : `${Math.floor(restante / 60)}:${String(restante % 60).padStart(2, '0')}`}</Texto></View>
+          <View style={{ flex: 1, alignItems: 'center' }}><Texto v="legenda" suave>{descanso.troca ? 'TROCA DE EXERCÍCIO' : 'DESCANSO'}</Texto><Texto v="titulo-2">{restante === 0 ? 'Pronto!' : `${Math.floor(restante / 60)}:${String(restante % 60).padStart(2, '0')}`}</Texto></View>
           <Botao v="secundario" titulo="+15 s" onPress={() => ajustar(15)} />
         </View>
       )}
+      {descanso && <Texto v="rotulo" suave style={{ textAlign: 'center' }} >{descanso.troca ? `Próximo: ${descanso.exercicio}` : `Próxima série: ${descanso.exercicio}`}</Texto>}
       {descanso && <Botao v="texto" titulo="Pular descanso" onPress={pular} />}
       {confirmarFim ? (
         <View style={{ gap: 8 }}>

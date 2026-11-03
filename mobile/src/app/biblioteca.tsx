@@ -3,11 +3,13 @@ import { useDeferredValue, useMemo, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
 import { Botao, Campo, EstadoVazio, FaixaFichas, Ficha, ItemLista, Tela, Texto } from '@/componentes/ui';
-import { AREAS, EQUIPAMENTOS, filtrarExercicios, GRUPOS, type Area } from '@/dominio/biblioteca';
+import { AREAS, EQUIPAMENTOS, filtrarExercicios, GRUPOS, type Area, doCatalogo } from '@/dominio/biblioteca';
 import { midiaDoExercicio } from '@/dominio/midia-exercicios';
 import type { Exercicio } from '@/dominio/tipos';
 import { acoes, todosExercicios, useEstado } from '@/estado/armazem';
 import { novoId } from '@/servicos/id';
+import { descansoEntreSeries } from '@/dominio/descanso';
+import { REGRAS } from '@/dominio/objetivo';
 import { useCores } from '@/tema/tema';
 
 export const ALTURA_ITEM = 72;
@@ -33,7 +35,10 @@ export default function Biblioteca() {
   const adicionar = () => {
     if (!rotina) return;
     const base = rotina.itens.length;
-    aplicar((e) => acoes.salvarRotina(e, { ...rotina, itens: [...rotina.itens, ...sel.map((x, i) => ({ id: novoId(), exercicioId: x, ordem: base + i, seriesAlvo: 3, repsAlvo: 10, descansoS: 90 }))] }));
+    // v0.7: repetições pelo objetivo e descanso calculado pelo tipo de exercício (dominio/descanso.ts).
+    const t = estado.perfil?.treino;
+    const reps = t ? REGRAS[t.objetivo].reps : 10;
+    aplicar((e) => acoes.salvarRotina(e, { ...rotina, itens: [...rotina.itens, ...sel.map((x, i) => ({ id: novoId(), exercicioId: x, ordem: base + i, seriesAlvo: 3, repsAlvo: reps, descansoS: descansoEntreSeries(doCatalogo(x), t) }))] }));
     router.back();
   };
   const item = ({ item: e, index }: { item: Exercicio; index: number }) => (
@@ -43,7 +48,7 @@ export default function Biblioteca() {
     </View>
   );
   return (
-    <Tela semRolagem titulo="Biblioteca de exercícios" voltar={router.back} rodape={rotina ? <Botao grande titulo={`Adicionar ${sel.length || ''} à rotina`} desabilitado={!sel.length} onPress={adicionar} /> : undefined}>
+    <Tela semRolagem titulo="Biblioteca de exercícios" voltar={router.back} rodape={rotina ? <Botao grande titulo={`Adicionar ${sel.length || ''} ao treino`} desabilitado={!sel.length} onPress={adicionar} /> : undefined}>
       <Campo testID="busca-biblioteca" rotulo="Buscar" value={busca} onChangeText={setBusca} placeholder="Ex.: supino, agachamento, rosca" />
       <FaixaFichas rolar>{AREAS.map((a) => <Ficha key={a.id} texto={a.nome} ativa={area === a.id} onPress={() => setArea(area === a.id ? null : a.id)} />)}</FaixaFichas>
       <FaixaFichas rolar>{GRUPOS.map((g) => <Ficha key={g} texto={g} ativa={grupo === g} onPress={() => setGrupo(grupo === g ? null : g)} />)}</FaixaFichas>

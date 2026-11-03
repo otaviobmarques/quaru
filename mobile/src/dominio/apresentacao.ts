@@ -5,7 +5,7 @@ export interface PassoApresentacao { ilustracao: NomeIlustracao; titulo: string;
 
 export const PASSOS: readonly PassoApresentacao[] = [
   { ilustracao: 'boas-vindas', titulo: 'Bem-vindo ao Quaru', texto: 'Seu caderno de treinos no bolso. Funciona sem internet e os dados ficam neste aparelho.', descricao: 'Ilustração de um halter com brilhos' },
-  { ilustracao: 'rotinas', titulo: 'Monte ou escolha seu treino', texto: 'Crie rotinas como Treino A, B e C. O Quaru sugere a próxima da sequência a cada dia.', descricao: 'Ilustração de três cartões de treino, A, B e C, com o B em destaque' },
+  { ilustracao: 'rotinas', titulo: 'Monte ou escolha seu treino', texto: 'Crie treinos como Treino A, B e C. O Quaru sugere o próximo da sequência a cada dia.', descricao: 'Ilustração de três cartões de treino, A, B e C, com o B em destaque' },
   { ilustracao: 'series', titulo: 'Registre séries e descanso', texto: 'Anote carga e repetições de cada série. O cronômetro de descanso avisa quando voltar.', descricao: 'Ilustração de uma lista de séries marcadas como feitas e um cronômetro' },
   { ilustracao: 'evolucao', titulo: 'Acompanhe sua evolução', texto: 'Veja o histórico, os recordes e o seu peso ao longo do tempo.', descricao: 'Ilustração de um gráfico de barras subindo e um troféu' },
 ];
@@ -22,7 +22,7 @@ export const PASSOS_TOUR: readonly PassoTour[] = [
   { id: 'experiencia', titulo: 'Há quanto tempo você treina?', texto: 'Ajuda a começar no ritmo certo.', pergunta: true },
   { id: 'tempo-local', titulo: 'Tempo e lugar', texto: 'Quanto tempo você tem por treino e onde costuma treinar.', pergunta: true },
   { id: 'equipamentos', titulo: 'Seus equipamentos', texto: 'Marque o que você tem onde treina. Assim sugerimos treinos que dá para fazer.', pergunta: true },
-  { id: 'treinos', area: 'Treinos', titulo: 'Treinos: rotinas e sugestões', texto: 'Monte suas rotinas ou use um treino sugerido com um toque. Durante o treino, registre séries e descanso.', pergunta: false, ilustracao: 'rotinas', descricao: PASSOS[1].descricao },
+  { id: 'treinos', area: 'Treinos', titulo: 'Treinos: os seus e os sugeridos', texto: 'Monte seus treinos ou use um treino sugerido com um toque. Durante o treino, registre séries e descanso.', pergunta: false, ilustracao: 'rotinas', descricao: PASSOS[1].descricao },
   { id: 'areas', titulo: 'Áreas de foco', texto: 'Quer dar atenção a alguma parte do corpo? Pode escolher mais de uma.', pergunta: true },
   { id: 'restricoes', titulo: 'Alguma dor ou lesão?', texto: 'Opcional. É dado de saúde e fica só neste aparelho.', pergunta: true },
   { id: 'medidas', titulo: 'Altura e peso', texto: 'Opcional. Servem para o IMC e para a meta de água. Ficam só neste aparelho.', pergunta: true },
@@ -34,7 +34,7 @@ export const PASSOS_TOUR: readonly PassoTour[] = [
 
 /** Lista "Comece aqui" do Início sem treino. */
 export const COMECE_AQUI = [
-  { titulo: 'Crie sua primeira rotina', texto: 'Dê um nome, como Treino A, e escolha os exercícios.' },
+  { titulo: 'Monte seu primeiro treino', texto: 'Dê um nome, como Treino A, e escolha os exercícios.' },
   { titulo: 'Inicie o treino', texto: 'Toque em "Iniciar treino" no Início quando chegar na academia.' },
   { titulo: 'Registre cada série', texto: 'Carga, repetições e descanso. O resumo aparece no fim.' },
 ] as const;
