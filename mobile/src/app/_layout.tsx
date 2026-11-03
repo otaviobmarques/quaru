@@ -9,6 +9,7 @@ import { ProvedorSessao, useSessao } from '@/estado/sessao';
 import { planoLembretes } from '@/dominio/lembretes';
 import { diaLocal } from '@/dominio/treino-de-hoje';
 import { agendarLembretes } from '@/servicos/notificacoes';
+import { chaveAniversario, enviarAniversario } from '@/servicos/aniversario';
 import { buscarDoTreinador } from '@/servicos/treinador';
 import { ARQUIVOS_FONTES } from '@/tema/fontes';
 import { useFonts } from 'expo-font';
@@ -62,6 +63,21 @@ function SincronizarTreinador() {
   return null;
 }
 
+/** v0.9: leva o aniversário para o perfil no servidor quando muda (ou na próxima abertura, se estava sem rede). */
+function SincronizarAniversario() {
+  const s = useSessao();
+  const { estado, pronto, aplicar } = useEstado();
+  const logado = s.modo === 'conta' && !!s.usuario && !!s.acesso?.ativo;
+  const a = estado.perfil?.aniversario ?? null;
+  const chave = chaveAniversario(a);
+  const enviado = estado.aniversarioEnviado ?? (a ? null : '-'); // nunca informado: nada a enviar
+  useEffect(() => {
+    if (!logado || !pronto || enviado === chave) return;
+    enviarAniversario(a).then((ok) => { if (ok) aplicar((e) => acoes.marcarAniversarioEnviado(e, chave)); }).catch(() => { /* sem rede */ });
+  }, [logado, pronto, chave, enviado]); // eslint-disable-line react-hooks/exhaustive-deps
+  return null;
+}
+
 function SementeDev() {
   const { aplicar, pronto } = useEstado();
   useEffect(() => {
@@ -98,6 +114,7 @@ export default function Layout() {
         <Lembretes />
         <GuardaConta />
         <SincronizarTreinador />
+        <SincronizarAniversario />
         <Stack screenOptions={{ headerShown: false }} />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>

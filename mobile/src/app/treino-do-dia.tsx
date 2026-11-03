@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { DemonstracaoExercicio } from '@/componentes/demonstracao-exercicio';
-import { Aviso, Botao, Cartao, Selo, Tela, Texto, Toast } from '@/componentes/ui';
+import { Aviso, Botao, Cartao, Selo, Tela, Texto } from '@/componentes/ui';
 import { equipamentosDoPerfil } from '@/dominio/equipamentos';
 import { AVISO_RESTRICAO } from '@/dominio/tour';
 import { comoItensRotina, gerarTreinoDoDia } from '@/dominio/treino-do-dia';
 import { AVISO_TREINO } from '@/dominio/treinos-sugeridos';
 import { acoes, useEstado } from '@/estado/armazem';
 import { iniciarTreino } from '@/estado/treino';
+import { DepoisDeAdicionar } from '@/componentes/treinos/depois-de-adicionar';
 import { novoId } from '@/servicos/id';
 
 const tempo = (s: number) => (s >= 60 ? `${Math.floor(s / 60)} min${s % 60 ? ` ${s % 60} s` : ''}` : `${s} s`);
@@ -22,7 +23,7 @@ const tempo = (s: number) => (s >= 60 ? `${Math.floor(s / 60)} min${s % 60 ? ` $
 export default function TreinoDoDia() {
   const { estado, aplicar } = useEstado();
   const [variacao, setVariacao] = useState(0);
-  const [salvo, setSalvo] = useState<string | null>(null);
+  const [salvo, setSalvo] = useState<{ id: string; nome: string } | null>(null);
   const [agora] = useState(() => new Date().toISOString());
   const p = estado.perfil;
   const t = gerarTreinoDoDia({ treino: p?.treino, tem: equipamentosDoPerfil(p), tempoMin: p?.tempoTreinoMin, restricoes: p?.restricoes ?? [],
@@ -39,7 +40,7 @@ export default function TreinoDoDia() {
     const dia = new Date(agora).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     const r = montar(`${t.titulo.replace('Treino do dia · ', '')} (${dia})`);
     aplicar((e) => acoes.salvarRotina(e, r));
-    setSalvo(r.nome);
+    setSalvo({ id: r.id, nome: r.nome });
   };
   return (
     <Tela titulo="Treino do dia" voltar={router.back} rodape={
@@ -78,7 +79,7 @@ export default function TreinoDoDia() {
       ))}
       {t.itens.length === 0 && <Aviso tom="alerta" titulo="Não deu para montar um treino" texto="Com o equipamento e as restrições informadas, faltaram opções. Ajuste em Perfil → Meus dados." />}
       <Aviso tom="alerta" titulo="Antes de começar" texto={AVISO_TREINO} />
-      {salvo && <Toast fixo texto={`“${salvo}” foi para Meus treinos.`} acao="Ver" onAcao={() => router.navigate('/treinos?secao=meus' as never)} onFim={() => setSalvo(null)} />}
+      {salvo && <Cartao destaque><DepoisDeAdicionar rotinaId={salvo.id} nome={salvo.nome} /></Cartao>}
     </Tela>
   );
 }

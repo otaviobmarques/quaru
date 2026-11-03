@@ -10,31 +10,38 @@ import { novoId } from '@/servicos/id';
 import { doCatalogo } from '@/dominio/biblioteca';
 import { descansoEntreSeries, tempoEstimadoTreino } from '@/dominio/descanso';
 import { iniciarTreino } from '@/estado/treino';
+import { DepoisDeAdicionar } from '@/componentes/treinos/depois-de-adicionar';
 
 /** Tela 4b – Editar treino (rotina no código). "nova" cria a rotina e redireciona para o id real. */
 export default function EditarRotina() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, nova: ehNova } = useLocalSearchParams<{ id: string; nova?: string }>();
   const { estado, aplicar } = useEstado();
   const rotina = estado.rotinas.find((r) => r.id === id);
   useEffect(() => {
     if (id !== 'nova') return;
     const nova = { id: novoId(), nome: `Treino ${String.fromCharCode(65 + estado.rotinas.filter((r) => !r.excluidoEm).length)}`, ordem: estado.rotinas.length + 1, itens: [], atualizadoEm: new Date().toISOString() };
     aplicar((e) => acoes.salvarRotina(e, nova));
-    router.replace(`/rotina/${nova.id}`);
+    router.replace(`/rotina/${nova.id}?nova=1` as never);
   }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!rotina) return <Tela voltar={router.back}><Texto suave>Carregando…</Texto></Tela>;
-  return <Editor key={rotina.id} rotina={rotina} />;
+  return <Editor key={rotina.id} rotina={rotina} nova={ehNova === '1'} />;
 }
 
-function Editor({ rotina }: { rotina: Rotina }) {
+function Editor({ rotina, nova }: { rotina: Rotina; nova?: boolean }) {
   const { estado, aplicar } = useEstado();
+  const [perguntarDia, setPerguntarDia] = useState(false);
   const [nome, setNome] = useState(rotina.nome);
   const [removido, setRemovido] = useState<{ item: ItemRotina; nome: string } | null>(null);
   const ex = new Map(todosExercicios(estado).map((e) => [e.id, e]));
   const itens = rotina.itens.toSorted((a, b) => a.ordem - b.ordem);
   const salvarItens = (l: ItemRotina[]) => aplicar((e) => acoes.salvarRotina(e, { ...rotina, nome: nome.trim() || rotina.nome, itens: l.map((x, i) => ({ ...x, ordem: i })) }));
   const mover = (i: number, d: number) => { const l = [...itens]; const j = i + d; if (j < 0 || j >= l.length) return; [l[i], l[j]] = [l[j], l[i]]; salvarItens(l); };
-  const salvar = () => { aplicar((e) => acoes.salvarRotina(e, { ...rotina, nome: nome.trim().slice(0, 60) || rotina.nome })); router.back(); };
+  // v0.9: treino novo, com exercícios e fora da agenda? Ao salvar, pergunta para qual dia (Hoje, Amanhã, Escolher).
+  const naAgenda = Object.values(estado.agenda?.dias ?? {}).includes(rotina.id) || Object.values(estado.agenda?.semana ?? {}).includes(rotina.id);
+  const salvar = () => {
+    aplicar((e) => acoes.salvarRotina(e, { ...rotina, nome: nome.trim().slice(0, 60) || rotina.nome }));
+    if (nova && itens.length > 0 && !naAgenda) setPerguntarDia(true); else router.back();
+  };
   // v0.7: começar direto daqui (salva o nome antes) e recalcular os descansos pelo tipo de exercício e objetivo.
   const comecar = () => { aplicar((e) => acoes.salvarRotina(e, { ...rotina, nome: nome.trim().slice(0, 60) || rotina.nome })); iniciarTreino(aplicar, estado, rotina.id); };
   const recalcular = () => salvarItens(itens.map((i) => ({ ...i, descansoS: descansoEntreSeries(doCatalogo(i.exercicioId), estado.perfil?.treino) })));
@@ -68,8 +75,9 @@ function Editor({ rotina }: { rotina: Rotina }) {
     );
   }
   return (
-    <Tela titulo="Editar treino" voltar={router.back} rodape={
-      <View style={{ flexDirection: 'row', gap: 12 }}>
+    <Tela titulo={nova ? 'Novo treino' : 'Editar treino'} voltar={router.back} rodape={perguntarDia
+      ? <DepoisDeAdicionar rotinaId={rotina.id} nome={nome.trim() || rotina.nome} aoConcluir={() => router.back()} />
+      : <View style={{ flexDirection: 'row', gap: 12 }}>
         <Botao flex v="secundario" titulo="Salvar" onPress={salvar} testID="salvar-treino" />
         <Botao flex grande titulo={ativa ? 'Continuar treino' : 'Começar este treino'} onPress={comecar} desabilitado={itens.length === 0 || (!!ativa && ativa.rotinaId !== rotina.id)} testID="comecar-treino" />
       </View>}>

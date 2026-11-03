@@ -1,3 +1,4 @@
+import type { Aniversario } from './aniversario';
 import { equipamentosPadrao, itensCompativeis, type Equipamento } from './equipamentos';
 import type { IdDieta } from './dietas';
 import { recomendar, type PerfilTreino } from './objetivo';
@@ -53,6 +54,8 @@ export interface DadosTour {
   restricoes?: Restricao[] | null; prefAlimentar?: PrefAlimentar | null; lembretes?: Lembretes | null; cidade?: string | null; bairro?: string | null;
   /** v0.4.3: equipamentos no lugar de treino. null = ainda não respondido (usa o padrão do local). */
   equipamentos?: Equipamento[] | null;
+  /** v0.9: aniversário (dia e mês; ano opcional), para o Quaru dar parabéns. */
+  aniversario?: Aniversario | null;
 }
 export interface Recomendacao { modelos: (Modelo & { cabeNoTempo: boolean })[]; avisos: string[] }
 

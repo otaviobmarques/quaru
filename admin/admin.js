@@ -59,7 +59,8 @@ if (!configurado) {
     corpo.replaceChildren();
     if (!lista.length) { corpo.append(el('tr', {}, el('td', { colSpan: 5, textContent: q ? 'Ninguém encontrado.' : 'Nenhum usuário ainda.' }))); return; }
     for (const u of lista) {
-      const quem = el('td', {}, el('div', { className: 'email', textContent: u.email }), ...(u.nome ? [el('div', { className: 'nome', textContent: u.nome })] : []));
+      const quem = el('td', {}, el('div', { className: 'email', textContent: u.email }), ...(u.nome ? [el('div', { className: 'nome', textContent: u.nome })] : []),
+        ...(u.aniversario ? [el('div', { className: 'nome', textContent: `🎂 ${u.aniversario}` })] : []));
       const NOMES_PAPEL = { admin: 'Admin', treinador: 'Treinador', usuario: 'Usuário' };
       let papel;
       if (u.eu) papel = el('td', {}, el('span', { className: 'selo', textContent: NOMES_PAPEL[u.papel].toUpperCase() }));

@@ -219,7 +219,7 @@ describe('treinos sugeridos', () => {
     expect(ultimo.rotinas[0].nome).toBe('Inferiores (iniciante)');
     // v0.8.1: o cartão pergunta "Começar agora" ou "Agendar"; agendar põe o treino na agenda na data escolhida.
     const id = ultimo.rotinas[0].id;
-    expect(screen.getByText(/está em Meus treinos\. E agora\?/)).toBeTruthy();
+    expect(screen.getByText(/está em Meus treinos\. Para qual dia\?/)).toBeTruthy();
     expect(screen.getByTestId(`comecar-agora-${id}`)).toBeTruthy();
     await fireEvent.press(screen.getByTestId(`agendar-botao-${id}`));
     await fireEvent.press(screen.getByText('Amanhã'));

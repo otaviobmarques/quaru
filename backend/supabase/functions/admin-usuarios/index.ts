@@ -41,9 +41,9 @@ Deno.serve(async (req) => {
   if (erroQuem || !quem?.user) return resposta(origem, 401, { erro: 'Sessão expirada. Entre de novo.' });
 
   // 2) É administrador ativo?
-  const { data: perfisDb, error: erroPerfis } = await admin.from('perfis').select('usuario_id, papel, ativo, nome, criado_em');
+  const { data: perfisDb, error: erroPerfis } = await admin.from('perfis').select('usuario_id, papel, ativo, nome, criado_em, aniversario_dia, aniversario_mes');
   if (erroPerfis) return resposta(origem, 500, { erro: 'Não foi possível ler os perfis.' });
-  const perfis = (perfisDb ?? []) as (PerfilResumo & { nome: string | null; criado_em: string })[];
+  const perfis = (perfisDb ?? []) as (PerfilResumo & { nome: string | null; criado_em: string; aniversario_dia: number | null; aniversario_mes: number | null })[];
   const eu = perfis.find((p) => p.usuario_id === quem.user.id);
   if (!eu || !eu.ativo || (eu.papel !== 'admin' && eu.papel !== 'treinador')) return resposta(origem, 403, { erro: 'Só administradores podem fazer isso.' });
 
@@ -77,7 +77,8 @@ Deno.serve(async (req) => {
         }
         const lista = usuarios.map((u) => {
           const pf = perfis.find((x) => x.usuario_id === u.id);
-          return { id: u.id, email: u.email ?? '', nome: pf?.nome ?? null, papel: pf?.papel ?? 'usuario', ativo: pf?.ativo ?? false,
+          const aniv = pf?.aniversario_dia && pf?.aniversario_mes ? `${String(pf.aniversario_dia).padStart(2, '0')}/${String(pf.aniversario_mes).padStart(2, '0')}` : null; // v0.9: só dia e mês
+          return { id: u.id, email: u.email ?? '', nome: pf?.nome ?? null, aniversario: aniv, papel: pf?.papel ?? 'usuario', ativo: pf?.ativo ?? false,
             criado_em: u.created_at, ultimo_acesso: u.last_sign_in_at ?? null, convite_pendente: !u.email_confirmed_at && !u.last_sign_in_at, eu: u.id === eu.usuario_id };
         }).sort((a, b) => a.email.localeCompare(b.email));
         return resposta(origem, 200, { usuarios: lista });

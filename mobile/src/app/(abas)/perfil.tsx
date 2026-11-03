@@ -2,7 +2,8 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Platform, View } from 'react-native';
 
-import { Aviso, Botao, Campo, Cartao, ItemLista, Tela, Texto } from '@/componentes/ui';
+import { Aviso, Botao, Campo, Cartao, Chave, ItemLista, Tela, Texto } from '@/componentes/ui';
+import { formatarAniversario } from '@/dominio/aniversario';
 import { acoes, temExemplo, temSaude, useEstado } from '@/estado/armazem';
 import { useSessao } from '@/estado/sessao';
 import { buscarDoTreinador, desvincularTreinador } from '@/servicos/treinador';
@@ -93,6 +94,13 @@ export default function Perfil() {
           </View>
         ) : <Texto v="rotulo" suave>{estado.perfil?.alturaCm ? 'Registre um peso para ver o IMC.' : 'Informe a altura e registre um peso para ver o IMC.'}</Texto>}
         <Aviso tom="secundaria" titulo="Sobre o IMC" texto={AVISO_IMC} />
+      </Cartao>
+      {/* v0.9: aniversário e mascote do Início */}
+      <Cartao>
+        <Texto v="corpo-forte">Aniversário</Texto>
+        <Texto v="rotulo" suave>{estado.perfil?.aniversario ? `${formatarAniversario(estado.perfil.aniversario)} · o Quaru te dá parabéns no dia.` : 'Ainda não informado. Conta para o Quaru te dar parabéns no dia.'}</Texto>
+        <Botao v="texto" titulo={estado.perfil?.aniversario ? 'Mudar o aniversário' : 'Informar o aniversário'} onPress={() => router.push('/meus-dados')} testID="perfil-aniversario" />
+        <Chave rotulo="Mascote no Início" valor={!estado.mascote?.desligado} onChange={(v) => aplicar((e) => acoes.ligarMascote(e, v))} testID="chave-mascote" />
       </Cartao>
       {sessao.modo === 'conta' && sessao.usuario
         ? <Texto suave>Conta: {sessao.usuario.email}{sessao.acesso?.papel === 'admin' ? ' · administrador' : ''} · treinos guardados {Platform.OS === 'web' ? 'neste navegador' : 'neste aparelho'}</Texto>

@@ -43,3 +43,27 @@ export function datasDaSemana(dia: string, deslocamento = 0): string[] {
 }
 
 export const hoje = (agora: string | Date = new Date()) => diaLocal(typeof agora === 'string' ? agora : agora.toISOString());
+
+/** As próximas `n` datas a partir de `inicio` (AAAA-MM-DD), inclusive. */
+export function proximasDatas(inicio: string, n = 14): string[] {
+  const d = new Date(`${inicio}T12:00:00Z`);
+  return Array.from({ length: n }, (_, i) => { const x = new Date(d); x.setUTCDate(d.getUTCDate() + i); return x.toISOString().slice(0, 10); });
+}
+export const amanhaDe = (dia: string) => proximasDatas(dia, 2)[1];
+
+/** "Hoje", "Amanhã" ou "Qua 05/11". */
+export function rotuloData(dia: string, hojeDia: string): string {
+  if (dia === hojeDia) return 'Hoje';
+  if (dia === amanhaDe(hojeDia)) return 'Amanhã';
+  return `${SIGLAS_DIA[diaDaSemana(dia)]} ${dia.slice(8, 10)}/${dia.slice(5, 7)}`;
+}
+
+/**
+ * v0.9: reagendar o treino de uma data para outra. Só aquela data muda: se o treino vinha do padrão
+ * da semana ("toda terça"), a terça de `de` fica livre e as outras terças continuam com o treino.
+ * Se `para` já tinha outro treino, ele é trocado.
+ */
+export function reagendar(a: Agenda | undefined, de: string, para: string, id: string): Agenda {
+  if (de === para) return a ?? agendaVazia();
+  return definirDia(definirDia(a, de, null), para, id);
+}

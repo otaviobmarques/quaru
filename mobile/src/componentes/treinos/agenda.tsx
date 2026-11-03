@@ -2,8 +2,9 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, Switch, Text, View } from 'react-native';
 
-import { Botao, Cartao, Ficha, Segmentado, Selo, Texto } from '@/componentes/ui';
-import { datasDaSemana, diaDaSemana, hoje, NOMES_DIA, planejadoPara, SIGLAS_DIA, type Planejado } from '@/dominio/agenda';
+import { Botao, Cartao, Ficha, Segmentado, Selo, Texto, Toast } from '@/componentes/ui';
+import { datasDaSemana, diaDaSemana, hoje, NOMES_DIA, planejadoPara, rotuloData, SIGLAS_DIA, type Planejado } from '@/dominio/agenda';
+import { SeletorDia } from '@/componentes/treinos/seletor-dia';
 import { diasTreinados } from '@/dominio/treino-de-hoje';
 import { acoes, useEstado } from '@/estado/armazem';
 import { iniciarTreino } from '@/estado/treino';
@@ -27,6 +28,8 @@ export function AgendaTreinos() {
   const hojeDia = hoje();
   const [mes, setMes] = useState(() => ({ a: +hojeDia.slice(0, 4), m: +hojeDia.slice(5, 7) - 1 }));
   const [sel, setSel] = useState<string | null>(hojeDia);
+  const [mover, setMover] = useState<{ de: string; para: string | null } | null>(null);
+  const [movido, setMovido] = useState<string | null>(null);
   const treinos = estado.rotinas.filter((r) => !r.excluidoEm).toSorted((a, b2) => a.ordem - b2.ordem);
   const existe = (id: string) => treinos.some((r) => r.id === id);
   const nome = (v: Planejado | null) => (v === 'descanso' ? 'Descanso' : v ? treinos.find((r) => r.id === v)?.nome ?? '' : '');
@@ -57,6 +60,25 @@ export function AgendaTreinos() {
         </View>
         <Botao v="texto" titulo="+ Montar um treino novo para este dia" onPress={novo} testID={`novo-treino-${dia}`} />
         {dia === hojeDia && p.valor && p.valor !== 'descanso' && !ativa && <Botao titulo={`Começar ${nome(p.valor)}`} onPress={() => iniciarTreino(aplicar, estado, p.valor as string)} />}
+        {/* v0.9: reagendar só esta data (o padrão "toda semana" continua nas outras). */}
+        {p.valor && p.valor !== 'descanso' && dia >= hojeDia && mover?.de !== dia && (
+          <Botao v="secundario" titulo={`Reagendar ${nome(p.valor)}`} onPress={() => setMover({ de: dia, para: null })} testID={`reagendar-${dia}`} />
+        )}
+        {p.valor && p.valor !== 'descanso' && mover?.de === dia && (
+          <View style={{ gap: 8 }} testID={`reagendar-painel-${dia}`}>
+            <Texto v="corpo-forte">{`Para qual dia mudar ${nome(p.valor)}?`}</Texto>
+            {repete && <Texto v="rotulo" suave>{`Só ${NOMES_DIA[dow].toLowerCase()}, ${dm(dia)} muda. As outras ${NOMES_DIA[dow].toLowerCase()}s continuam com o treino.`}</Texto>}
+            <SeletorDia hojeDia={hojeDia} valor={mover.para} onChange={(para) => setMover({ de: dia, para })} pular={dia} />
+            <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+              <Botao titulo="Reagendar" desabilitado={!mover.para} testID={`confirmar-reagendar-${dia}`} onPress={() => {
+                const para = mover.para; if (!para) return;
+                aplicar((e) => acoes.reagendarDia(e, dia, para, p.valor as string));
+                setMover(null); setMovido(`${nome(p.valor)} foi para ${rotuloData(para, hojeDia).toLowerCase()}.`); setSel(para);
+              }} />
+              <Botao v="texto" titulo="Cancelar" onPress={() => setMover(null)} />
+            </View>
+          </View>
+        )}
       </View>
     );
   };
@@ -73,6 +95,7 @@ export function AgendaTreinos() {
 
   return (
     <>
+      {movido && <Toast texto={movido} onFim={() => setMovido(null)} />}
       <Segmentado opcoes={[{ valor: 'semana', rotulo: 'Semana' }, { valor: 'mes', rotulo: 'Mês' }]} valor={modo} onChange={setModo} />
       {treinos.length === 0 && <Cartao><Texto v="corpo-forte">Monte um treino primeiro</Texto><Texto v="rotulo" suave>Depois é só escolher em que dias fazer cada um. Ou use “Montar um treino novo” num dia.</Texto></Cartao>}
       {modo === 'semana' ? (
