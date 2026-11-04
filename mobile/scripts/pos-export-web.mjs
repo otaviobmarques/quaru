@@ -67,7 +67,7 @@ const lista = arquivos.filter((f) => !['sw.js', '404.html', '.nojekyll'].include
 const hash = createHash('sha256'); for (const f of lista) hash.update(f).update(readFileSync(join(dist, f)));
 const versao = hash.digest('hex').slice(0, 12);
 const sw = `// Service worker do Quaru web (gerado por scripts/pos-export-web.mjs). Só guarda os arquivos do app para uso offline;
-// nunca guarda dados do usuário (esses ficam no localStorage). Sem push, sem sincronização.
+// nunca guarda dados do usuário (esses ficam no localStorage). v0.11: recebe o push do fim do descanso (sem conteúdo).
 const CACHE = 'quaru-${versao}';
 const BASE = '${BASE}';
 const MIDIA = 'quaru-midia-v1'; // mídias dos exercícios: cache em uso, sobrevive às atualizações do app
@@ -77,6 +77,25 @@ const ARQUIVOS = ${JSON.stringify(['', ...lista].map((f) => BASE + f))};
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ARQUIVOS))); });
 self.addEventListener('message', (e) => { if (e.data === 'ATUALIZAR') self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k.startsWith('quaru-') && k !== CACHE && k !== MIDIA).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
+// v0.11 (ADR-0025): fim do descanso com a tela bloqueada. O push não tem conteúdo; o texto é fixo e sem dado de saúde.
+// Com o app aberto e em foco, o próprio app já tocou o alerta: a notificação sai silenciosa (o navegador exige mostrar uma).
+self.addEventListener('push', (e) => {
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((cs) => {
+    const emFoco = cs.some((c) => c.visibilityState === 'visible' && c.focused);
+    return self.registration.showNotification('⏱ Acabou o tempo', {
+      body: 'Bora para a próxima série do seu treino!', tag: 'quaru-descanso', renotify: !emFoco, silent: emFoco,
+      icon: BASE + 'icones/icone-192.png', badge: BASE + 'icones/icone-192.png', vibrate: [0, 400, 200, 400], data: { url: BASE + 'treino' },
+    });
+  }));
+});
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const url = (e.notification.data && e.notification.data.url) || BASE;
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((cs) => {
+    const c = cs.find((x) => new URL(x.url).pathname.startsWith(BASE));
+    return c ? c.focus() : self.clients.openWindow(url);
+  }));
+});
 self.addEventListener('fetch', (e) => {
   const r = e.request; const u = new URL(r.url);
   if (r.method !== 'GET' || u.origin !== location.origin || !u.pathname.startsWith(BASE)) return;

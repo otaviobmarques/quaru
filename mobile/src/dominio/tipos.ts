@@ -27,6 +27,8 @@ export interface ItemRotina {
   descansoS: number;
   /** v0.8: observação do treinador para o exercício. */
   obs?: string;
+  /** v0.11: exercício por tempo (cardio): duração de cada série/bloco, em segundos. */
+  duracaoAlvoS?: number;
 }
 
 export interface Rotina extends Sincronizavel {

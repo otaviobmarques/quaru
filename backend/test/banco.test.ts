@@ -31,7 +31,7 @@ describe('RLS e privilégios', () => {
   it('todas as tabelas públicas têm RLS ativo', async () => {
     const r = await db.query<{ relname: string; relrowsecurity: boolean }>(
       `select relname, relrowsecurity from pg_class where relnamespace = 'public'::regnamespace and relkind = 'r'`);
-    expect(r.rows.length).toBe(12); // v0.6: + perfis; v0.8: + alunos_treinador, treinos_atribuidos; v0.10: + evolucao_aluno, agenda_aluno;
+    expect(r.rows.length).toBe(15); // v0.6: + perfis; v0.8: + alunos_treinador, treinos_atribuidos; v0.10: + evolucao_aluno, agenda_aluno; v0.11: + push_chaves, push_inscricoes, avisos_descanso;
     r.rows.forEach((t) => expect(t.relrowsecurity, t.relname).toBe(true));
   });
 

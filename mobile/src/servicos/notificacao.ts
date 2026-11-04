@@ -16,6 +16,8 @@ const emSerie = <T,>(f: () => Promise<T>): Promise<T> => { const p = fila.then(f
  * (Android: modo silencioso/vibrar; iPhone: chave lateral). Em segundo plano, a notificação local aparece com o mesmo som.
  */
 export const SOM_DESCANSO = 'descanso.wav';
+export const SOM_CONCLUIDO = 'concluido.wav';
+export const CANAL_CONCLUIDO = 'concluido';
 export const CANAL_DESCANSO = 'descanso';
 export const comportamentoPrimeiroPlano = { shouldShowBanner: false, shouldShowList: false, shouldPlaySound: true, shouldSetBadge: false } as const;
 if (Platform.OS !== 'web') {
@@ -32,6 +34,7 @@ export async function prepararCanal() {
     vibrationPattern: [0, 400, 200, 400],
     enableVibrate: true,
   });
+  await Notifications.setNotificationChannelAsync?.(CANAL_CONCLUIDO, { name: 'Treino concluído', importance: 5, sound: SOM_CONCLUIDO, enableVibrate: false });
 }
 if (Platform.OS === 'android') prepararCanal().catch(() => {});
 
@@ -43,12 +46,12 @@ export async function pedirPermissao(): Promise<boolean> {
   return r.granted;
 }
 
-export function agendarFimDescanso(segundos: number, exercicio: string) {
+export function agendarFimDescanso(segundos: number, exercicio: string, corpo?: string) {
   return emSerie(async () => {
     await cancelarAgora();
     if (Platform.OS === 'web' || segundos <= 0) return;
     agendada = await Notifications.scheduleNotificationAsync({
-      content: { title: 'Descanso', body: textoDescanso(exercicio), sound: SOM_DESCANSO },
+      content: { title: 'Descanso', body: corpo ?? textoDescanso(exercicio), sound: SOM_DESCANSO },
       trigger: { type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds: Math.round(segundos), channelId: CANAL_DESCANSO },
     });
   });
@@ -60,3 +63,14 @@ async function cancelarAgora() {
 }
 
 export function cancelarDescanso(): Promise<void> { return emSerie(cancelarAgora); }
+
+/** v0.11: som de treino concluído (agora, sem banner com o app aberto). Sem permissão de notificação, só vibra. */
+export async function tocarSomConcluido(): Promise<void> {
+  if (Platform.OS === 'web') return;
+  const p = await Notifications.getPermissionsAsync().catch(() => null);
+  if (!p?.granted) return;
+  await Notifications.scheduleNotificationAsync({
+    content: { title: 'Treino concluído', body: 'Mandou bem! Treino registrado.', sound: SOM_CONCLUIDO },
+    trigger: Platform.OS === 'android' ? { channelId: CANAL_CONCLUIDO } as never : null,
+  });
+}

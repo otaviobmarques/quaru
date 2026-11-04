@@ -1,3 +1,4 @@
+import type { PreferenciaDescanso } from '@/dominio/descanso';
 import { nomeVazio } from '@/dominio/validacao';
 import { criarArmazenamento, type Armazenamento, type Modo } from '@/servicos/armazenamento';
 import { createContext, use, useEffect, useState, type ReactNode } from 'react';
@@ -62,7 +63,8 @@ export interface Estado {
 }
 
 export type Avatar = { tipo: 'ilustrado'; id: string } | { tipo: 'foto'; uri: string };
-export interface Perfil { nome: string | null; avatar: Avatar | null; alturaCm: number | null; /** meta editada pela pessoa; null = padrão 35 ml/kg */ metaAguaMl?: number | null; /** objetivo, nível e dias (v0.4.1) */ treino?: PerfilTreino | null }
+export interface Perfil { nome: string | null; avatar: Avatar | null; alturaCm: number | null; /** meta editada pela pessoa; null = padrão 35 ml/kg */ metaAguaMl?: number | null; /** objetivo, nível e dias (v0.4.1) */ treino?: PerfilTreino | null;
+  /** v0.11: descanso entre séries (padrão 60 s fixos) */ descanso?: PreferenciaDescanso | null }
 /** Dados do tour guiado (v0.4.1): faixa de idade, experiência, tempo, local, restrições (saúde), preferência alimentar, lembretes, cidade/bairro. */
 export type PerfilCompleto = Perfil & DadosTour;
 export const perfilVazio = (): Perfil => ({ nome: null, avatar: null, alturaCm: null });
@@ -159,6 +161,7 @@ export const acoes = {
   },
   guardarVinculoPendente: (e: Estado, codigo: string | null): Estado => ({ ...e, vinculoPendente: codigo }),
   marcarAniversarioEnviado: (e: Estado, chave: string): Estado => ({ ...e, aniversarioEnviado: chave }),
+  definirDescanso: (e: Estado, d: PreferenciaDescanso): Estado => ({ ...e, perfil: { ...(e.perfil ?? perfilVazio()), descanso: d } }),
   fecharMascote: (e: Estado, dia: string): Estado => ({ ...e, mascote: { ...(e.mascote ?? {}), fechadoEm: dia } }),
   ligarMascote: (e: Estado, ligado: boolean): Estado => ({ ...e, mascote: { ...(e.mascote ?? {}), desligado: !ligado, fechadoEm: null } }),
   /** v0.7: agenda. `repetir` grava como padrão do dia da semana. */
