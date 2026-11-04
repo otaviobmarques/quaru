@@ -4,15 +4,17 @@ import { useState } from 'react';
 import { Platform, Share, View } from 'react-native';
 
 import { Botao, Campo, Cartao, ItemLista, Tela, Texto } from '@/componentes/ui';
+import { Mascote } from '@/componentes/mascote';
 import { dataLonga, metricasPorSessao, seriesDaSessao } from '@/dominio/consultas';
 import { ehRecorde, formatarKg } from '@/dominio/metricas';
 import { acoes, todosExercicios, useEstado } from '@/estado/armazem';
 import { textoCompartilharTreino } from '@/dominio/compartilhar';
 import { sequenciaDias } from '@/dominio/treino-de-hoje';
+import { formatarDuracao } from '@/dominio/cardio';
 
 /** Tela 7 – Resumo do treino (volume, recordes, anotação). */
 export default function Resumo() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, concluido } = useLocalSearchParams<{ id: string; concluido?: string }>();
   const { estado, aplicar } = useEstado();
   const sessao = estado.sessoes.find((s) => s.id === id);
   const [notas, setNotas] = useState(sessao?.notas ?? '');
@@ -39,7 +41,18 @@ export default function Resumo() {
   return (
     <Tela titulo="Resumo do treino" voltar={() => router.replace('/inicio')}
       rodape={<Botao grande titulo="Concluir" onPress={() => { aplicar((e) => acoes.salvarSessao(e, { ...sessao, notas: notas.slice(0, 2000) || null })); router.replace('/inicio'); }} />}>
-      {sessao.finalizadaEm && <Animacao nome="treino-concluido" tamanho={140} />}
+      {/* v0.11: acabou de finalizar: confirmação clara de que o treino foi concluído (com som e vibração na tela anterior). */}
+      {sessao.finalizadaEm && concluido === '1' ? (
+        <Cartao destaque>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }} testID="treino-concluido">
+            <Mascote pose="festa" tamanho={96} />
+            <View style={{ flex: 1, gap: 4 }}>
+              <Texto v="titulo-2">{`Treino concluído${estado.perfil?.nome ? `, ${estado.perfil.nome}` : ''}! 🎉`}</Texto>
+              <Texto v="rotulo" suave>{`Mandou bem: ${m.series} ${m.series === 1 ? 'série' : 'séries'}${dur != null ? ` em ${dur} min` : ''}. Está registrado no seu histórico.`}</Texto>
+            </View>
+          </View>
+        </Cartao>
+      ) : sessao.finalizadaEm && <Animacao nome="treino-concluido" tamanho={140} />}
       <Texto suave>{dataLonga(sessao.iniciadaEm)}{sessao.exemplo ? ' · EXEMPLO' : ''}</Texto>
       <View style={{ flexDirection: 'row', gap: 12 }}>
         {[['VOLUME', `${formatarKg(m.volume)} kg`], ['SÉRIES', String(m.series)], ['DURAÇÃO', dur != null ? `${dur} min` : '–']].map(([r, v]) => (
@@ -50,7 +63,7 @@ export default function Resumo() {
         <Texto v="corpo-forte">Recordes pessoais</Texto>
         {recs.length === 0 ? <Texto v="rotulo" suave>Nenhum recorde neste treino.</Texto> : recs.map((s, i) => <ItemLista key={s.id} ultimo={i === recs.length - 1} titulo={`Recorde · ${exs.get(s.exercicioId)}`} valor={`${formatarKg(s.cargaKg)} kg × ${s.reps}`} />)}
       </Cartao>
-      <Cartao>{porEx.map((e, i) => <ItemLista key={e} ultimo={i === porEx.length - 1} titulo={exs.get(e) ?? ''} sub={minhas.filter((s) => s.exercicioId === e).map((s) => `${formatarKg(s.cargaKg)}×${s.reps}`).join(' · ')} onPress={() => router.push(`/exercicio/${e}`)} />)}</Cartao>
+      <Cartao>{porEx.map((e, i) => <ItemLista key={e} ultimo={i === porEx.length - 1} titulo={exs.get(e) ?? ''} sub={minhas.filter((s) => s.exercicioId === e).map((s) => (s.duracaoS != null ? formatarDuracao(s.duracaoS) : `${formatarKg(s.cargaKg)}×${s.reps}`)).join(' · ')} onPress={() => router.push(`/exercicio/${e}`)} />)}</Cartao>
       {sessao.finalizadaEm && <Botao v="secundario" titulo={copiado ? 'Texto copiado ✓' : 'Compartilhar treino'} onPress={compartilhar} testID="compartilhar-treino" />}
       <Campo rotulo="Anotação (opcional)" value={notas} onChangeText={setNotas} maxLength={2000} placeholder="Como foi o treino?" multilinha />
     </Tela>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Quaru",
     "slug": "app-academia",
-    "version": "0.10.0",
+    "version": "0.11.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "app-academia",
@@ -38,7 +38,8 @@
         "expo-notifications",
         {
           "sounds": [
-            "./assets/sons/descanso.wav"
+            "./assets/sons/descanso.wav",
+            "./assets/sons/concluido.wav"
           ],
           "color": "#E0263F"
         }

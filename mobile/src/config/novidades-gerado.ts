@@ -1,11 +1,13 @@
 // GERADO por scripts/gerar-novidades.mjs a partir do CHANGELOG.md. Não edite à mão.
-export const VERSAO_NOVIDADES = "0.10.0";
+export const VERSAO_NOVIDADES = "0.11.0";
 export const NOVIDADES: string[] = [
   "### Adicionado",
-  "- ID de aluno: toda conta tem um ID curto (ex.: K7M-2PQ9), em Perfil → Meu ID de aluno, com o botão Compartilhar.",
-  "- Convite do treinador pelo ID: na área do treinador, \"Convidar pelo ID do aluno\". O aluno recebe o convite no app (Início e Perfil) e escolhe: aceitar e compartilhar a evolução, aceitar sem compartilhar ou recusar. O link de vínculo continua valendo, agora também com a escolha de compartilhar.",
-  "- Compartilhar a evolução: em Perfil → Meu treinador, liga e desliga quando quiser. Ligado, o treinador vê o peso, os treinos feitos (data, séries, volume e tempo) e a agenda. Desligar ou desvincular apaga esse resumo do servidor. Alimentação, água, lesões e notas nunca são compartilhadas.",
-  "- Área do treinador: evolução e agenda do aluno: números da semana e do mês, gráfico do peso, últimos treinos e a agenda das próximas 4 semanas. O treinador agenda um treino num dia e ele entra na agenda do aluno; um dia que o aluno mudou fica como ele deixou.",
-  "### Mudado",
-  "- A lista de alunos do treinador mostra quem está com convite pendente, quem recusou e quem compartilha a evolução."
+  "- Descanso padrão de 1 minuto, configurável: na tela do treino (\"Descanso entre séries · Mudar\") ou em Perfil, com 30 s, 45 s, 1 min, 1 min 30 s, 2 min, 3 min ou Automático (calculado pelo exercício e objetivo, como antes). Treino do treinador usa o descanso dele.",
+  "- Bipes nos 3 últimos segundos e alerta no fim do descanso.",
+  "- Aviso com a tela bloqueada na versão web: ative uma vez (\"Avisar com a tela bloqueada?\") e, a cada descanso, o servidor manda uma notificação na hora certa, com som e vibração do sistema. Android: no navegador ou instalado. iPhone: com o Quaru instalado na Tela de Início (iOS 16.4+). No app de celular, a notificação local já fazia isso.",
+  "- Alerta de treino concluído: ao finalizar, toca um som de comemoração, vibra e o resumo abre com o mascote: \"Treino concluído! 🎉\".",
+  "- Cardio no Treino do dia: escolha Musculação ou Cardio. Iniciante faz contínuo leve (caminhada rápida, bike ou elíptico); os demais alternam contínuo e intervalado. Sem esteira/bike, vira caminhada ou circuito em casa. Lesões tiram o que tem impacto na região. Sempre com aquecimento e volta à calma.",
+  "- Exercícios por tempo: cardio tem campo de minutos e cronômetro (▶). No fim do bloco, o app avisa, registra o tempo e começa a recuperação.",
+  "### Corrigido",
+  "- O alerta do descanso pausava a música (Spotify etc.) no iPhone. Agora o som toca por cima da música, sem interromper. Observação: no iPhone com a chave do silencioso ligada, o som com o app aberto não toca; a notificação segue as regras do sistema."
 ];

@@ -2,7 +2,8 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Platform, Share, View } from 'react-native';
 
-import { Aviso, Botao, Campo, Cartao, Chave, ItemLista, Tela, Texto } from '@/componentes/ui';
+import { Aviso, Botao, Campo, Cartao, Chave, Ficha, ItemLista, Tela, Texto } from '@/componentes/ui';
+import { OPCOES_DESCANSO_S, preferenciaDescanso, rotuloDescanso } from '@/dominio/descanso';
 import { formatarAniversario } from '@/dominio/aniversario';
 import { acoes, temExemplo, temSaude, useEstado } from '@/estado/armazem';
 import { useSessao } from '@/estado/sessao';
@@ -119,6 +120,15 @@ export default function Perfil() {
           </View>
         ) : <Texto v="rotulo" suave>{estado.perfil?.alturaCm ? 'Registre um peso para ver o IMC.' : 'Informe a altura e registre um peso para ver o IMC.'}</Texto>}
         <Aviso tom="secundaria" titulo="Sobre o IMC" texto={AVISO_IMC} />
+      </Cartao>
+      {/* v0.11: descanso entre séries (padrão 60 s) */}
+      <Cartao>
+        <Texto v="corpo-forte">Descanso entre séries</Texto>
+        <Texto v="rotulo" suave>O cronômetro começa sozinho ao concluir cada série. No fim, toca um alerta (por cima da música) e vibra. Treino do seu treinador usa o descanso dele.</Texto>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }} testID="perfil-descanso">
+          {OPCOES_DESCANSO_S.map((o) => { const pd = preferenciaDescanso(estado.perfil?.descanso); return <Ficha key={o} texto={rotuloDescanso(o)} ativa={pd.modo === 'fixo' && pd.segundos === o} onPress={() => aplicar((e) => acoes.definirDescanso(e, { modo: 'fixo', segundos: o }))} />; })}
+          <Ficha texto="Automático (pelo exercício)" ativa={preferenciaDescanso(estado.perfil?.descanso).modo === 'auto'} onPress={() => aplicar((e) => acoes.definirDescanso(e, { modo: 'auto' }))} />
+        </View>
       </Cartao>
       {/* v0.9: aniversário e mascote do Início */}
       <Cartao>

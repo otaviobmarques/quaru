@@ -39,11 +39,32 @@ export function descansoEntreExercicios(entreSeries: number): number {
   return arred15(Math.min(180, Math.max(90, entreSeries + 30)));
 }
 
+/**
+ * v0.11: preferência de descanso da pessoa. Padrão: 60 s fixos entre as séries (o que ela pediu), com troca de
+ * exercício de 90 s. "auto" volta ao cálculo pelo objetivo e pelo exercício. O treinador manda no treino dele.
+ */
+export type PreferenciaDescanso = { modo: 'fixo'; segundos: number } | { modo: 'auto' };
+export const DESCANSO_PADRAO_S = 60;
+export const OPCOES_DESCANSO_S = [30, 45, 60, 90, 120, 180];
+export const preferenciaDescanso = (p?: PreferenciaDescanso | null): PreferenciaDescanso => p ?? { modo: 'fixo', segundos: DESCANSO_PADRAO_S };
+export const rotuloDescanso = (s: number) => (s < 60 ? `${s} s` : s % 60 ? `${Math.floor(s / 60)} min ${s % 60} s` : `${s / 60} min`);
+
+/** Descanso entre as séries no cronômetro: treino do treinador usa o dele; senão a preferência (fixo ou calculado). */
+export function descansoDaSerie(pref: PreferenciaDescanso | null | undefined, item: Pick<ItemRotina, 'descansoS'> | undefined, ex: InfoExercicio | null | undefined,
+  treino: PerfilTreino | null | undefined, doTreinador: boolean): number {
+  if (doTreinador && item) return item.descansoS;
+  const p = preferenciaDescanso(pref);
+  if (p.modo === 'fixo') return Math.max(10, Math.min(600, Math.round(p.segundos)));
+  return item?.descansoS ?? descansoEntreSeries(ex, treino);
+}
+
 const SEG_POR_REP = 3;
 /** Tempo estimado (min, de 5 em 5) de um treino: séries × reps × 3 s + descansos entre séries + troca entre exercícios. */
 export function tempoEstimadoTreino(itens: ItemRotina[]): number {
   if (!itens.length) return 0;
-  const s = itens.reduce((t, i, k) => t + i.seriesAlvo * (i.repsAlvo ?? 10) * SEG_POR_REP + (i.seriesAlvo - 1) * i.descansoS
-    + (k < itens.length - 1 ? descansoEntreExercicios(i.descansoS) : 0), 0);
+  // v0.11: exercício por tempo (cardio) conta a duração dos blocos e a recuperação entre eles, sem troca de aparelho.
+  const s = itens.reduce((t, i, k) => t + (i.duracaoAlvoS
+    ? i.seriesAlvo * i.duracaoAlvoS + (i.seriesAlvo - 1) * i.descansoS
+    : i.seriesAlvo * (i.repsAlvo ?? 10) * SEG_POR_REP + (i.seriesAlvo - 1) * i.descansoS + (k < itens.length - 1 ? descansoEntreExercicios(i.descansoS) : 0)), 0);
   return Math.max(5, Math.round(s / 60 / 5) * 5);
 }

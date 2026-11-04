@@ -20,16 +20,17 @@ import type { ItemRotina, Serie, SessaoTreino } from './tipos';
  * - `variacao` gera outra sugestão no mesmo dia ("Outra sugestão").
  * É uma sugestão geral, não uma prescrição (mesmo aviso dos treinos sugeridos).
  */
-export type Foco = 'corpo-inteiro' | 'superiores' | 'inferiores';
-export interface ItemDoDia { exercicioId: string; nome: string; seriesAlvo: number; repsAlvo: number | null; descansoS: number }
+export type Foco = 'corpo-inteiro' | 'superiores' | 'inferiores' | 'cardio';
+export interface ItemDoDia { exercicioId: string; nome: string; seriesAlvo: number; repsAlvo: number | null; descansoS: number;
+  /** v0.11 (cardio): duração de cada série/bloco e o papel no treino. */ duracaoS?: number; papel?: string }
 export interface TreinoDoDia { foco: Foco; titulo: string; motivo: string; itens: ItemDoDia[]; minutos: number }
 
-const VAGAS: Record<Foco, Regiao[]> = {
+const VAGAS: Record<Exclude<Foco, 'cardio'>, Regiao[]> = {
   'corpo-inteiro': ['quadriceps', 'peito', 'costas', 'posterior', 'ombros', 'abdomen', 'gluteos'],
   superiores: ['peito', 'costas', 'ombros', 'costas', 'peito', 'biceps', 'triceps', 'abdomen'],
   inferiores: ['quadriceps', 'posterior', 'gluteos', 'quadriceps', 'panturrilha', 'abdomen'],
 };
-export const NOME_FOCO: Record<Foco, string> = { 'corpo-inteiro': 'Corpo inteiro', superiores: 'Superiores', inferiores: 'Inferiores' };
+export const NOME_FOCO: Record<Foco, string> = { 'corpo-inteiro': 'Corpo inteiro', superiores: 'Superiores', inferiores: 'Inferiores', cardio: 'Cardio' };
 
 /** Exercícios de mais carga evitados por lesão informada (a pessoa deve procurar um profissional). */
 const EVITAR: Record<Restricao, string[]> = {
@@ -96,7 +97,7 @@ export function gerarTreinoDoDia(p: {
   const itens: ItemDoDia[] = [];
 
   const emCasa = !!p.tem && !p.tem.includes('maquinas') && !p.tem.includes('polia');
-  for (const [k, vaga] of VAGAS[foco].entries()) {
+  for (const [k, vaga] of VAGAS[foco as Exclude<Foco, 'cardio'>].entries()) {
     const candidatos = POOL
       .filter((x) => !usados.has(x.nome) && !evitar.has(x.nome) && (nivel !== 'iniciante' || x.iniciante || !['Agachamento livre', 'Levantamento terra', 'Barra fixa', 'Barra fixa supinada'].includes(x.nome)))
       .filter((x) => !(foco === 'superiores' && SO_LOMBAR.has(x.nome)))
@@ -134,5 +135,6 @@ export function gerarTreinoDoDia(p: {
 
 /** Converte para itens de treino (rotina) com ids gerados. */
 export function comoItensRotina(itens: ItemDoDia[], ids: () => string = (() => { let n = 0; return () => `tmp-${n++}`; })()): ItemRotina[] {
-  return itens.map((i, k) => ({ id: ids(), exercicioId: i.exercicioId, ordem: k, seriesAlvo: i.seriesAlvo, repsAlvo: i.repsAlvo, descansoS: i.descansoS }));
+  return itens.map((i, k) => ({ id: ids(), exercicioId: i.exercicioId, ordem: k, seriesAlvo: i.seriesAlvo, repsAlvo: i.repsAlvo, descansoS: i.descansoS,
+    ...(i.duracaoS ? { duracaoAlvoS: i.duracaoS } : {}) }));
 }

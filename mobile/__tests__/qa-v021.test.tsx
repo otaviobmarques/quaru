@@ -65,7 +65,7 @@ describe('BUG-17 / ADR-0011', () => {
     const vib = jest.spyOn(Vibration, 'vibrate').mockImplementation(() => {});
     jest.useFakeTimers({ now: new Date('2026-11-01T12:00:00Z') });
     try {
-      await quadro(<Treino />, { ...comTreino('negada'), rotinas: comTreino().rotinas.map((r) => ({ ...r, itens: r.itens.map((i) => ({ ...i, descansoS: 2 })) })) });
+      await quadro(<Treino />, { ...acoes.definirDescanso(comTreino('negada'), { modo: 'auto' }), rotinas: comTreino().rotinas.map((r) => ({ ...r, itens: r.itens.map((i) => ({ ...i, descansoS: 2 })) })) });
       await fireEvent.changeText(screen.getByLabelText('Carga em kg, série 1'), '50');
       await fireEvent.press(screen.getByTestId('concluir-1'));
       expect(vib).not.toHaveBeenCalled();

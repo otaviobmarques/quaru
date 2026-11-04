@@ -1,9 +1,10 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
 import { DemonstracaoExercicio } from '@/componentes/demonstracao-exercicio';
-import { Aviso, Botao, Cartao, Selo, Tela, Texto } from '@/componentes/ui';
+import { Aviso, Botao, Cartao, Segmentado, Selo, Tela, Texto } from '@/componentes/ui';
+import { formatarDuracao, gerarCardio } from '@/dominio/cardio';
 import { equipamentosDoPerfil } from '@/dominio/equipamentos';
 import { AVISO_RESTRICAO } from '@/dominio/tour';
 import { comoItensRotina, gerarTreinoDoDia } from '@/dominio/treino-do-dia';
@@ -26,8 +27,13 @@ export default function TreinoDoDia() {
   const [salvo, setSalvo] = useState<{ id: string; nome: string } | null>(null);
   const [agora] = useState(() => new Date().toISOString());
   const p = estado.perfil;
-  const t = gerarTreinoDoDia({ treino: p?.treino, tem: equipamentosDoPerfil(p), tempoMin: p?.tempoTreinoMin, restricoes: p?.restricoes ?? [],
-    sessoes: estado.sessoes, series: estado.series, agora, variacao });
+  const { tipo: tipo0 } = useLocalSearchParams<{ tipo?: string }>();
+  const [tipo, setTipo] = useState<'forca' | 'cardio'>(tipo0 === 'cardio' ? 'cardio' : 'forca');
+  // v0.11: também sugere cardio (contínuo ou intervalado, pelo nível, equipamento, tempo e lesões).
+  const t = tipo === 'cardio'
+    ? gerarCardio({ treino: p?.treino, tem: equipamentosDoPerfil(p), tempoMin: p?.tempoTreinoMin, restricoes: p?.restricoes ?? [], variacao })
+    : gerarTreinoDoDia({ treino: p?.treino, tem: equipamentosDoPerfil(p), tempoMin: p?.tempoTreinoMin, restricoes: p?.restricoes ?? [],
+      sessoes: estado.sessoes, series: estado.series, agora, variacao });
   const ativa = estado.sessoes.find((s) => !s.finalizadaEm && !s.excluidoEm);
   const montar = (nome: string) => ({ id: novoId(), nome, ordem: Math.max(0, ...estado.rotinas.filter((r) => !r.excluidoEm).map((r) => r.ordem)) + 1,
     itens: comoItensRotina(t.itens, novoId), atualizadoEm: new Date().toISOString() });
@@ -38,7 +44,7 @@ export default function TreinoDoDia() {
   };
   const salvar = () => {
     const dia = new Date(agora).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-    const r = montar(`${t.titulo.replace('Treino do dia · ', '')} (${dia})`);
+    const r = montar(`${t.titulo.replace('Treino do dia · ', '').replace('Cardio do dia · ', 'Cardio ')} (${dia})`);
     aplicar((e) => acoes.salvarRotina(e, r));
     setSalvo({ id: r.id, nome: r.nome });
   };
@@ -51,7 +57,8 @@ export default function TreinoDoDia() {
           <Botao flex v="secundario" titulo="Salvar em Meus treinos" onPress={salvar} testID="salvar-treino-do-dia" />
         </View>
       </View>}>
-      <Texto v="titulo-1">{t.titulo.replace('Treino do dia · ', '')}</Texto>
+      <Segmentado opcoes={[{ valor: 'forca', rotulo: 'Musculação' }, { valor: 'cardio', rotulo: 'Cardio' }]} valor={tipo} onChange={(v) => { setTipo(v); setVariacao(0); setSalvo(null); }} />
+      <Texto v="titulo-1">{t.titulo.replace('Treino do dia · ', '').replace('Cardio do dia · ', 'Cardio ')}</Texto>
       <Texto suave>{t.motivo}</Texto>
       <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
         <Selo texto={`${t.itens.length} exercícios`} tom="secundaria" />
@@ -71,7 +78,9 @@ export default function TreinoDoDia() {
             <Texto v="titulo-3">{k + 1}.</Texto>
             <View style={{ flex: 1, gap: 2 }}>
               <Texto v="corpo-forte">{i.nome}</Texto>
-              <Texto v="rotulo" suave>{i.seriesAlvo} séries × {i.repsAlvo ?? 'tempo'}{i.repsAlvo ? ' repetições' : ''} · descanso {tempo(i.descansoS)}</Texto>
+              {i.duracaoS
+                ? <Texto v="rotulo" suave>{i.seriesAlvo > 1 ? `${i.seriesAlvo} × ${formatarDuracao(i.duracaoS)} · recuperação ${tempo(i.descansoS)}` : formatarDuracao(i.duracaoS)}{i.papel ? ` · ${i.papel}` : ''}</Texto>
+                : <Texto v="rotulo" suave>{i.seriesAlvo} séries × {i.repsAlvo ?? 'tempo'}{i.repsAlvo ? ' repetições' : ''} · descanso {tempo(i.descansoS)}</Texto>}
             </View>
           </View>
           <DemonstracaoExercicio exercicioId={i.exercicioId} nome={i.nome} />

@@ -13,6 +13,7 @@ const agendar = N.scheduleNotificationAsync as jest.Mock;
 
 function estado(permissao: Estado['permissaoNotificacao']): Estado {
   let e = acoes.definirConsentimento(acoes.entrar(estadoInicial()), 'dados_saude', true);
+  e = acoes.definirDescanso(e, { modo: 'auto' }); // v0.11: estes testes usam o descanso da rotina (modo Automático)
   e = acoes.salvarRotina(e, { id: 'r', nome: 'Treino QA', ordem: 1, atualizadoEm: '', itens: [{ id: 'i', exercicioId: BIBLIOTECA[0].id, ordem: 1, seriesAlvo: 2, repsAlvo: 8, descansoS: 90 }] });
   e = acoes.iniciarSessao(e, { id: 'ses', rotinaId: 'r', iniciadaEm: new Date().toISOString(), finalizadaEm: null, notas: null, atualizadoEm: '' });
   return { ...e, permissaoNotificacao: permissao };
