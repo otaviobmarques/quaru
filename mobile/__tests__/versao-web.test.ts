@@ -30,4 +30,20 @@ describe('alerta de descanso na web', () => {
     jest.isolateModules(() => { require('../src/servicos/alerta-descanso.web').alertarFimDescanso(); });
     expect(vibrate).toHaveBeenCalledWith([0, 400, 200, 400]);
   });
+  it('v0.12.2: toca no modo que mistura com a música e solta o áudio logo depois do bipe', () => {
+    jest.useFakeTimers();
+    const sessao = { type: 'auto' };
+    Object.defineProperty(globalThis.navigator, 'audioSession', { value: sessao, configurable: true });
+    const suspend = jest.fn(() => Promise.resolve());
+    const no = () => ({ connect: (x: unknown) => x, start: jest.fn(), stop: jest.fn(), frequency: { value: 0 }, gain: { value: 0, setValueAtTime: jest.fn(), exponentialRampToValueAtTime: jest.fn() } });
+    class Ctx { state = 'running'; currentTime = 0; destination = {}; suspend = suspend; resume = jest.fn(() => Promise.resolve()); createOscillator = no; createGain = no; }
+    (globalThis as { AudioContext?: unknown }).AudioContext = Ctx;
+    jest.isolateModules(() => { require('../src/servicos/alerta-descanso.web').alertarFimDescanso(); });
+    expect(sessao.type).toBe('ambient');
+    expect(suspend).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(2000);
+    expect(suspend).toHaveBeenCalled();
+    delete (globalThis as { AudioContext?: unknown }).AudioContext;
+    jest.useRealTimers();
+  });
 });

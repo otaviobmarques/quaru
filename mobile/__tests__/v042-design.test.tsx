@@ -32,7 +32,7 @@ describe('marca', () => {
     expect(marca.slogan).toBe(marcaJson.slogan);
     expect(marca.nome).toBe(MARCA_DESIGN.nome);
     expect(marca.empresa).toBe(MARCA_DESIGN.empresa);
-    expect(marca.versao).toMatch(/^0\.12\.1/);
+    expect(marca.versao).toMatch(/^0\.12\.2/);
   });
   it('links jurídicos apontam para a tela jurídica existente', () => {
     expect(linksJuridicos.termos).toEqual({ tipo: 'interno', rota: '/juridico?doc=termos' });

@@ -1,6 +1,10 @@
 # Changelog
 Formato Keep a Changelog.
 
+## [0.12.2] – 2026-11-05
+### Corrigido
+- **O bipe do fim do descanso não para mais a música** (Spotify, Apple Music etc.) no iPhone: o som agora só se mistura com a música e o app solta o áudio logo depois de cada bipe. Antes, depois do primeiro toque, o app segurava o áudio do aparelho durante o treino inteiro.
+
 ## [0.12.1] – 2026-11-05
 ### Mudado
 - **O app mudou para https://app.quaru.com.br** (Vercel), com o painel admin em /admin e a área do treinador em /treinador. O código pode ficar em repositório privado.

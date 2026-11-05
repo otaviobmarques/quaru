@@ -30,6 +30,11 @@ com o celular bloqueado, alerta de treino concluído e sugestão de cardio. O ap
 5. **Cardio**: itens com `duracaoAlvoS`; séries viram blocos de tempo com cronômetro; recuperação entre blocos e sem
    pausa entre aquecimento, parte principal e volta à calma. Gerador `gerarCardio` (OMS/ACSM: moderado, conversável).
 
+## Revisão v0.12.2
+Ainda houve relato de a música parar no fim do descanso. O som passou para `audioSession.type = 'ambient'` (só mistura,
+não abaixa nem pausa a música) e o `AudioContext` é suspenso logo depois de cada som; antes ele ficava ligado o treino
+inteiro e segurava a sessão de áudio do iPhone.
+
 ## Consequências
 - O aviso com a tela bloqueada depende de conta logada e de rede no momento em que o descanso começa.
 - Custo: uma chamada de função por descanso (e uma a mais a cada 100 s em descansos longos).
