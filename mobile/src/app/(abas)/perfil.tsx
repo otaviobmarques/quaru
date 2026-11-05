@@ -9,6 +9,7 @@ import { acoes, temExemplo, temSaude, useEstado } from '@/estado/armazem';
 import { useSessao } from '@/estado/sessao';
 import { buscarDoTreinador, definirCompartilhamento, desvincularTreinador } from '@/servicos/treinador';
 import { CartaoConvite } from '@/componentes/convite-treinador';
+import { dataCurtaBr, diasDeTeste, nomeDoPlano, type PlanoConta } from '@/dominio/plano';
 import { formatarIdAluno } from '@/dominio/treinador';
 import { OBJETIVOS } from '@/dominio/objetivo';
 import { FotoPerfil } from '@/componentes/avatares';
@@ -70,6 +71,14 @@ export default function Perfil() {
         ))}
       </View>
       {temExemplo(estado) && <Texto v="rotulo">Valores de exemplo.</Texto>}
+      {/* v0.12: plano de assinatura */}
+      {sessao.modo === 'conta' && estado.plano?.cobranca_ativa && (
+        <Cartao onPress={() => router.push('/planos' as never)} rotulo="Meu plano: abrir">
+          <Texto v="legenda" suave>MEU PLANO</Texto>
+          <Texto v="corpo-forte">{textoPlano(estado.plano)}</Texto>
+          <Texto v="rotulo" cor={b['primaria-texto']}>Ver planos e pagamento ›</Texto>
+        </Cartao>
+      )}
       {(estado.convites ?? []).map((c) => <CartaoConvite key={c.aluno_ref} c={c} />)}
       {/* v0.10: ID de aluno, para o treinador mandar o convite */}
       {sessao.modo === 'conta' && estado.idAluno && (
@@ -170,4 +179,12 @@ export default function Perfil() {
       <RodapeMarca />
     </Tela>
   );
+}
+
+function textoPlano(p: PlanoConta): string {
+  if (p.motivo === 'isento') return p.cortesia ? 'Cortesia do Quaru 🎁' : 'Acesso liberado';
+  if (p.valido_ate && +new Date(p.valido_ate) > Date.now()) return `${nomeDoPlano(p.plano) ?? 'Plano'} · ${p.status === 'cancelada' ? 'cancelado, vale' : 'válido'} até ${dataCurtaBr(p.valido_ate)}`;
+  const d = diasDeTeste(p);
+  if (d && d > 0) return `Teste grátis · ${d === 1 ? 'falta 1 dia' : `faltam ${d} dias`}`;
+  return 'Sem plano ativo';
 }

@@ -23,6 +23,7 @@ import { DepoisDeAdicionar } from '@/componentes/treinos/depois-de-adicionar';
 import { SeletorDia } from '@/componentes/treinos/seletor-dia';
 import { CartaoMascote } from '@/componentes/cartao-mascote';
 import { CartaoConvite } from '@/componentes/convite-treinador';
+import { FaixaPlano } from '@/componentes/faixa-plano';
 import { DICA_EMAGRECER, OBJETIVOS, } from '@/dominio/objetivo';
 import { recomendarPara } from '@/dominio/tour';
 import { equipamentosDoPerfil, modeloAdaptado } from '@/dominio/equipamentos';
@@ -135,6 +136,7 @@ export default function Inicio() {
           </View>
         </Aviso>
       )}
+      <FaixaPlano plano={estado.plano} />
       {(estado.convites ?? []).map((c) => <CartaoConvite key={c.aluno_ref} c={c} />)}
       {/* v0.9: mascote com boas-vindas e parabéns no aniversário; fechado, volta o adesivo. */}
       {estado.mascote?.desligado || estado.mascote?.fechadoEm === hojeDia

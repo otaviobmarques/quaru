@@ -20,6 +20,8 @@ type CtxSessao = {
   /** v0.6.1: o admin criou a conta (ou trocou a senha) e pediu para a pessoa criar a própria senha no 1º acesso. */
   trocarSenha: boolean;
   entrar: (email: string, senha: string) => Promise<string | null>;
+  /** v0.12: autocadastro (teste grátis). Devolve a mensagem de erro, ou null quando o e-mail de confirmação foi enviado. */
+  criarConta: (nome: string, email: string, senha: string) => Promise<string | null>;
   esqueci: (email: string) => Promise<string | null>;
   definirSenha: (senha: string) => Promise<string | null>;
   sair: () => Promise<void>;
@@ -101,6 +103,23 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
       if (/fetch|network/i.test(error.message)) return MSG.rede;
       return MSG.credenciais; // não diz se o e-mail existe
     },
+    criarConta: async (nome, email, senha) => {
+      if (!sb) return null;
+      if (senha.length < SENHA_MINIMA) return MSG.senhaCurta;
+      if (!/[A-Za-zÀ-ÿ]/.test(senha) || !/\d/.test(senha)) return 'Use letras e números na senha.';
+      const destino = typeof window !== 'undefined' && window.location ? `${window.location.origin}${process.env.EXPO_PUBLIC_BASE_URL ?? '/quaru'}/` : undefined;
+      const { data, error } = await sb.auth.signUp({ email: email.trim().toLowerCase(), password: senha, options: { emailRedirectTo: destino, data: { nome: nome.trim().slice(0, 80) } } });
+      if (error) {
+        if (/fetch|network/i.test(error.message)) return MSG.rede;
+        if (/not allowed|disabled/i.test(error.message)) return 'O cadastro está fechado no momento. Fale com o suporte do Quaru.';
+        if (/password/i.test(error.message)) return 'Senha fraca: use pelo menos 8 caracteres, com letras e números.';
+        if (/rate|seconds/i.test(error.message)) return 'Muitas tentativas. Espere um minuto e tente de novo.';
+        return 'Não deu para criar a conta. Confira o e-mail e tente de novo.';
+      }
+      // Com confirmação de e-mail ligada, não há sessão ainda: a pessoa confirma pelo link e depois entra.
+      if (data.session) return null;
+      return null;
+    },
     esqueci: async (email) => {
       if (!sb) return null;
       const destino = typeof window !== 'undefined' && window.location ? `${window.location.origin}${process.env.EXPO_PUBLIC_BASE_URL ?? '/quaru'}/` : undefined;
@@ -123,7 +142,7 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
 /** Sem provedor (modo local e testes): sessão "local", sempre pronta, sem conta. */
 const LOCAL: CtxSessao = {
   modo: 'local', pronta: true, usuario: null, acesso: null, aviso: null, link: null, trocarSenha: false,
-  entrar: async () => null, esqueci: async () => null, definirSenha: async () => null, sair: async () => {}, limparLink: () => {},
+  entrar: async () => null, criarConta: async () => null, esqueci: async () => null, definirSenha: async () => null, sair: async () => {}, limparLink: () => {},
 };
 export function useSessao(): CtxSessao {
   return use(Ctx) ?? LOCAL;

@@ -1,3 +1,4 @@
+import type { PlanoConta } from '@/dominio/plano';
 import type { PreferenciaDescanso } from '@/dominio/descanso';
 import { nomeVazio } from '@/dominio/validacao';
 import { criarArmazenamento, type Armazenamento, type Modo } from '@/servicos/armazenamento';
@@ -43,6 +44,8 @@ export interface Estado {
   vinculos?: Vinculo[];
   /** v0.10: convites de treinador esperando resposta; ID de aluno da conta; o resumo já publicado. */
   convites?: Convite[];
+  /** v0.12: o plano da conta, como o servidor respondeu da última vez (reconferido localmente pelas datas). */
+  plano?: PlanoConta | null;
   idAluno?: string | null;
   evolucaoEnviada?: string | null;
   vinculoPendente?: string | null;
@@ -152,6 +155,7 @@ export const acoes = {
   },
   /** v0.8: treinos do treinador vindos do servidor (troca o conjunto inteiro; não entra na fila de envio). */
   receberConvites: (e: Estado, convites: Convite[]): Estado => ({ ...e, convites }),
+  receberPlano: (e: Estado, plano: PlanoConta | null): Estado => ({ ...e, plano }),
   guardarIdAluno: (e: Estado, id: string | null): Estado => ({ ...e, idAluno: id }),
   marcarEvolucaoEnviada: (e: Estado, ass: string | null): Estado => ({ ...e, evolucaoEnviada: ass }),
   receberTreinosDoTreinador: (e: Estado, vinculos: Vinculo[], treinos: TreinoAtribuido[]): Estado => {
