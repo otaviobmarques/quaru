@@ -1,3 +1,4 @@
+import { BASE } from '@/config/endereco';
 /**
  * Atualização da versão web/PWA (v0.4.1). O service worker novo instala e fica em espera; o app mostra
  * "Nova versão disponível" e, ao tocar em "Atualizar agora", manda ATUALIZAR (skipWaiting) e recarrega quando o
@@ -5,7 +6,7 @@
  */
 export type EstadoAtualizacao = 'indisponivel' | 'atualizado' | 'verificando' | 'nova-versao' | 'erro';
 export const suportaAtualizacao = typeof navigator !== 'undefined' && 'serviceWorker' in navigator;
-const ESCOPO = '/quaru/';
+const ESCOPO = BASE;
 
 const registro = async () => (suportaAtualizacao ? (await navigator.serviceWorker.getRegistration(ESCOPO)) ?? null : null);
 

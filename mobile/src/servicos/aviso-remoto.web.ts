@@ -1,4 +1,5 @@
 import { supabase } from '@/servicos/supabase';
+import { BASE } from '@/config/endereco';
 import { novoId } from '@/servicos/id';
 
 /**
@@ -25,7 +26,7 @@ async function chamar(corpo: Record<string, unknown>): Promise<Record<string, un
   const { data, error } = await sb.functions.invoke('aviso-descanso', { body: corpo });
   return error ? null : (data as Record<string, unknown>);
 }
-async function registro() { return navigator.serviceWorker.getRegistration('/quaru/').then((r) => r ?? navigator.serviceWorker.ready); }
+async function registro() { return navigator.serviceWorker.getRegistration(BASE).then((r) => r ?? navigator.serviceWorker.ready); }
 
 export async function situacaoAvisoRemoto(): Promise<SituacaoAvisoRemoto> {
   if (!supabase()) return 'sem-suporte';

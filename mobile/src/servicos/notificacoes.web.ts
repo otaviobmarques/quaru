@@ -1,4 +1,5 @@
 import type { ResultadoPermissao } from './notificacoes';
+import { BASE } from '@/config/endereco';
 
 /** Web: só pede a permissão do navegador quando a pessoa ativa um lembrete (nunca antes). */
 export async function pedirPermissaoNotificacao(): Promise<ResultadoPermissao> {
@@ -23,7 +24,7 @@ const hojeLocal = () => { const d = new Date(); return `${d.getFullYear()}-${d.g
 async function mostrar(titulo: string, corpo: string) {
   try {
     const reg = await navigator.serviceWorker?.getRegistration?.();
-    if (reg?.showNotification) { await reg.showNotification(titulo, { body: corpo, icon: '/quaru/icones/icone-192.png', tag: titulo }); return; }
+    if (reg?.showNotification) { await reg.showNotification(titulo, { body: corpo, icon: `${BASE}icones/icone-192.png`, tag: titulo }); return; }
   } catch { /* cai para a Notification simples */ }
   try { new Notification(titulo, { body: corpo }); } catch { /* sem suporte */ }
 }

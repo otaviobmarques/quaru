@@ -31,7 +31,7 @@ describe('aviso-descanso: regras', () => {
     const [h, c, s] = jwt.split('.');
     const dec = (x: string) => JSON.parse(Buffer.from(x, 'base64url').toString());
     expect(dec(h)).toEqual({ typ: 'JWT', alg: 'ES256' });
-    expect(dec(c)).toEqual({ aud: 'https://web.push.apple.com', exp: 4600, sub: 'https://otaviobmarques.github.io/quaru/' });
+    expect(dec(c)).toEqual({ aud: 'https://web.push.apple.com', exp: 4600, sub: 'https://app.quaru.com.br/' });
     const ok = await crypto.subtle.verify({ name: 'ECDSA', hash: 'SHA-256' }, par.publicKey, Buffer.from(s, 'base64url'), new TextEncoder().encode(`${h}.${c}`));
     expect(ok).toBe(true);
   });

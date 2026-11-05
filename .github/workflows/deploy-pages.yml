@@ -28,33 +28,13 @@ jobs:
       # Padrão: o projeto Supabase "quaru". As variáveis do repositório (Settings → Secrets and variables → Actions →
       # Variables), se existirem, têm prioridade. São valores PÚBLICOS (URL do projeto e chave anon, protegida pela
       # RLS); a service_role NUNCA entra aqui.
-      - name: Export web (baseUrl /quaru vem de experiments.baseUrl no app.json)
+      # v0.12.1: o app mudou para a Vercel (https://app.quaru.com.br). Este endereço antigo continua no ar só para a
+      # pessoa levar os dados do aparelho para o novo (botão "Levar meus dados"). Mesmo script de build da Vercel.
+      - name: Montar a versão web (endereço antigo, em /quaru)
         env:
-          EXPO_PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://gnmbrcdqljhtoxxkuekz.supabase.co' }}
-          EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdubWJyY2RxbGpodG94eGt1ZWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM1NTY1MjQsImV4cCI6MjEwOTEzMjUyNH0.K3dqSYthWnC2NhLQ6TAVQJhXkwJB2vPZu-ps72Ud2YA' }}
-        run: |
-          node scripts/gerar-novidades.mjs
-          npx expo export --platform web --output-dir dist
-      - name: Pós-export (manifest, service worker, 404.html)
-        run: node scripts/pos-export-web.mjs dist
-      - name: Animações de exercícios e .nojekyll
-        run: |
-          mkdir -p dist/exercicios
-          cp -r --update=none public/exercicios/. dist/exercicios/
-          touch dist/.nojekyll
-          test -f dist/index.html
-      - name: Painel de administração (/quaru/admin/) e área do treinador (/quaru/treinador/)
-        env:
-          SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://gnmbrcdqljhtoxxkuekz.supabase.co' }}
-          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdubWJyY2RxbGpodG94eGt1ZWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM1NTY1MjQsImV4cCI6MjEwOTEzMjUyNH0.K3dqSYthWnC2NhLQ6TAVQJhXkwJB2vPZu-ps72Ud2YA' }}
-          URL_APP: ${{ vars.URL_APP || 'https://otaviobmarques.github.io/quaru/' }}
-        run: |
-          mkdir -p dist/admin dist/treinador
-          cp -r ../admin/. dist/admin/
-          node ../scripts/gerar-catalogo-treinador.mjs
-          cp -r ../treinador/. dist/treinador/
-          node -e "const v={supabaseUrl:process.env.SUPABASE_URL||'',supabaseAnonKey:process.env.SUPABASE_ANON_KEY||'',urlApp:process.env.URL_APP||''};const t='window.QUARU_ADMIN = '+JSON.stringify(v)+';\n';require('fs').writeFileSync('dist/admin/config.js',t);require('fs').writeFileSync('dist/treinador/config.js',t)"
-          test -f dist/admin/index.html && test -f dist/treinador/index.html && test -f dist/treinador/catalogo.json
+          EXPO_PUBLIC_BASE_URL: /quaru
+          URL_APP: https://app.quaru.com.br/
+        run: bash ../scripts/build-web.sh
       - uses: actions/upload-pages-artifact@v3
         with:
           path: mobile/dist

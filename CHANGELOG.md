@@ -1,6 +1,12 @@
 # Changelog
 Formato Keep a Changelog.
 
+## [0.12.1] – 2026-11-05
+### Mudado
+- **O app mudou para https://app.quaru.com.br** (Vercel), com o painel admin em /admin e a área do treinador em /treinador. O código pode ficar em repositório privado.
+- No endereço antigo (GitHub Pages) aparece o aviso "O Quaru mudou de endereço", com **Levar meus dados**: abre o endereço novo e passa os treinos, o peso e o resto que está no aparelho, sem passar por servidor. Plano B: **Baixar meus dados** e escolher o arquivo no endereço novo (tela "Trazer meus dados").
+- Convites e links de redefinir senha levam ao endereço novo.
+
 ## [0.12.0] – 2026-11-05
 ### Adicionado
 - **Planos de assinatura**: Mensal (R$ 19,90), Trimestral (R$ 49,90, sai R$ 16,63/mês) e Anual (R$ 179,90, sai R$ 14,99/mês). Pagamento pelo Asaas, com Pix, boleto ou cartão, na página de cobrança dele (o Quaru não vê dados de cartão nem guarda CPF). Renova sozinho; dá para cancelar no app e treinar até o fim do período pago.

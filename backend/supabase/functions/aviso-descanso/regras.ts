@@ -45,7 +45,7 @@ export const b64url = (b: ArrayBuffer | Uint8Array) => {
 const texto = (o: unknown) => b64url(new TextEncoder().encode(JSON.stringify(o)));
 
 /** JWT VAPID (ES256) para o serviço de push. `sub` é o endereço do app (sem e-mail de ninguém). */
-export async function jwtVapid(endpoint: string, privada: CryptoKey, agoraS = Math.floor(Date.now() / 1000), sub = 'https://otaviobmarques.github.io/quaru/') {
+export async function jwtVapid(endpoint: string, privada: CryptoKey, agoraS = Math.floor(Date.now() / 1000), sub = 'https://app.quaru.com.br/') {
   const aud = new URL(endpoint).origin;
   const corpo = `${texto({ typ: 'JWT', alg: 'ES256' })}.${texto({ aud, exp: agoraS + 3600, sub })}`;
   const sig = await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, privada, new TextEncoder().encode(corpo));
