@@ -1,12 +1,12 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { ActivityIndicator, Linking, Platform, Pressable, ScrollView, Text, useColorScheme, useWindowDimensions, View } from 'react-native';
+import { AccessibilityInfo, ActivityIndicator, Animated, Easing, Linking, Platform, Pressable, ScrollView, Text, useColorScheme, useWindowDimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle, Path, SvgXml } from 'react-native-svg';
 
 import { BotaoGoogle } from '@/componentes/botao-google';
 import { InstalarApp } from '@/componentes/instalar-app';
-import { Ilustracao } from '@/componentes/ilustracoes';
+import { Mascote } from '@/componentes/mascote';
 import { AssinaturaDomma } from '@/componentes/simbolo-domma';
 import { Aviso, Botao, Campo, LARGURA_COLUNA, Texto } from '@/componentes/ui';
 import { LOGO_CLARO } from '@/config/logo-gerado';
@@ -115,17 +115,68 @@ function Separador({ texto }: { texto: string }) {
 }
 
 /** Vitrine do computador: adesivo amarelo e ilustração num bloco (prancha v3.2). Decorativa. */
+/** Flutua devagar (sobe e desce). Parado para quem pediu menos movimento no sistema. */
+function Flutuar({ children, atraso = 0, distancia = 8, duracao = 3200 }: { children: ReactNode; atraso?: number; distancia?: number; duracao?: number }) {
+  const [v] = useState(() => new Animated.Value(0));
+  useEffect(() => {
+    let laco: Animated.CompositeAnimation | null = null;
+    let vivo = true;
+    AccessibilityInfo.isReduceMotionEnabled().then((calmo) => {
+      if (!vivo || calmo) return;
+      laco = Animated.loop(Animated.sequence([
+        Animated.delay(atraso),
+        Animated.timing(v, { toValue: 1, duration: duracao / 2, easing: Easing.inOut(Easing.sin), useNativeDriver: Platform.OS !== 'web' }),
+        Animated.timing(v, { toValue: 0, duration: duracao / 2, easing: Easing.inOut(Easing.sin), useNativeDriver: Platform.OS !== 'web' }),
+      ]));
+      laco.start();
+    }).catch(() => {});
+    return () => { vivo = false; laco?.stop(); };
+  }, [v, atraso, duracao]);
+  return <Animated.View style={{ transform: [{ translateY: v.interpolate({ inputRange: [0, 1], outputRange: [0, -distancia] }) }] }}>{children}</Animated.View>;
+}
+
+/** Selo flutuante de destaque (ex.: "1:00 · descanso"). */
+function Ficha({ valor, rotulo, fundo }: { valor: string; rotulo: string; fundo?: string }) {
+  return (
+    <View style={{ backgroundColor: fundo ?? '#FFFFFF', borderWidth: 2.5, borderColor: apoio['sobre-energia'], borderRadius: 16, paddingHorizontal: 14, paddingVertical: 8,
+      shadowColor: apoio['sobre-energia'], shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 4, height: 4 } }}>
+      <Text style={{ color: '#14141A', fontSize: 20, lineHeight: 24, fontWeight: '800' }}>{valor}</Text>
+      <Text style={{ color: '#5C5257', fontSize: 12, lineHeight: 16, fontWeight: '600' }}>{rotulo}</Text>
+    </View>
+  );
+}
+
+const DESTAQUES = ['Treino do dia montado pra você (musculação e cardio)', 'Cronômetro de descanso que não pausa a sua música', 'Agenda da semana, evolução do peso e recordes', 'Seu treinador acompanha tudo de perto'];
+
+/** v0.12.1: vitrine da tela de entrar no computador: mascote, destaques flutuando e o que o app faz. */
 function Vitrine() {
   const ft = useFonteTitulo();
   return (
-    <View style={{ width: 340, gap: espaco[3], paddingTop: espaco[12] }}>
-      <View style={{ alignSelf: 'flex-start', transform: [{ rotate: '-3deg' }], backgroundColor: apoio.energia, borderWidth: 2, borderColor: apoio['sobre-energia'], borderRadius: 10, paddingHorizontal: 14, paddingVertical: 6,
-        shadowColor: apoio['sobre-energia'], shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 3, height: 3 } }}>
-        <Text style={{ color: apoio['sobre-energia'], fontSize: 15, lineHeight: 20, ...ft }}>Treino, água e comida num lugar só</Text>
+    <View style={{ width: 480, gap: espaco[5], paddingTop: espaco[10] }} testID="vitrine-entrar">
+      <View style={{ alignSelf: 'flex-start', transform: [{ rotate: '-3deg' }], backgroundColor: apoio.energia, borderWidth: 2.5, borderColor: apoio['sobre-energia'], borderRadius: 12, paddingHorizontal: 16, paddingVertical: 8,
+        shadowColor: apoio['sobre-energia'], shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 4, height: 4 } }}>
+        <Text style={{ color: apoio['sobre-energia'], fontSize: 17, lineHeight: 22, ...ft }}>7 dias grátis, sem cartão</Text>
       </View>
-      <BlocoTinta>
-        <View style={{ alignItems: 'center', padding: espaco[4] }}><Ilustracao nome="boas-vindas" descricao="Pessoa comemorando o treino" largura={280} /></View>
-      </BlocoTinta>
+      {/* Mascote no centro de um círculo, com os destaques do app flutuando em volta */}
+      <View style={{ height: 380, alignItems: 'center', justifyContent: 'center' }} accessible accessibilityLabel="Mascote do Quaru acenando, com destaques do app: descanso de 1 minuto, 5 dias seguidos, 1,45 litro de água e menos 1,6 quilo">
+        <View style={{ position: 'absolute', width: 320, height: 320, borderRadius: 160, backgroundColor: '#FFFFFF', borderWidth: 2.5, borderColor: apoio['sobre-energia'],
+          shadowColor: apoio['sobre-energia'], shadowOpacity: 1, shadowRadius: 0, shadowOffset: { width: 6, height: 6 } }} />
+        <Flutuar distancia={12} duracao={2600}><Mascote tamanho={230} /></Flutuar>
+        <View style={{ position: 'absolute', left: 0, top: 40 }}><Flutuar atraso={300}><Ficha valor="⏱ 1:00" rotulo="descanso entre séries" /></Flutuar></View>
+        <View style={{ position: 'absolute', right: 0, top: 96 }}><Flutuar atraso={900}><Ficha valor="🔥 5 dias" rotulo="seguidos treinando" fundo={apoio.energia} /></Flutuar></View>
+        <View style={{ position: 'absolute', left: 12, bottom: 44 }}><Flutuar atraso={1500}><Ficha valor="💧 1,45 L" rotulo="de água hoje" /></Flutuar></View>
+        <View style={{ position: 'absolute', right: 20, bottom: 18 }}><Flutuar atraso={600}><Ficha valor="📈 −1,6 kg" rotulo="em 3 semanas" /></Flutuar></View>
+      </View>
+      <View style={{ gap: espaco[2] }}>
+        {DESTAQUES.map((t) => (
+          <View key={t} style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+            <View style={{ width: 24, height: 24, borderRadius: 12, backgroundColor: apoio.energia, borderWidth: 2, borderColor: apoio['sobre-energia'], alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={{ color: apoio['sobre-energia'], fontSize: 13, fontWeight: '900' }}>✓</Text>
+            </View>
+            <Text style={{ color: '#14141A', fontSize: 17, lineHeight: 24, fontWeight: '600', flex: 1 }}>{t}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
@@ -190,6 +241,11 @@ export default function Entrar() {
                   </View>
                 </View>
               </BlocoTinta>
+              {!largo && (
+                <View style={{ position: 'absolute', right: espaco[3], top: espaco[3] }} pointerEvents="none">
+                  <Flutuar distancia={6}><Mascote tamanho={96} /></Flutuar>
+                </View>
+              )}
               {marca.slogan ? (
                 <Text testID="slogan" accessibilityRole="header" aria-level={1}
                   style={{ color: c.texto, ...ft, fontSize: tituloGrande, lineHeight: tituloGrande * 1.02, letterSpacing: -0.02 * tituloGrande }}>
