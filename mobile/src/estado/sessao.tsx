@@ -2,6 +2,7 @@ import { createContext, use, useEffect, useState, type ReactNode } from 'react';
 import type { Session } from '@supabase/supabase-js';
 
 import { supabase, tipoLinkInicial } from '@/servicos/supabase';
+import { BASE } from '@/config/endereco';
 
 /**
  * Sessão da conta (v0.6, ADR-0022). Sem Supabase configurado, `modo` = 'local' e nada muda no app.
@@ -107,7 +108,7 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
       if (!sb) return null;
       if (senha.length < SENHA_MINIMA) return MSG.senhaCurta;
       if (!/[A-Za-zÀ-ÿ]/.test(senha) || !/\d/.test(senha)) return 'Use letras e números na senha.';
-      const destino = typeof window !== 'undefined' && window.location ? `${window.location.origin}${process.env.EXPO_PUBLIC_BASE_URL ?? '/quaru'}/` : undefined;
+      const destino = typeof window !== 'undefined' && window.location ? `${window.location.origin}${BASE}` : undefined;
       const { data, error } = await sb.auth.signUp({ email: email.trim().toLowerCase(), password: senha, options: { emailRedirectTo: destino, data: { nome: nome.trim().slice(0, 80) } } });
       if (error) {
         if (/fetch|network/i.test(error.message)) return MSG.rede;
@@ -122,7 +123,7 @@ export function ProvedorSessao({ children }: { children: ReactNode }) {
     },
     esqueci: async (email) => {
       if (!sb) return null;
-      const destino = typeof window !== 'undefined' && window.location ? `${window.location.origin}${process.env.EXPO_PUBLIC_BASE_URL ?? '/quaru'}/` : undefined;
+      const destino = typeof window !== 'undefined' && window.location ? `${window.location.origin}${BASE}` : undefined;
       const { error } = await sb.auth.resetPasswordForEmail(email.trim().toLowerCase(), { redirectTo: destino });
       return error && /fetch|network/i.test(error.message) ? MSG.rede : null; // não revela se o e-mail tem conta
     },

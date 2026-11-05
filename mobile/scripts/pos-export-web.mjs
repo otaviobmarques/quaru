@@ -5,11 +5,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSy
 import { dirname, join, relative, sep } from 'node:path';
 
 const dist = process.argv[2] ?? 'dist';
-const BASE = '/quaru/'; // igual a experiments.baseUrl do app.json
+// v0.12.1: mesmo endereço base do build (EXPO_PUBLIC_BASE_URL): "/quaru" no GitHub Pages, "" na Vercel.
+const BASE = `${process.env.EXPO_PUBLIC_BASE_URL ?? '/quaru'}/`;
 const idx = join(dist, 'index.html');
-const SITE = 'https://otaviobmarques.github.io' + BASE;
+const SITE = (process.env.URL_APP || 'https://otaviobmarques.github.io/quaru/').replace(/\/?$/, '/');
 const TITULO = 'Quaru · Seu treino, no seu ritmo.';
-const DESCRICAO = 'Registre seus treinos, acompanhe a evolução, a água e a alimentação. Acesso por convite.';
+const DESCRICAO = 'Treino do dia, cronômetro de descanso, agenda, água e evolução. Comece com 7 dias grátis.';
 let html = readFileSync(idx, 'utf8');
 if (!html.includes('manifest.webmanifest')) {
   html = html.replace(/<meta name="description"[^>]*>/g, '').replace('<html lang="en">', '<html lang="pt-BR">').replace(/<title>[^<]*<\/title>/, '<title>Quaru · Seu treino, no seu ritmo.</title>').replace(/<noscript>[^<]*<\/noscript>/, '<noscript>Ative o JavaScript para usar o Quaru.</noscript>').replace('</head>', [

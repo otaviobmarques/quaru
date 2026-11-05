@@ -1,4 +1,5 @@
 import { Platform, type ImageSourcePropType } from 'react-native';
+import { BASE } from '@/config/endereco';
 
 import { doCatalogo } from './biblioteca';
 import { imagemDoExercicio } from './imagens-exercicios';
@@ -9,7 +10,7 @@ import { imagemDoExercicio } from './imagens-exercicios';
  * baixadas sob demanda (o service worker guarda as que a pessoa abriu). As 22 fotos antigas seguem no pacote.
  * No app nativo, a origem vem de EXPO_PUBLIC_MIDIA_URL; sem ela, só as 22 fotos do pacote aparecem.
  */
-const BASE_WEB = '/quaru/exercicios/';
+const BASE_WEB = `${BASE}exercicios/`;
 let baseForcada: string | null | undefined;
 /** Só para testes e capturas: força a origem das mídias (undefined volta ao padrão). */
 export const definirBaseMidia = (b: string | null | undefined) => { baseForcada = b; };

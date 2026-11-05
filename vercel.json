@@ -1,0 +1,28 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd mobile && npm ci",
+  "buildCommand": "EXPO_PUBLIC_BASE_URL= URL_APP=https://app.quaru.com.br/ bash scripts/build-web.sh",
+  "outputDirectory": "mobile/dist",
+  "framework": null,
+  "redirects": [
+    { "source": "/admin", "destination": "/admin/", "permanent": true },
+    { "source": "/treinador", "destination": "/treinador/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/((?!admin/|treinador/|exercicios/|_expo/|assets/|icones/).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
+        { "key": "Permissions-Policy", "value": "camera=(self), microphone=(), geolocation=(), interest-cohort=()" }
+      ]
+    },
+    { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+    { "source": "/_expo/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/exercicios/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000" }] }
+  ]
+}

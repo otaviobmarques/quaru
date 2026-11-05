@@ -13,6 +13,7 @@ import { chaveAniversario, enviarAniversario } from '@/servicos/aniversario';
 import { buscarDoTreinador, meuIdAluno, meusConvites, publicarEvolucao } from '@/servicos/treinador';
 import { assinatura, montarResumo } from '@/dominio/evolucao';
 import { buscarPlano } from '@/servicos/assinatura';
+import { AvisoNovoEndereco } from '@/componentes/aviso-novo-endereco';
 import { ARQUIVOS_FONTES } from '@/tema/fontes';
 import { useFonts } from 'expo-font';
 
@@ -32,7 +33,7 @@ function Lembretes() {
 }
 
 /** Rotas abertas sem login quando a conta é obrigatória (v0.6). */
-const ROTAS_ABERTAS = ['/', '/entrar', '/criar-conta', '/definir-senha', '/juridico', '/vincular'];
+const ROTAS_ABERTAS = ['/', '/entrar', '/criar-conta', '/definir-senha', '/juridico', '/vincular', '/receber-dados'];
 /** v0.6: com conta obrigatória, qualquer endereço do app sem sessão ativa volta para a tela de entrar. */
 function GuardaConta() {
   const s = useSessao();
@@ -145,6 +146,7 @@ export default function Layout() {
         <SincronizarTreinador />
         <SincronizarAniversario />
         <PublicarEvolucao />
+        <AvisoNovoEndereco />
         <Stack screenOptions={{ headerShown: false }} />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>

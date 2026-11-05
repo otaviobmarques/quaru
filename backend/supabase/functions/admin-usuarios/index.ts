@@ -3,16 +3,16 @@
 // a service_role, que existe apenas aqui no servidor (variável SUPABASE_SERVICE_ROLE_KEY, nunca no navegador nem no app).
 //
 // Variáveis (Painel do Supabase → Edge Functions → Secrets):
-//   ORIGENS_ADMIN  (opcional) endereços que podem chamar, separados por vírgula. Padrão: https://otaviobmarques.github.io
-//   URL_APP        (opcional) para onde o convite leva para criar a senha. Padrão: https://otaviobmarques.github.io/quaru/
+//   ORIGENS_ADMIN  (opcional) endereços que podem chamar, separados por vírgula. Padrão: https://app.quaru.com.br e o antigo (GitHub Pages)
+//   URL_APP        (opcional) para onde o convite leva para criar a senha. Padrão: https://app.quaru.com.br/
 // SUPABASE_URL, SUPABASE_ANON_KEY e SUPABASE_SERVICE_ROLE_KEY já vêm prontas no Supabase.
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4';
 import { lerPedido, recusar, recusarTreinador, type PerfilResumo } from './regras.ts';
 
 const env = (k: string) => Deno.env.get(k) ?? '';
 // Padrões do site publicado (valores públicos); as variáveis, se existirem, têm prioridade.
-const ORIGENS = (env('ORIGENS_ADMIN') || 'https://otaviobmarques.github.io').split(',').map((s) => s.trim()).filter(Boolean);
-const URL_APP = env('URL_APP') || 'https://otaviobmarques.github.io/quaru/';
+const ORIGENS = (env('ORIGENS_ADMIN') || 'https://app.quaru.com.br,https://otaviobmarques.github.io').split(',').map((s) => s.trim()).filter(Boolean);
+const URL_APP = env('URL_APP') || 'https://app.quaru.com.br/';
 const BANIDO = '876000h'; // ~100 anos: o Auth recusa login e renovação do token
 
 function cabecalhos(origem: string | null): Record<string, string> {

@@ -8,7 +8,7 @@ import { b64url, jwtVapid, lerPedido, proximoPasso } from './regras.ts';
 
 declare const EdgeRuntime: { waitUntil(p: Promise<unknown>): void };
 const env = (k: string) => Deno.env.get(k) ?? '';
-const ORIGENS = (env('ORIGENS_ADMIN') || 'https://otaviobmarques.github.io').split(',').map((s) => s.trim()).filter(Boolean);
+const ORIGENS = (env('ORIGENS_ADMIN') || 'https://app.quaru.com.br,https://otaviobmarques.github.io').split(',').map((s) => s.trim()).filter(Boolean);
 const URL_FUNCAO = `${env('SUPABASE_URL')}/functions/v1/aviso-descanso`;
 const MAX_INSCRICOES = 5;
 
