@@ -13,7 +13,7 @@ node scripts/gerar-novidades.mjs
 npx expo export --platform web --output-dir dist
 node scripts/pos-export-web.mjs dist
 mkdir -p dist/exercicios
-cp -r --update=none public/exercicios/. dist/exercicios/
+cp -rn public/exercicios/. dist/exercicios/ || true
 touch dist/.nojekyll
 mkdir -p dist/admin dist/treinador
 cp -r ../admin/. dist/admin/
