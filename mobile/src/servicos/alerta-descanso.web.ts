@@ -1,18 +1,29 @@
 /**
- * Sons do treino na WEB (ADR-0013, revisto na v0.11).
+ * Sons do treino na WEB (ADR-0013, revisto na v0.11 e na v0.12.2).
  * - Antes: <audio> com descanso.wav. No iPhone isso tomava a sessão de áudio e PAUSAVA a música (Spotify etc.).
- * - Agora: sons sintetizados pelo Web Audio, com navigator.audioSession.type = 'transient' (Safari 16.4+), que toca
+ * - Agora: sons sintetizados pelo Web Audio, com navigator.audioSession (Safari 16.4+; tipo abaixo), que toca
  *   por cima da música sem interromper. No Android/Chrome o Web Audio já não pausa a música.
  *   Observação: no iPhone, com a chave do silencioso ligada, esse tipo de som não toca (fica a notificação).
+ * - v0.12.2: ainda havia relato de a música parar. Duas causas no iPhone: 'transient' pode abaixar/pausar a música
+ *   enquanto o áudio do app está ativo, e o AudioContext ficava LIGADO o treino todo (depois do primeiro toque),
+ *   segurando a sessão de áudio. Agora: tipo 'ambient' (só mistura, nunca interrompe nem abaixa) e o contexto é
+ *   suspenso logo depois de cada som, devolvendo o áudio para a música.
  * - Vibra com navigator.vibrate onde existe (Android). O AudioContext é "destravado" num toque (exigência dos navegadores).
  */
 type ComSessao = Navigator & { audioSession?: { type: string } };
 let ctx: AudioContext | null = null;
+let soltar: ReturnType<typeof setTimeout> | null = null;
+
+/** Suspende o contexto depois de `ms` (sem som tocando), para não segurar a sessão de áudio do aparelho. */
+function soltarDepois(ms: number) {
+  if (soltar) clearTimeout(soltar);
+  soltar = setTimeout(() => { soltar = null; try { if (ctx && ctx.state === 'running') ctx.suspend().catch(() => {}); } catch { /* ignora */ } }, ms);
+}
 
 function contexto(): AudioContext | null {
   try {
     const nav = (typeof navigator !== 'undefined' ? navigator : undefined) as ComSessao | undefined;
-    if (nav?.audioSession) { try { nav.audioSession.type = 'transient'; } catch { /* navegador sem suporte */ } }
+    if (nav?.audioSession) { try { nav.audioSession.type = 'ambient'; } catch { /* navegador sem suporte */ } }
     if (!ctx) {
       const C = (globalThis as { AudioContext?: typeof AudioContext; webkitAudioContext?: typeof AudioContext }).AudioContext
         ?? (globalThis as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -38,6 +49,8 @@ function tocar(notas: [number, number, number][], volume = 0.35) {
     o.connect(g).connect(c.destination);
     o.start(t0 + ini); o.stop(t0 + ini + dur + 0.05);
   }
+  const fim = Math.max(...notas.map(([, ini, dur]) => ini + dur));
+  soltarDepois(Math.round((fim + 0.4) * 1000));
 }
 const vibrar = (p: number[]) => { try { if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') navigator.vibrate(p); } catch { /* sem suporte */ } };
 
@@ -46,6 +59,7 @@ export function prepararAlertaDescanso() {
   const c = contexto();
   if (!c) return;
   try { const o = c.createOscillator(); const g = c.createGain(); g.gain.value = 0; o.connect(g).connect(c.destination); o.start(); o.stop(c.currentTime + 0.01); } catch { /* ignora */ }
+  soltarDepois(300);
 }
 
 /** Fim do descanso: três bipes (Lá5) e vibração. */
