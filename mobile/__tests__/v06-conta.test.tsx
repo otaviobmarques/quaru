@@ -9,6 +9,7 @@ const mockSessao = { modo: 'conta', pronta: true, usuario: null as { id: string;
   entrar: jest.fn(async () => null as string | null), esqueci: jest.fn(async () => null), definirSenha: jest.fn(async () => null), sair: jest.fn(async () => {}), limparLink: jest.fn() };
 jest.mock('@/estado/sessao', () => ({ ...jest.requireActual('@/estado/sessao'), useSessao: () => mockSessao }));
 jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn() }, useLocalSearchParams: () => ({}) }));
+const router = jest.requireMock('expo-router').router as Record<string, jest.Mock>;
 const mockRouter = jest.requireMock('expo-router').router as Record<string, jest.Mock>;
 const mockCofre = new Map<string, string>();
 jest.mock('expo-secure-store', () => ({
@@ -27,12 +28,12 @@ const montar = (ui: React.ReactElement) => render(
 beforeEach(() => { jest.clearAllMocks(); mockSessao.aviso = null; mockSessao.usuario = null; mockSessao.trocarSenha = false; mockSessao.entrar.mockImplementation(async () => null); });
 
 describe('tela de entrar com conta obrigatória', () => {
-  it('não tem "Continuar sem conta", "Criar conta" nem Google; explica que é por convite', async () => {
+  it('não tem "Continuar sem conta" nem Google; v0.12: "Criar conta · 7 dias grátis" leva ao cadastro', async () => {
     await montar(<Entrar />);
     expect(screen.queryByTestId('continuar')).toBeNull();
-    expect(screen.queryByTestId('criar-conta')).toBeNull();
     expect(screen.queryByTestId('botao-google')).toBeNull();
-    expect(screen.getByText(/acesso ao Quaru é por convite/)).toBeTruthy();
+    await fireEvent.press(screen.getByTestId('criar-conta'));
+    expect(router.push).toHaveBeenCalledWith('/criar-conta');
     expect(screen.getByTestId('campo-email').props.editable).toBe(true);
   });
   it('Entrar chama o login com e-mail e senha e volta para o início', async () => {

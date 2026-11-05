@@ -13,9 +13,9 @@ beforeEach(async () => {
 });
 
 describe('perfis e administrador (v0.6)', () => {
-  it('todo usuário novo ganha perfil "usuario" BLOQUEADO (só o convite do painel ativa)', async () => {
+  it('todo usuário novo ganha perfil "usuario" ATIVO (v0.12: autocadastro com teste grátis; antes nascia bloqueado)', async () => {
     const r = await db.query<{ papel: string; ativo: boolean }>(`select papel, ativo from public.perfis where usuario_id = $1`, [A]);
-    expect(r.rows[0]).toEqual({ papel: 'usuario', ativo: false });
+    expect(r.rows[0]).toEqual({ papel: 'usuario', ativo: true });
   });
   it('permissões como no Supabase real: sem TRUNCATE/DELETE, anon sem acesso, tornar_admin fechada', async () => {
     const r = await db.query<Record<string, boolean>>(`select
@@ -31,7 +31,7 @@ describe('perfis e administrador (v0.6)', () => {
   });
   it('meu_acesso devolve papel e situação do próprio perfil', async () => {
     const r = await como(db, A, (q) => q<{ a: { papel: string; ativo: boolean } }>(`select public.meu_acesso() as a`));
-    expect(r.rows[0].a).toEqual({ papel: 'usuario', ativo: false });
+    expect(r.rows[0].a).toEqual({ papel: 'usuario', ativo: true });
     const adm = await como(db, ADMIN, (q) => q<{ ok: boolean }>(`select public.eh_admin() as ok`));
     expect(adm.rows[0].ok).toBe(true);
   });

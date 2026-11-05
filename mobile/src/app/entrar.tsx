@@ -45,7 +45,7 @@ function BlocoTinta({ children, raio: r = raio.grande * 1.5, fundo, girar, estil
  * Botão de conta ainda indisponível (v3.2): contorno tracejado e texto suave, em vez de botão apagado com opacidade.
  * Continua focável e anuncia "desativado" (ADR-0019); o toque não faz nada.
  */
-function BotaoConta({ titulo, desabilitado, carregando, testID }: { titulo: string; desabilitado?: boolean; carregando?: boolean; testID: string }) {
+function BotaoConta({ titulo, desabilitado, carregando, testID, onPress }: { titulo: string; desabilitado?: boolean; carregando?: boolean; testID: string; onPress?: () => void }) {
   const b = useCoresBase();
   const inativo = desabilitado || carregando;
   const ref = useRef<import('react-native').View | null>(null) as unknown as React.RefObject<never>;
@@ -55,7 +55,7 @@ function BotaoConta({ titulo, desabilitado, carregando, testID }: { titulo: stri
     if (inativo) el.setAttribute('aria-disabled', 'true'); else el.removeAttribute?.('aria-disabled');
   }, [inativo]);
   return (
-    <Pressable ref={ref} testID={testID} accessibilityRole="button" accessibilityLabel={titulo} accessibilityState={{ disabled: !!inativo, busy: !!carregando }} onPress={() => {}}
+    <Pressable ref={ref} testID={testID} accessibilityRole="button" accessibilityLabel={titulo} accessibilityState={{ disabled: !!inativo, busy: !!carregando }} onPress={() => { if (!inativo) onPress?.(); }}
       style={{ minHeight: 52, borderRadius: 14, borderWidth: 2, borderStyle: inativo ? 'dashed' : 'solid', borderColor: inativo ? b['texto-suave'] : b.primaria,
         alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8, paddingHorizontal: 20 }}>
       {carregando && <ActivityIndicator color={b['texto-suave']} />}
@@ -220,7 +220,9 @@ export default function Entrar() {
                   </View>
                   <BotaoContinuar titulo={enviando ? 'Entrando…' : 'Entrar'} testID="entrar" onPress={entrarConta} carregando={enviando} />
                   <Separador texto="sem conta?" />
-                  <Texto v="rotulo" cor={b['texto-suave']} style={{ textAlign: 'center' }}>O acesso ao {marca.nome} é por convite. Peça o seu ao administrador: você recebe um e-mail para criar a senha.</Texto>
+                  {/* v0.12: autocadastro com 7 dias grátis, sem cartão */}
+                  <BotaoConta titulo="Criar conta · 7 dias grátis" onPress={() => router.push('/criar-conta' as never)} testID="criar-conta" />
+                  <Texto v="rotulo" cor={b['texto-suave']} style={{ textAlign: 'center' }}>Sem cartão. Depois, escolha um plano (a partir de R$ 14,99 por mês, no anual).</Texto>
                 </View>
                 ) : (
                 <View style={{ padding: espaco[4], gap: espaco[3] }} accessibilityLabel={`Entrar no ${marca.nome}`}>

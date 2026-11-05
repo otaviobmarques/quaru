@@ -41,6 +41,12 @@
 
     <!-- Painel -->
     <section id="tela-painel" hidden>
+      <div class="bloco cartao" id="bloco-cobranca">
+        <h2>Assinaturas</h2>
+        <p class="suave">Planos: Mensal R$ 19,90 · Trimestral R$ 49,90 · Anual R$ 179,90, com 7 dias grátis para toda conta nova. Admin e treinador não pagam.</p>
+        <label class="opcao"><input type="checkbox" id="cobranca-ativa"> <b>Cobrança ativa</b> <span class="suave">(desligada, ninguém é bloqueado. Ligue só depois de configurar o Asaas; quem está no teste ganha pelo menos 7 dias a partir de agora.)</span></label>
+        <p id="msg-cobranca" class="msg" role="status" aria-live="polite"></p>
+      </div>
       <div class="bloco cartao">
         <h2>Cadastrar usuário</h2>
         <fieldset class="modo">
@@ -81,7 +87,7 @@
         <p id="msg-lista" class="msg" role="status" aria-live="polite"></p>
         <div class="rolagem">
           <table>
-            <thead><tr><th scope="col">Usuário</th><th scope="col">Papel</th><th scope="col">Situação</th><th scope="col">Último acesso</th><th scope="col"><span class="sr">Ações</span></th></tr></thead>
+            <thead><tr><th scope="col">Usuário</th><th scope="col">Papel</th><th scope="col">Situação</th><th scope="col">Plano</th><th scope="col">Último acesso</th><th scope="col"><span class="sr">Ações</span></th></tr></thead>
             <tbody id="linhas"></tbody>
           </table>
         </div>

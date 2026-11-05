@@ -57,7 +57,7 @@ if (!configurado) {
     $('contagem').textContent = String(usuarios.length);
     const corpo = $('linhas');
     corpo.replaceChildren();
-    if (!lista.length) { corpo.append(el('tr', {}, el('td', { colSpan: 5, textContent: q ? 'Ninguém encontrado.' : 'Nenhum usuário ainda.' }))); return; }
+    if (!lista.length) { corpo.append(el('tr', {}, el('td', { colSpan: 6, textContent: q ? 'Ninguém encontrado.' : 'Nenhum usuário ainda.' }))); return; }
     for (const u of lista) {
       const quem = el('td', {}, el('div', { className: 'email', textContent: u.email }), ...(u.nome ? [el('div', { className: 'nome', textContent: u.nome })] : []),
         ...(u.aniversario ? [el('div', { className: 'nome', textContent: `🎂 ${u.aniversario}` })] : []));
@@ -73,6 +73,20 @@ if (!configurado) {
       }
       const situacao = el('td', {}, el('span', { className: !u.ativo ? 'selo vermelho' : 'selo cinza', textContent: !u.ativo ? 'BLOQUEADO' : u.convite_pendente ? 'CONVITE ENVIADO' : 'ATIVO' }));
       const acesso = el('td', { textContent: fmtData(u.ultimo_acesso) });
+      // v0.12: plano de assinatura e cortesia
+      const a = assinaturas.get(u.id);
+      const plano = el('td', {}, el('div', { className: 'nome', textContent: textoPlano(u, a) }));
+      if (a && u.papel === 'usuario') {
+        const cort = el('label', { className: 'nome' }); const ck = el('input', { type: 'checkbox', checked: !!a.cortesia });
+        ck.setAttribute('aria-label', `Cortesia (não paga) para ${u.email}`);
+        ck.addEventListener('change', async () => {
+          msg($('msg-lista'), 'Salvando…');
+          const { error } = await sb.rpc('admin_definir_cortesia', { p_usuario: u.id, p_cortesia: ck.checked });
+          if (error) { ck.checked = !ck.checked; return msg($('msg-lista'), 'Não foi possível salvar a cortesia.', 'erro'); }
+          a.cortesia = ck.checked; msg($('msg-lista'), ck.checked ? `${u.email} agora tem cortesia (não paga).` : `Cortesia de ${u.email} retirada.`, 'ok'); desenhar();
+        });
+        cort.append(ck, ' Cortesia'); plano.append(cort);
+      }
       const acoes = el('td', { className: 'acoes' });
       acoes.append(botao('Definir senha', 'secundario', () => definirSenha(u), `Definir nova senha de ${u.email}`));
       acoes.append(botao(u.convite_pendente ? 'Reenviar convite' : 'E-mail de senha', 'secundario', () => acao({ acao: 'reenviar', usuario_id: u.id }, u.convite_pendente ? 'Convite reenviado.' : 'E-mail para redefinir a senha enviado.'), `${u.convite_pendente ? 'Reenviar convite' : 'Enviar e-mail para redefinir a senha'} de ${u.email}`));
@@ -80,13 +94,41 @@ if (!configurado) {
         acoes.append(botao(u.ativo ? 'Bloquear' : 'Desbloquear', 'secundario', () => acao({ acao: u.ativo ? 'bloquear' : 'desbloquear', usuario_id: u.id }, u.ativo ? 'Usuário bloqueado: não consegue mais entrar.' : 'Usuário desbloqueado.'), `${u.ativo ? 'Bloquear' : 'Desbloquear'} ${u.email}`));
         acoes.append(botao('Remover', 'perigo', () => confirmarRemocao(u), `Remover ${u.email}`));
       } else acoes.append(el('span', { className: 'nome', textContent: ' (você)' }));
-      corpo.append(el('tr', {}, quem, papel, situacao, acesso, acoes));
+      corpo.append(el('tr', {}, quem, papel, situacao, plano, acesso, acoes));
     }
   }
 
+  // v0.12: assinaturas (plano, teste, cortesia) e a chave geral da cobrança
+  let assinaturas = new Map();
+  const dataBr = (iso) => new Date(iso).toLocaleDateString('pt-BR');
+  const NOMES_PLANO = { mensal: 'Mensal', trimestral: 'Trimestral', anual: 'Anual' };
+  function textoPlano(u, a) {
+    if (u.papel !== 'usuario') return 'Não paga (equipe)';
+    if (!a) return '—';
+    if (a.cortesia) return 'Cortesia';
+    const agora = Date.now();
+    if (a.valido_ate && new Date(a.valido_ate) > agora) return `${NOMES_PLANO[a.plano] ?? 'Plano'} · ${a.status === 'cancelada' ? 'cancelado, vale' : a.status === 'atrasada' ? 'em atraso, vale' : 'até'} ${dataBr(a.valido_ate)}`;
+    if (a.status === 'pendente') return `${NOMES_PLANO[a.plano] ?? ''} · aguardando pagamento`;
+    if (new Date(a.teste_ate) > agora) return `Teste até ${dataBr(a.teste_ate)}`;
+    return 'Sem plano';
+  }
+  async function carregarAssinaturas() {
+    const [l, c] = await Promise.all([sb.rpc('admin_assinaturas'), sb.rpc('admin_cobranca')]);
+    if (!l.error) assinaturas = new Map((l.data ?? []).map((x) => [x.usuario_id, x]));
+    if (!c.error) $('cobranca-ativa').checked = !!c.data;
+  }
+  $('cobranca-ativa').addEventListener('change', async (e) => {
+    const ligar = e.target.checked;
+    msg($('msg-cobranca'), 'Salvando…');
+    const { error } = await sb.rpc('admin_definir_cobranca', { p_ativa: ligar });
+    if (error) { e.target.checked = !ligar; return msg($('msg-cobranca'), 'Não foi possível mudar a cobrança.', 'erro'); }
+    msg($('msg-cobranca'), ligar ? 'Cobrança ligada: quem não tem plano nem teste válido não começa treinos novos.' : 'Cobrança desligada: ninguém é bloqueado.', 'ok');
+    await carregarAssinaturas(); desenhar();
+  });
+
   async function carregar(limpar = true) {
     if (limpar) msg($('msg-lista'), 'Carregando…');
-    try { usuarios = (await chamar({ acao: 'listar' })).usuarios ?? []; if (limpar) msg($('msg-lista'), ''); desenhar(); }
+    try { usuarios = (await chamar({ acao: 'listar' })).usuarios ?? []; await carregarAssinaturas().catch(() => null); if (limpar) msg($('msg-lista'), ''); desenhar(); }
     catch (e) { msg($('msg-lista'), e.message, 'erro'); }
   }
 

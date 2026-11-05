@@ -12,6 +12,7 @@ import { agendarLembretes } from '@/servicos/notificacoes';
 import { chaveAniversario, enviarAniversario } from '@/servicos/aniversario';
 import { buscarDoTreinador, meuIdAluno, meusConvites, publicarEvolucao } from '@/servicos/treinador';
 import { assinatura, montarResumo } from '@/dominio/evolucao';
+import { buscarPlano } from '@/servicos/assinatura';
 import { ARQUIVOS_FONTES } from '@/tema/fontes';
 import { useFonts } from 'expo-font';
 
@@ -31,7 +32,7 @@ function Lembretes() {
 }
 
 /** Rotas abertas sem login quando a conta é obrigatória (v0.6). */
-const ROTAS_ABERTAS = ['/', '/entrar', '/definir-senha', '/juridico', '/vincular'];
+const ROTAS_ABERTAS = ['/', '/entrar', '/criar-conta', '/definir-senha', '/juridico', '/vincular'];
 /** v0.6: com conta obrigatória, qualquer endereço do app sem sessão ativa volta para a tela de entrar. */
 function GuardaConta() {
   const s = useSessao();
@@ -56,6 +57,8 @@ function SincronizarTreinador() {
       if (Date.now() - ultimo < 60000) return;
       ultimo = Date.now();
       buscarDoTreinador().then((r) => { if (r) aplicar((e) => acoes.receberTreinosDoTreinador(e, r.vinculos, r.treinos)); }).catch(() => { /* sem rede: tenta na próxima */ });
+      // v0.12: o plano da conta (teste, assinatura, cortesia)
+      buscarPlano().then((pl) => { if (pl) aplicar((e) => acoes.receberPlano(e, pl)); }).catch(() => { /* sem rede: vale o último */ });
       // v0.10: convites pelo ID e o próprio ID de aluno
       meusConvites().then((c) => { if (c) aplicar((e) => acoes.receberConvites(e, c)); }).catch(() => { /* sem rede */ });
       meuIdAluno().then((id) => { if (id) aplicar((e) => (e.idAluno === id ? e : acoes.guardarIdAluno(e, id))); }).catch(() => { /* sem rede */ });
