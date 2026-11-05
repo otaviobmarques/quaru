@@ -15,7 +15,7 @@ export const DIAS_TESTE = 7;
 export const PLANOS: { id: IdPlano; nome: string; valor: number; meses: number; destaque?: string }[] = [
   { id: 'mensal', nome: 'Mensal', valor: 19.9, meses: 1 },
   { id: 'trimestral', nome: 'Trimestral', valor: 49.9, meses: 3 },
-  { id: 'anual', nome: 'Anual', valor: 179.9, meses: 12, destaque: 'Mais escolhido' },
+  { id: 'anual', nome: 'Anual', valor: 179.9, meses: 12, destaque: 'Melhor preço' },
 ];
 export const reais = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 export const porMes = (p: { valor: number; meses: number }) => Math.floor((p.valor / p.meses) * 100 + 1e-6) / 100;
