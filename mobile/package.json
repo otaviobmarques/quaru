@@ -1,6 +1,6 @@
 {
   "name": "app-academia",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "main": "./index.js",
   "dependencies": {
     "@expo/ui": "~58.0.26",
@@ -66,6 +66,9 @@
     "preset": "jest-expo",
     "setupFiles": [
       "./jest.setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./jest.depois.js"
     ],
     "testTimeout": 20000
   }

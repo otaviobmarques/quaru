@@ -5,12 +5,13 @@ import { Vibration } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Fila from '@/app/fila';
 import Treino from '@/app/treino';
+import { VigiaDescanso } from '@/componentes/vigia-descanso';
 import { acoes, estadoInicial, ProvedorEstado, type Estado } from '@/estado/armazem';
 import { BIBLIOTECA } from '@/dominio/biblioteca';
 import { comportamentoPrimeiroPlano } from '@/servicos/notificacao';
 import { nomeVazio } from '@/dominio/validacao';
 
-jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), canGoBack: () => false } }));
+jest.mock('expo-router', () => ({ router: { push: jest.fn(), replace: jest.fn(), back: jest.fn(), canGoBack: () => false }, usePathname: () => '/treino' }));
 afterEach(async () => { await cleanup(); jest.clearAllMocks(); });
 const quadro = (ui: React.ReactElement, e: Estado) => render(<SafeAreaProvider initialMetrics={{ frame: { x: 0, y: 0, width: 360, height: 800 }, insets: { top: 0, left: 0, right: 0, bottom: 0 } }}><ProvedorEstado inicial={e}>{ui}</ProvedorEstado></SafeAreaProvider>);
 const base = () => acoes.definirConsentimento(acoes.entrar(estadoInicial()), 'dados_saude', true);
@@ -34,7 +35,9 @@ describe('REG-01 – tela de treino', () => {
     await fireEvent.changeText(screen.getByLabelText('Carga em kg, série 1'), '1000');
     await fireEvent.press(screen.getByTestId('concluir-1'));
     expect(screen.queryByText('Série não registrada')).toBeNull();
-    expect(screen.getByText('DESCANSO')).toBeTruthy();
+    // v0.12.3: era a única série do treino: em vez de descanso, "Treino concluído".
+    expect(screen.queryByText('DESCANSO')).toBeNull();
+    expect(screen.getByTestId('todas-feitas')).toBeTruthy();
   });
   it('REG-04 (corrigido na 0.2.2): se outra regra recusa a série (consentimento revogado com treino aberto), a tela deveria avisar e não iniciar descanso/notificação', async () => {
     const e = acoes.definirConsentimento(comTreino(), 'dados_saude', false);
@@ -65,7 +68,8 @@ describe('BUG-17 / ADR-0011', () => {
     const vib = jest.spyOn(Vibration, 'vibrate').mockImplementation(() => {});
     jest.useFakeTimers({ now: new Date('2026-11-01T12:00:00Z') });
     try {
-      await quadro(<Treino />, { ...acoes.definirDescanso(comTreino('negada'), { modo: 'auto' }), rotinas: comTreino().rotinas.map((r) => ({ ...r, itens: r.itens.map((i) => ({ ...i, descansoS: 2 })) })) });
+      // v0.12.3: 2 séries (na última não há descanso) e o alerta vem do VigiaDescanso (montado no _layout).
+      await quadro(<><Treino /><VigiaDescanso /></>, { ...acoes.definirDescanso(comTreino('negada'), { modo: 'auto' }), rotinas: comTreino().rotinas.map((r) => ({ ...r, itens: r.itens.map((i) => ({ ...i, descansoS: 2, seriesAlvo: 2 })) })) });
       await fireEvent.changeText(screen.getByLabelText('Carga em kg, série 1'), '50');
       await fireEvent.press(screen.getByTestId('concluir-1'));
       expect(vib).not.toHaveBeenCalled();

@@ -203,6 +203,12 @@ export const acoes = {
   descartarSessao: (e: Estado, id: string): Estado => {
     const s = e.sessoes.find((x) => x.id === id);
     if (!s || s.finalizadaEm) return e;
+    return acoes.excluirSessao(e, id);
+  },
+  /** v0.12.3: apaga um treino (em andamento ou já feito) e as séries dele: sai do histórico, da sequência e das métricas. */
+  excluirSessao: (e: Estado, id: string): Estado => {
+    const s = e.sessoes.find((x) => x.id === id);
+    if (!s) return e;
     const quando = agora();
     let fila = enfileirar(e.fila, { tabela: 'sessoes_treino', registro: { ...s, excluidoEm: quando, atualizadoEm: quando } as never });
     for (const x of e.series.filter((y) => y.sessaoId === id)) fila = enfileirar(fila, { tabela: 'series', registro: { ...x, excluidoEm: quando, atualizadoEm: quando } as never });

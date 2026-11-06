@@ -12,7 +12,7 @@ import { novoId } from '@/servicos/id';
  */
 export type SituacaoAvisoRemoto = 'ativo' | 'disponivel' | 'instalar' | 'negado' | 'sem-suporte';
 
-const ehIos = () => typeof navigator !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent);
+export const ehIphone = () => typeof navigator !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent);
 const instalado = () => typeof window !== 'undefined' && (window.matchMedia?.('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true);
 const temPush = () => typeof window !== 'undefined' && 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 
@@ -30,7 +30,7 @@ async function registro() { return navigator.serviceWorker.getRegistration(BASE)
 
 export async function situacaoAvisoRemoto(): Promise<SituacaoAvisoRemoto> {
   if (!supabase()) return 'sem-suporte';
-  if (ehIos() && !instalado()) return 'instalar';
+  if (ehIphone() && !instalado()) return 'instalar';
   if (!temPush()) return 'sem-suporte';
   if (Notification.permission === 'denied') return 'negado';
   if (Notification.permission !== 'granted') return 'disponivel';
@@ -64,4 +64,18 @@ export function cancelarAvisoRemoto(): void {
   if (!ativo) return;
   ativo = false;
   chamar({ acao: 'cancelar' }).catch(() => {});
+}
+
+/** v0.12.3: o aviso do servidor está marcado para este descanso (evita aviso duplicado). */
+export function avisoRemotoAgendado(): boolean { return ativo; }
+
+/** v0.12.3: com o app em segundo plano e sem o aviso do servidor, a notificação sai do próprio aparelho (Android). */
+export function avisoLocalDescanso(): void {
+  try {
+    if (!temPush() || Notification.permission !== 'granted') return;
+    registro().then((r) => r?.showNotification('⏱ Acabou o tempo', {
+      body: 'Bora para a próxima série do seu treino!', tag: 'quaru-descanso', icon: `${BASE}icones/icone-192.png`,
+      badge: `${BASE}icones/icone-192.png`, data: { url: `${BASE}treino` }, vibrate: [0, 400, 200, 400], renotify: true,
+    } as NotificationOptions)).catch(() => {});
+  } catch { /* sem suporte */ }
 }

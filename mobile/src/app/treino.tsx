@@ -13,8 +13,9 @@ import { doCatalogo } from '@/dominio/biblioteca';
 import type { Serie, TipoSerie } from '@/dominio/tipos';
 import { acoes, todosExercicios, useEstado } from '@/estado/armazem';
 import { novoId } from '@/servicos/id';
-import { alertarFimDescanso, alertarFimTreino, bipeContagem, prepararAlertaDescanso } from '@/servicos/alerta-descanso';
-import { agendarAvisoRemoto, ativarAvisoRemoto, cancelarAvisoRemoto, situacaoAvisoRemoto, type SituacaoAvisoRemoto } from '@/servicos/aviso-remoto';
+import { alertarFimDescanso, alertarFimTreino, prepararAlertaDescanso } from '@/servicos/alerta-descanso';
+import { agendarAvisoRemoto, ativarAvisoRemoto, cancelarAvisoRemoto, ehIphone, situacaoAvisoRemoto, type SituacaoAvisoRemoto } from '@/servicos/aviso-remoto';
+import { definirDescanso, lerDescanso, type Descanso } from '@/estado/descanso-atual';
 import { duracaoDoItem, ehPorTempo, formatarDuracao, lerMinutos, minutosParaCampo } from '@/dominio/cardio';
 import { agendarFimDescanso, cancelarDescanso, pedirPermissao } from '@/servicos/notificacao';
 import { useContornoInterno, useCores, useCoresBase } from '@/tema/tema';
@@ -31,11 +32,17 @@ export default function Treino() {
   const contorno = useContornoInterno();
   const sessao = estado.sessoes.find((s) => !s.finalizadaEm && !s.excluidoEm);
   const [rascunho, setRascunho] = useState<Record<string, { kg: string; reps: string; tipo: TipoSerie }>>({});
-  const [descanso, setDescanso] = useState<{ fim: number; exercicio: string; troca?: boolean; recuperacao?: boolean; trabalho?: { exId: string; ordem: number; seg: number } } | null>(null);
+  // v0.12.3: o descanso continua ao sair e voltar para a tela (começa pelo que está em estado/descanso-atual) e é
+  // repassado para o VigiaDescanso, que toca o alerta em qualquer tela do app.
+  const [descanso, setDescanso] = useState<Descanso | null>(lerDescanso);
+  useEffect(() => { definirDescanso(descanso); }, [descanso]);
+  const [semAvisoTela, setSemAvisoTela] = useState(false);
+  const [tudoFeito, setTudoFeito] = useState(false);
   const [mudarDescanso, setMudarDescanso] = useState(false);
   const [remoto, setRemoto] = useState<SituacaoAvisoRemoto | null>(null);
   const [agora, setAgora] = useState(agoraMs);
   const [pedirAviso, setPedirAviso] = useState(false);
+  const [testando, setTestando] = useState(false);
   const [erroSerie, setErroSerie] = useState<string | null>(null);
   const [recorde, setRecorde] = useState<string | null>(null);
   const [extras, setExtras] = useState<string[]>([]);
@@ -43,16 +50,7 @@ export default function Treino() {
   const [confirmarFim, setConfirmarFim] = useState(false);
   const [confirmarDescarte, setConfirmarDescarte] = useState(false);
   useEffect(() => { if (!descanso) return; const t = setInterval(() => setAgora(agoraMs()), 250); return () => clearInterval(t); }, [descanso]);
-  // BUG-17: com o app em primeiro plano, vibra quando o descanso chega a zero.
   const zerou = !!descanso && agora >= descanso.fim;
-  // v0.11: bipes de contagem nos 3 últimos segundos; no zero, o alerta (que toca por cima da música).
-  const faltaS = descanso ? Math.ceil((descanso.fim - agora) / 1000) : null;
-  useEffect(() => { if (faltaS != null && faltaS >= 1 && faltaS <= 3) bipeContagem(); }, [faltaS]);
-  useEffect(() => {
-    // Com o app aberto e em foco no fim, o próprio app avisa: cancela o push do servidor (evita aviso duplicado).
-    if (faltaS === 2 && typeof document !== 'undefined' && document.visibilityState === 'visible' && document.hasFocus?.()) cancelarAvisoRemoto();
-  }, [faltaS]);
-  useEffect(() => { if (zerou) alertarFimDescanso(); }, [zerou]); // web: som + navigator.vibrate (ADR-0013)
   useEffect(() => { situacaoAvisoRemoto().then(setRemoto).catch(() => setRemoto('sem-suporte')); }, []);
 
   if (!sessao) return <Tela titulo="Treino" voltar={() => router.replace('/inicio')}><Texto suave>Nenhum treino em andamento.</Texto></Tela>;
@@ -65,7 +63,8 @@ export default function Treino() {
   const porTempo = (exId: string) => ehPorTempo(rotina?.itens.find((i) => i.exercicioId === exId), doCatalogo(exId));
   // v0.11: o aviso do fim (descanso ou bloco de cardio) também vai pelo servidor (web) ou pela notificação local (aparelho).
   const agendarAvisos = async (seg: number, nome: string, corpo?: string) => {
-    if (Platform.OS === 'web') { if (remoto === 'ativo') agendarAvisoRemoto(seg); else if ((remoto === 'disponivel' || remoto === 'instalar') && estado.permissaoNotificacao === 'nao_pedida') setPedirAviso(true); }
+    // v0.12.3: na web, o pedido para ativar fica sempre visível no topo (antes só aparecia se nunca tinham pedido notificação).
+    if (Platform.OS === 'web') { if (remoto === 'ativo') agendarAvisoRemoto(seg); }
     else if (estado.permissaoNotificacao === 'nao_pedida') setPedirAviso(true);
     else if (estado.permissaoNotificacao === 'concedida') await agendarFimDescanso(seg, nome, corpo);
   };
@@ -103,6 +102,11 @@ export default function Treino() {
     const entreSeries = tempo ? (item?.descansoS ?? 60) : descansoDaSerie(estado.perfil?.descanso, item, doCatalogo(exId), estado.perfil?.treino, rotina?.origem === 'treinador');
     const totalSeries = Math.max(item?.seriesAlvo ?? 1, ...feitas.filter((x) => x.exercicioId === exId).map((x) => x.ordem)) + (mais[exId] ?? 0);
     const feitasDoEx = new Set(feitas.filter((x) => x.exercicioId === exId && x.concluidaEm).map((x) => x.ordem)); feitasDoEx.add(ordem);
+    // v0.12.3: era a última série do treino (todos os quadradinhos verdes)? Sinaliza "Treino concluído", sem descanso.
+    const feitasTodas = new Set(feitas.filter((x) => x.concluidaEm).map((x) => `${x.exercicioId}:${x.ordem}`)); feitasTodas.add(k);
+    if (planos.length > 0 && planos.every((pl) => Array.from({ length: pl.n }, (_, i) => `${pl.exId}:${i + 1}`).every((x) => feitasTodas.has(x)))) {
+      pararAvisos(); setDescanso(null); setTudoFeito(true); alertarFimTreino(); return;
+    }
     const proximoId = feitasDoEx.size >= totalSeries ? ids[ids.indexOf(exId) + 1] : undefined;
     const troca = !!proximoId;
     const seg = tempo ? (troca ? 0 : entreSeries) : troca ? descansoEntreExercicios(entreSeries) : entreSeries;
@@ -130,14 +134,16 @@ export default function Treino() {
   };
   const pular = () => { pararAvisos(); setDescanso(null); };
   const finalizar = () => {
-    pararAvisos();
-    alertarFimTreino(); // v0.11: som e vibração de treino concluído
+    // v0.12.3: sem nenhuma série marcada, não vira "treino feito": oferece descartar.
+    if (concluidas === 0) { setConfirmarFim(false); setConfirmarDescarte(true); return; }
+    pararAvisos(); setDescanso(null); definirDescanso(null);
+    if (!tudoFeito) alertarFimTreino(); // v0.11: som e vibração de treino concluído
     aplicar((e) => acoes.salvarSessao(e, { ...sessao, finalizadaEm: new Date().toISOString() }));
     router.replace(`/resumo/${sessao.id}?concluido=1` as never);
   };
 
   const descartar = () => {
-    pararAvisos();
+    pararAvisos(); setDescanso(null); definirDescanso(null);
     aplicar((e) => acoes.descartarSessao(e, sessao.id));
     router.replace('/treinos?secao=meus' as never);
   };
@@ -162,6 +168,12 @@ export default function Treino() {
 
   const rodape = (
     <View style={{ gap: 12 }}>
+      {!proxima && concluidas > 0 && (
+        <View testID="todas-feitas" accessibilityLiveRegion="polite" style={{ alignItems: 'center', gap: 2 }}>
+          <Texto v="titulo-3">🎉 Treino concluído!</Texto>
+          <Texto v="rotulo" suave style={{ textAlign: 'center' }}>{`Todas as ${concluidas} ${concluidas === 1 ? 'série feita' : 'séries feitas'}. Toque em Finalizar treino para salvar.`}</Texto>
+        </View>
+      )}
       {descanso && (
         <View accessibilityRole="timer" style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <Botao v="secundario" titulo="−15 s" onPress={() => ajustar(-15)} />
@@ -185,7 +197,7 @@ export default function Treino() {
         </View>
       ) : (
         <View style={{ flexDirection: 'row', gap: 12 }}>
-          <View style={{ width: 128 }}><Botao v="secundario" titulo="Finalizar" onPress={() => (proxima ? setConfirmarFim(true) : finalizar())} testID="finalizar" /></View>
+          <View style={{ width: 128 }}><Botao v="secundario" titulo="Finalizar" onPress={() => (concluidas === 0 ? finalizar() : proxima ? setConfirmarFim(true) : finalizar())} testID="finalizar" /></View>
           {proxima && porTempo(proxima.p.exId)
             ? (descanso?.trabalho ? null : <Botao flex grande titulo={`▶ Iniciar bloco ${proxima.ordem}`} desabilitado={!!descanso && !zerou} onPress={() => iniciarBloco(proxima!.p.exId, proxima!.ordem)} testID="iniciar-bloco-proximo" />)
             : proxima
@@ -203,7 +215,7 @@ export default function Treino() {
       <Texto v="rotulo" suave>{concluidas} de {total} {ids.length > 0 && ids.every((x) => porTempo(x)) ? 'blocos' : 'séries'} · {minutos} min{proxima ? ` · próxima: ${exs.get(proxima.p.exId)?.nome}, série ${proxima.ordem}` : ''}</Texto>
       {confirmarDescarte ? (
         <Cartao destaque>
-          <Texto v="corpo-forte">Descartar este treino?</Texto>
+          <Texto v="corpo-forte">{concluidas === 0 ? 'Nenhuma série marcada. Descartar este treino?' : 'Descartar este treino?'}</Texto>
           <Texto v="rotulo" suave>{concluidas === 1 ? 'A série registrada nele será apagada. ' : concluidas > 1 ? `As ${concluidas} séries registradas nele serão apagadas. ` : ''}Ele não entra no histórico nem na sequência. Depois é só começar o treino certo.</Texto>
           <View style={{ flexDirection: 'row', gap: 12 }}>
             <Botao flex v="secundario" titulo="Voltar ao treino" onPress={() => setConfirmarDescarte(false)} />
@@ -236,26 +248,34 @@ export default function Treino() {
       })()}
       {erroSerie && <Aviso tom="erro" titulo="Série não registrada" texto={erroSerie} />}
       {recorde && <Aviso tom="sucesso" titulo="Novo recorde pessoal" texto={recorde} />}
-      {pedirAviso && Platform.OS === 'web' && (
+      {/* v0.12.3: aviso do fim do descanso com a tela bloqueada / em outro app. Fica visível até ativar (ou fechar neste treino). */}
+      {Platform.OS === 'web' && !semAvisoTela && remoto && remoto !== 'sem-suporte' && remoto !== 'ativo' && (
         <Cartao destaque>
-          <Texto v="corpo-forte">Avisar com a tela bloqueada?</Texto>
+          <View testID="cartao-aviso-tela">
+            <Texto v="corpo-forte">🔔 Ser avisado quando o descanso acabar</Texto>
+          </View>
           {remoto === 'instalar' ? (
-            <>
-              <Texto v="rotulo" suave>No iPhone, o aviso com a tela apagada só funciona com o Quaru instalado: toque em Compartilhar ⬆️ e em “Adicionar à Tela de Início”, e abra o Quaru por lá. Com o app aberto, o som toca do mesmo jeito.</Texto>
-              <Botao v="secundario" titulo="Entendi" onPress={() => { aplicar((e) => ({ ...e, permissaoNotificacao: 'negada' })); setPedirAviso(false); }} />
-            </>
+            <Texto v="rotulo" suave>No iPhone, o aviso com a tela bloqueada ou em outro app só funciona com o Quaru instalado: no Safari, toque em Compartilhar ⬆️ → “Adicionar à Tela de Início” e abra o Quaru pelo ícone. Depois, volte aqui e toque em Ativar avisos.</Texto>
+          ) : remoto === 'negado' ? (
+            <Texto v="rotulo" suave>As notificações do Quaru estão bloqueadas neste celular. Libere em Ajustes → Notificações → Quaru (iPhone) ou no cadeado ao lado do endereço → Notificações → Permitir (Android). Depois, abra o treino de novo.</Texto>
           ) : (
             <>
-              <Texto v="rotulo" suave>Quando o descanso acabar, chega uma notificação com som, mesmo com o celular bloqueado. Assim você não precisa ficar olhando a tela. Nenhum dado do treino vai na notificação.</Texto>
+              <Texto v="rotulo" suave>Chega uma notificação com som e vibração no fim de cada descanso, mesmo com a tela bloqueada ou se você estiver em outro app. Nenhum dado do treino vai na notificação.</Texto>
               <Botao titulo="Ativar avisos" testID="ativar-aviso-remoto" onPress={async () => {
-                const r = await ativarAvisoRemoto(); setRemoto(r); setPedirAviso(false);
-                aplicar((e) => ({ ...e, permissaoNotificacao: r === 'ativo' ? 'concedida' : 'negada' }));
+                const r = await ativarAvisoRemoto(); setRemoto(r);
                 if (r === 'ativo' && descanso) { const seg = Math.round((descanso.fim - agoraMs()) / 1000); if (seg > 0) agendarAvisoRemoto(seg); }
               }} />
-              <Botao v="texto" titulo="Agora não" onPress={() => { aplicar((e) => ({ ...e, permissaoNotificacao: 'negada' })); setPedirAviso(false); }} />
             </>
           )}
+          <Botao v="texto" titulo="Agora não" onPress={() => setSemAvisoTela(true)} />
         </Cartao>
+      )}
+      {Platform.OS === 'web' && remoto === 'ativo' && (
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <Texto v="rotulo" suave>{`🔔 Aviso do descanso ligado${ehIphone() ? ' (com o modo silencioso, o celular só vibra)' : ''}.`}</Texto>
+          <Botao v="texto" titulo="Testar" testID="testar-aviso" onPress={() => { prepararAlertaDescanso(); alertarFimDescanso(); agendarAvisoRemoto(10); setTestando(true); }} />
+          {testando && <Texto v="rotulo" suave>Bloqueie a tela: o aviso chega em 10 s.</Texto>}
+        </View>
       )}
       {pedirAviso && Platform.OS !== 'web' && (
         <Cartao destaque>
