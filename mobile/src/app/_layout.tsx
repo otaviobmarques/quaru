@@ -14,6 +14,7 @@ import { buscarDoTreinador, meuIdAluno, meusConvites, publicarEvolucao } from '@
 import { assinatura, montarResumo } from '@/dominio/evolucao';
 import { buscarPlano } from '@/servicos/assinatura';
 import { AvisoNovoEndereco } from '@/componentes/aviso-novo-endereco';
+import { VigiaDescanso } from '@/componentes/vigia-descanso';
 import { ARQUIVOS_FONTES } from '@/tema/fontes';
 import { useFonts } from 'expo-font';
 
@@ -148,6 +149,7 @@ export default function Layout() {
         <PublicarEvolucao />
         <AvisoNovoEndereco />
         <Stack screenOptions={{ headerShown: false }} />
+        <VigiaDescanso />
         {Platform.OS === 'web' && <AvisoAtualizacao />}
       </ProvedorEstado>
       </ProvedorSessao>

@@ -19,6 +19,7 @@ export default function Resumo() {
   const sessao = estado.sessoes.find((s) => s.id === id);
   const [notas, setNotas] = useState(sessao?.notas ?? '');
   const [copiado, setCopiado] = useState(false);
+  const [excluindo, setExcluindo] = useState(false);
   if (!sessao) return <Tela voltar={router.back}><Texto suave>Treino não encontrado.</Texto></Tela>;
   const m = metricasPorSessao(estado, sessao.id);
   const exs = new Map(todosExercicios(estado).map((e) => [e.id, e.nome]));
@@ -66,6 +67,17 @@ export default function Resumo() {
       <Cartao>{porEx.map((e, i) => <ItemLista key={e} ultimo={i === porEx.length - 1} titulo={exs.get(e) ?? ''} sub={minhas.filter((s) => s.exercicioId === e).map((s) => (s.duracaoS != null ? formatarDuracao(s.duracaoS) : `${formatarKg(s.cargaKg)}×${s.reps}`)).join(' · ')} onPress={() => router.push(`/exercicio/${e}`)} />)}</Cartao>
       {sessao.finalizadaEm && <Botao v="secundario" titulo={copiado ? 'Texto copiado ✓' : 'Compartilhar treino'} onPress={compartilhar} testID="compartilhar-treino" />}
       <Campo rotulo="Anotação (opcional)" value={notas} onChangeText={setNotas} maxLength={2000} placeholder="Como foi o treino?" multilinha />
+      {/* v0.12.3: apagar um treino registrado por engano. */}
+      {excluindo ? (
+        <Cartao destaque>
+          <Texto v="corpo-forte">Excluir este treino?</Texto>
+          <Texto v="rotulo" suave>{`${m.series === 0 ? 'Ele' : `Ele e as ${m.series} ${m.series === 1 ? 'série' : 'séries'}`} saem do histórico, da sequência e da evolução. Não dá para desfazer.`}</Texto>
+          <View style={{ flexDirection: 'row', gap: 12 }}>
+            <Botao flex v="secundario" titulo="Manter" onPress={() => setExcluindo(false)} />
+            <Botao flex v="perigo" titulo="Excluir" testID="confirmar-excluir-sessao" onPress={() => { aplicar((e) => acoes.excluirSessao(e, sessao.id)); router.replace('/inicio'); }} />
+          </View>
+        </Cartao>
+      ) : <Botao v="texto" titulo="Excluir este treino" onPress={() => setExcluindo(true)} testID="excluir-sessao" />}
     </Tela>
   );
 }

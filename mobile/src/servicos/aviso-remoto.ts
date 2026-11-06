@@ -7,3 +7,6 @@ export async function situacaoAvisoRemoto(): Promise<SituacaoAvisoRemoto> { retu
 export async function ativarAvisoRemoto(): Promise<SituacaoAvisoRemoto> { return 'sem-suporte'; }
 export function agendarAvisoRemoto(_segundos: number): void {}
 export function cancelarAvisoRemoto(): void {}
+export function avisoRemotoAgendado(): boolean { return false; }
+export function avisoLocalDescanso(): void {}
+export function ehIphone(): boolean { return false; }

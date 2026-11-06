@@ -79,14 +79,12 @@ self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c
 self.addEventListener('message', (e) => { if (e.data === 'ATUALIZAR') self.skipWaiting(); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k.startsWith('quaru-') && k !== CACHE && k !== MIDIA).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 // v0.11 (ADR-0025): fim do descanso com a tela bloqueada. O push não tem conteúdo; o texto é fixo e sem dado de saúde.
-// Com o app aberto e em foco, o próprio app já tocou o alerta: a notificação sai silenciosa (o navegador exige mostrar uma).
+// v0.12.3: avisa SEMPRE com som e vibração, mesmo com o app aberto: no iPhone no modo silencioso o bipe do app não toca,
+// e a ideia é a pessoa não precisar olhar a tela (pode estar em outro app).
 self.addEventListener('push', (e) => {
-  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((cs) => {
-    const emFoco = cs.some((c) => c.visibilityState === 'visible' && c.focused);
-    return self.registration.showNotification('⏱ Acabou o tempo', {
-      body: 'Bora para a próxima série do seu treino!', tag: 'quaru-descanso', renotify: !emFoco, silent: emFoco,
-      icon: BASE + 'icones/icone-192.png', badge: BASE + 'icones/icone-192.png', vibrate: [0, 400, 200, 400], data: { url: BASE + 'treino' },
-    });
+  e.waitUntil(self.registration.showNotification('⏱ Acabou o tempo', {
+    body: 'Bora para a próxima série do seu treino!', tag: 'quaru-descanso', renotify: true,
+    icon: BASE + 'icones/icone-192.png', badge: BASE + 'icones/icone-192.png', vibrate: [0, 400, 200, 400], data: { url: BASE + 'treino' },
   }));
 });
 self.addEventListener('notificationclick', (e) => {

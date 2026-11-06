@@ -58,6 +58,7 @@ export default function Inicio() {
   const recomendados = rec?.modelos ?? [];
   const [adicionados, setAdicionados] = useState<Record<string, { id: string; nome: string }>>({});
   const [reagendando, setReagendando] = useState(false);
+  const [excluindo, setExcluindo] = useState(false);
   const [diaNovo, setDiaNovo] = useState<string | null>(null);
   const [reagendado, setReagendado] = useState<string | null>(null);
   const hojeDia = hoje();
@@ -71,7 +72,21 @@ export default function Inicio() {
     const m = metricasPorSessao(estado, cartao.sessao.id);
     conteudo = <><Selo texto="✓ Feito hoje" tom="sucesso" /><Texto v="titulo-2">Treino de hoje feito</Texto><Texto suave>{nome(cartao.sessao.rotinaId)} · {m.series} séries · {formatarKg(m.volume)} kg de volume</Texto>
       {cartao.proxima && <Botao v="secundario" titulo="Treinar de novo" onPress={() => iniciarTreino(aplicar, estado, cartao.proxima!.id)} />}</>;
-    principal = <Botao grande titulo="Ver resumo" onPress={() => router.push(`/resumo/${cartao.sessao.id}`)} />;
+    const idFeito = cartao.sessao.id;
+    principal = <>
+      <Botao grande titulo="Ver resumo" onPress={() => router.push(`/resumo/${idFeito}`)} />
+      {/* v0.12.3: treino registrado por engano pode ser apagado. */}
+      {excluindo ? (
+        <View style={{ gap: 8 }} testID="excluir-feito-painel">
+          <Texto v="corpo-forte">Excluir este treino?</Texto>
+          <Texto v="rotulo" suave>{`${m.series === 0 ? 'Ele' : `Ele e as ${m.series} ${m.series === 1 ? 'série' : 'séries'}`} saem do histórico, da sequência e da evolução. Não dá para desfazer.`}</Texto>
+          <View style={{ flexDirection: 'row', gap: 12 }}>
+            <Botao flex v="secundario" titulo="Manter" onPress={() => setExcluindo(false)} />
+            <Botao flex v="perigo" titulo="Excluir" testID="confirmar-excluir-feito" onPress={() => { aplicar((e) => acoes.excluirSessao(e, idFeito)); setExcluindo(false); }} />
+          </View>
+        </View>
+      ) : <Botao v="texto" titulo="Registrou errado? Excluir este treino" onPress={() => setExcluindo(true)} testID="excluir-feito" />}
+    </>;
   } else if (cartao.estado === 'proxima') {
     const nomesEx = cartao.rotina.itens.toSorted((a, b) => a.ordem - b.ordem).map((i) => nomeExercicio.get(i.exercicioId)).filter(Boolean) as string[];
     const minHoje = tempoEstimadoTreino(cartao.rotina.itens);

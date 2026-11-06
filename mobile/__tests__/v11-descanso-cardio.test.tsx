@@ -59,6 +59,11 @@ describe('fim do treino', () => {
   it('finalizar vibra com o alerta de concluído e abre o resumo com a comemoração', async () => {
     const vib = jest.spyOn(Vibration, 'vibrate').mockImplementation(() => {});
     await montar(<Treino />, comTreino(forca));
+    // v0.12.3: sem nenhuma série marcada, Finalizar oferece descartar; com uma série, finaliza.
+    await fireEvent.press(screen.getByTestId('finalizar'));
+    expect(screen.getByTestId('confirmar-descartar')).toBeTruthy();
+    await fireEvent.press(screen.getByText('Voltar ao treino'));
+    await fireEvent.press(screen.getByTestId('concluir-proxima'));
     await fireEvent.press(screen.getByTestId('finalizar'));
     await fireEvent.press(screen.getByTestId('confirmar-finalizar'));
     expect(vib).toHaveBeenCalledWith([0, 200, 100, 200, 100, 500]);
